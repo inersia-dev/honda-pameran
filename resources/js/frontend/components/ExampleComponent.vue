@@ -1,5 +1,5 @@
 <template>
-    <span>Laravel Boilerplate</span>
+    <span>inersia.dev/honda-pameran</span>
 </template>
 
 <script>

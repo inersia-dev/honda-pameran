@@ -1,11 +1,10 @@
 {
-    "name": "rappasoft/laravel-boilerplate",
+    "name": "inersia-dev/honda-pameran",
     "type": "project",
-    "description": "The Laravel Boilerplate Project.",
+    "description": "rimbaborne Project.",
     "keywords": [
-        "framework",
-        "laravel",
-        "boilerplate"
+        "rimbaborne",
+        "inersia"
     ],
     "license": "MIT",
     "require": {
