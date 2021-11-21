@@ -11,6 +11,11 @@
 
     @stack('before-styles')
     <link href="{{ mix('css/backend.css') }}" rel="stylesheet">
+    <style>
+        .c-sidebar {
+            background-color: #29363d;
+        }
+    </style>
     <livewire:styles />
     @stack('after-styles')
 </head>
