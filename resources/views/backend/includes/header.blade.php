@@ -16,7 +16,7 @@
     <ul class="c-header-nav d-md-down-none">
         <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="{{ route('frontend.index') }}">@lang('Home')</a></li>
 
-        @if(config('boilerplate.locale.status') && count(config('boilerplate.locale.languages')) > 1)
+        {{-- @if(config('boilerplate.locale.status') && count(config('boilerplate.locale.languages')) > 1)
             <li class="c-header-nav-item dropdown">
                 <x-utils.link
                     :text="__(getLocaleName(app()->getLocale()))"
@@ -28,7 +28,7 @@
 
                 @include('includes.partials.lang')
             </li>
-        @endif
+        @endif --}}
     </ul>
 
     <ul class="c-header-nav ml-auto mr-4">
@@ -36,7 +36,7 @@
             <x-utils.link class="c-header-nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                 <x-slot name="text">
                     <div class="c-avatar">
-                        <img class="c-avatar-img" src="{{ $logged_in_user->avatar }}" alt="{{ $logged_in_user->email ?? '' }}">
+                        <img class="c-avatar-img" src="{{ $logged_in_user->avatar }}" alt="{{ $logged_in_user->name ?? '' }}">
                     </div>
                 </x-slot>
             </x-utils.link>

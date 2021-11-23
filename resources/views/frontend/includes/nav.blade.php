@@ -1,9 +1,7 @@
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
     <div class="container">
-        <x-utils.link
-            :href="route('frontend.index')"
-            :text="appName()"
-            class="navbar-brand" />
+        {{-- <img class="img-fluid" src="/img/logo/logo-honda.png" alt="" width="100"> --}}
+        <img class="img-fluid" src="/img/logo/logo-astra.png" alt="" width="100">
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="@lang('Toggle navigation')">
             <span class="navbar-toggler-icon"></span>
@@ -11,7 +9,7 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
-                @if(config('boilerplate.locale.status') && count(config('boilerplate.locale.languages')) > 1)
+                {{-- @if(config('boilerplate.locale.status') && count(config('boilerplate.locale.languages')) > 1)
                     <li class="nav-item dropdown">
                         <x-utils.link
                             :text="__(getLocaleName(app()->getLocale()))"
@@ -23,7 +21,31 @@
 
                         @include('includes.partials.lang')
                     </li>
-                @endif
+                @endif --}}
+                <li class="nav-item">
+                    <x-utils.link
+                        class="nav-link"
+                        :href="route('frontend.user.dashboard')"
+                        :active="activeClass(Route::is('frontend.user.dashboard'))"
+                        icon="nav-icon cil-speedometer"
+                        :text="__('Dashboard')" />
+                </li>
+                <li class="nav-item">
+                    <x-utils.link
+                        class="nav-link"
+                        :href="route('frontend.user.pameran.index')"
+                        :active="activeClass('pameran/*')"
+                        icon="nav-icon cil-layers"
+                        text="Pameran" />
+                </li>
+                <li class="nav-item">
+                    <x-utils.link
+                        class="nav-link"
+                        {{-- :href="route('admin.dashboard')"
+                        :active="activeClass(Route::is('admin.dashboard'), 'c-active')" --}}
+                        icon="nav-icon cil-list"
+                        text="LPJ" />
+                </li>
 
                 @guest
                     <li class="nav-item">
@@ -69,15 +91,6 @@
                                     :text="__('Administration')"
                                     class="dropdown-item" />
                             @endif
-
-                            @if ($logged_in_user->isUser())
-                                <x-utils.link
-                                    :href="route('frontend.user.dashboard')"
-                                    :active="activeClass(Route::is('frontend.user.dashboard'))"
-                                    :text="__('Dashboard')"
-                                    class="dropdown-item"/>
-                            @endif
-
                             <x-utils.link
                                 :href="route('frontend.user.account')"
                                 :active="activeClass(Route::is('frontend.user.account'))"
