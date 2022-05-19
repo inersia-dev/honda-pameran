@@ -10,3 +10,5 @@ Route::get('dashboard', [DashboardController::class, 'index'])
     ->breadcrumbs(function (Trail $trail) {
         $trail->push(__('Home'), route('admin.dashboard'));
     });
+Route::get('pameran', [DashboardController::class, 'pameran'])->name('admin.pameran');
+

@@ -19,4 +19,15 @@ class PameranController
     {
         return view('frontend.user.pameran.create');
     }
+
+    public function show()
+    {
+        return view('frontend.user.pameran.show');
+    }
+
+    public function lpj()
+    {
+        return view('frontend.user.lpj.index');
+    }
+
 }

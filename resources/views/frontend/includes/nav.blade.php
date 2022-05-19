@@ -41,8 +41,8 @@
                 <li class="nav-item">
                     <x-utils.link
                         class="nav-link"
-                        {{-- :href="route('admin.dashboard')"
-                        :active="activeClass(Route::is('admin.dashboard'), 'c-active')" --}}
+                        :href="route('frontend.user.pameran.lpj')"
+                        :active="activeClass(Route::is('frontend.user.pameran.lpj'), 'active')"
                         icon="nav-icon cil-list"
                         text="LPJ" />
                 </li>

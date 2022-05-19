@@ -27,8 +27,8 @@
         <li class="c-sidebar-nav-item">
             <x-utils.link
                 class="c-sidebar-nav-link"
-                {{-- :href="route('admin.dashboard')"
-                :active="activeClass(Route::is('admin.dashboard'), 'c-active')" --}}
+                :href="route('admin.admin.pameran')"
+                :active="activeClass(Route::is('admin.admin.pameran'), 'c-active')"
                 icon="c-sidebar-nav-icon cil-layers"
                 text="Pameran" />
         </li>

@@ -32,4 +32,6 @@ Route::group(['as' => 'user.', 'middleware' => ['auth', 'password.expires', conf
     //PAMERAN
     Route::get('pameran',        [PameranController::class, 'index'])->name('pameran.index');
     Route::get('pameran/create', [PameranController::class, 'create'])->name('pameran.create');
+    Route::get('pameran/show',   [PameranController::class, 'show'])->name('pameran.show');
+    Route::get('lpj',   [PameranController::class, 'lpj'])->name('pameran.lpj');
 });

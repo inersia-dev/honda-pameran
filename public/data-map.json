@@ -1,0 +1,203 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 1,
+        "name": "Dealer D",
+        "address": "20244 Tracy Haven\nLake Ismael, AZ 45356",
+        "latitude": "-1.242292",
+        "longitude": "116.879625",
+        "creator_id": 1,
+        "created_at": "2021-11-14T03:04:33.000000Z",
+        "updated_at": "2021-11-14T03:04:33.000000Z",
+        "coordinate": "-1.242292, 116.879625",
+        "map_popup_content": "<div class=\"my-2\"><strong>Outlet:</strong><br><a href=\"https://honda-map.test/outlets/1\" title=\"View Distinctio Quos Outlet detail\">Distinctio Quos</a></div><div class=\"my-2\"><strong>Koordinat:</strong><br>-1.242292, 116.879625</div>"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "116.879625",
+          "-1.242292"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 2,
+        "name": "Dealer Z",
+        "address": "346 Napoleon Spring Apt. 100\nZiemetown, PA 33273-6025",
+        "latitude": "-1.252223",
+        "longitude": "116.851946",
+        "creator_id": 2,
+        "created_at": "2021-11-14T03:04:33.000000Z",
+        "updated_at": "2021-11-14T03:04:33.000000Z",
+        "coordinate": "-1.252223, 116.851946",
+        "map_popup_content": "<div class=\"my-2\"><strong>Outlet:</strong><br><a href=\"https://honda-map.test/outlets/2\" title=\"View Qui Laboriosam Outlet detail\">Qui Laboriosam</a></div><div class=\"my-2\"><strong>Koordinat:</strong><br>-1.252223, 116.851946</div>"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "116.851946",
+          "-1.252223"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3,
+        "name": "Dealer N",
+        "address": "6943 Arnold Plains Apt. 165\nPort Keatonview, LA 23125-2491",
+        "latitude": "-1.199892",
+        "longitude": "116.832942",
+        "creator_id": 3,
+        "created_at": "2021-11-14T03:04:33.000000Z",
+        "updated_at": "2021-11-14T03:04:33.000000Z",
+        "coordinate": "-1.199892, 116.832942",
+        "map_popup_content": "<div class=\"my-2\"><strong>Outlet:</strong><br><a href=\"https://honda-map.test/outlets/3\" title=\"View Non Veritatis Outlet detail\">Non Veritatis</a></div><div class=\"my-2\"><strong>Koordinat:</strong><br>-1.199892, 116.832942</div>"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "116.832942",
+          "-1.199892"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 4,
+        "name": "Dealer P",
+        "address": "7806 Thiel Stream Apt. 345\nPhoebeborough, VT 58486-0403",
+        "latitude": "-1.21232",
+        "longitude": "116.812449",
+        "creator_id": 4,
+        "created_at": "2021-11-14T03:04:33.000000Z",
+        "updated_at": "2021-11-14T03:04:33.000000Z",
+        "coordinate": "-1.21232, 116.812449",
+        "map_popup_content": "<div class=\"my-2\"><strong>Outlet:</strong><br><a href=\"https://honda-map.test/outlets/4\" title=\"View Repellat Incidunt Outlet detail\">Repellat Incidunt</a></div><div class=\"my-2\"><strong>Koordinat:</strong><br>-1.21232, 116.812449</div>"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "116.812449",
+          "-1.21232"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 5,
+        "name": "Dealer E",
+        "address": "5198 Mervin Rest\nSchustermouth, DE 03569-5026",
+        "latitude": "-1.195196",
+        "longitude": "116.826433",
+        "creator_id": 5,
+        "created_at": "2021-11-14T03:04:33.000000Z",
+        "updated_at": "2021-11-14T03:04:33.000000Z",
+        "coordinate": "-1.195196, 116.826433",
+        "map_popup_content": "<div class=\"my-2\"><strong>Outlet:</strong><br><a href=\"https://honda-map.test/outlets/5\" title=\"View Dolore Facere Outlet detail\">Dolore Facere</a></div><div class=\"my-2\"><strong>Koordinat:</strong><br>-1.195196, 116.826433</div>"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "116.826433",
+          "-1.195196"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6,
+        "name": "Dealer A",
+        "address": "105 Dovie Crescent Suite 569\nNew Cordia, FL 88032-0517",
+        "latitude": "-1.278105",
+        "longitude": "116.782158",
+        "creator_id": 6,
+        "created_at": "2021-11-14T03:04:33.000000Z",
+        "updated_at": "2021-11-14T03:04:33.000000Z",
+        "coordinate": "-1.278105, 116.782158",
+        "map_popup_content": "<div class=\"my-2\"><strong>Outlet:</strong><br><a href=\"https://honda-map.test/outlets/6\" title=\"View Quidem Magni Outlet detail\">Quidem Magni</a></div><div class=\"my-2\"><strong>Koordinat:</strong><br>-1.278105, 116.782158</div>"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "116.782158",
+          "-1.278105"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 7,
+        "name": "Dealer K",
+        "address": "467 O'Conner Grove\nSouth Theron, MI 40510",
+        "latitude": "-1.239848",
+        "longitude": "116.916119",
+        "creator_id": 7,
+        "created_at": "2021-11-14T03:04:33.000000Z",
+        "updated_at": "2021-11-14T03:04:33.000000Z",
+        "coordinate": "-1.239848, 116.916119",
+        "map_popup_content": "<div class=\"my-2\"><strong>Outlet:</strong><br><a href=\"https://honda-map.test/outlets/7\" title=\"View Rerum Similique Outlet detail\">Rerum Similique</a></div><div class=\"my-2\"><strong>Koordinat:</strong><br>-1.239848, 116.916119</div>"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "116.916119",
+          "-1.239848"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 8,
+        "name": "Dealer B",
+        "address": "1040 Hellen Station\nCeciliafort, SC 77763-5977",
+        "latitude": "-1.254132",
+        "longitude": "116.801776",
+        "creator_id": 8,
+        "created_at": "2021-11-14T03:04:33.000000Z",
+        "updated_at": "2021-11-14T03:04:33.000000Z",
+        "coordinate": "-1.254132, 116.801776",
+        "map_popup_content": "<div class=\"my-2\"><strong>Outlet:</strong><br><a href=\"https://honda-map.test/outlets/8\" title=\"View Qui Voluptatem Outlet detail\">Qui Voluptatem</a></div><div class=\"my-2\"><strong>Koordinat:</strong><br>-1.254132, 116.801776</div>"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "116.801776",
+          "-1.254132"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9,
+        "name": "Dealer Q",
+        "address": "808 Frami Flats Suite 220\nWest Chris, GA 98590-1642",
+        "latitude": "-1.207895",
+        "longitude": "116.810173",
+        "creator_id": 9,
+        "created_at": "2021-11-14T03:04:33.000000Z",
+        "updated_at": "2021-11-14T03:04:33.000000Z",
+        "coordinate": "-1.207895, 116.810173",
+        "map_popup_content": "<div class=\"my-2\"><strong>Outlet:</strong><br><a href=\"https://honda-map.test/outlets/9\" title=\"View Dolorem Dolor Outlet detail\">Dolorem Dolor</a></div><div class=\"my-2\"><strong>Koordinat:</strong><br>-1.207895, 116.810173</div>"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "116.810173",
+          "-1.207895"
+        ]
+      }
+    }
+  ]
+}

@@ -14,4 +14,9 @@ class DashboardController
     {
         return view('backend.dashboard');
     }
+
+    public function pameran()
+    {
+        return view('backend.pameran.index');
+    }
 }
