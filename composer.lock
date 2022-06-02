@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "627da25a700db7139b06b3e470a4c975",
+    "content-hash": "f1852d30bfc23ad1acd467ef1cf9cbac",
     "packages": [
         {
             "name": "arcanedev/log-viewer",
@@ -252,6 +252,74 @@
                 "source": "https://github.com/Bacon/BaconQrCode/tree/2.0.4"
             },
             "time": "2021-06-18T13:26:35+00:00"
+        },
+        {
+            "name": "bmatovu/multi-auth",
+            "version": "v10.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mtvbrianking/multi-auth.git",
+                "reference": "5aaffc49242593fd38e85316de8029db7a6bf913"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mtvbrianking/multi-auth/zipball/5aaffc49242593fd38e85316de8029db7a6bf913",
+                "reference": "5aaffc49242593fd38e85316de8029db7a6bf913",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/auth": "^8.0",
+                "illuminate/console": "^8.0",
+                "illuminate/notifications": "^8.0",
+                "illuminate/routing": "^8.0",
+                "illuminate/support": "^8.0",
+                "php": "^7.3|^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.0",
+                "phpunit/phpunit": "^9.3.3"
+            },
+            "suggest": {
+                "laravel/ui": "Scaffolding frontend resources for; Bootstrap, VueJs, or ReactJs."
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Bmatovu\\MultiAuth\\MultiAuthServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Bmatovu\\MultiAuth\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Brian Matovu",
+                    "email": "mtvbrianking@gmail.com",
+                    "homepage": "http://bmatovu.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel Multi Authentication",
+            "homepage": "https://github.com/mtvbrianking/multi-auth",
+            "keywords": [
+                "Authentication",
+                "laravel",
+                "multi",
+                "package"
+            ],
+            "support": {
+                "issues": "https://github.com/mtvbrianking/multi-auth/issues",
+                "source": "https://github.com/mtvbrianking/multi-auth/tree/v10.4.0"
+            },
+            "time": "2021-01-04T10:34:51+00:00"
         },
         {
             "name": "brick/math",
@@ -12369,5 +12437,5 @@
         "php": "^7.4|^8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.3.0"
 }
