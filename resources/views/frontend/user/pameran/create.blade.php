@@ -3,6 +3,10 @@
 @section('title', 'Pameran | Create')
 
 @section('content')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
     <div class="container py-4">
         <div class="row justify-content-center">
             <div class="col-md-12">
@@ -106,19 +110,19 @@
                                         <div class="mb-2 row">
                                             <label class="col-sm-3 col-form-label">Kelurahan</label>
                                             <div class="col-sm-9">
-                                                <input class="form-control" type="text">
+                                                <select class="form-control data-kelurahan"> </select>
                                             </div>
                                         </div>
-                                        <div class="mb-2 row">
+                                        {{-- <div class="mb-2 row">
                                             <label class="col-sm-3 col-form-label">Kecamatan</label>
                                             <div class="col-sm-9">
                                                 <input class="form-control" type="text">
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div class="mb-2 row">
                                             <label class="col-sm-3 col-form-label">Display</label>
                                             <div class="col-sm-9">
-                                                <input class="form-control" type="text">
+                                                <select class="form-control data-display"> </select>
                                             </div>
                                         </div>
                                         <div class="mb-2 row">
@@ -309,4 +313,47 @@
             </div><!--col-md-10-->
         </div><!--row-->
     </div><!--container-->
+
+    <script type="text/javascript">
+        $('.data-kelurahan').select2({
+            placeholder: 'Cari Kelurahan',
+            ajax: {
+                url: '/kelurahan',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results: $.map(data, function (item) {
+                            return {
+                                text: item.name+' - '+item.email,
+                                id: item.id
+                            }
+                        })
+                    };
+                },
+                cache: true
+            }
+        });
+    </script>
+    <script type="text/javascript">
+        $('.data-display').select2({
+            placeholder: 'Cari Display',
+            ajax: {
+                url: '/display',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results: $.map(data, function (item) {
+                            return {
+                                text: item.name+' - '+item.email,
+                                id: item.id
+                            }
+                        })
+                    };
+                },
+                cache: true
+            }
+        });
+    </script>
 @endsection

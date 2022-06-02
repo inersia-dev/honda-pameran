@@ -29,7 +29,7 @@
 
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    <link href="{{ mix('css/backend.css') }}" rel="stylesheet">
+    <link href="{{ '/css/backend.css' }}" rel="stylesheet">
     <livewire:styles />
     @stack('after-styles')
 </head>
@@ -48,9 +48,9 @@
     </div><!--app-->
 
     @stack('before-scripts')
-    <script src="{{ mix('js/manifest.js') }}"></script>
-    <script src="{{ mix('js/vendor.js') }}"></script>
-    <script src="{{ mix('js/backend.js') }}"></script>
+    <script src="{{ '/js/manifest.js' }}"></script>
+    <script src="{{ '/js/vendor.js' }}"></script>
+    <script src="{{ '/js/backend.js' }}"></script>
     @include('frontend.includes.js')
     <livewire:scripts />
     @stack('after-scripts')

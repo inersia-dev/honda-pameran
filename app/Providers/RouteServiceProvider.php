@@ -50,6 +50,18 @@ class RouteServiceProvider extends ServiceProvider
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
 
+            Route::prefix('cabang')
+                ->as('cabang.')
+                ->middleware('web')
+                ->namespace('App\Http\Controllers\Cabang')
+                ->group(base_path('routes/cabang.php'));
+
+            Route::prefix('pusat')
+                ->as('pusat.')
+                ->middleware('web')
+                ->namespace('App\Http\Controllers\Pusat')
+                ->group(base_path('routes/pusat.php'));
+
             // For the 'Login As' functionality from the 404labfr/laravel-impersonate package
             Route::middleware('web')
                 ->group(function (Router $router) {

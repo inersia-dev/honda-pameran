@@ -11,7 +11,7 @@
         @stack('before-styles')
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-        <link href="{{ mix('css/frontend.css') }}" rel="stylesheet">
+        <link href="{{ '/css/frontend.css' }}" rel="stylesheet">
         <style>
             html, body {
                 background-color: #fff;
@@ -102,9 +102,9 @@
         </div><!--app-->
 
         @stack('before-scripts')
-        <script src="{{ mix('js/manifest.js') }}"></script>
-        <script src="{{ mix('js/vendor.js') }}"></script>
-        <script src="{{ mix('js/frontend.js') }}"></script>
+        <script src="{{ '/js/manifest.js' }}"></script>
+        <script src="{{ '/js/vendor.js' }}"></script>
+        <script src="{{ '/js/frontend.js' }}"></script>
         @stack('after-scripts')
     </body>
 </html>

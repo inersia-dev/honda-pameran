@@ -69,6 +69,14 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
+        'cabang.auth' => \App\Http\Middleware\RedirectIfNotCabang::class,
+        'cabang.guest' => \App\Http\Middleware\RedirectIfCabang::class,
+        // 'cabang.verified' => \App\Http\Middleware\EnsureCabangEmailIsVerified::class,
+        // 'cabang.password.confirm' => \App\Http\Middleware\RequireCabangPassword::class,
+        'pusat.auth' => \App\Http\Middleware\RedirectIfNotPusat::class,
+        'pusat.guest' => \App\Http\Middleware\RedirectIfPusat::class,
+        // 'pusat.verified' => \App\Http\Middleware\EnsurePusatEmailIsVerified::class,
+        // 'pusat.password.confirm' => \App\Http\Middleware\RequirePusatPassword::class,
         '2fa' => \App\Domains\Auth\Http\Middleware\TwoFactorAuthenticationStatus::class,
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,

@@ -10,7 +10,7 @@
     @yield('meta')
 
     @stack('before-styles')
-    <link href="{{ mix('css/backend.css') }}" rel="stylesheet">
+    <link href="{{ '/css/backend.css' }}" rel="stylesheet">
     <style>
         .c-sidebar {
             background-color: #29363d;
@@ -43,9 +43,9 @@
     </div><!--c-wrapper-->
 
     @stack('before-scripts')
-    <script src="{{ mix('js/manifest.js') }}"></script>
-    <script src="{{ mix('js/vendor.js') }}"></script>
-    <script src="{{ mix('js/backend.js') }}"></script>
+    <script src="{{ '/js/manifest.js' }}"></script>
+    <script src="{{ '/js/vendor.js' }}"></script>
+    <script src="{{ '/js/backend.js' }}"></script>
     <livewire:scripts />
     @stack('after-scripts')
 </body>

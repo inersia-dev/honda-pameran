@@ -36,6 +36,16 @@ return [
     */
 
     'guards' => [
+        'cabang' => [
+            'driver' => 'session',
+            'provider' => 'cabangs',
+        ],
+
+        'pusat' => [
+            'driver' => 'session',
+            'provider' => 'pusats',
+        ],
+
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
@@ -60,6 +70,16 @@ return [
     */
 
     'providers' => [
+        'cabangs' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Cabang::class,
+        ],
+
+        'pusats' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Pusat::class,
+        ],
+
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Domains\Auth\Models\User::class,
@@ -87,6 +107,20 @@ return [
     */
 
     'passwords' => [
+        'cabangs' => [
+            'provider' => 'cabangs',
+            'table' => 'cabang_password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+
+        'pusats' => [
+            'provider' => 'pusats',
+            'table' => 'pusat_password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+
         'users' => [
             'provider' => 'users',
             'table' => 'password_resets',
