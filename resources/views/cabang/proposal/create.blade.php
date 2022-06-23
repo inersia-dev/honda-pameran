@@ -24,6 +24,8 @@ rel="stylesheet"
                     <form class="card-body" action="{{ route('cabang.proposal.postStore') }}" method="POST">
                         @csrf
                         <input type="hidden" name="uuid" value="{{ $data->uuid }}">
+                    @else
+                    <div class="card-body">
                     @endif
                         <div class="row">
                             <div class="col-12">
@@ -500,6 +502,8 @@ rel="stylesheet"
                                 </div>
                             </div>
                     </form>
+                        @else
+                    </div>
                         @endif
                 </div>
             </div><!--col-md-10-->
