@@ -20,9 +20,11 @@ rel="stylesheet"
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
+                    @if ($data->status_proposal == 1)
                     <form class="card-body" action="{{ route('cabang.proposal.postStore') }}" method="POST">
                         @csrf
                         <input type="hidden" name="uuid" value="{{ $data->uuid }}">
+                    @endif
                         <div class="row">
                             <div class="col-12">
                                 <div class="float-left">
@@ -487,17 +489,18 @@ rel="stylesheet"
                                 </div>
                             </div>
                         </div>
-                        <div class="mb-2 row fixed-bottom position-sticky p-4 border-top" style="background-color: #fff; ">
-                            <div class="col-12">
-                                <a href="#" class="btn btn-outline-secondary">Cancel</a>
-                                <div class="float-right">
-                                    <button class="btn btn-outline-info" type="text" name="b" value="draft">Simpan Sebagai Draft</button>
-                                    <button class="btn btn-primary" type="text" name="b" value="done"  onclick="return confirm('Konfirmasi Pengajuan Proposal')">Selesai</button>
+                        @if ($data->status_proposal == 1)
+                            <div class="mb-2 row fixed-bottom position-sticky p-4 border-top" style="background-color: #fff; ">
+                                <div class="col-12">
+                                    <a href="#" class="btn btn-outline-secondary">Cancel</a>
+                                    <div class="float-right">
+                                        <button class="btn btn-outline-info" type="text" name="b" value="draft">Simpan Sebagai Draft</button>
+                                        <button class="btn btn-primary" type="text" name="b" value="done"  onclick="return confirm('Konfirmasi Pengajuan Proposal')">Selesai</button>
+                                    </div>
                                 </div>
                             </div>
-
-                        </div>
                     </form>
+                        @endif
                 </div>
             </div><!--col-md-10-->
         </div><!--row-->
