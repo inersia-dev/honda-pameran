@@ -13,5 +13,5 @@
         </x-slot>
     </x-backend.card> --}}
 
-    @include('backend.includes.statistik')
+    {{-- @include('backend.includes.statistik') --}}
 @endsection

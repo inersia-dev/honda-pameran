@@ -19,4 +19,9 @@ class DashboardController
     {
         return view('backend.pameran.index');
     }
+
+    public function proposal()
+    {
+        return view('backend.pameran.index');
+    }
 }

@@ -15,7 +15,7 @@
                 icon="c-sidebar-nav-icon cil-speedometer"
                 :text="__('Dashboard')" />
         </li>
-        <li class="c-sidebar-nav-item">
+        {{-- <li class="c-sidebar-nav-item">
             <x-utils.link
                 class="c-sidebar-nav-link"
                 :href="route('admin.admin.pameran')"
@@ -26,11 +26,11 @@
         <li class="c-sidebar-nav-item">
             <x-utils.link
                 class="c-sidebar-nav-link"
-                {{-- :href="route('admin.dashboard')"
-                :active="activeClass(Route::is('admin.dashboard'), 'c-active')" --}}
+                :href="route('admin.dashboard')"
+                :active="activeClass(Route::is('admin.dashboard'), 'c-active')"
                 icon="c-sidebar-nav-icon cil-list"
                 text="LPJ" />
-        </li>
+        </li> --}}
 
         <li class="c-sidebar-nav-title">Konfigurasi</li>
         <li class="c-sidebar-nav-item">
