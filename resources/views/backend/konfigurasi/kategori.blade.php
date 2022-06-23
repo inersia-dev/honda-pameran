@@ -87,9 +87,9 @@
                                     </div>
                                     <div class="text-right">
                                         <div class="btn-group" role="group" aria-label="Action">
-                                            <button type="button" class="btn btn-sm btn-warning">
+                                            {{-- <button type="button" class="btn btn-sm btn-warning">
                                                 <i class="cil-pencil"></i>
-                                            </button>
+                                            </button> --}}
                                             <form action="" onsubmit="return confirm('Apakah Anda yakin data {{ $data->nama_kategori }} dihapus ?');" >
                                                 <input type="hidden" name="metode" value="hapus">
                                                 <input type="hidden" name="id" value="{{ $data->id }}">
