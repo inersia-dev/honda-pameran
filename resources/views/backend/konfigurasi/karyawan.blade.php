@@ -1,6 +1,6 @@
 @extends('backend.layouts.app')
 
-@section('title', 'Admin | Karyawan')
+@section('title', 'Karyawan')
 
 @section('content')
 <div class="modal fade" id="tambahdata" tabindex="-1" role="dialog" aria-labelledby="tambahdatadisplay" aria-hidden="true">
