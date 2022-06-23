@@ -9,11 +9,11 @@
         </x-slot>
 
         <x-slot name="body">
-            @lang('Welcome to the Dashboard')
+            <strong>Dashboard Main Dealer ...</strong>
         </x-slot>
     </x-backend.card>
 
-    @include('pusat.includes.statistik')
+    {{-- @include('pusat.includes.statistik') --}}
 
 
 @endsection

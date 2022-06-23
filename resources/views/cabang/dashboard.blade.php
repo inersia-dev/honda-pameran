@@ -9,11 +9,11 @@
         </x-slot>
 
         <x-slot name="body">
-            @lang('Welcome to the Dashboard')
+           <strong>Dasboard Dealer</strong>
         </x-slot>
     </x-backend.card>
 
-    @include('cabang.includes.statistik')
+    {{-- @include('cabang.includes.statistik') --}}
 
 
 @endsection
