@@ -12,7 +12,7 @@
     </button>
 
     <ul class="c-header-nav d-md-down-none">
-        <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="#">Dealer Pusat</a></li>
+        <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="#">Main Dealer</a></li>
 
         {{-- @if(config('boilerplate.locale.status') && count(config('boilerplate.locale.languages')) > 1)
             <li class="c-header-nav-item dropdown">
@@ -42,6 +42,9 @@
             <div class="dropdown-menu dropdown-menu-right pt-0">
                 <div class="dropdown-header bg-light py-2">
                     <strong>@lang('Account')</strong>
+                </div>
+                <div class="dropdown-item">
+                    {{ Auth::guard('pusat')->user()->name }}
                 </div>
 
                 <x-utils.link

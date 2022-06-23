@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Pusat;
 
 use App\Http\Controllers\Controller;
+use App\Models\Dealer;
 use App\Models\Display;
 use App\Models\KategoriProposal;
 use App\Models\Proposal;
@@ -48,11 +49,16 @@ class ProposalController extends Controller
 
         $datalokasi   = Lokasi::get();
         $datakategori = KategoriProposal::get();
-        $datas        = Proposal::where('dealer_proposal', Auth::guard('cabang')->user()->dealer)
-                            ->orderBy('updated_at', 'DESC')
-                            ->paginate()
-                            ;
-        return view('pusat.proposal.index', compact('datas', 'datalokasi', 'datakategori'));
+        $datadealer   = Dealer::get();
+        $datas        = Proposal::orderBy('updated_at', 'DESC')
+                            ->pj(request()->namapj)
+                            ->kategori(request()->kategori)
+                            ->lokasi(request()->lokasi)
+                            ->statusProposal(request()->status)
+                            ->tanggal(request()->tanggal)
+                            ->cariDealer(request()->dealer)
+                            ->paginate(10);
+        return view('pusat.proposal.index', compact('datas', 'datalokasi', 'datakategori', 'datadealer'));
     }
 
     public function getTes()

@@ -1,6 +1,7 @@
-@extends('cabang.layouts.cabang')
+@extends('pusat.layouts.pusat')
 
 @section('title', 'Proposal')
+
 @section('content')
 <div class="row">
     <div class="col-md-12">
@@ -70,6 +71,21 @@
                                 </div>
                                 <div class="pb-2 col">
                                     <div  style="padding-top: 5px; padding-bottom: 5px">
+                                        <label class="form-check-label">Dealer</label>
+                                    </div>
+                                    <select name="dealer" class="data-dealer form-control">
+                                        <option value=""></option>
+                                        @foreach ($datadealer as $data_d)
+                                            <option value="{{ $data_d->id }}"
+                                                @if (request()->dealer == $data_d->id)
+                                                    selected
+                                                @endif
+                                            >{{ $data_d->nama_dealer }}, {{ $data_d->kota_dealer }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="pb-2 col">
+                                    <div  style="padding-top: 5px; padding-bottom: 5px">
                                         <label class="form-check-label">Submit Date</label>
                                     </div>
                                     <input class="form-control" type="date" value="{{ request()->tanggal ?? '' }}" name="tanggal" style="font-size: small" />
@@ -96,6 +112,7 @@
                         <div class="col p-0">Proposal</div>
                         <div class="col p-0">Lokasi</div>
                         <div class="col p-0">Penanggung Jawab</div>
+                        <div class="col p-0">Dealer</div>
                         <div class="col p-0">Submit Date</div>
                     </div>
                 </div>
@@ -107,7 +124,7 @@
 
                 @foreach($datas as $key => $data)
 
-                    <div href="#" style="text-decoration: none;">
+                    <div style="text-decoration: none;">
                         <div class="card mb-2" style="border-radius: 5px; font-size: 12px">
                             <div class="row p-2 align-items-center">
                                 <div class="col p-0 pl-3">
@@ -134,6 +151,11 @@
                                 <div class="col p-0">
                                     <div class="font-weight-bold" style="color: #222222">
                                         {{ $data->pj->nama_sales_people ?? '' }}
+                                    </div>
+                                </div>
+                                <div class="col p-0">
+                                    <div class="font-weight-bold" style="color: #222222">
+                                        {{ $data->dealer->nama_dealer ?? '' }}
                                     </div>
                                 </div>
                                 <div class="col p-0 pr-4">
@@ -189,6 +211,7 @@
 </div><!--row-->
 <script type="text/javascript">
     $('.data-lokasi').select2();
+    $('.data-dealer').select2();
 </script>
 <script type="text/javascript">
     $(document).ready(function(){

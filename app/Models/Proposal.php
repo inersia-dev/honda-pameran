@@ -130,4 +130,11 @@ class Proposal extends Model
         }
     }
 
+    public function scopeCariDealer($query, $dealer)
+    {
+        if ($dealer) {
+            return $query->where('dealer_proposal', $dealer);
+        }
+    }
+
 }
