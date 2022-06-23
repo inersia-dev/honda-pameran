@@ -1,6 +1,6 @@
-@extends('cabang.layouts.cabang')
+@extends('pusat.layouts.pusat')
 
-@section('title', 'Cabang | Proposal')
+@section('title', 'Pilih Jenis Proposal')
 @section('content')
 <div class="row pb-4">
     <div class="col-md-6">
@@ -11,7 +11,7 @@
     <div class="col-md-8">
 
         @foreach ($datas as $data)
-            <form action="{{ route('cabang.proposal.postPilihJenisProposalBuat') }}" method="POST" class="row" onsubmit="return confirm('Konfirmasi Pembuatan Proposal {{ $data->nama_kategori }} ?');">
+            <form action="{{ route('pusat.proposal.postPilihJenisProposalBuat') }}" method="POST" class="row" onsubmit="return confirm('Konfirmasi Pembuatan Proposal {{ $data->nama_kategori }} ?');">
                 @csrf
                 <input type="hidden" name="metode" value="buat">
                 <input type="hidden" name="kategori" value="{{ $data->id }}">

@@ -1,4 +1,4 @@
-@extends('cabang.layouts.cabang')
+@extends('pusat.layouts.pusat')
 
 @section('title', __('Dashboard'))
 

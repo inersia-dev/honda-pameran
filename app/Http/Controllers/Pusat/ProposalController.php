@@ -101,8 +101,7 @@ class ProposalController extends Controller
         if (request()->metode == 'buat') {
             $buat                     = new Proposal;
             $buat->uuid               = Str::uuid();
-            $buat->user_proposal      = Auth::guard('cabang')->user()->id;
-            $buat->dealer_proposal    = Auth::guard('cabang')->user()->dealer;
+            $buat->user_proposal      = Auth::guard('pusat')->user()->id;
             $buat->kategori_proposal  = request()->kategori;
             $buat->status_proposal    = 1;
 
@@ -119,12 +118,13 @@ class ProposalController extends Controller
     {
         $datalokasi         = Lokasi::get();
         $datadisplay        = Display::get();
-        $salespeople        = SalesPeople::where('dealer_sales_people', Auth::guard('cabang')->user()->dealer)->get();
+        $datadealer         = Dealer::get();
+        $salespeople        = SalesPeople::where('dealer_sales_people', Auth::guard('pusat')->user()->dealer)->get();
         $data               = Proposal::where('uuid', request()->id)->first();
         $datadana           = json_decode($data->dana_proposal, true) ?? null;
         $datasalespeople    = json_decode($data->sales_people_proposal, true) ?? null;
 
-        return view('pusat.proposal.create', compact('data', 'datalokasi', 'datadisplay', 'salespeople', 'datadana', 'datasalespeople'));
+        return view('pusat.proposal.create', compact('data', 'datalokasi', 'datadisplay', 'datadealer', 'salespeople', 'datadana', 'datasalespeople'));
     }
 
     public function postStore()
@@ -162,6 +162,7 @@ class ProposalController extends Controller
         $data->no_proposal                      = $st == 'draft' ? null : $no.'/'.$dt->year.'/'.$dt->month.'/'.$dt->day.'/'.$data->kategori_proposal.'/'.$data->dealer->kode_dealer ;
         $data->status_proposal                  = $st == 'done' ? 2 : 1;
         $data->lokasi_proposal                  = request()->lokasi ?? null ;
+        $data->dealer_proposal                  = request()->dealer ?? null;
         $data->display_proposal                 = cekarray(request()->display) ?? null ;
         $data->target_database_proposal         = request()->targetdata ?? null ;
         $data->target_penjualan_proposal        = request()->targetjual ?? null ;

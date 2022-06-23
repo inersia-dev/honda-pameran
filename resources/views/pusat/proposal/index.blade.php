@@ -14,7 +14,7 @@
                             <h5>Data Proposal</h5>
                         </div>
                         <div class="float-right">
-                            <a href="{{ route('cabang.proposal.getPilihJenisProposal') }}" class="btn btn-success">Buat Proposal </a>
+                            <a href="{{ route('pusat.proposal.getPilihJenisProposal') }}" class="btn btn-success">Buat Proposal <i class="fas fa-plus"></i></a>
                         </div>
                     </div>
                 </div>
@@ -168,15 +168,15 @@
                                         <div class="col-4 text-right">
                                             <div class="btn-group dropleft">
                                                 @if ($data->status_proposal == 1)
-                                                    <a href="{{ route('cabang.proposal.getCreate') }}?id={{ $data->uuid }}" class="btn btn-sm btn-outline-warning">
+                                                    <a href="{{ route('pusat.proposal.getCreate') }}?id={{ $data->uuid }}" class="btn btn-sm btn-outline-warning">
                                                         <i class="cil-pencil"></i>
                                                     </a>
                                                 @else
-                                                    <a href="{{ route('cabang.proposal.getCreate') }}?id={{ $data->uuid }}" class="btn btn-sm btn-warning">
+                                                    <a href="{{ route('pusat.proposal.getCreate') }}?id={{ $data->uuid }}" class="btn btn-sm btn-warning">
                                                         <i class="cil-search"></i>
                                                     </a>
                                                 @endif
-                                                <a  class="btn btn-sm btn-outline-danger" href="{{ route('cabang.proposal.index') }}?metode=hapus&id={{ $data->id }}" onclick="return confirm('Konfirmasi Hapus Proposal')">
+                                                <a  class="btn btn-sm btn-outline-danger" href="{{ route('pusat.proposal.index') }}?metode=hapus&id={{ $data->id }}" onclick="return confirm('Konfirmasi Hapus Proposal')">
                                                     <i class="cil-trash"></i>
                                                 </a>
                                             </div>

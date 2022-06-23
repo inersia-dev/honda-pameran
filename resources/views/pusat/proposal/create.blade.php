@@ -1,6 +1,6 @@
-@extends('cabang.layouts.cabang')
+@extends('pusat.layouts.pusat')
 
-@section('title', __('Dashboard'))
+@section('title', 'Proposal')
 
 @section('content')
 {{-- <link rel="stylesheet"  type="text/css" href="/filepond/app.css"/> --}}
@@ -21,7 +21,7 @@ rel="stylesheet"
             <div class="col-md-12">
                 <div class="card">
                     @if ($data->status_proposal == 1)
-                    <form class="card-body" action="{{ route('cabang.proposal.postStore') }}" method="POST">
+                    <form class="card-body" action="{{ route('pusat.proposal.postStore') }}" method="POST">
                         @csrf
                         <input type="hidden" name="uuid" value="{{ $data->uuid }}">
                     @else
@@ -39,11 +39,17 @@ rel="stylesheet"
                             <label class="col-sm-2 col-form-label">
                                 <strong>Dealer</strong>
                             </label>
-                            <label class="col-sm-10 col-form-label">
-                                @php
-                                    $dealer = DB::table('dealers')->where('id', Auth::guard('cabang')->user()->dealer)->first();
-                                @endphp
-                                {{ $dealer->nama_dealer }}
+                            <label class="col-sm-5 col-form-label">
+                                <select class="form-control data-dealer" name="dealer">
+                                    @if (!null == $data->dealer_proposal)
+                                        <option value="{{ $data->dealer_proposal }}" selected>{{ $data->dealer->nama_dealer }}, {{ $data->dealer->kota_dealer }}</option>
+                                    @else
+                                        <option></option>
+                                    @endif
+                                    @foreach ($datadealer as $data_de)
+                                        <option value="{{ $data_de->id }}">{{ $data_de->nama_dealer }}, {{ $data_de->kota_dealer }}</option>
+                                    @endforeach
+                                </select>
                             </label>
                         </div>
                         <div class="mb-2 row">
@@ -791,7 +797,10 @@ rel="stylesheet"
     </script> --}}
 
     {{-- <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script> --}}
-
+    @php
+        $long_ = "-1.2449965";
+        $lat_  = "116.8322469";
+    @endphp
     <script>
 
     var redIcon = new L.Icon({
@@ -916,7 +925,7 @@ rel="stylesheet"
     // map.addLayer(markers);
 
 
-    var mapCenter = [ {!!  $data->lat_proposal ?? '-1.2449965' !!}, {!!  $data->long_proposal ?? '116.8322469' !!}];
+    var mapCenter = [ {!!  $data->lat_proposal ?? $lat_ !!}, {!!  $data->long_proposal ?? $long_ !!}];
 
     // Tambah Data Marker
     var theMarker = L.marker(mapCenter).addTo(map);
