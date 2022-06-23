@@ -18,7 +18,7 @@
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
-                                        <i class="icon-user"></i>
+                                        <i class="cil-user"></i>
                                     </span>
                                 </div>
                                 <input name="email" class="form-control" type="text" placeholder="Email">
@@ -26,7 +26,7 @@
                             <div class="input-group mb-4">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
-                                        <i class="icon-lock"></i>
+                                        <i class="cil-lock-locked"></i>
                                     </span>
                                 </div>
                                 <input name="password" class="form-control" type="password" placeholder="Password">

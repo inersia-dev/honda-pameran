@@ -19,6 +19,13 @@ class CreateCabangsTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('kode_user')->nullable();
+            $table->string('jabatan')->nullable();
+            $table->string('status')->default(1)->nullable(); // 1. BELUM AKTIF - 2. AKTIF - 3. DI BLOKIR
+            $table->string('nohp')->nullable();
+            $table->string('area_user')->nullable();
+            $table->string('dealer')->nullable();
+            $table->string('keterangan')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

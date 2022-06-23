@@ -110,22 +110,22 @@ return [
         'cabangs' => [
             'provider' => 'cabangs',
             'table' => 'cabang_password_resets',
-            'expire' => 60,
-            'throttle' => 60,
+            'expire' => 6000,
+            'throttle' => 6000,
         ],
 
         'pusats' => [
             'provider' => 'pusats',
             'table' => 'pusat_password_resets',
-            'expire' => 60,
-            'throttle' => 60,
+            'expire' => 6000,
+            'throttle' => 60,00
         ],
 
         'users' => [
             'provider' => 'users',
             'table' => 'password_resets',
-            'expire' => 60,
-            'throttle' => 60,
+            'expire' => 6000,
+            'throttle' => 6000,
         ],
     ],
 

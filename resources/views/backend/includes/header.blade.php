@@ -59,11 +59,11 @@
         </li>
     </ul>
 
-    <div class="c-subheader justify-content-between px-3">
+    {{-- <div class="c-subheader justify-content-between px-3">
         @include('backend.includes.partials.breadcrumbs')
 
         <div class="c-subheader-nav mfe-2">
             @yield('breadcrumb-links')
         </div>
-    </div><!--c-subheader-->
+    </div><!--c-subheader--> --}}
 </header>

@@ -7,6 +7,7 @@ use App\Notifications\Pusat\Auth\VerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\UserJabatanPusat;
 
 class Pusat extends Authenticatable
 {
@@ -18,7 +19,16 @@ class Pusat extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+        'email',
+        'password',
+        'kode_user',
+        'jabatan',
+        'akses',
+        'status',
+        'nohp',
+        'area_user',
+        'keterangan',
     ];
 
     /**
@@ -58,5 +68,10 @@ class Pusat extends Authenticatable
     public function sendEmailVerificationNotification()
     {
         $this->notify(new VerifyEmail);
+    }
+
+    public function jabatanpusat()
+    {
+        return $this->hasOne(UserJabatanPusat::class, 'id', 'jabatan');
     }
 }

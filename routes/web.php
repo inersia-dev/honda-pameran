@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LocaleController;
+use Illuminate\Support\Facades\Route;
 
 /*
  * Global Routes
@@ -26,3 +27,5 @@ Route::group(['as' => 'frontend.'], function () {
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin'], function () {
     includeRouteFiles(__DIR__.'/backend/');
 });
+
+Route::auto('/admin/konfigurasi', App\Http\Controllers\Backend\KonfigurasiController::class, ['middleware' => 'admin']);

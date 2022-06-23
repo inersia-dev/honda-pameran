@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Pusat :: Dashboard</div>
+                <div class="card-header">Selamat Datang</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    Mohon Tunggu, Akun anda sedang dalam proses Aktivasi.
                 </div>
             </div>
         </div>

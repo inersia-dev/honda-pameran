@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ appName() }} | @yield('title')</title>
     <meta name="description" content="@yield('meta_description', appName())">
-    <meta name="author" content="@yield('meta_author', 'Anthony Rappa')">
+    <meta name="author" content="@yield('meta_author', 'Honda Balikpapan')">
     @yield('meta')
 
     @stack('before-styles')
@@ -15,9 +15,14 @@
         .c-sidebar {
             background-color: #29363d;
         }
+
+        .c-sidebar .c-sidebar-nav-link.c-active .c-sidebar-nav-icon {
+            color: #ED1B25;
+        }
     </style>
     <livewire:styles />
     @stack('after-styles')
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <body class="c-app">
     @include('backend.includes.sidebar')
@@ -26,7 +31,7 @@
         @include('backend.includes.header')
         @include('includes.partials.read-only')
         @include('includes.partials.logged-in-as')
-        @include('includes.partials.announcements')
+        {{-- @include('includes.partials.announcements') --}}
 
         <div class="c-body">
             <main class="c-main">

@@ -7,6 +7,7 @@ use App\Notifications\Cabang\Auth\VerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Dealer;
 
 class Cabang extends Authenticatable
 {
@@ -18,7 +19,16 @@ class Cabang extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+        'email',
+        'password',
+        'kode_user',
+        'jabatan',
+        'status',
+        'nohp',
+        'area_user',
+        'dealer',
+        'keterangan',
     ];
 
     /**
@@ -58,5 +68,10 @@ class Cabang extends Authenticatable
     public function sendEmailVerificationNotification()
     {
         $this->notify(new VerifyEmail);
+    }
+
+    public function dealercabang()
+    {
+        return $this->hasOne(Dealer::class, 'id', 'dealer');
     }
 }

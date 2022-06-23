@@ -18,11 +18,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/backend.css') }}" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
 <div id="app">
+    {{-- <div class="pt-1" style="background-color: #CB2127"></div>
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="{{ route('pusat.home') }}">
@@ -53,13 +54,13 @@
                     @else
                         <li class="nav-item dropdown">
                             <li class="nav-item">
-                                <a href="https://honda-pameran.test/dashboard" class="nav-link"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+                                <a href="https://honda-pameran.test/pusat" class="nav-link"><i class="fa-solid fa-gauge"></i> Dashboard</a>
                             </li>
                             <li class="nav-item">
-                                <a href="https://honda-pameran.test/pameran" class="nav-link"><i class="fa-regular fa-calendar-check"></i> Pameran</a>
+                                <a href="#" class="nav-link"><i class="fa-regular fa-calendar-check"></i> Pameran</a>
                             </li>
                             <li class="nav-item">
-                                <a href="https://honda-pameran.test/lpj" class="nav-link"><i class="fa-solid fa-pencil"></i> LPJ</a>
+                                <a href="#" class="nav-link"><i class="fa-solid fa-pencil"></i> LPJ</a>
                             </li>
 
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -83,6 +84,7 @@
             </div>
         </div>
     </nav>
+    <div class="pt-1" style="background-color: #CB2127"></div> --}}
 
     <main class="py-4">
         @yield('content')
