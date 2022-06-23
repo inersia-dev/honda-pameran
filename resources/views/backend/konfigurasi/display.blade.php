@@ -113,7 +113,7 @@
                 @endphp
 
                 @foreach($datas as $key => $data)
-                    <a href="#" style="text-decoration: none;">
+                    <div style="text-decoration: none;">
                         <div class="card mb-2" style="border-radius: 5px; font-size: 12px">
                             <div class="row p-2 align-items-center">
                                 <div class="col-6">
@@ -131,10 +131,10 @@
 
                                     </div>
                                     <div class="text-right">
-                                        <div class="btn-group" role="group" aria-label="Action">
-                                            <button type="button" class="btn btn-sm btn-warning">
+                                        <div class="btn-group dropleft">
+                                            <a data-toggle="collapse" href="#detail{{ $data->id }}" aria-expanded="false" class="btn btn-sm btn-warning">
                                                 <i class="cil-pencil"></i>
-                                            </button>
+                                            </a>
                                             <form action="" onsubmit="return confirm('Apakah Anda yakin data {{ $data->nama_display }} dihapus ?');" >
                                                 <input type="hidden" name="metode" value="hapus">
                                                 <input type="hidden" name="id" value="{{ $data->id }}">
@@ -146,8 +146,37 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row" style="color: #4e4e4e">
+                                <div class="col-12">
+                                    <div class="col-12">
+                                        <div class="collapse" id="detail{{ $data->id }}">
+                                            <hr>
+                                            <form class="row" action="">
+                                                <input type="hidden" name="id" value="{{ $data->id }}">
+                                                <input type="hidden" name="metode" value="edit">
+                                                <div class="col-3">
+
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Nama Display</label>
+                                                        <input type="text" class="form-control" name="nama" value="{{ $data->nama_display }}">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <button type="submit" class="btn btn-sm btn-primary">Update</button>
+                                                    </div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Unis Dsiplay</label>
+                                                        <input type="text" class="form-control" name="unit" value="{{ $data->unit_display }}">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </a>
+                    </div>
                     @php
                         $first  = $datas->firstItem();
                         $end    = $key + $datas->firstItem();
