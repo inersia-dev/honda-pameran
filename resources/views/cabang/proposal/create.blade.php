@@ -792,6 +792,10 @@ rel="stylesheet"
 
     {{-- <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script> --}}
 
+    @php
+        $long_ = "-1.2449965";
+        $lat_  = "116.8322469";
+    @endphp
     <script>
 
     var redIcon = new L.Icon({
@@ -916,7 +920,7 @@ rel="stylesheet"
     // map.addLayer(markers);
 
 
-    var mapCenter = [ {!!  $data->lat_proposal ?? '-1.2449965' !!}, {!!  $data->long_proposal ?? '116.8322469' !!}];
+    var mapCenter = [ {!!  $data->lat_proposal ?? $long_ !!}, {!!  $data->long_proposal ?? $lat_ !!}];
 
     // Tambah Data Marker
     var theMarker = L.marker(mapCenter).addTo(map);

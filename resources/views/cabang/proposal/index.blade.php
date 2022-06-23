@@ -27,13 +27,13 @@
                                             <div style="padding-top: 5px; padding-bottom: 5px">
                                                 <label class="form-check-label">Penanggung Jawab</label>
                                             </div>
-                                            <input class="form-control" type="text" value="{{ request()->nama ?? '' }}" name="nama" style="font-size: small" />
+                                            <input class="form-control" type="text" value="{{ request()->namapj ?? '' }}" name="namapj" style="font-size: small" />
                                         </div>
                                         <div class="pb-2 col-6" >
                                             <div style="padding-top: 5px; padding-bottom: 5px">
                                                 <label class="form-check-label">Kategori Proposal</label>
                                             </div>
-                                            <select class="form-control" name="kategori">
+                                            <select class="form-control" name="kategori" id="kategori">
                                                 <option value=""></option>
                                                 @foreach ($datakategori as $data_k)
                                                     <option value="{{ $data_k->id }}">{{ $data_k->nama_kategori }}</option>
@@ -47,10 +47,17 @@
                                     <div  style="padding-top: 5px; padding-bottom: 5px">
                                         <label class="form-check-label">Lokasi</label>
                                     </div>
-                                    <select class="form-control data-lokasi" name="lokasi" id="data-lokasi">
+                                    <select class="form-control data-lokasi" name="lokasi">
                                         <option value=""></option>
+                                        @if (request()->lokasi)
+                                            <option value="" selected></option>
+                                        @endif
                                         @foreach ($datalokasi as $data_l)
-                                            <option value="{{ $data_l->id }}">{{ $data_l->kelurahan_lokasi }}, {{ $data_l->kecamatan_lokasi }}</option>
+                                            <option value="{{ $data_l->id }}"
+                                                @if (request()->lokasi == $data_l->id)
+                                                    selected
+                                                @endif
+                                            >{{ $data_l->kelurahan_lokasi }}, {{ $data_l->kecamatan_lokasi }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -189,6 +196,13 @@
 </div><!--row-->
 <script type="text/javascript">
     $('.data-lokasi').select2();
+</script>
+<script type="text/javascript">
+    $(document).ready(function(){
+          $("#kategori").val("{!! request()->kategori !!}");
+          $("#lokasi").val("{!! request()->lokasi !!}");
+          $("#status").val("{!! request()->status !!}");
+    });
 </script>
 
 @endsection

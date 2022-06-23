@@ -25,11 +25,6 @@ class ProposalController extends Controller
         $this->middleware('cabang.auth:cabang');
     }
 
-    /**
-     * Show the Cabang dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index()
     {
         if(request()->metode == 'hapus') {
@@ -40,7 +35,12 @@ class ProposalController extends Controller
 
         $datalokasi   = Lokasi::get();
         $datakategori = KategoriProposal::get();
-        $datas = Proposal::where('dealer_proposal', Auth::guard('cabang')->user()->dealer)
+        $datas        = Proposal::where('dealer_proposal', Auth::guard('cabang')->user()->dealer)
+                            ->pj(request()->namapj)
+                            ->kategori(request()->kategori)
+                            ->lokasi(request()->lokasi)
+                            ->statusProposal(request()->status)
+                            ->tanggal(request()->tanggal)
                             ->orderBy('updated_at', 'DESC')
                             ->paginate()
                             ;
@@ -65,10 +65,6 @@ class ProposalController extends Controller
         }
         return response()->json($datalokasi);
     }
-    public function getDataDisplay()
-    {}
-    public function getDataKaryawan()
-    {}
 
     public function getUpload()
     {
@@ -119,10 +115,6 @@ class ProposalController extends Controller
 
     public function postStore()
     {
-
-        // dd(str_replace(",","",request()->total));
-        // dd(request()->idsales);
-
         foreach (request()->ket_dana as $key => $item) {
             $dana[] = [
                 'ket_dana'          => request()->ket_dana[$key],
@@ -195,21 +187,6 @@ class ProposalController extends Controller
             return redirect()->back()->withFlashSuccess('Foto Berhasil Terhapus  ! ✅');
         }
 
-    }
-
-    public function getTez()
-    {
-        $a = 'ok';
-        $b = 'okk';
-        $tes[] =  $a;
-        $tes[] =  $b;
-        $v = json_encode($tes);
-
-        foreach(json_decode($v) as $key => $foto_){
-            $oke[] = $key;
-        }
-
-        return $oke;
     }
 
     public function postUploadFoto()

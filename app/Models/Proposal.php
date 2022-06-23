@@ -92,5 +92,42 @@ class Proposal extends Model
         return $this->hasOne(Cabang::class, 'id', 'user_proposal');
     }
 
+    public function scopePj($query, $pj)
+    {
+        $this->pj = $pj;
+        if ($this->pj) {
+            return $query->whereHas('pj', function ($query) {
+                return $query->whereRaw('LOWER(nama_sales_people) LIKE ? ', '%'.strtolower($this->pj).'%');
+            });
+        }
+    }
+
+    public function scopeKategori($query, $kategori)
+    {
+        if ($kategori) {
+            return $query->where('kategori_proposal', $kategori);
+        }
+    }
+
+    public function scopeLokasi($query, $lokasi)
+    {
+        if ($lokasi) {
+            return $query->where('lokasi_proposal', $lokasi);
+        }
+    }
+
+    public function scopeStatusProposal($query, $status)
+    {
+        if ($status) {
+            return $query->where('status_proposal', $status);
+        }
+    }
+
+    public function scopeTanggal($query, $tanggal)
+    {
+        if ($tanggal) {
+            return $query->whereDate('created_at', '=', date($tanggal));
+        }
+    }
 
 }
