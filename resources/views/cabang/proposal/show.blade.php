@@ -1,7 +1,6 @@
 @extends('cabang.layouts.cabang')
 
-@section('title', __('Dashboard'))
-
+@section('title', 'Proposal')
 @section('content')
 {{-- <link rel="stylesheet"  type="text/css" href="/filepond/app.css"/> --}}
 {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/filepond/4.30.4/filepond.css" integrity="sha512-OwkTbucz29JjQUeii4ZRkjY/E+Xdg4AfffPZICCf98rYKWIHxX87AwwuIQ73rbVrev8goqrKmaXyu+VxyDqr1A==" crossorigin="anonymous" referrerpolicy="no-referrer" /> --}}

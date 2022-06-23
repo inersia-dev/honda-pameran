@@ -1,7 +1,6 @@
 @extends('cabang.layouts.upload')
 
-@section('title', __('Dashboard | Upload Foto'))
-
+@section('title', __('Upload Foto'))
 @section('content')
 <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet" />
 <link

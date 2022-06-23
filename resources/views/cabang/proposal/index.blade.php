@@ -1,5 +1,6 @@
 @extends('cabang.layouts.cabang')
 
+@section('title', 'Proposal')
 @section('content')
 <div class="row">
     <div class="col-md-12">

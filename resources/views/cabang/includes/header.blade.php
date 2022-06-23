@@ -36,7 +36,9 @@
                 <div class="dropdown-header bg-light py-2">
                     <strong>@lang('Account')</strong>
                 </div>
-
+                <div class="dropdown-item">
+                    {{ Auth::guard('cabang')->user()->name }}
+                </div>
                 <x-utils.link
                     class="dropdown-item"
                     icon="c-icon mr-2 cil-account-logout"
