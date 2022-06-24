@@ -341,11 +341,6 @@ rel="stylesheet"
                                             @if (!null == $data->foto_lokasi_proposal)
                                                 @foreach (json_decode($data->foto_lokasi_proposal) as $item)
                                                 <div class="col-4 img-thumbnail">
-                                                    <div class="float-left" style="position: absolute">
-                                                        <button type="text" name="b" value="{{ $item }}" class="float-right btn btn-sm btn-danger"  onclick="return confirm('Konfirmasi Menghapus foto?')">
-                                                            <i class="fas fa-trash"></i>
-                                                        </button>
-                                                    </div>
                                                     <a href="{{ Request::root() }}/upload-foto/{{ $item }}" target="_blank">
                                                         <img src="/upload-foto/{{ $item }}" alt="" class="img-fluid">
                                                     </a>
