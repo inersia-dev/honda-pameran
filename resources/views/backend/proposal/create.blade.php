@@ -125,12 +125,12 @@ rel="stylesheet"
                                             <div class="col-sm-9">
                                                 <select class="form-control data-lokasi" name="lokasi">
                                                     @if (!null == $data->lokasi_proposal)
-                                                        <option value="{{ $data->lokasi_proposal }}" selected>{{ $data->lokasi->kelurahan_lokasi }}, {{ $data->lokasi->kecamatan_lokasi }}, {{ $data->lokasi->kota_lokasi }}</option>
+                                                        <option value="{{ $data->lokasi_proposal }}" selected>{{ $data->lokasi->kelurahan_lokasi }}, {{ $data->lokasi->kecamatan_lokasi }}</option>
                                                     @else
                                                         <option></option>
                                                     @endif
                                                     @foreach ($datalokasi as $data_l)
-                                                        <option value="{{ $data_l->id }}">{{ $data_l->kelurahan_lokasi }}, {{ $data_l->kecamatan_lokasi }}, {{ $data_l->kota_lokasi }}</option>
+                                                        <option value="{{ $data_l->id }}">{{ $data_l->kelurahan_lokasi }}, {{ $data_l->kecamatan_lokasi }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
