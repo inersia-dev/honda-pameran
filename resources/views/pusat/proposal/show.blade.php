@@ -445,7 +445,7 @@ rel="stylesheet"
                             <div class="col-12">
                                 <a href="#" class="btn btn-outline-dark"><i class="fas fa-chevron-left"></i> Kembali</a>
                                 <div class="float-right">
-                                    <button class="btn btn-primary" type="text" name="b" value="done"  onclick="return confirm('Konfirmasi Pengajuan Proposal')">Submit <i class="fas fa-check"></i> </button>
+                                    <a href="{{ route('pusat.proposal.index') }}" class="btn btn-primary" type="text" name="b" value="done"  onclick="return confirm('Konfirmasi Submit Status Proposal')">Submit <i class="fas fa-check"></i> </a>
                                 </div>
                             </div>
                         </form>
