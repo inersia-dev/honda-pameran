@@ -10,17 +10,11 @@
 href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
 rel="stylesheet"
 />
-   <style>
-        .form-control:disabled, .form-control[readonly] {
-            background-color: #ffffff;
-            opacity: 1;
-        }
-    </style>
     <div>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <form class="card-body" action="{{ route('cabang.proposal.postStore') }}" method="POST">
+                    <div class="card-body">
                         @csrf
                         <input type="hidden" name="uuid" value="{{ $data->uuid }}">
                         <div class="row">
@@ -33,13 +27,18 @@ rel="stylesheet"
                         <hr>
                         <div class="mb-2 row">
                             <label class="col-sm-2 col-form-label">
+                                <strong>No Proposal</strong>
+                            </label>
+                            <label class="col-sm-10 col-form-label font-weight-bold">
+                                {{ $data->no_proposal }}
+                            </label>
+                        </div>
+                        <div class="mb-2 row">
+                            <label class="col-sm-2 col-form-label">
                                 <strong>Dealer</strong>
                             </label>
-                            <label class="col-sm-10 col-form-label">
-                                @php
-                                    $dealer = DB::table('dealers')->where('id', Auth::guard('cabang')->user()->dealer)->first();
-                                @endphp
-                                {{ $dealer->nama_dealer }}
+                            <label class="col-sm-10 col-form-label font-weight-bold">
+                                {{ $data->dealer->nama_dealer}}
                             </label>
                         </div>
                         <div class="mb-2 row">
@@ -59,13 +58,13 @@ rel="stylesheet"
                                 <div class="mb-2 row">
                                     <label class="col-sm-2 col-form-label">Latar Belakang Honda</label>
                                     <div class="col-sm-10">
-                                        <textarea class="form-control" name="latarbelakang" id="" rows="2">{{ $data->latar_belakang_proposal }}</textarea>
+                                        <textarea class="form-control" id="" rows="2" disabled>{{ $data->latar_belakang_proposal }}</textarea>
                                     </div>
                                 </div>
                                 <div class="mb-2 row">
                                     <label class="col-sm-2 col-form-label">Latar Belakang Kompetitor</label>
                                     <div class="col-sm-10">
-                                        <textarea class="form-control" name="latarkompetitor" id="" rows="2">{{ $data->latar_kompetitor_proposal }}</textarea>
+                                        <textarea class="form-control" id="" rows="2" disabled>{{ $data->latar_kompetitor_proposal }}</textarea>
                                     </div>
                                 </div>
                                 <div class="mb-2 row">
@@ -85,10 +84,10 @@ rel="stylesheet"
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        <input class="form-control" type="number" name="mmin1" value="{{ $data->kondisi_penjualan_m_1_proposal }}">
+                                                        <input class="form-control" type="number" value="{{ $data->kondisi_penjualan_m_1_proposal }}" disabled>
                                                     </td>
                                                     <td>
-                                                        <input class="form-control" type="number" name="m1" value="{{ $data->kondisi_penjualan_m1_proposal }}">
+                                                        <input class="form-control" type="number" value="{{ $data->kondisi_penjualan_m1_proposal }}" disabled>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -100,7 +99,7 @@ rel="stylesheet"
                                         Tujuan / Benefit
                                     </label>
                                     <div class="col-sm-10">
-                                        <textarea class="form-control" name="tujuan" id="" rows="2">{{ $data->tujuan_proposal }}</textarea>
+                                        <textarea class="form-control" id="" rows="2" disabled>{{ $data->tujuan_proposal }}</textarea>
                                     </div>
                                 </div>
                                 <hr>
@@ -117,7 +116,7 @@ rel="stylesheet"
                                         <div class="mb-2 row">
                                             <label class="col-sm-3 col-form-label">Tempat</label>
                                             <div class="col-sm-9">
-                                                <input class="form-control" type="text"  name="tempat" value="{{ $data->tempat_proposal }}">
+                                                <input class="form-control" type="text" value="{{ $data->tempat_proposal }}" disabled>
                                             </div>
                                         </div>
                                         <div class="mb-2 row">
@@ -126,12 +125,7 @@ rel="stylesheet"
                                                 <select class="form-control data-lokasi" name="lokasi">
                                                     @if (!null == $data->lokasi_proposal)
                                                         <option value="{{ $data->lokasi_proposal }}" selected>{{ $data->lokasi->kelurahan_lokasi }}, {{ $data->lokasi->kecamatan_lokasi }}, {{ $data->lokasi->kota_lokasi }}</option>
-                                                    @else
-                                                        <option></option>
                                                     @endif
-                                                    @foreach ($datalokasi as $data_l)
-                                                        <option value="{{ $data_l->id }}">{{ $data_l->kelurahan_lokasi }}, {{ $data_l->kecamatan_lokasi }}, {{ $data_l->kota_lokasi }}</option>
-                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
@@ -159,7 +153,7 @@ rel="stylesheet"
                                             <label class="col-sm-4 col-form-label">History Penjualan</label>
                                             <div class="col-sm-8">
                                                 <div class="input-group">
-                                                    <input class="form-control" type="number" name="historypenjualan" value="{{ $data->history_penjualan_proposal }}">
+                                                    <input class="form-control" type="number" value="{{ $data->history_penjualan_proposal }}" disabled>
                                                     {{-- <span class="input-group-text">Unit</span> --}}
                                                 </div>
                                             </div>
@@ -167,13 +161,13 @@ rel="stylesheet"
                                         <div class="mb-2 row">
                                             <label class="col-sm-3 col-form-label">Start</label>
                                             <div class="col-sm-9">
-                                                <input class="form-control" name="tanggalstart" type="date" value="{{ $data->periode_start_proposal }}">
+                                                <input class="form-control" name="tanggalstart" type="date" value="{{ $data->periode_start_proposal }}" disabled>
                                             </div>
                                         </div>
                                         <div class="mb-2 row">
                                             <label class="col-sm-3 col-form-label">End</label>
                                             <div class="col-sm-9">
-                                                <input class="form-control" name="tanggalend" type="date" value="{{ $data->periode_end_proposal }}">
+                                                <input class="form-control" name="tanggalend" type="date" value="{{ $data->periode_end_proposal }}" disabled>
                                             </div>
                                         </div>
                                     </div>
@@ -181,26 +175,26 @@ rel="stylesheet"
                                         <div class="mb-2 row">
                                             <label class="col-sm-5 col-form-label">Target Database</label>
                                             <div class="col-sm-7">
-                                                <input class="form-control" type="number" name="targetdata" value="{{ $data->target_database_proposal }}">
+                                                <input class="form-control" type="number" value="{{ $data->target_database_proposal }}" disabled>
                                             </div>
                                         </div>
                                         <div class="mb-2 row">
                                             <label class="col-sm-5 col-form-label">Target Penjualan</label>
                                             <div class="col-sm-7">
-                                                <input class="form-control" type="number" name="targetjual" value="{{ $data->target_penjualan_proposal }}">
+                                                <input class="form-control" type="number" value="{{ $data->target_penjualan_proposal }}" disabled>
                                             </div>
                                         </div>
                                         <div class="mb-2 row">
                                             <label class="col-sm-5 col-form-label">Target Prospectus</label>
                                             <div class="col-sm-7">
-                                                <input class="form-control" type="number" name="targetpros" value="{{ $data->target_prospectus_proposal }}">
+                                                <input class="form-control" type="number" value="{{ $data->target_prospectus_proposal }}" disabled>
                                             </div>
                                         </div>
 
                                         <div class="mb-2 row">
                                             <label class="col-sm-5 col-form-label">Program Penjualan</label>
                                             <div class="col-sm-7">
-                                                <input class="form-control" type="text" name="program" value="{{ $data->program_proposal }}">
+                                                <textarea class="form-control" id="" rows="2" disabled>{{ $data->program_proposal }}</textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -220,59 +214,28 @@ rel="stylesheet"
                                             <th>Beban Delaer</th>
                                             <th>Beban Fincoy</th>
                                             <th>Beban MD(Jika Ada)</th>
-                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @if (!null == $datadana)
-                                            @foreach ($datadana as $key => $data_dana)
-                                                <tr class="row_to_clone_dana">
-                                                    <td>
-                                                        <input class="form-control" type="text" name="ket_dana[{{ $key }}]" id="ket_dana[{{ $key }}]" value="{{ data_get($data_dana, 'ket_dana') }}">
-                                                    </td>
-                                                    <td>
-                                                        <input oninput="totaldana()" class="form-control beban_dealer_" type="number" name="beban_dealer_dana[{{ $key }}]" id="beban_dealer_dana[{{ $key }}]" value="{{ data_get($data_dana, 'beban_dealer_dana') }}">
-                                                    </td>
-                                                    <td>
-                                                        <input oninput="totaldana()" class="form-control beban_fincoy_" type="number" name="beban_fincoy_dana[{{ $key }}]" id="beban_fincoy_dana[{{ $key }}]" value="{{ data_get($data_dana, 'beban_fincoy_dana') }}">
-                                                    </td>
-                                                    <td>
-                                                        <input oninput="totaldana()" class="form-control beban_md_" type="number" name="beban_md_dana[{{ $key }}]" id="beban_md_dana[{{ $key }}]" value="{{ data_get($data_dana, 'beban_md_dana') }}">
-                                                    </td>
-                                                    <td>
-                                                        <a href="javascript:void(0);" class="removeDana btn btn-danger">
-                                                            <i class="fas fa-minus-circle"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        @else
+                                        @foreach ($datadana as $key => $data_dana)
                                             <tr class="row_to_clone_dana">
                                                 <td>
-                                                    <input class="form-control" type="text" name="ket_dana[0]" id="ket_dana[]">
+                                                    <input class="form-control" type="text" name="ket_dana[{{ $key }}]" id="ket_dana[{{ $key }}]" value="{{ data_get($data_dana, 'ket_dana') }}" disabled>
                                                 </td>
                                                 <td>
-                                                    <input oninput="totaldana()" class="form-control beban_dealer_" type="number" name="beban_dealer_dana[0]" id="beban_dealer_dana[]">
+                                                    <input oninput="totaldana()" class="form-control beban_dealer_" type="number" name="beban_dealer_dana[{{ $key }}]" id="beban_dealer_dana[{{ $key }}]" value="{{ data_get($data_dana, 'beban_dealer_dana') }}" disabled>
                                                 </td>
                                                 <td>
-                                                    <input oninput="totaldana()" class="form-control beban_fincoy_" type="number" name="beban_fincoy_dana[0]" id="beban_fincoy_dana[]">
+                                                    <input oninput="totaldana()" class="form-control beban_fincoy_" type="number" name="beban_fincoy_dana[{{ $key }}]" id="beban_fincoy_dana[{{ $key }}]" value="{{ data_get($data_dana, 'beban_fincoy_dana') }}" disabled>
                                                 </td>
                                                 <td>
-                                                    <input oninput="totaldana()" class="form-control beban_md_" type="number" name="beban_md_dana[0]" id="beban_md_dana[]">
-                                                </td>
-                                                <td>
-                                                    <a href="javascript:void(0);" class="removeDana btn btn-danger">
-                                                        <i class="fas fa-minus-circle"></i>
-                                                    </a>
+                                                    <input oninput="totaldana()" class="form-control beban_md_" type="number" name="beban_md_dana[{{ $key }}]" id="beban_md_dana[{{ $key }}]" value="{{ data_get($data_dana, 'beban_md_dana') }}" disabled>
                                                 </td>
                                             </tr>
-                                        @endif
+                                        @endforeach
 
                                     </tbody>
                                 </table>
-                                <a class="btn btn-outline-success" onclick="addRowDana(); return false;" href="#">
-                                    Tambah Perkiraan Dana <i class="fas fa-plus-circle"></i>
-                                </a>
                                 <div class="row">
                                     <div class="col-form-label col-8 text-right">
                                         TOTAL :
@@ -282,7 +245,7 @@ rel="stylesheet"
                                             <div class="input-group-prepend">
                                               <span class="input-group-text" id="basic-addon1">Rp. </span>
                                             </div>
-                                            <input class="form-control" name="total" id="total" value="{{ $data->total_dana_proposal }}">
+                                            <input class="form-control" id="total" value="{{ $data->total_dana_proposal }}" disabled>
                                           </div>
                                     </div>
                                 </div>
@@ -294,21 +257,6 @@ rel="stylesheet"
                                 <strong>Penanggung Jawab</strong>
                             </label>
                             <div class="col-sm-10">
-                                <div class="row pb-2">
-                                    <div class="col-4">
-                                        <select class="form-control data-pj" name="pj" id="datapj">
-                                            <option value="">Pilih..</option>
-                                            @foreach ($salespeople as $data_pj)
-                                                <option value="{{ $data_pj->id }}-{{ $data_pj->nama_sales_people }}-{{ $data_pj->honda_id_sales_people }}-{{ $data_pj->hso_id_sales_people }}">{{ $data_pj->nama_sales_people }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="col-4">
-                                        <a class="btn btn-outline-success" onclick="pj(); return false;" href="#">
-                                            Pilih Penanggung Jawab <i class="fas fa-check-circle"></i>
-                                        </a>
-                                    </div>
-                                </div>
                                 <div class="row">
                                     <div class="col-12">
                                         <table class="table table-striped border datatable table-sm">
@@ -343,21 +291,6 @@ rel="stylesheet"
                                 <strong>Sales People</strong>
                             </label>
                             <div class="col-sm-10">
-                                <div class="row pb-2">
-                                    <div class="col-4">
-                                        <select class="form-control data-sales sales" name="sales[]" id="datasalespeople">
-                                            <option value="">Pilih..</option>
-                                            @foreach ($salespeople as $data_s)
-                                                <option value="{{ $data_s->id }}-{{ $data_s->nama_sales_people }}-{{ $data_s->honda_id_sales_people }}-{{ $data_s->hso_id_sales_people }}">{{ $data_s->nama_sales_people }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="col-4">
-                                        <a class="btn btn-outline-success" onclick="tambahsales(); return false;" href="#">
-                                            Tambah Sales People <i class="fas fa-plus-circle"></i>
-                                        </a>
-                                    </div>
-                                </div>
                                 <div class="row">
                                     <div class="col-12">
                                         <table class="table table-striped border datatable table-sm" id="salesdata">
@@ -366,7 +299,6 @@ rel="stylesheet"
                                                     <th>Nama</th>
                                                     <th>HONDA ID</th>
                                                     <th>HSO ID</th>
-                                                    <th></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -385,10 +317,6 @@ rel="stylesheet"
                                                             </td>
                                                             <td>
                                                                 <input class="form-control hso_id" type="text" name="hso_id[]" value="{{ $sp->hso_id_sales_people }}" disabled="">
-                                                            </td>
-                                                            <td>
-                                                                <a href="javascript:void(0);" class="removeSales btn btn-danger"><i class="fas fa-minus-circle"></i>
-                                                                </a>
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -427,30 +355,18 @@ rel="stylesheet"
                                                 <div class="pb-2"></div>
                                             @endif
                                         </div>
-                                        <div class="row pt-2">
-                                            <div class="col-4">
-                                                <button type="text" name="b" value="upload" class="btn btn-info btn-block" >
-                                                    <div class="float-left">
-                                                        Upload Foto
-                                                    </div>
-                                                    <div class="text-right">
-                                                        <i class="fas fa-chevron-right"></i>
-                                                    </div>
-                                                </button>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="mb-2 row">
                                     <label class="col-sm-2 col-form-label">Latitude</label>
                                     <div class="col-sm-5">
-                                        <input class="form-control" name="lat" id="lat" type="text" value="{{ $data->lat_proposal }}">
+                                        <input class="form-control" name="lat" id="lat" type="text" value="{{ $data->lat_proposal }}" disabled>
                                     </div>
                                 </div>
                                 <div class="mb-2 row">
                                     <label class="col-sm-2 col-form-label">Longtitude</label>
                                     <div class="col-sm-5">
-                                        <input class="form-control"  name="long" id="long" type="text" value="{{ $data->long_proposal }}">
+                                        <input class="form-control"  name="long" id="long" type="text" value="{{ $data->long_proposal }}" disabled>
                                     </div>
                                 </div>
                                 <div id="mapid"></div>
@@ -487,197 +403,79 @@ rel="stylesheet"
                                 </div>
                             </div>
                         </div>
-                        <div class="mb-2 row fixed-bottom position-sticky p-4 border-top" style="background-color: #fff; ">
-                            <div class="col-12">
-                                <a href="#" class="btn btn-outline-secondary">Cancel</a>
-                                <div class="float-right">
-                                    <button class="btn btn-outline-info" type="text" name="b" value="draft">Simpan Sebagai Draft</button>
-                                    <button class="btn btn-primary" type="text" name="b" value="done"  onclick="return confirm('Konfirmasi Pengajuan Proposal')">Selesai</button>
+                        <form action="" method="POST" class="mb-4 row fixed-bottom position-sticky p-4 border-top" style="background-color: #fff; ">
+                            <div class="col-12 mb-4">
+                                <div class="mb-2 row">
+                                    <label class="col-sm-2 col-form-label">History</label>
+                                    <div class="col-sm-10">
+                                        <table class="table table-sm text-center">
+                                            <thead class="table-dark">
+                                                <tr>
+                                                    <th>No.</th>
+                                                    <th>Tanggal</th>
+                                                    <th>Created By</th>
+                                                    <th>Status</th>
+                                                    <th>Keterangan</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>1.</td>
+                                                    <td>{{ $data->created_at }}</td>
+                                                    <td>{{ $data->user_proposal }}</td>
+                                                    <td></td>
+                                                    <td>Submit Proposal</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="mb-2 row">
+                                    <label class="col-sm-2 col-form-label">Status</label>
+                                    <div class="col-sm-5">
+                                        <select class="form-control" name="status">
+                                            <option value="1">Approve</option>
+                                            <option value="2">Revise</option>
+                                            <option value="3">Rejected</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-2 row">
+                                    <label class="col-sm-2 col-form-label">Keterangan</label>
+                                    <div class="col-sm-10">
+                                        <textarea type="text" class="form-control" rows="4"></textarea>
+                                    </div>
                                 </div>
                             </div>
-
-                        </div>
-                    </form>
+                            <div class="col-12">
+                                <a href="#" class="btn btn-outline-dark"><i class="fas fa-chevron-left"></i> Kembali</a>
+                                <div class="float-right">
+                                    <button class="btn btn-primary" type="text" name="b" value="done"  onclick="return confirm('Konfirmasi Pengajuan Proposal')">Submit <i class="fas fa-check"></i> </button>
+                                </div>
+                            </div>
+                        </form>
+                        {{-- <div class="mb-2 row fixed-bottom position-sticky p-4 border-top" style="background-color: #fff; ">
+                            <div class="col-12">
+                                <a href="#" class="btn btn-outline-danger" onclick="return confirm('Konfirmasi Rejected Proposal')">Rejected <i class="fas fa-times"></i></a>
+                                <div class="float-right">
+                                    <button class="btn btn-outline-warning" type="text" name="b" value="draft" onclick="return confirm('Konfirmasi Revise Proposal')">Revise <i class="fas fa-info"></i></button>
+                                    <button class="btn btn-success" type="text" name="b" value="done" onclick="return confirm('Konfirmasi Approval Proposal')">Approve <i class="fas fa-check"></i></button>
+                                </div>
+                            </div>
+                        </div> --}}
+                    </div>
                 </div>
             </div><!--col-md-10-->
         </div><!--row-->
     </div><!--container-->
 
     <script type="text/javascript">
-        $('.data-lokasi').select2(
-        //     {
-        //     placeholder: 'Cari Lokasi',
-        //     ajax: {
-        //         url: 'data-lokasi',
-        //         dataType: 'json',
-        //         delay: 250,
-        //         processResults: function (data) {
-        //             return {
-        //                 results: $.map(data, function (item) {
-        //                     return {
-        //                         text: item.kelurahan_lokasi+', '+item.kecamatan_lokasi+', '+item.kota_lokasi,
-        //                         id: item.id
-        //                     }
-        //                 })
-        //             };
-        //         },
-        //         cache: true
-        //     }
-        // }
-        );
+        $('.data-lokasi').select2().prop("disabled", true);
     </script>
     <script type="text/javascript">
-        $('.data-display').select2(
-        //     {
-        //     placeholder: 'Cari Display',
-        //     ajax: {
-        //         url: '/display',
-        //         dataType: 'json',
-        //         delay: 250,
-        //         processResults: function (data) {
-        //             return {
-        //                 results: $.map(data, function (item) {
-        //                     return {
-        //                         text: item.name+' - '+item.email,
-        //                         id: item.id
-        //                     }
-        //                 })
-        //             };
-        //         },
-        //         cache: true
-        //     }
-        // }
-        );
-    </script>
-    <script type="text/javascript">
-        $('.data-sales').select2(
-        //     {
-        //     placeholder: 'Cari Sales People',
-        //     ajax: {
-        //         url: '/sales',
-        //         dataType: 'json',
-        //         delay: 250,
-        //         processResults: function (data) {
-        //             return {
-        //                 results: $.map(data, function (item) {
-        //                     return {
-        //                         text: item.name+' - '+item.email,
-        //                         id: item.id
-        //                     }
-        //                 })
-        //             };
-        //         },
-        //         cache: true
-        //     }
-        // }
-        );
-    </script>
-    <script type="text/javascript">
-        $('.data-pj').select2(
-        //     {
-        //     placeholder: 'Cari Penanggung Jawab',
-        //     ajax: {
-        //         url: '/pj',
-        //         dataType: 'json',
-        //         delay: 250,
-        //         processResults: function (data) {
-        //             return {
-        //                 results: $.map(data, function (item) {
-        //                     return {
-        //                         text: item.name+' - '+item.email,
-        //                         id: item.id
-        //                     }
-        //                 })
-        //             };
-        //         },
-        //         cache: true
-        //     }
-        // }
-        );
+        $('.data-display').select2().prop("disabled", true);
     </script>
 
-    {{-- Tambah data dana --}}
-    <script>
-    function addRowDana() {
-        /* Declare variables */
-        var elements, templateRow, rowCount, row, className, newRow, element;
-        var i, s, t;
-
-        /* Get and count all "tr" elements with class="row".    The last one will
-        * be serve as a template. */
-        if (!document.getElementsByTagName)
-            return false; /* DOM not supported */
-        elements = document.getElementsByTagName("tr");
-        templateRow = null;
-        rowCount = 0;
-        for (i = 0; i < elements.length; i++) {
-            row = elements.item(i);
-
-            /* Get the "class" attribute of the row. */
-            className = null;
-            if (row.getAttribute)
-                className = row.getAttribute('class')
-            if (className == null && row.attributes) {    // MSIE 5
-                /* getAttribute('class') always returns null on MSIE 5, and
-                * row.attributes doesn't work on Firefox 1.0.    Go figure. */
-                className = row.attributes['class'];
-                if (className && typeof(className) == 'object' && className.value) {
-                    // MSIE 6
-                    className = className.value;
-                }
-            }
-
-            /* This is not one of the rows we're looking for.    Move along. */
-            if (className != "row_to_clone_dana")
-                continue;
-
-            /* This *is* a row we're looking for. */
-            templateRow = row;
-            rowCount++;
-        }
-        if (templateRow == null)
-            return false; /* Couldn't find a template row. */
-
-        /* Make a copy of the template row */
-        newRow = templateRow.cloneNode(true);
-
-        /* Change the form variables e.g. price[x] -> price[rowCount] */
-        elements = newRow.getElementsByTagName("input");
-        for (i = 0; i < elements.length; i++) {
-
-            // name
-            element = elements.item(i);
-            s = null;
-            s = element.getAttribute("name");
-            if (s == null)
-                continue;
-            t = s.split("[");
-            if (t.length < 2)
-                continue;
-            s = t[0] + "[" + rowCount.toString() + "]";
-            element.setAttribute("name", s);
-            element.value = "";
-        }
-
-        /* Add the newly-created row to the table */
-        templateRow.parentNode.appendChild(newRow);
-        return true;
-
-    }
-    </script>
-    <script>
-        $(document).ready(function(){
-            $("#dataDana").on('click','.removeDana',function(){
-                $(this).parent().parent().remove();
-                totaldana();
-            });
-            $("#salesdata").on('click','.removeSales',function(){
-                $(this).parent().parent().remove();
-            });
-            totaldana();
-
-        });
-    </script>
 
     <script>
         function totaldana(){
@@ -701,46 +499,12 @@ rel="stylesheet"
 
             console.log(sum_a + sum_b + sum_c);
         }
+
+        $(document).ready(function(){
+            totaldana();
+        });
     </script>
 
-    <script>
-        function tambahsales() {
-            var table         = document.getElementById("salesdata");
-            var rowCount      = table.rows.length;
-            var row           = table.insertRow(rowCount);
-            var nama          = row.insertCell(0);
-            var hondaid       = row.insertCell(1);
-            var hsoid         = row.insertCell(2);
-            var remv          = row.insertCell(3);
-
-            //console.log($('#datasalespeople').val());
-
-            var dataid      = $('#datasalespeople').val().split('-')[0];
-            var datanama    = $('#datasalespeople').val().split('-')[1];
-            var datahondaid = $('#datasalespeople').val().split('-')[2];
-            var datahsoid   = $('#datasalespeople').val().split('-')[3];
-
-            nama.innerHTML    = '<input type="hidden" name="idsales[]" value="'+dataid+'"><input class="form-control sales_nama" type="text" name="sales_nama[]" value="'+datanama+'" disabled>';
-            hondaid.innerHTML = '<input class="form-control honda_id" type="text" name="honda_id[]" value="'+datahondaid+'" disabled>'
-            hsoid.innerHTML   = '<input class="form-control hso_id" type="text" name="hso_id[]" value="'+datahsoid+'" disabled>';
-            remv.innerHTML    = '<a href="javascript:void(0);" class="removeSales btn btn-danger"><i class="fas fa-minus-circle"></i></a>'
-        }
-    </script>
-
-    <script>
-        function pj() {
-            var dataid      = $('#datapj').val().split('-')[0];
-            var datanama    = $('#datapj').val().split('-')[1];
-            var datahondaid = $('#datapj').val().split('-')[2];
-            var datahsoid   = $('#datapj').val().split('-')[3];
-
-            console.log($('#datapj').val());
-            document.getElementById("pjid").value = dataid;
-            document.getElementById("pjnama").value = datanama;
-            document.getElementById("pjhondaid").value = datahondaid;
-            document.getElementById("pjhsoid").value = datahsoid ;
-        }
-    </script>
 
     {{-- Map Leaflet JS --}}
     <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"
@@ -784,7 +548,10 @@ rel="stylesheet"
     </script> --}}
 
     {{-- <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script> --}}
-
+    @php
+        $long_ = "-1.2449965";
+        $lat_  = "116.8322469";
+    @endphp
     <script>
 
     var redIcon = new L.Icon({
@@ -909,7 +676,7 @@ rel="stylesheet"
     // map.addLayer(markers);
 
 
-    var mapCenter = [ {!!  $data->lat_proposal ?? '-1.2449965' !!}, {!!  $data->long_proposal ?? '116.8322469' !!}];
+    var mapCenter = [ {!!  $data->lat_proposal ?? $lat_ !!}, {!!  $data->long_proposal ?? $long_ !!}];
 
     // Tambah Data Marker
     var theMarker = L.marker(mapCenter).addTo(map);
@@ -921,27 +688,6 @@ rel="stylesheet"
         .openPopup();
         return false;
     };
-
-    map.on('click', function(e) {
-        let latitude = e.latlng.lat.toString().substring(0, 15);
-        let longitude = e.latlng.lng.toString().substring(0, 15);
-
-        // if (theMarker != undefined) {
-        //     map.removeLayer(theMarker);
-        // };
-
-        // var popupContent = "Tandai Disini";
-        // popupContent += '<br><a href="latitude=' + latitude + '&longitude=' + longitude + '">Add new outlet here</a>';
-
-
-        // theMarker.bindPopup(popupContent)
-        // .openPopup();
-
-        // update kolom
-        $('#lat').val(latitude);
-        $('#long').val(longitude);
-        updateMarker(latitude, longitude);
-    });
 
     var updateMarkerByInputs = function() {
         return updateMarker( $('#lat').val() , $('#long').val());

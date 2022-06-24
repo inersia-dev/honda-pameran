@@ -10,7 +10,7 @@
 href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
 rel="stylesheet"
 />
-   <style>
+    <style>
         .form-control:disabled, .form-control[readonly] {
             background-color: #ffffff;
             opacity: 1;
@@ -20,13 +20,9 @@ rel="stylesheet"
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    @if ($data->status_proposal == 1)
                     <form class="card-body" action="{{ route('pusat.proposal.postStore') }}" method="POST">
                         @csrf
                         <input type="hidden" name="uuid" value="{{ $data->uuid }}">
-                    @else
-                    <div class="card-body">
-                    @endif
                         <div class="row">
                             <div class="col-12">
                                 <div class="float-left">
@@ -210,7 +206,7 @@ rel="stylesheet"
                                         <div class="mb-2 row">
                                             <label class="col-sm-5 col-form-label">Program Penjualan</label>
                                             <div class="col-sm-7">
-                                                <input class="form-control" type="text" name="program" value="{{ $data->program_proposal }}">
+                                                <textarea class="form-control" id="" rows="2" name="program">{{ $data->program_proposal }}</textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -309,7 +305,7 @@ rel="stylesheet"
                                         <select class="form-control data-pj" name="pj" id="datapj">
                                             <option value="">Pilih..</option>
                                             @foreach ($salespeople as $data_pj)
-                                                <option value="{{ $data_pj->id }}-{{ $data_pj->nama_sales_people }}-{{ $data_pj->honda_id_sales_people }}-{{ $data_pj->hso_id_sales_people }}">{{ $data_pj->nama_sales_people }}</option>
+                                                <option value="{{ $data_pj->id }}-{{ $data_pj->nama_sales_people }}-{{ $data_pj->honda_id_sales_people }}-{{ $data_pj->hso_id_sales_people }}">{{ $data_pj->nama_sales_people }} ({{ $data_pj->dealer->nama_dealer }})</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -358,7 +354,7 @@ rel="stylesheet"
                                         <select class="form-control data-sales sales" name="sales[]" id="datasalespeople">
                                             <option value="">Pilih..</option>
                                             @foreach ($salespeople as $data_s)
-                                                <option value="{{ $data_s->id }}-{{ $data_s->nama_sales_people }}-{{ $data_s->honda_id_sales_people }}-{{ $data_s->hso_id_sales_people }}">{{ $data_s->nama_sales_people }}</option>
+                                                <option value="{{ $data_s->id }}-{{ $data_s->nama_sales_people }}-{{ $data_s->honda_id_sales_people }}-{{ $data_s->hso_id_sales_people }}">{{ $data_s->nama_sales_people }} ({{ $data_pj->dealer->nama_dealer }})</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -497,20 +493,16 @@ rel="stylesheet"
                                 </div>
                             </div>
                         </div>
-                        @if ($data->status_proposal == 1)
-                            <div class="mb-2 row fixed-bottom position-sticky p-4 border-top" style="background-color: #fff; ">
-                                <div class="col-12">
-                                    <a href="#" class="btn btn-outline-secondary">Cancel</a>
-                                    <div class="float-right">
-                                        <button class="btn btn-outline-info" type="text" name="b" value="draft">Simpan Sebagai Draft</button>
-                                        <button class="btn btn-primary" type="text" name="b" value="done"  onclick="return confirm('Konfirmasi Pengajuan Proposal')">Selesai</button>
-                                    </div>
+                        <div class="mb-2 row fixed-bottom position-sticky p-4 border-top" style="background-color: #fff; ">
+                            <div class="col-12">
+                                <a href="#" class="btn btn-outline-secondary">Cancel</a>
+                                <div class="float-right">
+                                    <button class="btn btn-outline-info" type="text" name="b" value="draft">Simpan Sebagai Draft</button>
+                                    <button class="btn btn-primary" type="text" name="b" value="done"  onclick="return confirm('Konfirmasi Pengajuan Proposal')">Selesai</button>
                                 </div>
                             </div>
+                        </div>
                     </form>
-                        @else
-                    </div>
-                        @endif
                 </div>
             </div><!--col-md-10-->
         </div><!--row-->
@@ -611,72 +603,72 @@ rel="stylesheet"
 
     {{-- Tambah data dana --}}
     <script>
-    function addRowDana() {
-        /* Declare variables */
-        var elements, templateRow, rowCount, row, className, newRow, element;
-        var i, s, t;
+        function addRowDana() {
+            /* Declare variables */
+            var elements, templateRow, rowCount, row, className, newRow, element;
+            var i, s, t;
 
-        /* Get and count all "tr" elements with class="row".    The last one will
-        * be serve as a template. */
-        if (!document.getElementsByTagName)
-            return false; /* DOM not supported */
-        elements = document.getElementsByTagName("tr");
-        templateRow = null;
-        rowCount = 0;
-        for (i = 0; i < elements.length; i++) {
-            row = elements.item(i);
+            /* Get and count all "tr" elements with class="row".    The last one will
+            * be serve as a template. */
+            if (!document.getElementsByTagName)
+                return false; /* DOM not supported */
+            elements = document.getElementsByTagName("tr");
+            templateRow = null;
+            rowCount = 0;
+            for (i = 0; i < elements.length; i++) {
+                row = elements.item(i);
 
-            /* Get the "class" attribute of the row. */
-            className = null;
-            if (row.getAttribute)
-                className = row.getAttribute('class')
-            if (className == null && row.attributes) {    // MSIE 5
-                /* getAttribute('class') always returns null on MSIE 5, and
-                * row.attributes doesn't work on Firefox 1.0.    Go figure. */
-                className = row.attributes['class'];
-                if (className && typeof(className) == 'object' && className.value) {
-                    // MSIE 6
-                    className = className.value;
+                /* Get the "class" attribute of the row. */
+                className = null;
+                if (row.getAttribute)
+                    className = row.getAttribute('class')
+                if (className == null && row.attributes) {    // MSIE 5
+                    /* getAttribute('class') always returns null on MSIE 5, and
+                    * row.attributes doesn't work on Firefox 1.0.    Go figure. */
+                    className = row.attributes['class'];
+                    if (className && typeof(className) == 'object' && className.value) {
+                        // MSIE 6
+                        className = className.value;
+                    }
                 }
+
+                /* This is not one of the rows we're looking for.    Move along. */
+                if (className != "row_to_clone_dana")
+                    continue;
+
+                /* This *is* a row we're looking for. */
+                templateRow = row;
+                rowCount++;
+            }
+            if (templateRow == null)
+                return false; /* Couldn't find a template row. */
+
+            /* Make a copy of the template row */
+            newRow = templateRow.cloneNode(true);
+
+            /* Change the form variables e.g. price[x] -> price[rowCount] */
+            elements = newRow.getElementsByTagName("input");
+            for (i = 0; i < elements.length; i++) {
+
+                // name
+                element = elements.item(i);
+                s = null;
+                s = element.getAttribute("name");
+                if (s == null)
+                    continue;
+                t = s.split("[");
+                if (t.length < 2)
+                    continue;
+                s = t[0] + "[" + rowCount.toString() + "]";
+                element.setAttribute("name", s);
+                element.value = "";
             }
 
-            /* This is not one of the rows we're looking for.    Move along. */
-            if (className != "row_to_clone_dana")
-                continue;
+            /* Add the newly-created row to the table */
+            templateRow.parentNode.appendChild(newRow);
+            return true;
 
-            /* This *is* a row we're looking for. */
-            templateRow = row;
-            rowCount++;
         }
-        if (templateRow == null)
-            return false; /* Couldn't find a template row. */
-
-        /* Make a copy of the template row */
-        newRow = templateRow.cloneNode(true);
-
-        /* Change the form variables e.g. price[x] -> price[rowCount] */
-        elements = newRow.getElementsByTagName("input");
-        for (i = 0; i < elements.length; i++) {
-
-            // name
-            element = elements.item(i);
-            s = null;
-            s = element.getAttribute("name");
-            if (s == null)
-                continue;
-            t = s.split("[");
-            if (t.length < 2)
-                continue;
-            s = t[0] + "[" + rowCount.toString() + "]";
-            element.setAttribute("name", s);
-            element.value = "";
-        }
-
-        /* Add the newly-created row to the table */
-        templateRow.parentNode.appendChild(newRow);
-        return true;
-
-    }
     </script>
     <script>
         $(document).ready(function(){

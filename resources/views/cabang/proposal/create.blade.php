@@ -9,12 +9,23 @@
 href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
 rel="stylesheet"
 />
-   <style>
+    @if ($data->status_proposal == 1)
+    <style>
         .form-control:disabled, .form-control[readonly] {
             background-color: #ffffff;
             opacity: 1;
         }
     </style>
+    @else
+    <style>
+        .form-control {
+            pointer-events: none;
+            background-color: #efefef;
+
+        }
+    </style>
+    @endif
+
     <div>
         <div class="row">
             <div class="col-md-12">
@@ -203,7 +214,7 @@ rel="stylesheet"
                                         <div class="mb-2 row">
                                             <label class="col-sm-5 col-form-label">Program Penjualan</label>
                                             <div class="col-sm-7">
-                                                <input class="form-control" type="text" name="program" value="{{ $data->program_proposal }}">
+                                                <textarea class="form-control" id="" rows="2" name="program">{{ $data->program_proposal }}</textarea>
                                             </div>
                                         </div>
                                     </div>

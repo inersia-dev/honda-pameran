@@ -116,15 +116,46 @@ class ProposalController extends Controller
 
     public function getCreate()
     {
+        if (request()->id == null) {
+            return redirect()->route('pusat.proposal.index');
+        }
+
         $datalokasi         = Lokasi::get();
         $datadisplay        = Display::get();
         $datadealer         = Dealer::get();
-        $salespeople        = SalesPeople::where('dealer_sales_people', Auth::guard('pusat')->user()->dealer)->get();
+        $salespeople        = SalesPeople::get();
         $data               = Proposal::where('uuid', request()->id)->first();
         $datadana           = json_decode($data->dana_proposal, true) ?? null;
         $datasalespeople    = json_decode($data->sales_people_proposal, true) ?? null;
 
+        if (null == $data) {
+            return redirect()->route('pusat.proposal.index');
+        }
+
         return view('pusat.proposal.create', compact('data', 'datalokasi', 'datadisplay', 'datadealer', 'salespeople', 'datadana', 'datasalespeople'));
+    }
+
+    public function getShow()
+    {
+        // dd(request()->id);
+        if (!null == request()->id) {
+
+            $datalokasi         = Lokasi::get();
+            $datadisplay        = Display::get();
+            $datadealer         = Dealer::get();
+            $salespeople        = SalesPeople::get();
+            $data               = Proposal::where('uuid', request()->id)->first();
+            $datadana           = json_decode($data->dana_proposal, true) ?? null;
+            $datasalespeople    = json_decode($data->sales_people_proposal, true) ?? null;
+
+            if (null == $data || $data->status_proposal == 1) {
+                return redirect()->route('pusat.proposal.index');
+            }
+
+            return view('pusat.proposal.show', compact('data', 'datalokasi', 'datadisplay', 'datadealer', 'salespeople', 'datadana', 'datasalespeople'));
+        } else {
+            return redirect()->route('pusat.proposal.index');
+        }
     }
 
     public function postStore()

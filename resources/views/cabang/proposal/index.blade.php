@@ -150,7 +150,7 @@
                                                         <i class="cil-pencil"></i>
                                                     </a>
                                                 @else
-                                                    <a href="{{ route('cabang.proposal.getCreate') }}?id={{ $data->uuid }}" class="btn btn-sm btn-warning">
+                                                    <a href="{{ route('cabang.proposal.getShow') }}?id={{ $data->uuid }}" class="btn btn-sm btn-warning">
                                                         <i class="cil-search"></i>
                                                     </a>
                                                 @endif
