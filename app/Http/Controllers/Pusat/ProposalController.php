@@ -57,6 +57,7 @@ class ProposalController extends Controller
                             ->statusProposal(request()->status)
                             ->tanggal(request()->tanggal)
                             ->cariDealer(request()->dealer)
+                            ->where('status_proposal', '!=', 1)
                             ->paginate(10);
         return view('pusat.proposal.index', compact('datas', 'datalokasi', 'datakategori', 'datadealer'));
     }
