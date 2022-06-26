@@ -99,6 +99,15 @@
                 text="Sales People" />
         </li>
 
+        <li class="c-sidebar-nav-item">
+            <x-utils.link
+                class="c-sidebar-nav-link"
+                :href="route('admin/konfigurasi.getFinanceCompany')"
+                :active="activeClass(Route::is('admin/konfigurasi.getFinanceCompany'), 'c-active')"
+                icon="c-sidebar-nav-icon cil-money"
+                text="Finance Company" />
+        </li>
+
 
 
         @if (

@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Models\Karyawan;
 use App\Models\SalesPeople;
+use App\Models\FinanceCompany;
 
 /**
  * Class KonfigurasiController.
@@ -262,6 +263,42 @@ class KonfigurasiController  extends Controller
                         ->paginate(10);
 
         return view('backend.konfigurasi.display', compact('datas', 'dataunit'));
+    }
+
+    public function getFinanceCompany()
+    {
+        if (request()->metode == 'tambah') {
+            $tambah = new FinanceCompany;
+            $tambah->nama = request()->nama;
+            $tambah->kode = Str::upper(request()->kode);
+            $tambah->save();
+
+            return redirect()->back()->withFlashSuccess('Data Berhasil Ditambah ! ✅');
+        }
+
+        if (request()->metode == 'edit') {
+            $edit = FinanceCompany::find(request()->id);
+            $edit->nama = request()->nama;
+            $edit->kode = Str::upper(request()->kode);
+            $edit->save();
+
+            return redirect()->back()->withFlashSuccess('Data Berhasil Diperbaruhi  ! ✅');
+        }
+
+        if (request()->metode == 'hapus') {
+            $hapus = FinanceCompany::find(request()->id);
+            $hapus->delete();
+
+            return redirect()->back()->withFlashSuccess('Data Berhasil Dihapus ! ✅');
+        }
+
+        $datas = FinanceCompany::when(request()->cari, function ($query) {
+                            return $query->where('nama', 'like', '%'.request()->cari.'%');
+                        })
+                        ->orderBy('created_at', 'desc')
+                        ->paginate(10);
+
+        return view('backend.konfigurasi.finance-company', compact('datas'));
     }
 
     public function getLokasi()

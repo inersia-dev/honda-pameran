@@ -299,12 +299,38 @@ rel="stylesheet"
                                                 <thead class="text-center">
                                                     <tr>
                                                         <th>Nama</th>
-                                                        <th>HONDA ID</th>
-                                                        <th>HSO ID</th>
-                                                        <th></th>
+                                                        <th>Alamat</th>
+                                                        <th>Oke</th>
+                                                        <th>Oke</th>
+                                                        <th>Oke</th>
+                                                        <th>Oke</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
                                                     {{-- @if (!null == $data->sales_people_proposal)
                                                         @foreach ($datasalespeople as $data_sal)
                                                             @php
