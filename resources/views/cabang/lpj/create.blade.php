@@ -9,6 +9,11 @@
 href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
 rel="stylesheet"
 />
+<style>
+    .table td {
+        vertical-align: baseline;
+    }
+</style>
     <div>
         <div class="row">
             <div class="col-md-12">
@@ -38,19 +43,52 @@ rel="stylesheet"
                             </div>
                             <div class="mb-2 row">
                                 <label class="col-sm-2 col-form-label">
-                                    <strong>Aktual Priode</strong>
+                                    <strong>No Proposal</strong>
+                                </label>
+                                <label class="col-sm-10 col-form-label">
+                                </label>
+                            </div>
+                            <div class="mb-2 row">
+                                <label class="col-sm-2 col-form-label">
+                                    <strong>Periode</strong>
                                 </label>
                                 <div class="col-sm-3 col-form-label">
-                                    <div class="mb-2 row">
-                                        <label class="col-sm-3 col-form-label">Start</label>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            Target
+                                        </div>
                                         <div class="col-sm-9">
-                                            <input class="form-control" name="tanggalstart" type="date" value="">
+                                            <div class="mb-2 row">
+                                                <label class="col-sm-3 col-form-label">Start</label>
+                                                <div class="col-sm-9">
+                                                    <input class="form-control" name="tanggalstart" type="date" value="">
+                                                </div>
+                                            </div>
+                                            <div class="mb-2 row">
+                                                <label class="col-sm-3 col-form-label">End</label>
+                                                <div class="col-sm-9">
+                                                    <input class="form-control" name="tanggalend" type="date" value="">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="mb-2 row">
-                                        <label class="col-sm-3 col-form-label">End</label>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            Aktual
+                                        </div>
                                         <div class="col-sm-9">
-                                            <input class="form-control" name="tanggalend" type="date" value="">
+                                            <div class="mb-2 row">
+                                                <label class="col-sm-3 col-form-label">Start</label>
+                                                <div class="col-sm-9">
+                                                    <input class="form-control" name="tanggalstart" type="date" value="">
+                                                </div>
+                                            </div>
+                                            <div class="mb-2 row">
+                                                <label class="col-sm-3 col-form-label">End</label>
+                                                <div class="col-sm-9">
+                                                    <input class="form-control" name="tanggalend" type="date" value="">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -288,7 +326,7 @@ rel="stylesheet"
                                     <div class="row pb-2">
                                         <div class="col-8"></div>
                                         <div class="col-4 text-right">
-                                            <a class="btn btn-outline-success" onclick="tambahsales(); return false;" href="#">
+                                            <a class="btn btn-outline-success btn-sm" onclick="tambahsales(); return false;" href="#">
                                                 Tambah Data Konsumen <i class="fas fa-plus-circle"></i>
                                             </a>
                                         </div>
@@ -296,66 +334,48 @@ rel="stylesheet"
                                     <div class="row" style="font-size: 10px">
                                         <div class="col-12">
                                             <table class="table table-striped border datatable table-sm" id="salesdata">
-                                                <thead class="text-center">
+                                                <thead class="table-dark">
                                                     <tr>
                                                         <th>Nama</th>
                                                         <th>Alamat</th>
-                                                        <th>Oke</th>
-                                                        <th>Oke</th>
-                                                        <th>Oke</th>
-                                                        <th>Oke</th>
+                                                        <th>Kelurahan</th>
+                                                        <th>No Telepon</th>
+                                                        <th>Type</th>
+                                                        <th>Sales Prople</th>
+                                                        <th>CASH/CREDIT</th>
+                                                        <th>Finance Company</th>
+                                                        <th>Database</th>
+                                                        <th>Prospecting</th>
+                                                        <th>Polling</th>
+                                                        <th>Reject</th>
+                                                        <th>SSU</th>
+                                                        <th width="70"></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
+                                                        <td>Nama</td>
+                                                        <td>Alamat</td>
+                                                        <td>Kelurahan</td>
+                                                        <td>No Telepon</td>
+                                                        <td>Type</td>
+                                                        <td>Sales Prople</td>
+                                                        <td>CASH/CREDIT</td>
+                                                        <td>Finance Company</td>
+                                                        <td>Database</td>
+                                                        <td>Prospecting</td>
+                                                        <td>Polling</td>
+                                                        <td>Reject</td>
+                                                        <td>SSU</td>
+                                                        <td>
+                                                            <a href="javascript:void(0)" id="edit-post" data-id="" class="btn btn-warning btn-sm m-0" style="padding: 0.15rem 0.3rem; font-size: 0.7rem;">
+                                                                <i class="fas fa-edit"></i>
+                                                            </a>
+                                                            <a href="javascript:void(0)" id="delete-post" data-id="" class="btn btn-danger delete-post btn-sm m-0" style="padding: 0.15rem 0.3rem; font-size: 0.7rem;">
+                                                                <i class="fas fa-trash"></i>
+                                                            </a>
+                                                        </td>
                                                     </tr>
-                                                    <tr>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                    </tr>
-                                                    {{-- @if (!null == $data->sales_people_proposal)
-                                                        @foreach ($datasalespeople as $data_sal)
-                                                            @php
-                                                                $sp = DB::table('sales_people')->where('id', $data_sal)->first();
-                                                            @endphp
-                                                            <tr>
-                                                                <td>
-                                                                    <input type="hidden" name="idsales[]" value="{{ $sp->id }}">
-                                                                    <input class="form-control sales_nama" type="text" name="sales_nama[]" value="{{ $sp->nama_sales_people }}" disabled="">
-                                                                </td>
-                                                                <td>
-                                                                    <input class="form-control honda_id" type="text" name="honda_id[]" value="{{ $sp->honda_id_sales_people }}" disabled="">
-                                                                </td>
-                                                                <td>
-                                                                    <input class="form-control hso_id" type="text" name="hso_id[]" value="{{ $sp->hso_id_sales_people }}" disabled="">
-                                                                </td>
-                                                                <td>
-                                                                    <a href="javascript:void(0);" class="removeSales btn btn-danger"><i class="fas fa-minus-circle"></i>
-                                                                    </a>
-                                                                </td>
-                                                            </tr>
-                                                        @endforeach
-                                                    @else
-
-                                                    @endif --}}
                                                 </tbody>
                                             </table>
                                         </div>
@@ -365,43 +385,213 @@ rel="stylesheet"
                             </div>
                             <div class="mb-2 row">
                                 <label class="col-sm-2 col-form-label">
-                                    <strong>Lokasi Pameran</strong>
+                                    <strong>Dokumentasi</strong>
                                 </label>
                                 <div class="col-sm-10">
                                     <div class="mb-2 row">
-                                        <label class="col-sm-2 col-form-label">Foto</label>
-                                        <div class="col-sm-10">
-                                            <div class="row p-2">
-                                                {{-- @if (!null == $data->foto_lokasi_proposal)
-                                                    @foreach (json_decode($data->foto_lokasi_proposal) as $item)
-                                                    <div class="col-4 img-thumbnail">
-                                                        <div class="float-left" style="position: absolute">
-                                                            <button type="text" name="b" value="{{ $item }}" class="float-right btn btn-sm btn-danger"  onclick="return confirm('Konfirmasi Menghapus foto?')">
-                                                                <i class="fas fa-trash"></i>
-                                                            </button>
-                                                        </div>
-                                                        <a href="{{ Request::root() }}/upload-foto/{{ $item }}" target="_blank">
-                                                            <img src="/upload-foto/{{ $item }}" alt="" class="img-fluid">
-                                                        </a>
-                                                    </div>
-                                                    @endforeach
-                                                    <div class="pb-2"></div>
-                                                @endif --}}
-                                            </div>
-                                            <div class="row pt-2">
+                                        <label class="col-2 col-form-label">Dokumentasi Pre event</label>
+                                        <div class="col-10">
+                                            <div class="row">
+                                                <label class="col-4 col-form-label">Kanvasing Sebelum kegiatan</label>
                                                 <div class="col-4">
-                                                    <button type="text" name="b" value="upload" class="btn btn-info btn-block" >
-                                                        <div class="float-left">
-                                                            Upload Foto
-                                                        </div>
-                                                        <div class="text-right">
-                                                            <i class="fas fa-chevron-right"></i>
-                                                        </div>
-                                                    </button>
+                                                    {{-- <div class="row p-2">
+                                                        @if (!null == $data->foto_lokasi_proposal)
+                                                            @foreach (json_decode($data->foto_lokasi_proposal) as $item)
+                                                            <div class="col-4 img-thumbnail">
+                                                                <div class="float-left" style="position: absolute">
+                                                                    <button type="text" name="b" value="{{ $item }}" class="float-right btn btn-sm btn-danger"  onclick="return confirm('Konfirmasi Menghapus foto?')">
+                                                                        <i class="fas fa-trash"></i>
+                                                                    </button>
+                                                                </div>
+                                                                <a href="{{ Request::root() }}/upload-foto/{{ $item }}" target="_blank">
+                                                                    <img src="/upload-foto/{{ $item }}" alt="" class="img-fluid">
+                                                                </a>
+                                                            </div>
+                                                            @endforeach
+                                                            <div class="pb-2"></div>
+                                                        @endif
+                                                    </div> --}}
+                                                    <div class="row p-2">
+                                                        <button type="text" name="b" value="upload" class="btn btn-info btn-block" >
+                                                            <div class="float-left">
+                                                                Upload Foto
+                                                            </div>
+                                                            <div class="text-right">
+                                                                <i class="fas fa-chevron-right"></i>
+                                                            </div>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <label class="col-4 col-form-label">Capture Blast WA kepada konsumen</label>
+                                                <div class="col-4">
+                                                    {{-- <div class="row p-2">
+                                                        @if (!null == $data->foto_lokasi_proposal)
+                                                            @foreach (json_decode($data->foto_lokasi_proposal) as $item)
+                                                            <div class="col-4 img-thumbnail">
+                                                                <div class="float-left" style="position: absolute">
+                                                                    <button type="text" name="b" value="{{ $item }}" class="float-right btn btn-sm btn-danger"  onclick="return confirm('Konfirmasi Menghapus foto?')">
+                                                                        <i class="fas fa-trash"></i>
+                                                                    </button>
+                                                                </div>
+                                                                <a href="{{ Request::root() }}/upload-foto/{{ $item }}" target="_blank">
+                                                                    <img src="/upload-foto/{{ $item }}" alt="" class="img-fluid">
+                                                                </a>
+                                                            </div>
+                                                            @endforeach
+                                                            <div class="pb-2"></div>
+                                                        @endif
+                                                    </div> --}}
+                                                    <div class="row p-2">
+                                                        <button type="text" name="b" value="upload" class="btn btn-info btn-block" >
+                                                            <div class="float-left">
+                                                                Upload Foto
+                                                            </div>
+                                                            <div class="text-right">
+                                                                <i class="fas fa-chevron-right"></i>
+                                                            </div>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <label class="col-4 col-form-label">Posting flyer kegiatan di media sosial dealer</label>
+                                                <div class="col-4">
+                                                    {{-- <div class="row p-2">
+                                                        @if (!null == $data->foto_lokasi_proposal)
+                                                            @foreach (json_decode($data->foto_lokasi_proposal) as $item)
+                                                            <div class="col-4 img-thumbnail">
+                                                                <div class="float-left" style="position: absolute">
+                                                                    <button type="text" name="b" value="{{ $item }}" class="float-right btn btn-sm btn-danger"  onclick="return confirm('Konfirmasi Menghapus foto?')">
+                                                                        <i class="fas fa-trash"></i>
+                                                                    </button>
+                                                                </div>
+                                                                <a href="{{ Request::root() }}/upload-foto/{{ $item }}" target="_blank">
+                                                                    <img src="/upload-foto/{{ $item }}" alt="" class="img-fluid">
+                                                                </a>
+                                                            </div>
+                                                            @endforeach
+                                                            <div class="pb-2"></div>
+                                                        @endif
+                                                    </div> --}}
+                                                    <div class="row p-2">
+                                                        <button type="text" name="b" value="upload" class="btn btn-info btn-block" >
+                                                            <div class="float-left">
+                                                                Upload Foto
+                                                            </div>
+                                                            <div class="text-right">
+                                                                <i class="fas fa-chevron-right"></i>
+                                                            </div>
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <hr>
+                                    <div class="mb-2 row">
+                                        <label class="col-2 col-form-label">Dokumentasi event Day</label>
+                                        <div class="col-10">
+                                            <div class="row">
+                                                <label class="col-4 col-form-label">Interaksi konsumen</label>
+                                                <div class="col-4">
+                                                    {{-- <div class="row p-2">
+                                                        @if (!null == $data->foto_lokasi_proposal)
+                                                            @foreach (json_decode($data->foto_lokasi_proposal) as $item)
+                                                            <div class="col-4 img-thumbnail">
+                                                                <div class="float-left" style="position: absolute">
+                                                                    <button type="text" name="b" value="{{ $item }}" class="float-right btn btn-sm btn-danger"  onclick="return confirm('Konfirmasi Menghapus foto?')">
+                                                                        <i class="fas fa-trash"></i>
+                                                                    </button>
+                                                                </div>
+                                                                <a href="{{ Request::root() }}/upload-foto/{{ $item }}" target="_blank">
+                                                                    <img src="/upload-foto/{{ $item }}" alt="" class="img-fluid">
+                                                                </a>
+                                                            </div>
+                                                            @endforeach
+                                                            <div class="pb-2"></div>
+                                                        @endif
+                                                    </div> --}}
+                                                    <div class="row p-2">
+                                                        <button type="text" name="b" value="upload" class="btn btn-info btn-block" >
+                                                            <div class="float-left">
+                                                                Upload Foto
+                                                            </div>
+                                                            <div class="text-right">
+                                                                <i class="fas fa-chevron-right"></i>
+                                                            </div>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <label class="col-4 col-form-label">Unit Display</label>
+                                                <div class="col-4">
+                                                    {{-- <div class="row p-2">
+                                                        @if (!null == $data->foto_lokasi_proposal)
+                                                            @foreach (json_decode($data->foto_lokasi_proposal) as $item)
+                                                            <div class="col-4 img-thumbnail">
+                                                                <div class="float-left" style="position: absolute">
+                                                                    <button type="text" name="b" value="{{ $item }}" class="float-right btn btn-sm btn-danger"  onclick="return confirm('Konfirmasi Menghapus foto?')">
+                                                                        <i class="fas fa-trash"></i>
+                                                                    </button>
+                                                                </div>
+                                                                <a href="{{ Request::root() }}/upload-foto/{{ $item }}" target="_blank">
+                                                                    <img src="/upload-foto/{{ $item }}" alt="" class="img-fluid">
+                                                                </a>
+                                                            </div>
+                                                            @endforeach
+                                                            <div class="pb-2"></div>
+                                                        @endif
+                                                    </div> --}}
+                                                    <div class="row p-2">
+                                                        <button type="text" name="b" value="upload" class="btn btn-info btn-block" >
+                                                            <div class="float-left">
+                                                                Upload Foto
+                                                            </div>
+                                                            <div class="text-right">
+                                                                <i class="fas fa-chevron-right"></i>
+                                                            </div>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <label class="col-4 col-form-label">Live Season saat kegiatan berlangsung</label>
+                                                <div class="col-4">
+                                                    {{-- <div class="row p-2">
+                                                        @if (!null == $data->foto_lokasi_proposal)
+                                                            @foreach (json_decode($data->foto_lokasi_proposal) as $item)
+                                                            <div class="col-4 img-thumbnail">
+                                                                <div class="float-left" style="position: absolute">
+                                                                    <button type="text" name="b" value="{{ $item }}" class="float-right btn btn-sm btn-danger"  onclick="return confirm('Konfirmasi Menghapus foto?')">
+                                                                        <i class="fas fa-trash"></i>
+                                                                    </button>
+                                                                </div>
+                                                                <a href="{{ Request::root() }}/upload-foto/{{ $item }}" target="_blank">
+                                                                    <img src="/upload-foto/{{ $item }}" alt="" class="img-fluid">
+                                                                </a>
+                                                            </div>
+                                                            @endforeach
+                                                            <div class="pb-2"></div>
+                                                        @endif
+                                                    </div> --}}
+                                                    <div class="row p-2">
+                                                        <button type="text" name="b" value="upload" class="btn btn-info btn-block" >
+                                                            <div class="float-left">
+                                                                Upload Foto
+                                                            </div>
+                                                            <div class="text-right">
+                                                                <i class="fas fa-chevron-right"></i>
+                                                            </div>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
                                 </div>
                             </div>
                             <div class="mb-2 row fixed-bottom position-sticky p-4 border-top" style="background-color: #fff; ">
