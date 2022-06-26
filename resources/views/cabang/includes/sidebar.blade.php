@@ -30,13 +30,13 @@
         <li class="c-sidebar-nav-item">
             <x-utils.link
                 class="c-sidebar-nav-link"
-                :href="route('admin.dashboard')"
-                :active="activeClass(Route::is('admin.dashboard'), 'c-active')"
+                :href="route('cabang.lpj.index')"
+                :active="activeClass(Route::is('cabang.lpj.index'), 'c-active')"
                 icon="c-sidebar-nav-icon cil-list"
                 text="LPJ" />
         </li>
 
-        <li class="c-sidebar-nav-title">Menu</li>
+        {{-- <li class="c-sidebar-nav-title">Menu</li>
         <li class="c-sidebar-nav-item">
             <x-utils.link
                 class="c-sidebar-nav-link"
@@ -44,7 +44,7 @@
                 :active="activeClass(Route::is('admin.dashboard'), 'c-active')"
                 icon="c-sidebar-nav-icon cil-cog"
                 text="Pengaturan" />
-        </li>
+        </li> --}}
     </ul>
     <button class="c-sidebar-minimizer c-class-toggler" type="button" data-target="_parent" data-class="c-sidebar-minimized"></button>
 </div><!--sidebar-->

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Lpj;
 
 class LpjKonsumen extends Model
 {
@@ -27,4 +28,9 @@ class LpjKonsumen extends Model
         'reject',
         'ssu',
     ];
+
+    public function lpj()
+    {
+        return $this->hasOne(Lpj::class, 'id', 'id_lpj');
+    }
 }

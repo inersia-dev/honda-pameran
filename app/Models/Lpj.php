@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Proposal;
 
 class Lpj extends Model
 {
@@ -23,4 +24,10 @@ class Lpj extends Model
         'problem_identification_lpj',
         'corrective_action_lpj',
     ];
+
+    public function proposal()
+    {
+        return $this->hasOne(Proposal::class, 'id', 'id_proposal');
+    }
+
 }

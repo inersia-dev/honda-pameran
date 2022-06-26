@@ -1,19 +1,18 @@
 @extends('cabang.layouts.cabang')
 
-@section('title', 'Proposal')
+@section('title', 'LPJ')
 @section('content')
 <div class="row">
     <div class="col-md-12">
         <div class="card">
             <div class="card-body">
-
                 <div class="row">
                     <div class="col-12">
                         <div class="float-left">
-                            <h5>Data Proposal</h5>
+                            <h5>Data LPJ</h5>
                         </div>
                         <div class="float-right">
-                            <a href="{{ route('cabang.proposal.getPilihJenisProposal') }}" class="btn btn-success">Buat Proposal </a>
+                            {{-- <a href="#" class="btn btn-success">Buat Proposal </a> --}}
                         </div>
                     </div>
                 </div>
@@ -28,12 +27,12 @@
                                     </div>
                                     <select id="status" name="status" class="form-control">
                                         <option value="">Semua</option>
-                                        <option value="1">Draft</option>
+                                        {{-- <option value="1">Draft</option>
                                         <option value="2">Waiting Approval</option>
                                         <option value="3">Partial Approval</option>
                                         <option value="4">Final</option>
                                         <option value="5">Revise</option>
-                                        <option value="6">Rejected</option>
+                                        <option value="6">Rejected</option> --}}
                                     </select>
                                 </div>
                                 <div class="pb-2 col">
@@ -42,9 +41,9 @@
                                     </div>
                                     <select class="form-control" name="kategori" id="kategori">
                                         <option value=""></option>
-                                        @foreach ($datakategori as $data_k)
+                                        {{-- @foreach ($datakategori as $data_k)
                                             <option value="{{ $data_k->id }}">{{ $data_k->nama_kategori }}</option>
-                                        @endforeach
+                                        @endforeach --}}
                                     </select>
                                 </div>
                                 <div class="pb-2 col">
@@ -53,13 +52,13 @@
                                     </div>
                                     <select class="form-control data-lokasi" name="lokasi">
                                         <option value=""></option>
-                                        @foreach ($datalokasi as $data_l)
+                                        {{-- @foreach ($datalokasi as $data_l)
                                             <option value="{{ $data_l->id }}"
                                                 @if (request()->lokasi == $data_l->id)
                                                     selected
                                                 @endif
                                             >{{ $data_l->kelurahan_lokasi }}, {{ $data_l->kecamatan_lokasi }}</option>
-                                        @endforeach
+                                        @endforeach --}}
                                     </select>
                                 </div>
                                 <div class="pb-2 col">
@@ -99,14 +98,13 @@
                         <div class="col p-0">Submit Date</div>
                     </div>
                 </div>
-
+{{--
                 @php
                 $first  = 0;
                 $end    = 0;
                 @endphp
 
                 @foreach($datas as $key => $data)
-
                     <div href="#" style="text-decoration: none;">
                         <div class="card mb-2" style="border-radius: 5px; font-size: 12px">
                             <div class="row p-2 align-items-center">
@@ -117,28 +115,6 @@
                                                 <span class="btn btn-sm btn-{{ $data->statusp->warna_status ?? ''}} ms-auto">
                                                     {{ $data->statusp->nama_status ?? ''}}
                                                 </span>
-                                                @if ($data->status_proposal == 4)
-                                                    @php
-                                                        $a = \Carbon\Carbon::create($data->periode_start_proposal);
-                                                        $b = \Carbon\Carbon::create($data->periode_end_proposal);
-                                                        $c = \Carbon\Carbon::now();
-                                                    @endphp
-                                                    @if ($a->greaterThan($c) == true)
-                                                        <span class="btn btn-sm btn-outline-dark ms-auto">
-                                                            Akan Berjalan
-                                                        </span>
-                                                    @else
-                                                        @if ($b->greaterThan($c) == true)
-                                                            <span class="btn btn-sm btn-outline-primary ms-auto">
-                                                                Sedang Berjalan
-                                                            </span>
-                                                        @else
-                                                            <span class="btn btn-sm btn-outline-info ms-auto">
-                                                                Selesai
-                                                            </span>
-                                                        @endif
-                                                    @endif
-                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -160,30 +136,18 @@
                                 </div>
                                 <div class="col p-0 pr-4">
                                     <div class="row align-items-center">
-                                        <div class="col-6 p-0">
+                                        <div class="col-8">
                                             <div class="text-muted" style="font-size: 10px">
                                                 {{ $data->created_at }}
                                             </div>
                                         </div>
-                                        <div class="col-6 p-0 text-right pr-1">
+                                        <div class="col-4 text-right">
                                             <div class="btn-group dropleft">
                                                 @if ($data->status_proposal == 1)
                                                     <a href="{{ route('cabang.proposal.getCreate') }}?id={{ $data->uuid }}" class="btn btn-sm btn-outline-warning">
                                                         <i class="cil-pencil"></i>
                                                     </a>
                                                 @else
-                                                    @if ($data->status_proposal == 4)
-                                                        <div class="btn-group dropleft">
-                                                            <button class="btn btn-sm btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-                                                                <i class="cil-pencil"></i>
-                                                            </button>
-                                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                                <a href="{{ route('cabang.lpj.getCreate') }}?id={{ $data->uuid }}" class="dropdown-item">
-                                                                    Buat LPJ
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    @endif
                                                     <a href="{{ route('cabang.proposal.getShow') }}?id={{ $data->uuid }}" class="btn btn-sm btn-warning">
                                                         <i class="cil-search"></i>
                                                     </a>
@@ -216,7 +180,7 @@
                             {!! $datas->appends(request()->query())->links() !!}
                         </div>
                     </div><!--col-->
-                </div><!--row-->
+                </div><!--row--> --}}
             </div>
         </div>
     </div><!--col-md-10-->

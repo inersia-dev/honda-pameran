@@ -31,3 +31,4 @@ Route::post('password/confirm', 'Auth\ConfirmPasswordController@confirm');
 
 Route::auto('/pameran', App\Http\Controllers\Cabang\PameranController::class);
 Route::auto('/proposal', App\Http\Controllers\Cabang\ProposalController::class);
+Route::auto('/lpj', App\Http\Controllers\Cabang\LpjController::class);
