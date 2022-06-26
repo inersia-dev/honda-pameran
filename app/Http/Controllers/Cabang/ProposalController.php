@@ -97,9 +97,9 @@ class ProposalController extends Controller
 
     public function getCreate()
     {
-        if (request()->id == null) {
-            return redirect()->route('cabang.proposal.index');
-        }
+        // if (request()->id == null) {
+        //     return redirect()->route('cabang.proposal.index');
+        // }
 
         $datalokasi         = Lokasi::get();
         $datadisplay        = Display::get();
@@ -108,16 +108,16 @@ class ProposalController extends Controller
         $datadana           = json_decode($data->dana_proposal, true) ?? null;
         $datasalespeople    = json_decode($data->sales_people_proposal, true) ?? null;
 
-        if (null == $data) {
-            return redirect()->route('cabang.proposal.index');
-        }
+        // if (null == $data) {
+        //     return redirect()->route('cabang.proposal.index');
+        // }
 
         return view('cabang.proposal.create', compact('data', 'datalokasi', 'datadisplay', 'salespeople', 'datadana', 'datasalespeople'));
     }
     public function getShow()
     {
         // dd(request()->id);
-        if (!null == request()->id) {
+        // if (!null == request()->id) {
 
             $datalokasi         = Lokasi::get();
             $datadisplay        = Display::get();
@@ -126,14 +126,14 @@ class ProposalController extends Controller
             $datadana           = json_decode($data->dana_proposal, true) ?? null;
             $datasalespeople    = json_decode($data->sales_people_proposal, true) ?? null;
 
-            if (null == $data || $data->status_proposal == 1) {
-                return redirect()->route('cabang.proposal.index');
-            }
+            // if (null == $data || $data->status_proposal == 1) {
+            //     return redirect()->route('cabang.proposal.index');
+            // }
 
             return view('cabang.proposal.show', compact('data', 'datalokasi', 'datadisplay', 'salespeople', 'datadana', 'datasalespeople'));
-        } else {
-            return redirect()->route('cabang.proposal.index');
-        }
+        // } else {
+        //     return redirect()->route('cabang.proposal.index');
+        // }
     }
 
     public function postStore()
