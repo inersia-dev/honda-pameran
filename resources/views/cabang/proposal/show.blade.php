@@ -410,16 +410,50 @@ rel="stylesheet"
                                                     <th>Created By</th>
                                                     <th>Status</th>
                                                     <th>Keterangan</th>
+                                                    <th></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
                                                     <td>1.</td>
                                                     <td>{{ $data->created_at }}</td>
-                                                    <td>{{ $data->user_proposal }}</td>
+                                                    <td>{{ $data->usercabang->name }}</td>
                                                     <td></td>
-                                                    <td>Submit Proposal</td>
+                                                    <td>
+                                                        <label class="badge bg-info" style="color: #fff">Submit Proposal <i class="fas fa-check"></i> </label>
+                                                    </td>
+                                                    <td></td>
                                                 </tr>
+                                                @php
+                                                    $n = 2;
+                                                @endphp
+                                                @foreach ($dataapproval as $data_h)
+                                                    <tr>
+                                                        <td>{{ $n++ }}</td>
+                                                        <td>{{ $data_h->created_at }}</td>
+                                                        <td>{{ $data_h->userapp->name }}</td>
+                                                        <td>{{ $data_h->userapp->jabatanpusat->nama_jabatan }}</td>
+                                                        <td>
+                                                            @php
+                                                                if ($data_h->status_approval == 1) {
+                                                                    $st = 'Approve';
+                                                                    $si = 'info';
+                                                                    $ic = 'check';
+                                                                } elseif ($data_h->status_approval == 2) {
+                                                                    $st = 'Revise';
+                                                                    $si = 'warning';
+                                                                    $ic = 'exclamation-triangle';
+                                                                } elseif ($data_h->status_approval == 3) {
+                                                                    $st = 'Rejected';
+                                                                    $si = 'danger';
+                                                                    $ic = 'times';
+                                                                }
+                                                            @endphp
+                                                            <label class="badge bg-{{ $si }}"  style="color: #fff">{{ $st }} <i class="fas fa-{{ $ic }}"></i></label>
+                                                        </td>
+                                                        <td>{{ $data_h->keterangan_approval }}</td>
+                                                    </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>

@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
 use Image;
+use App\Models\ApprovalProposal;
 
 class ProposalController extends Controller
 {
@@ -105,8 +106,8 @@ class ProposalController extends Controller
         $datadisplay        = Display::get();
         $salespeople        = SalesPeople::where('dealer_sales_people', Auth::guard('cabang')->user()->dealer)->get();
         $data               = Proposal::where('uuid', request()->id)->first();
-        $datadana           = json_decode($data->dana_proposal, true) ?? null;
-        $datasalespeople    = json_decode($data->sales_people_proposal, true) ?? null;
+        $datadana           = json_decode($data->dana_proposal  ?? null, true);
+        $datasalespeople    = json_decode($data->sales_people_proposal  ?? null, true);
 
         // if (null == $data) {
         //     return redirect()->route('cabang.proposal.index');
@@ -123,14 +124,16 @@ class ProposalController extends Controller
             $datadisplay        = Display::get();
             $salespeople        = SalesPeople::get();
             $data               = Proposal::where('uuid', request()->id)->first();
-            $datadana           = json_decode($data->dana_proposal, true) ?? null;
-            $datasalespeople    = json_decode($data->sales_people_proposal, true) ?? null;
+            $datadana           = json_decode($data->dana_proposal  ?? null, true);
+            $datasalespeople    = json_decode($data->sales_people_proposal  ?? null, true);
 
             // if (null == $data || $data->status_proposal == 1) {
             //     return redirect()->route('cabang.proposal.index');
             // }
 
-            return view('cabang.proposal.show', compact('data', 'datalokasi', 'datadisplay', 'salespeople', 'datadana', 'datasalespeople'));
+            $dataapproval       = ApprovalProposal::where('id_proposal', $data->id)->get();
+
+            return view('cabang.proposal.show', compact('data', 'datalokasi', 'datadisplay', 'salespeople', 'datadana', 'datasalespeople', 'dataapproval'));
         // } else {
         //     return redirect()->route('cabang.proposal.index');
         // }

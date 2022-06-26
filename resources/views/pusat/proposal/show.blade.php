@@ -398,7 +398,7 @@ rel="stylesheet"
                                 </div>
                             </div>
                         </div>
-                        <form action="" method="POST" class="mb-4 row fixed-bottom position-sticky p-4 border-top" style="background-color: #fff; ">
+                        <form action="{{ route('pusat.proposal.postStatusHistory') }}" method="POST" class="mb-4 row fixed-bottom position-sticky p-4 border-top" style="background-color: #fff; ">
                             <div class="col-12 mb-4">
                                 <div class="mb-2 row">
                                     <label class="col-sm-2 col-form-label">History</label>
@@ -409,6 +409,7 @@ rel="stylesheet"
                                                     <th>No.</th>
                                                     <th>Tanggal</th>
                                                     <th>Created By</th>
+                                                    <th></th>
                                                     <th>Status</th>
                                                     <th>Keterangan</th>
                                                 </tr>
@@ -417,10 +418,43 @@ rel="stylesheet"
                                                 <tr>
                                                     <td>1.</td>
                                                     <td>{{ $data->created_at }}</td>
-                                                    <td>{{ $data->user_proposal }}</td>
+                                                    <td>{{ $data->usercabang->name }}</td>
                                                     <td></td>
-                                                    <td>Submit Proposal</td>
+                                                    <td>
+                                                        <label class="badge bg-info" style="color: #fff">Submit Proposal <i class="fas fa-check"></i> </label>
+                                                    </td>
+                                                    <td></td>
                                                 </tr>
+                                                @php
+                                                    $n = 2;
+                                                @endphp
+                                                @foreach ($dataapproval as $data_h)
+                                                    <tr>
+                                                        <td>{{ $n++ }}</td>
+                                                        <td>{{ $data_h->created_at }}</td>
+                                                        <td>{{ $data_h->userapp->name }}</td>
+                                                        <td>{{ $data_h->userapp->jabatanpusat->nama_jabatan }}</td>
+                                                        <td>
+                                                            @php
+                                                                if ($data_h->status_approval == 1) {
+                                                                    $st = 'Approve';
+                                                                    $si = 'info';
+                                                                    $ic = 'check';
+                                                                } elseif ($data_h->status_approval == 2) {
+                                                                    $st = 'Revise';
+                                                                    $si = 'warning';
+                                                                    $ic = 'exclamation-triangle';
+                                                                } elseif ($data_h->status_approval == 3) {
+                                                                    $st = 'Rejected';
+                                                                    $si = 'danger';
+                                                                    $ic = 'times';
+                                                                }
+                                                            @endphp
+                                                            <label class="badge bg-{{ $si }}"  style="color: #fff">{{ $st }} <i class="fas fa-{{ $ic }}"></i></label>
+                                                        </td>
+                                                        <td>{{ $data_h->keterangan_approval }}</td>
+                                                    </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -438,14 +472,16 @@ rel="stylesheet"
                                 <div class="mb-2 row">
                                     <label class="col-sm-2 col-form-label">Keterangan</label>
                                     <div class="col-sm-10">
-                                        <textarea type="text" class="form-control" rows="4"></textarea>
+                                        <textarea type="text" class="form-control" rows="4" name="keterangan"></textarea>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12">
-                                <a href="#" class="btn btn-outline-dark"><i class="fas fa-chevron-left"></i> Kembali</a>
+                                @csrf
+                                <input type="hidden" name="id" value="{{ $data->id }}">
+                                <a href="{{ route('pusat.proposal.index') }}" class="btn btn-outline-dark"><i class="fas fa-chevron-left"></i> Kembali</a>
                                 <div class="float-right">
-                                    <a href="{{ route('pusat.proposal.index') }}" class="btn btn-primary" type="text" name="b" value="done"  onclick="return confirm('Konfirmasi Submit Status Proposal')">Submit <i class="fas fa-check"></i> </a>
+                                    <button class="btn btn-primary" type="text" name="b" value="done"  onclick="return confirm('Konfirmasi Submit Status Proposal')">Submit <i class="fas fa-check"></i> </button>
                                 </div>
                             </div>
                         </form>
@@ -509,39 +545,6 @@ rel="stylesheet"
     <script src='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.js'></script>
     <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.min.js'></script>
 
-
-    {{-- <script>
-    var mapCenter = [{{ request('latitude', config('leaflet.map_center_latitude')) }}, {{ request('longitude', config('leaflet.map_center_longitude')) }}];
-    var map = L.map('mapid--').setView(mapCenter, {{ config('leaflet.zoom_level') }});
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
-
-    var marker = L.marker(mapCenter).addTo(map);
-    function updateMarker(lat, lng) {
-        marker
-        .setLatLng([lat, lng])
-        .bindPopup("Your location :  " + marker.getLatLng().toString())
-        .openPopup();
-        return false;
-    };
-
-    map.on('click', function(e) {
-        let latitude = e.latlng.lat.toString().substring(0, 15);
-        let longitude = e.latlng.lng.toString().substring(0, 15);
-        $('#latitude').val(latitude);
-        $('#longitude').val(longitude);
-        updateMarker(latitude, longitude);
-    });
-
-    var updateMarkerByInputs = function() {
-        return updateMarker( $('#latitude').val() , $('#longitude').val());
-    }
-    $('#latitude').on('input', updateMarkerByInputs);
-    $('#longitude').on('input', updateMarkerByInputs);
-    </script> --}}
-
     {{-- <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script> --}}
     @php
         $long_ = "-1.2449965";
@@ -557,25 +560,6 @@ rel="stylesheet"
     popupAnchor: [1, -34],
     shadowSize: [41, 41]
     });
-    // please replace this with your own mapbox token!
-    // var token = 'pk.eyJ1IjoicmltYmFib3JuZSIsImEiOiJja3Z5bjZrZGwwMWtyMnVvN2xqaWRwdWh4In0.xUbfIJAJn2vMBTd_IKDzTQ';
-    // var mapboxUrl = 'https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/{z}/{x}/{y}@2x?access_token=' + token;
-    // var mapboxAttrib = 'Map data © <a href="http://osm.org/copyright">OpenStreetMap</a> contributors. Tiles from <a href="https://www.mapbox.com">Mapbox</a>.';
-    // var mapbox = new L.TileLayer(mapboxUrl, {
-    //         attribution: mapboxAttrib,
-    //         tileSize: 512,
-    //         zoomOffset: -1
-    // });
-
-    // var map = L.map('mapid', {
-    //         tap: false, // ref https://github.com/Leaflet/Leaflet/issues/7255
-    //         layers: [mapbox],
-    //         center: [{{ config('leaflet.map_center_latitude') }}, {{ config('leaflet.map_center_longitude') }}],
-    //         zoom: {{ config('leaflet.zoom_level') }},
-    //         zoomControl: true
-    //         }
-    //     );
-        // .setView([{{ config('leaflet.map_center_latitude') }}, {{ config('leaflet.map_center_longitude') }}], {{ config('leaflet.zoom_level') }});
 
     // inisiasi mapbox
     L.mapbox.accessToken = 'pk.eyJ1IjoicmltYmFib3JuZSIsImEiOiJja3Z5bjZrZGwwMWtyMnVvN2xqaWRwdWh4In0.xUbfIJAJn2vMBTd_IKDzTQ';
@@ -598,32 +582,6 @@ rel="stylesheet"
     })
     .addTo(map);
 
-    // untuk group marker, tapi jika tidak pake circle
-    // var markers = L.markerClusterGroup();
-
-    // ngambil data
-    // axios.get('https://honda-map.test/api/outlets', {
-    //     headers: {
-    //         'Access-Control-Allow-Origin' : '*',
-    //         'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-    //     }
-    // })
-    // .then(function (response) {
-    //     var marker = L.geoJSON(response.data, {
-    //         pointToLayer: function(geoJsonPoint, latlng, layer) {
-    //             markerr  = L.marker(latlng).bindPopup('Delaer Tes');
-    //             circle   = L.circle(latlng, {radius: 500, color: 'red', opacity:.5});
-    //             return L.featureGroup([markerr, circle])
-    //                     // .bindPopup(nama)
-    //                     .addTo(map);
-    //         }
-    //     });
-    //     markers.addLayer(marker);
-    // })
-    // .catch(function (error) {
-    //     console.log(error);
-    // });
-
     //Data Contoh
     // L.marker([-1.242292, 116.879625], {icon: redIcon}).bindPopup('Dealer A').addTo(map);
     // L.circle([-1.242292, 116.879625], {radius: 500, color: 'red', opacity:.5}).addTo(map);
@@ -638,58 +596,11 @@ rel="stylesheet"
     // L.circle([-1.239848, 116.916119], {radius: 500, color: 'red', opacity:.5}).addTo(map);
 
 
-
-    // map.addLayer(marker);
-
-    // tambah data manual
-    // var markers = [
-    //         [ -1.242292, 116.879625, "Dealer A" ],
-    //      ];
-
-    //      //Loop through the markers array
-    //      for (var i=0; i<markers.length; i++) {
-
-    //         var lon = markers[i][0];
-    //         var lat = markers[i][1];
-    //         var popupText = markers[i][2];
-
-    //         // markerr  = L.marker(lat, lon).bindPopup('Delaer Tes');
-    //         // circle   = L.circle(lat, lon, {radius: 500, color: 'red', opacity:.5});
-    //         // L.featureGroup([markerr, circle])
-    //         //             .bindPopup(popupText)
-    //         //             .addTo(map);
-
-    //          var markerLocation = new L.LatLng(lat, lon);
-    //          var marker = new L.Marker(markerLocation);
-    //          map.addLayer(marker);
-
-    //         //  marker.bindPopup(popupText);
-
-        //  }
-
-    // untuk group marker, tapi jika tidak pake circle
-    // map.addLayer(markers);
-
-
     var mapCenter = [ {!!  $data->lat_proposal ?? $lat_ !!}, {!!  $data->long_proposal ?? $long_ !!}];
 
     // Tambah Data Marker
-    var theMarker = L.marker(mapCenter).addTo(map);
+    L.marker(mapCenter).addTo(map);
 
-    function updateMarker(lat, lng) {
-        theMarker
-        .setLatLng([lat, lng])
-        .bindPopup("Tandai Lokasi")
-        .openPopup();
-        return false;
-    };
-
-    var updateMarkerByInputs = function() {
-        return updateMarker( $('#lat').val() , $('#long').val());
-    }
-
-    $('#lat').on('input', updateMarkerByInputs);
-    $('#long').on('input', updateMarkerByInputs);
     </script>
 
 

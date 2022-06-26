@@ -117,6 +117,28 @@
                                                 <span class="btn btn-sm btn-{{ $data->statusp->warna_status ?? ''}} ms-auto">
                                                     {{ $data->statusp->nama_status ?? ''}}
                                                 </span>
+                                                @if ($data->status_proposal == 4)
+                                                    @php
+                                                        $a = \Carbon\Carbon::create($data->periode_start_proposal);
+                                                        $b = \Carbon\Carbon::create($data->periode_end_proposal);
+                                                        $c = \Carbon\Carbon::now();
+                                                    @endphp
+                                                    @if ($a->greaterThan($c) == true)
+                                                        <span class="btn btn-sm btn-outline-dark ms-auto">
+                                                            Akan Berjalan
+                                                        </span>
+                                                    @else
+                                                        @if ($b->greaterThan($c) == true)
+                                                            <span class="btn btn-sm btn-outline-primary ms-auto">
+                                                                Sedang Berjalan
+                                                            </span>
+                                                        @else
+                                                            <span class="btn btn-sm btn-outline-info ms-auto">
+                                                                Selesai
+                                                            </span>
+                                                        @endif
+                                                    @endif
+                                                @endif
                                             </div>
                                         </div>
                                     </div>

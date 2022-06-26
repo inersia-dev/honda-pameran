@@ -13,6 +13,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
 use Image;
+use App\Models\ApprovalProposal;
 
 class ProposalController extends Controller
 {
@@ -60,6 +61,36 @@ class ProposalController extends Controller
                             ->where('status_proposal', '!=', 1)
                             ->paginate(10);
         return view('pusat.proposal.index', compact('datas', 'datalokasi', 'datakategori', 'datadealer'));
+    }
+
+    public function postStatusHistory()
+    {
+        $proposal  = Proposal::find(request()->id);
+        if (request()->status == 1) { // approve
+            if (Auth::guard('pusat')->user()->jabatan == 5){
+                $proposal->status_proposal = 4;
+            } else {
+                $proposal->status_proposal = 3;
+            }
+        } elseif (request()->status == 2) { // revise
+            $proposal->status_proposal = 5;
+        } elseif (request()->status == 3) { // rejected
+            $proposal->status_proposal = 6;
+        }
+
+
+
+        $proposal->save();
+
+        $approval                         = new ApprovalProposal;
+        $approval->id_proposal            = request()->id;
+        $approval->user_approval          = Auth::guard('pusat')->user()->id;
+        $approval->status_approval        = request()->status;
+        $approval->keterangan_approval    = request()->keterangan;
+
+        $approval->save();
+
+        return redirect()->route('pusat.proposal.index')->withFlashSuccess('Update Approval Proposal Berhasil ! ✅');
     }
 
     public function getTes()
@@ -117,21 +148,21 @@ class ProposalController extends Controller
 
     public function getCreate()
     {
-        if (request()->id == null) {
-            return redirect()->route('pusat.proposal.index');
-        }
+        // if (request()->id == null) {
+        //     return redirect()->route('pusat.proposal.index');
+        // }
 
         $datalokasi         = Lokasi::get();
         $datadisplay        = Display::get();
         $datadealer         = Dealer::get();
         $salespeople        = SalesPeople::get();
         $data               = Proposal::where('uuid', request()->id)->first();
-        $datadana           = json_decode($data->dana_proposal, true) ?? null;
-        $datasalespeople    = json_decode($data->sales_people_proposal, true) ?? null;
+        $datadana           = json_decode($data->dana_proposal  ?? null, true);
+        $datasalespeople    = json_decode($data->sales_people_proposal  ?? null, true);
 
-        if (null == $data) {
-            return redirect()->route('pusat.proposal.index');
-        }
+        // if (null == $data) {
+        //     return redirect()->route('pusat.proposal.index');
+        // }
 
         return view('pusat.proposal.create', compact('data', 'datalokasi', 'datadisplay', 'datadealer', 'salespeople', 'datadana', 'datasalespeople'));
     }
@@ -146,14 +177,17 @@ class ProposalController extends Controller
             $datadealer         = Dealer::get();
             $salespeople        = SalesPeople::get();
             $data               = Proposal::where('uuid', request()->id)->first();
-            $datadana           = json_decode($data->dana_proposal, true) ?? null;
-            $datasalespeople    = json_decode($data->sales_people_proposal, true) ?? null;
+            $datadana           = json_decode($data->dana_proposal  ?? null, true);
+            $datasalespeople    = json_decode($data->sales_people_proposal  ?? null, true);
 
-            if (null == $data || $data->status_proposal == 1) {
-                return redirect()->route('pusat.proposal.index');
-            }
+            // if (null == $data || $data->status_proposal == 1) {
+            //     return redirect()->route('pusat.proposal.index');
+            // }
 
-            return view('pusat.proposal.show', compact('data', 'datalokasi', 'datadisplay', 'datadealer', 'salespeople', 'datadana', 'datasalespeople'));
+            $dataapproval = ApprovalProposal::where('id_proposal', $data->id)->get();
+
+
+            return view('pusat.proposal.show', compact('data', 'datalokasi', 'datadisplay', 'datadealer', 'salespeople', 'datadana', 'datasalespeople', 'dataapproval'));
         } else {
             return redirect()->route('pusat.proposal.index');
         }
