@@ -9,6 +9,10 @@
 href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
 rel="stylesheet"
 />
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+
 <style>
     .table td {
         vertical-align: baseline;
@@ -45,14 +49,15 @@ rel="stylesheet"
                                 <label class="col-sm-2 col-form-label">
                                     <strong>No Proposal</strong>
                                 </label>
-                                <label class="col-sm-10 col-form-label">
+                                <label class="col-sm-10 col-form-label font-weight-bold">
+                                    {{ $data->proposal->no_proposal }}
                                 </label>
                             </div>
                             <div class="mb-2 row">
                                 <label class="col-sm-2 col-form-label">
                                     <strong>Periode</strong>
                                 </label>
-                                <div class="col-sm-3 col-form-label">
+                                <div class="col-sm-5 col-form-label">
                                     <div class="row">
                                         <div class="col-sm-3">
                                             Target
@@ -61,17 +66,18 @@ rel="stylesheet"
                                             <div class="mb-2 row">
                                                 <label class="col-sm-3 col-form-label">Start</label>
                                                 <div class="col-sm-9">
-                                                    <input class="form-control" name="tanggalstart" type="date" value="">
+                                                    <input class="form-control" type="date" value="{{ $data->proposal->periode_start_proposal }}" disabled>
                                                 </div>
                                             </div>
                                             <div class="mb-2 row">
                                                 <label class="col-sm-3 col-form-label">End</label>
                                                 <div class="col-sm-9">
-                                                    <input class="form-control" name="tanggalend" type="date" value="">
+                                                    <input class="form-control" type="date" value="{{ $data->proposal->periode_end_proposal }}" disabled>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <hr>
                                     <div class="row">
                                         <div class="col-sm-3">
                                             Aktual
@@ -123,13 +129,13 @@ rel="stylesheet"
                                                 <tbody>
                                                     <tr>
                                                         <td>
-                                                            <input class="form-control" type="number" value="">
+                                                            <input class="form-control" type="number"  value="{{ $data->proposal->target_database_proposal }}" disabled>
                                                         </td>
                                                         <td>
-                                                            <input class="form-control" type="number" value="">
+                                                            <input class="form-control" type="number"  value="{{ $data->proposal->target_prospectus_proposal }}" disabled>
                                                         </td>
                                                         <td>
-                                                            <input class="form-control" type="number" value="">
+                                                            <input class="form-control" type="number"  value="{{ $data->proposal->target_penjualan_proposal }}" disabled>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -186,22 +192,22 @@ rel="stylesheet"
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {{-- @foreach ($datadana as $key => $data_dana)
+                                                    @foreach ($datadana as $key => $data_dana)
                                                         <tr>
                                                             <td>
-                                                                <input class="form-control" type="text" value="{{ data_get($data_dana, 'ket_dana') }}">
+                                                                <input class="form-control" type="text" value="{{ data_get($data_dana, 'ket_dana') }}" disabled>
                                                             </td>
                                                             <td>
-                                                                <input class="form-control" type="number"  value="{{ data_get($data_dana, 'beban_dealer_dana') }}">
+                                                                <input class="form-control" type="number"  value="{{ data_get($data_dana, 'beban_dealer_dana') }}" disabled>
                                                             </td>
                                                             <td>
-                                                                <input class="form-control" type="number"  value="{{ data_get($data_dana, 'beban_fincoy_dana') }}">
+                                                                <input class="form-control" type="number"  value="{{ data_get($data_dana, 'beban_fincoy_dana') }}" disabled>
                                                             </td>
                                                             <td>
-                                                                <input class="form-control" type="number" value="{{ data_get($data_dana, 'beban_md_dana') }}">
+                                                                <input class="form-control" type="number" value="{{ data_get($data_dana, 'beban_md_dana') }}" disabled>
                                                             </td>
                                                         </tr>
-                                                    @endforeach --}}
+                                                    @endforeach
                                                 </tbody>
                                             </table>
                                             <div class="row">
@@ -213,7 +219,7 @@ rel="stylesheet"
                                                         <div class="input-group-prepend">
                                                         <span class="input-group-text" id="basic-addon1">Rp. </span>
                                                         </div>
-                                                        <input class="form-control" value="">
+                                                        <input class="form-control" value="{{ number_format($data->proposal->total_dana_proposal,0,',',','); }}" disabled>
                                                     </div>
                                                 </div>
                                             </div>
@@ -326,10 +332,109 @@ rel="stylesheet"
                                     <div class="row pb-2">
                                         <div class="col-8"></div>
                                         <div class="col-4 text-right">
-                                            <a class="btn btn-outline-success btn-sm" onclick="tambahsales(); return false;" href="#">
+                                            <a class="btn btn-outline-success btn-sm" data-toggle="collapse" href="#tambahkonsumen" aria-expanded="false">
                                                 Tambah Data Konsumen <i class="fas fa-plus-circle"></i>
                                             </a>
                                         </div>
+                                        <div class="col-12 pt-2">
+                                            <div class="row collapse" id="tambahkonsumen">
+                                                <div class="col-6">
+                                                    <div class="row form-group">
+                                                        <label for="name" class="col-sm-3 control-label">Nama</label>
+                                                        <div class="col-sm-9">
+                                                            <input type="text" class="form-control" id="namakonsumen" name="namakonsumen" value="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row form-group">
+                                                        <label class="col-sm-3 control-label">Alamat</label>
+                                                        <div class="col-sm-9">
+                                                            <input class="form-control" id="alamatnkonsumen" name="alamatkonsumen" value="" >
+                                                        </div>
+                                                    </div>
+                                                    <div class="row form-group">
+                                                        <label class="col-sm-3 control-label">Kelurahan</label>
+                                                        <div class="col-sm-9">
+                                                            <input class="form-control" id="kelurahankonsumen" name="kelurahankonsumen" value="" >
+                                                        </div>
+                                                    </div>
+                                                    <div class="row form-group">
+                                                        <label class="col-sm-3 control-label">No Telepon</label>
+                                                        <div class="col-sm-9">
+                                                            <input class="form-control" id="notelponsumen" name="knotelponsumen" value="" >
+                                                        </div>
+                                                    </div>
+                                                    <div class="row form-group">
+                                                        <label class="col-sm-3 control-label">Type</label>
+                                                        <div class="col-sm-9">
+                                                            <input class="form-control" id="typekonsumen" name="typekonsumen" value="" >
+                                                        </div>
+                                                    </div>
+                                                    <div class="row form-group">
+                                                        <label class="col-sm-3 control-label">Sales People</label>
+                                                        <div class="col-sm-9">
+                                                            <input class="form-control" id="spkonsumen" name="spkonsumen" value="" >
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="row form-group">
+                                                        <label class="col-sm-3 control-label">Jenis</label>
+                                                        <div class="col-sm-9">
+                                                            <select name="jeniskonsumen" class="form-control" id="jeniskonsumen" >
+                                                                <option value="1">CASH</option>
+                                                                <option value="2">CREDIT</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row form-group">
+                                                        <label class="col-sm-3 control-label">Finance Company</label>
+                                                        <div class="col-sm-9">
+                                                            <select name="financekonsumen" class="form-control" id="financekonsumen" >
+                                                                <option value="1">CASH</option>
+                                                                <option value="2">CREDIT</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="row form-group">
+                                                                <label class="col-sm-6 control-label">Database</label>
+                                                                <div class="col-sm-6">
+                                                                    <input type="checkbox" name="dbkonsumen" id="dbkonsumen">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row form-group">
+                                                                <label class="col-sm-6 control-label">Prospecting</label>
+                                                                <div class="col-sm-6">
+                                                                    <input type="checkbox" name="proskonsumen" id="proskonsumen">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row form-group">
+                                                                <label class="col-sm-6 control-label">Polling</label>
+                                                                <div class="col-sm-6">
+                                                                    <input type="checkbox" name="polkonsumen" id="polkonsumen">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="row form-group">
+                                                                <label class="col-sm-6 control-label">Reject</label>
+                                                                <div class="col-sm-6">
+                                                                    <input type="checkbox" name="rejkonsumen" id="rejkonsumen">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row form-group">
+                                                                <label class="col-sm-6 control-label">SSU</label>
+                                                                <div class="col-sm-6">
+                                                                    <input type="checkbox" name="ssukonsumen" id="ssukonsumen">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     </div>
                                     <div class="row" style="font-size: 10px">
                                         <div class="col-12">
@@ -344,12 +449,12 @@ rel="stylesheet"
                                                         <th>Sales Prople</th>
                                                         <th>CASH/CREDIT</th>
                                                         <th>Finance Company</th>
-                                                        <th>Database</th>
-                                                        <th>Prospecting</th>
-                                                        <th>Polling</th>
-                                                        <th>Reject</th>
-                                                        <th>SSU</th>
-                                                        <th width="70"></th>
+                                                        <th class="text-center">Database</th>
+                                                        <th class="text-center">Prospecting</th>
+                                                        <th class="text-center">Polling</th>
+                                                        <th class="text-center">Reject</th>
+                                                        <th class="text-center">SSU</th>
+                                                        <th class="text-center"width="70"></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -362,16 +467,26 @@ rel="stylesheet"
                                                         <td>Sales Prople</td>
                                                         <td>CASH/CREDIT</td>
                                                         <td>Finance Company</td>
-                                                        <td>Database</td>
-                                                        <td>Prospecting</td>
-                                                        <td>Polling</td>
-                                                        <td>Reject</td>
-                                                        <td>SSU</td>
-                                                        <td>
-                                                            <a href="javascript:void(0)" id="edit-post" data-id="" class="btn btn-warning btn-sm m-0" style="padding: 0.15rem 0.3rem; font-size: 0.7rem;">
+                                                        <td class="text-center">
+                                                           <i class="fas fa-check"></i>
+                                                        </td>
+                                                        <td class="text-center">
+                                                           <i class="fas fa-check"></i>
+                                                        </td>
+                                                        <td class="text-center">
+                                                           <i class="fas fa-check"></i>
+                                                        </td>
+                                                        <td class="text-center">
+                                                           <i class="fas fa-check"></i>
+                                                        </td>
+                                                        <td class="text-center">
+                                                           <i class="fas fa-check"></i>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <a href="javascript:void(0)" id="edit-post" data-id="1" class="btn btn-warning btn-sm m-0" style="padding: 0.15rem 0.3rem; font-size: 0.7rem;">
                                                                 <i class="fas fa-edit"></i>
                                                             </a>
-                                                            <a href="javascript:void(0)" id="delete-post" data-id="" class="btn btn-danger delete-post btn-sm m-0" style="padding: 0.15rem 0.3rem; font-size: 0.7rem;">
+                                                            <a href="javascript:void(0)" id="delete-post" data-id="1" class="btn btn-danger delete-post btn-sm m-0" style="padding: 0.15rem 0.3rem; font-size: 0.7rem;">
                                                                 <i class="fas fa-trash"></i>
                                                             </a>
                                                         </td>
@@ -609,98 +724,123 @@ rel="stylesheet"
             </div><!--col-md-10-->
         </div><!--row-->
     </div><!--container-->
+    <div class="modal fade" id="ajax-crud-modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <form id="postForm" name="postForm">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="postCrudModal"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-horizontal">
+                        <input type="hidden" name="post_id" id="post_id">
+                        <input type="hidden" name="uuid" value="{{ request()->uuid }}">
+                            <div class="row form-group">
+                                <label for="name" class="col-sm-3 control-label">Nama</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="namakonsumen" name="namakonsumen" value="">
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <label class="col-sm-3 control-label">Alamat</label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" id="alamatnkonsumen" name="alamatkonsumen" value="" >
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <label class="col-sm-3 control-label">Kelurahan</label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" id="kelurahankonsumen" name="kelurahankonsumen" value="" >
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <label class="col-sm-3 control-label">No Telepon</label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" id="notelponsumen" name="knotelponsumen" value="" >
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <label class="col-sm-3 control-label">Type</label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" id="typekonsumen" name="typekonsumen" value="" >
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <label class="col-sm-3 control-label">Sales People</label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" id="spkonsumen" name="spkonsumen" value="" >
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <label class="col-sm-3 control-label">Jenis</label>
+                                <div class="col-sm-9">
+                                    <select name="jeniskonsumen" class="form-control" id="jeniskonsumen" >
+                                        <option value="1">CASH</option>
+                                        <option value="2">CREDIT</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <label class="col-sm-3 control-label">Finance Company</label>
+                                <div class="col-sm-9">
+                                    <select name="financekonsumen" class="form-control" id="financekonsumen" >
+                                        <option value="1">CASH</option>
+                                        <option value="2">CREDIT</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <label class="col-sm-3 control-label">Database</label>
+                                <div class="col-sm-9">
+                                    <input type="checkbox" name="dbkonsumen" id="dbkonsumen">
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <label class="col-sm-3 control-label">Prospecting</label>
+                                <div class="col-sm-9">
+                                    <input type="checkbox" name="proskonsumen" id="proskonsumen">
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <label class="col-sm-3 control-label">Polling</label>
+                                <div class="col-sm-9">
+                                    <input type="checkbox" name="polkonsumen" id="polkonsumen">
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <label class="col-sm-3 control-label">Reject</label>
+                                <div class="col-sm-9">
+                                    <input type="checkbox" name="rejkonsumen" id="rejkonsumen">
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <label class="col-sm-3 control-label">SSU</label>
+                                <div class="col-sm-9">
+                                    <input type="checkbox" name="ssukonsumen" id="ssukonsumen">
+                                </div>
+                            </div>
+                        </div>
+                    <div class="modal-footer">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="text-right">
+                                    <button type="submit" class="btn btn-primary" id="btn-save" value="create">Save
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <script type="text/javascript">
-        $('.data-lokasi').select2(
-        //     {
-        //     placeholder: 'Cari Lokasi',
-        //     ajax: {
-        //         url: 'data-lokasi',
-        //         dataType: 'json',
-        //         delay: 250,
-        //         processResults: function (data) {
-        //             return {
-        //                 results: $.map(data, function (item) {
-        //                     return {
-        //                         text: item.kelurahan_lokasi+', '+item.kecamatan_lokasi+', '+item.kota_lokasi,
-        //                         id: item.id
-        //                     }
-        //                 })
-        //             };
-        //         },
-        //         cache: true
-        //     }
-        // }
-        );
+        $('.data-lokasi').select2();
     </script>
     <script type="text/javascript">
-        $('.data-display').select2(
-        //     {
-        //     placeholder: 'Cari Display',
-        //     ajax: {
-        //         url: '/display',
-        //         dataType: 'json',
-        //         delay: 250,
-        //         processResults: function (data) {
-        //             return {
-        //                 results: $.map(data, function (item) {
-        //                     return {
-        //                         text: item.name+' - '+item.email,
-        //                         id: item.id
-        //                     }
-        //                 })
-        //             };
-        //         },
-        //         cache: true
-        //     }
-        // }
-        );
-    </script>
-    <script type="text/javascript">
-        $('.data-sales').select2(
-        //     {
-        //     placeholder: 'Cari Sales People',
-        //     ajax: {
-        //         url: '/sales',
-        //         dataType: 'json',
-        //         delay: 250,
-        //         processResults: function (data) {
-        //             return {
-        //                 results: $.map(data, function (item) {
-        //                     return {
-        //                         text: item.name+' - '+item.email,
-        //                         id: item.id
-        //                     }
-        //                 })
-        //             };
-        //         },
-        //         cache: true
-        //     }
-        // }
-        );
-    </script>
-    <script type="text/javascript">
-        $('.data-pj').select2(
-        //     {
-        //     placeholder: 'Cari Penanggung Jawab',
-        //     ajax: {
-        //         url: '/pj',
-        //         dataType: 'json',
-        //         delay: 250,
-        //         processResults: function (data) {
-        //             return {
-        //                 results: $.map(data, function (item) {
-        //                     return {
-        //                         text: item.name+' - '+item.email,
-        //                         id: item.id
-        //                     }
-        //                 })
-        //             };
-        //         },
-        //         cache: true
-        //     }
-        // }
-        );
+        $('.data-sales').select2();
     </script>
 
     {{-- Tambah data dana --}}
@@ -848,6 +988,5 @@ rel="stylesheet"
             document.getElementById("pjhsoid").value = datahsoid ;
         }
     </script>
-
 
 @endsection

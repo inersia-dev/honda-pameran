@@ -178,7 +178,7 @@
                                                                 <i class="cil-pencil"></i>
                                                             </button>
                                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                                <a href="{{ route('cabang.lpj.getCreate') }}?id={{ $data->uuid }}" class="dropdown-item">
+                                                                <a href="{{ route('cabang.lpj.getStoreInit') }}?id={{ $data->uuid }}" class="dropdown-item">
                                                                     Buat LPJ
                                                                 </a>
                                                             </div>
