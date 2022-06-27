@@ -397,7 +397,7 @@ rel="stylesheet"
                                 </div>
                             </div>
                         </div>
-                        <div class="mb-4 row fixed-bottom position-sticky p-4 border-top" style="background-color: #fff; ">
+                        <div class="mb-4 row p-4 border-top" style="background-color: #fff; ">
                             <div class="col-12 mb-4">
                                 <div class="mb-2 row">
                                     <label class="col-sm-2 col-form-label">History</label>
@@ -596,7 +596,7 @@ rel="stylesheet"
                 .addControl(L.mapbox.geocoderControl('mapbox.places', {
                 autocomplete: true
             }));
-
+    map.scrollWheelZoom.disable();
     // lokasi titik posisi
     L.control.locate().addTo(map);
 
