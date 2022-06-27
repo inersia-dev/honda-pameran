@@ -441,7 +441,7 @@ rel="stylesheet"
                                                             @php
                                                                 if ($data_h->status_approval == 1) {
                                                                     $st = 'Approve';
-                                                                     = 'info';
+                                                                    $si = 'info';
                                                                     $ic = 'check';
                                                                 } elseif ($data_h->status_approval == 2) {
                                                                     $st = 'Revise';
