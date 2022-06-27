@@ -13,6 +13,7 @@ use Illuminate\Support\Str;
 use App\Models\Proposal;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Builder;
+use App\Models\KategoriProposal;
 
 class LpjController extends Controller
 {
@@ -27,11 +28,12 @@ class LpjController extends Controller
     }
 
     public function index() {
+        $datakategori = KategoriProposal::get();
         $datas = Lpj::whereHas('proposal', function (Builder $query) {
                     $query->where('dealer_proposal', Auth::guard('cabang')->user()->dealer);
                  })->paginate(10);
 
-        return view('cabang.lpj.index', compact('datas'));
+        return view('cabang.lpj.index', compact('datas', 'datakategori'));
     }
 
     public function getStoreInit() {

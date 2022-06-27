@@ -143,17 +143,17 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col p-0">
+                                <div class="col p-0 pl-2">
                                     <div class="font-weight-bold" style="color: #ec1b25">
                                         {{ $data->kategori->nama_kategori ?? '-' }}
                                     </div>
                                 </div>
-                                <div class="col p-0">
+                                <div class="col p-0 pl-2">
                                     <div class="font-weight-bold" style="color: #222222">
                                         {{ $data->lokasi->kelurahan_lokasi ?? '' }}, {{ $data->lokasi->kecamatan_lokasi ?? '' }}
                                     </div>
                                 </div>
-                                <div class="col p-0">
+                                <div class="col p-0 pl-3">
                                     <div class="font-weight-bold" style="color: #222222">
                                         {{ $data->pj->nama_sales_people ?? '' }}
                                     </div>

@@ -27,12 +27,8 @@
                                     </div>
                                     <select id="status" name="status" class="form-control">
                                         <option value="">Semua</option>
-                                        {{-- <option value="1">Draft</option>
-                                        <option value="2">Waiting Approval</option>
-                                        <option value="3">Partial Approval</option>
-                                        <option value="4">Final</option>
-                                        <option value="5">Revise</option>
-                                        <option value="6">Rejected</option> --}}
+                                        <option value="1">Draft</option>
+                                        <option value="2">Submit</option>
                                     </select>
                                 </div>
                                 <div class="pb-2 col">
@@ -41,24 +37,9 @@
                                     </div>
                                     <select class="form-control" name="kategori" id="kategori">
                                         <option value=""></option>
-                                        {{-- @foreach ($datakategori as $data_k)
+                                        @foreach ($datakategori as $data_k)
                                             <option value="{{ $data_k->id }}">{{ $data_k->nama_kategori }}</option>
-                                        @endforeach --}}
-                                    </select>
-                                </div>
-                                <div class="pb-2 col">
-                                    <div  style="padding-top: 5px; padding-bottom: 5px">
-                                        <label class="form-check-label">Lokasi</label>
-                                    </div>
-                                    <select class="form-control data-lokasi" name="lokasi">
-                                        <option value=""></option>
-                                        {{-- @foreach ($datalokasi as $data_l)
-                                            <option value="{{ $data_l->id }}"
-                                                @if (request()->lokasi == $data_l->id)
-                                                    selected
-                                                @endif
-                                            >{{ $data_l->kelurahan_lokasi }}, {{ $data_l->kecamatan_lokasi }}</option>
-                                        @endforeach --}}
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="pb-2 col">
@@ -93,7 +74,6 @@
                     <div class="row p-2 font-weight-bold">
                         <div class="col p-0 pl-3">Status</div>
                         <div class="col p-0">Proposal</div>
-                        <div class="col p-0">Lokasi</div>
                         <div class="col p-0">Penanggung Jawab</div>
                         <div class="col p-0">Submit Date</div>
                     </div>
@@ -126,17 +106,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col p-0">
+                                <div class="col p-0 pl-2">
                                     <div class="font-weight-bold" style="color: #ec1b25">
                                         {{ $data->proposal->kategori->nama_kategori ?? '-' }}
                                     </div>
                                 </div>
-                                <div class="col p-0">
-                                    <div class="font-weight-bold" style="color: #222222">
-                                        {{ $data->proposal->lokasi->kelurahan_lokasi ?? '' }}, {{ $data->proposal->lokasi->kecamatan_lokasi ?? '' }}
-                                    </div>
-                                </div>
-                                <div class="col p-0">
+                                <div class="col p-0 pl-3">
                                     <div class="font-weight-bold" style="color: #222222">
                                         {{ $data->proposal->pj->nama_sales_people ?? '' }}
                                     </div>
