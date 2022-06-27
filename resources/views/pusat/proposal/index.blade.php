@@ -123,90 +123,100 @@
                 @endphp
 
                 @foreach($datas as $key => $data)
-                    <div style="text-decoration: none;">
-                        <div class="card mb-2" style="border-radius: 5px; font-size: 12px">
-                            <div class="row p-2 align-items-center">
-                                <div class="col p-0 pl-3">
-                                    <div class="row">
-                                        <div class="pl-3" style="">
-                                            <div class="font-weight-bold">
-                                                <span class="btn btn-sm btn-{{ $data->statusp->warna_status ?? ''}} ms-auto">
-                                                    {{ $data->statusp->nama_status ?? ''}}
-                                                </span>
-                                                @if ($data->status_proposal == 4)
-                                                    @php
-                                                        $a = \Carbon\Carbon::create($data->periode_start_proposal);
-                                                        $b = \Carbon\Carbon::create($data->periode_end_proposal);
-                                                        $c = \Carbon\Carbon::now();
-                                                    @endphp
-                                                    @if ($a->greaterThan($c) == true)
-                                                        <span class="btn btn-sm btn-outline-dark ms-auto">
-                                                            Akan Berjalan
-                                                        </span>
-                                                    @else
-                                                        @if ($b->greaterThan($c) == true)
-                                                            <span class="btn btn-sm btn-outline-primary ms-auto">
-                                                                Sedang Berjalan
+                    @php
+                        $d = DB::table('approval_proposals')->where('id_proposal', $data->id)->get();
+                    @endphp
+                    @foreach ($d as $data_sub)
+                        @if ($data_sub->status_approval == null)
+                            @if ($data_sub->user_approval == Auth::guard('pusat')->user()->id)
+                                <div style="text-decoration: none;">
+                                    <div class="card mb-2" style="border-radius: 5px; font-size: 12px">
+                                        <div class="row p-2 align-items-center">
+                                            <div class="col p-0 pl-3">
+                                                <div class="row">
+                                                    <div class="pl-3" style="">
+                                                        <div class="font-weight-bold">
+                                                            <span class="btn btn-sm btn-{{ $data->statusp->warna_status ?? ''}} ms-auto">
+                                                                {{ $data->statusp->nama_status ?? ''}}
                                                             </span>
-                                                        @else
-                                                            <span class="btn btn-sm btn-outline-info ms-auto">
-                                                                Selesai
-                                                            </span>
-                                                        @endif
-                                                    @endif
-                                                @endif
+                                                            @if ($data->status_proposal == 4)
+                                                                @php
+                                                                    $a = \Carbon\Carbon::create($data->periode_start_proposal);
+                                                                    $b = \Carbon\Carbon::create($data->periode_end_proposal);
+                                                                    $c = \Carbon\Carbon::now();
+                                                                @endphp
+                                                                @if ($a->greaterThan($c) == true)
+                                                                    <span class="btn btn-sm btn-outline-dark ms-auto">
+                                                                        Akan Berjalan
+                                                                    </span>
+                                                                @else
+                                                                    @if ($b->greaterThan($c) == true)
+                                                                        <span class="btn btn-sm btn-outline-primary ms-auto">
+                                                                            Sedang Berjalan
+                                                                        </span>
+                                                                    @else
+                                                                        <span class="btn btn-sm btn-outline-info ms-auto">
+                                                                            Selesai
+                                                                        </span>
+                                                                    @endif
+                                                                @endif
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col p-0">
+                                                <div class="font-weight-bold" style="color: #ec1b25">
+                                                    {{ $data->kategori->nama_kategori ?? '-' }}
+                                                </div>
+                                            </div>
+                                            <div class="col p-0">
+                                                <div class="font-weight-bold" style="color: #222222">
+                                                    {{ $data->lokasi->kelurahan_lokasi ?? '' }}, {{ $data->lokasi->kecamatan_lokasi ?? '' }}
+                                                </div>
+                                            </div>
+                                            <div class="col p-0">
+                                                <div class="font-weight-bold" style="color: #222222">
+                                                    {{ $data->pj->nama_sales_people ?? '' }}
+                                                </div>
+                                            </div>
+                                            <div class="col p-0">
+                                                <div class="font-weight-bold" style="color: #222222">
+                                                    {{ $data->dealer->nama_dealer ?? '' }}
+                                                </div>
+                                            </div>
+                                            <div class="col p-0 pr-4">
+                                                <div class="row align-items-center">
+                                                    <div class="col-8">
+                                                        <div class="text-muted" style="font-size: 10px">
+                                                            {{ $data->created_at }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-4 text-right">
+                                                        <div class="btn-group dropleft">
+                                                            @if ($data->status_proposal == 1)
+                                                                <a href="{{ route('pusat.proposal.getCreate') }}?id={{ $data->uuid }}" class="btn btn-sm btn-outline-warning">
+                                                                    <i class="cil-pencil"></i>
+                                                                </a>
+                                                            @else
+                                                                <a href="{{ route('pusat.proposal.getShow') }}?id={{ $data->uuid }}" class="btn btn-sm btn-warning">
+                                                                    <i class="cil-search"></i>
+                                                                </a>
+                                                            @endif
+                                                            <a  class="btn btn-sm btn-outline-danger" href="{{ route('pusat.proposal.index') }}?metode=hapus&id={{ $data->id }}" onclick="return confirm('Konfirmasi Hapus Proposal')">
+                                                                <i class="cil-trash"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col p-0">
-                                    <div class="font-weight-bold" style="color: #ec1b25">
-                                        {{ $data->kategori->nama_kategori ?? '-' }}
-                                    </div>
-                                </div>
-                                <div class="col p-0">
-                                    <div class="font-weight-bold" style="color: #222222">
-                                        {{ $data->lokasi->kelurahan_lokasi ?? '' }}, {{ $data->lokasi->kecamatan_lokasi ?? '' }}
-                                    </div>
-                                </div>
-                                <div class="col p-0">
-                                    <div class="font-weight-bold" style="color: #222222">
-                                        {{ $data->pj->nama_sales_people ?? '' }}
-                                    </div>
-                                </div>
-                                <div class="col p-0">
-                                    <div class="font-weight-bold" style="color: #222222">
-                                        {{ $data->dealer->nama_dealer ?? '' }}
-                                    </div>
-                                </div>
-                                <div class="col p-0 pr-4">
-                                    <div class="row align-items-center">
-                                        <div class="col-8">
-                                            <div class="text-muted" style="font-size: 10px">
-                                                {{ $data->created_at }}
-                                            </div>
-                                        </div>
-                                        <div class="col-4 text-right">
-                                            <div class="btn-group dropleft">
-                                                @if ($data->status_proposal == 1)
-                                                    <a href="{{ route('pusat.proposal.getCreate') }}?id={{ $data->uuid }}" class="btn btn-sm btn-outline-warning">
-                                                        <i class="cil-pencil"></i>
-                                                    </a>
-                                                @else
-                                                    <a href="{{ route('pusat.proposal.getShow') }}?id={{ $data->uuid }}" class="btn btn-sm btn-warning">
-                                                        <i class="cil-search"></i>
-                                                    </a>
-                                                @endif
-                                                <a  class="btn btn-sm btn-outline-danger" href="{{ route('pusat.proposal.index') }}?metode=hapus&id={{ $data->id }}" onclick="return confirm('Konfirmasi Hapus Proposal')">
-                                                    <i class="cil-trash"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                            @endif
+                            @break
+                        @endif
+                    @endforeach
 
                     @php
                         $first  = $datas->firstItem();
@@ -216,7 +226,7 @@
                 <div class="row">
                     <div class="col-7">
                         <div class="float-left">
-                            {!! $first !!} - {!! $end !!} From {!! $datas->total() !!} Data
+                            {{-- {!! $first !!} - {!! $end !!} From {!! $datas->total() !!} Data --}}
                         </div>
                     </div><!--col-->
 

@@ -496,6 +496,7 @@ rel="stylesheet"
                                                     <div class="col-12">
                                                         @csrf
                                                         <input type="hidden" name="id" value="{{ $data->id }}">
+                                                        <input type="hidden" name="idapproval" value="{{ $data_sub->id }}">
                                                         <a href="{{ route('pusat.proposal.index') }}" class="btn btn-outline-dark"><i class="fas fa-chevron-left"></i> Kembali</a>
                                                         <div class="float-right">
                                                             <button class="btn btn-primary" type="text" name="b" value="done"  onclick="return confirm('Konfirmasi Submit Status Proposal')">Submit <i class="fas fa-check"></i> </button>

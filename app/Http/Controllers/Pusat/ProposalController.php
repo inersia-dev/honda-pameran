@@ -78,14 +78,9 @@ class ProposalController extends Controller
         } elseif (request()->status == 3) { // rejected
             $proposal->status_proposal = 6;
         }
-
-
-
         $proposal->save();
 
-        $approval                         = new ApprovalProposal;
-        $approval->id_proposal            = request()->id;
-        $approval->user_approval          = Auth::guard('pusat')->user()->id;
+        $approval                         = ApprovalProposal::find(request()->idapproval);
         $approval->status_approval        = request()->status;
         $approval->keterangan_approval    = request()->keterangan;
 
