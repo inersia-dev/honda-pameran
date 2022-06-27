@@ -405,12 +405,12 @@ rel="stylesheet"
                                         <table class="table table-sm text-center">
                                             <thead class="table-dark">
                                                 <tr>
-                                                    <th>No.</th>
-                                                    <th>Tanggal</th>
+                                                    <<th>No.</th>
+                                                    <th>Waktu</th>
                                                     <th>Created By</th>
+                                                    <th></th>
                                                     <th>Status</th>
                                                     <th>Keterangan</th>
-                                                    <th></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -441,7 +441,7 @@ rel="stylesheet"
                                                             @php
                                                                 if ($data_h->status_approval == 1) {
                                                                     $st = 'Approve';
-                                                                    $si = 'info';
+                                                                     = 'info';
                                                                     $ic = 'check';
                                                                 } elseif ($data_h->status_approval == 2) {
                                                                     $st = 'Revise';
