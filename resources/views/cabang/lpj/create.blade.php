@@ -1,6 +1,6 @@
 @extends('cabang.layouts.cabang')
 
-@section('title', 'Buat Proposal')
+@section('title', 'Buat LPJ')
 @section('content')
 {{-- <link rel="stylesheet"  type="text/css" href="/filepond/app.css"/> --}}
 {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/filepond/4.30.4/filepond.css" integrity="sha512-OwkTbucz29JjQUeii4ZRkjY/E+Xdg4AfffPZICCf98rYKWIHxX87AwwuIQ73rbVrev8goqrKmaXyu+VxyDqr1A==" crossorigin="anonymous" referrerpolicy="no-referrer" /> --}}
@@ -24,7 +24,7 @@ rel="stylesheet"
                 <div class="card">
                     <form class="card-body" action="{{ route('cabang.lpj.postStore') }}" method="POST">
                         @csrf
-                        <input type="hidden" name="uuid" value="">
+                        <input type="hidden" name="uuid" value="{{ request()->id }}">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-12">
@@ -86,13 +86,13 @@ rel="stylesheet"
                                             <div class="mb-2 row">
                                                 <label class="col-sm-3 col-form-label">Start</label>
                                                 <div class="col-sm-9">
-                                                    <input class="form-control" name="tanggalstart" type="date" value="">
+                                                    <input class="form-control" name="tanggalstart" type="date" value="{{ $data->periode_start_lpj }}">
                                                 </div>
                                             </div>
                                             <div class="mb-2 row">
                                                 <label class="col-sm-3 col-form-label">End</label>
                                                 <div class="col-sm-9">
-                                                    <input class="form-control" name="tanggalend" type="date" value="">
+                                                    <input class="form-control" name="tanggalend" type="date" value="{{ $data->periode_start_lpj }}">
                                                 </div>
                                             </div>
                                         </div>
@@ -101,10 +101,10 @@ rel="stylesheet"
                             </div>
                             <div class="row mb-3">
                                 <div class="col-sm-2 col-form-label">
-                                    <strong>Lokasi</strong>
+                                    <strong>Lokasi Aktual</strong>
                                 </div>
                                 <div class="col-sm-5">
-                                    <input class="form-control" name="lokasi" id="">
+                                    <input class="form-control" name="lokasi" id="" value="{{ $data->lokasi_lpj }}">
                                 </div>
                                 <div class="col-12">
                                     <hr>
@@ -156,13 +156,13 @@ rel="stylesheet"
                                                 <tbody>
                                                     <tr>
                                                         <td>
-                                                            <input class="form-control" type="number" value="">
+                                                            <input class="form-control" type="number" name="database" value="{{ $data->target_database_lpj }}">
                                                         </td>
                                                         <td>
-                                                            <input class="form-control" type="number" value="">
+                                                            <input class="form-control" type="number" name="prospectus" value="{{ $data->target_prospectus_lpj }}">
                                                         </td>
                                                         <td>
-                                                            <input class="form-control" type="number" value="">
+                                                            <input class="form-control" type="number" name="penjualan" value="{{ $data->target_penjualan_lpj }}">
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -239,7 +239,7 @@ rel="stylesheet"
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {{-- @if (!null == $datadana)
+                                                    @if (!null == $datadana)
                                                         @foreach ($datadana as $key => $data_dana)
                                                             <tr class="row_to_clone_dana">
                                                                 <td>
@@ -261,7 +261,7 @@ rel="stylesheet"
                                                                 </td>
                                                             </tr>
                                                         @endforeach
-                                                    @else --}}
+                                                    @else
                                                         <tr class="row_to_clone_dana">
                                                             <td>
                                                                 <input class="form-control" type="text" name="ket_dana[0]" id="ket_dana[]">
@@ -281,7 +281,7 @@ rel="stylesheet"
                                                                 </a>
                                                             </td>
                                                         </tr>
-                                                    {{-- @endif --}}
+                                                    @endif
 
                                                 </tbody>
                                             </table>
@@ -311,13 +311,13 @@ rel="stylesheet"
                             <div class="mb-2 row">
                                 <label class="col-sm-2 col-form-label">Problem Identification</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="problem" id="" rows="2"></textarea>
+                                    <textarea class="form-control" name="problem" id="" rows="2">{{ $data->problem_identification_lpj }}</textarea>
                                 </div>
                             </div>
                             <div class="mb-2 row">
                                 <label class="col-sm-2 col-form-label">Corrective Action</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="corrective" id="" rows="2"></textarea>
+                                    <textarea class="form-control" name="corrective" id="" rows="2">{{ $data->corrective_action_lpj }}</textarea>
                                 </div>
                                 <div class="col-12">
                                     <hr>
@@ -337,7 +337,7 @@ rel="stylesheet"
                                             </a>
                                         </div>
                                         <div class="col-12 pt-2">
-                                            <div class="row collapse" id="tambahkonsumen">
+                                            <div class="row collapse border p-4 rounded" id="tambahkonsumen">
                                                 <div class="col-6">
                                                     <div class="row form-group">
                                                         <label for="name" class="col-sm-3 control-label">Nama</label>
@@ -354,13 +354,18 @@ rel="stylesheet"
                                                     <div class="row form-group">
                                                         <label class="col-sm-3 control-label">Kelurahan</label>
                                                         <div class="col-sm-9">
-                                                            <input class="form-control" id="kelurahankonsumen" name="kelurahankonsumen" value="" >
+                                                            <select class="form-control data-lokasi" name="lokasikonsumen">
+                                                                <option value=""></option>
+                                                                @foreach ($datalokasi as $data_l)
+                                                                    <option value="{{ $data_l->id }}">{{ $data_l->kelurahan_lokasi }}, {{ $data_l->kecamatan_lokasi }}</option>
+                                                                @endforeach
+                                                            </select>
                                                         </div>
                                                     </div>
                                                     <div class="row form-group">
                                                         <label class="col-sm-3 control-label">No Telepon</label>
                                                         <div class="col-sm-9">
-                                                            <input class="form-control" id="notelponsumen" name="knotelponsumen" value="" >
+                                                            <input class="form-control" id="notelponsumen" name="notelpkonsumen" value="" >
                                                         </div>
                                                     </div>
                                                     <div class="row form-group">
@@ -372,7 +377,11 @@ rel="stylesheet"
                                                     <div class="row form-group">
                                                         <label class="col-sm-3 control-label">Sales People</label>
                                                         <div class="col-sm-9">
-                                                            <input class="form-control" id="spkonsumen" name="spkonsumen" value="" >
+                                                            <select class="form-control data-lokasi" name="lokasikonsumen">
+                                                                @foreach ($salespeople as $data_sp)
+                                                                    <option value="{{ $data_sp->id }}">{{ $data_sp->nama_sales_people }}</option>
+                                                                @endforeach
+                                                            </select>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -390,8 +399,9 @@ rel="stylesheet"
                                                         <label class="col-sm-3 control-label">Finance Company</label>
                                                         <div class="col-sm-9">
                                                             <select name="financekonsumen" class="form-control" id="financekonsumen" >
-                                                                <option value="1">CASH</option>
-                                                                <option value="2">CREDIT</option>
+                                                                @foreach ($datafinance as $data_fi)
+                                                                    <option value="{{ $data_fi->id }}">{{ $data_fi->nama }}</option>
+                                                                @endforeach
                                                             </select>
                                                         </div>
                                                     </div>
@@ -429,6 +439,12 @@ rel="stylesheet"
                                                                     <input type="checkbox" name="ssukonsumen" id="ssukonsumen">
                                                                 </div>
                                                             </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row form-group">
+                                                        <div class="col-sm-8"></div>
+                                                        <div class="col-sm-4">
+                                                            <button class="btn btn-sm btn-primary btn-block" type="text" name="b" value="konsumen">Simpan</button>
                                                         </div>
                                                     </div>
                                                 </div>

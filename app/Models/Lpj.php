@@ -20,9 +20,11 @@ class Lpj extends Model
         'target_penjualan_lpj',
         'target_prospectus_lpj',
         'dana_lpj',
+        'total_dana_lpj',
+        'status_lpj',
         'dokumentasi_lpj',
         'problem_identification_lpj',
-        'corrective_action_lpj',
+        'c_lpj',
     ];
 
     public function proposal()

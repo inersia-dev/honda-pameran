@@ -24,6 +24,8 @@ class CreateLpjsTable extends Migration
             $table->string('target_penjualan_lpj')->nullable();
             $table->string('target_prospectus_lpj')->nullable();
             $table->text('dana_lpj')->nullable(); // [item, beban dealer, beban fincoy, beban md]
+            $table->string('total_dana_lpj')->nullable(); // 1 DRAFT / 2 SUBMIT
+            $table->string('status_lpj')->nullable();
             $table->text('dokumentasi_lpj')->nullable(); // foto
             $table->string('problem_identification_lpj')->nullable();
             $table->string('corrective_action_lpj')->nullable();

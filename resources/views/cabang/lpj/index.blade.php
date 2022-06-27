@@ -69,7 +69,7 @@
                                 </div>
                                 <div class="pb-2 col">
                                     <div  style="padding-top: 5px; padding-bottom: 5px">
-                                        <label class="form-check-label">Submit Date</label>
+                                        <label class="form-check-label">Submit </label>
                                     </div>
                                     <input class="form-control" type="date" value="{{ request()->tanggal ?? '' }}" name="tanggal" style="font-size: small" />
                                 </div>
@@ -98,7 +98,7 @@
                         <div class="col p-0">Submit Date</div>
                     </div>
                 </div>
-{{--
+
                 @php
                 $first  = 0;
                 $end    = 0;
@@ -112,26 +112,33 @@
                                     <div class="row">
                                         <div class="pl-3" style="">
                                             <div class="font-weight-bold">
-                                                <span class="btn btn-sm btn-{{ $data->statusp->warna_status ?? ''}} ms-auto">
-                                                    {{ $data->statusp->nama_status ?? ''}}
-                                                </span>
+                                                @if ($data->status_lpj == 1)
+                                                    <span class="btn btn-sm btn-outline-info ms-auto">
+                                                        DRAFT
+                                                    </span>
+                                                @elseif ($data->status_lpj == 2)
+                                                    <span class="btn btn-sm btn-primary ms-auto">
+                                                        SUBMIT
+                                                    </span>
+                                                @endif
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col p-0">
                                     <div class="font-weight-bold" style="color: #ec1b25">
-                                        {{ $data->kategori->nama_kategori ?? '-' }}
+                                        {{ $data->proposal->kategori->nama_kategori ?? '-' }}
                                     </div>
                                 </div>
                                 <div class="col p-0">
                                     <div class="font-weight-bold" style="color: #222222">
-                                        {{ $data->lokasi->kelurahan_lokasi ?? '' }}, {{ $data->lokasi->kecamatan_lokasi ?? '' }}
+                                        {{ $data->proposal->lokasi->kelurahan_lokasi ?? '' }}, {{ $data->proposal->lokasi->kecamatan_lokasi ?? '' }}
                                     </div>
                                 </div>
                                 <div class="col p-0">
                                     <div class="font-weight-bold" style="color: #222222">
-                                        {{ $data->pj->nama_sales_people ?? '' }}
+                                        {{ $data->proposal->pj->nama_sales_people ?? '' }}
                                     </div>
                                 </div>
                                 <div class="col p-0 pr-4">
@@ -143,16 +150,16 @@
                                         </div>
                                         <div class="col-4 text-right">
                                             <div class="btn-group dropleft">
-                                                @if ($data->status_proposal == 1)
-                                                    <a href="{{ route('cabang.proposal.getCreate') }}?id={{ $data->uuid }}" class="btn btn-sm btn-outline-warning">
+                                                @if ($data->status_lpj == 1)
+                                                    <a href="{{ route('cabang.lpj.getCreate') }}?id={{ $data->uuid }}" class="btn btn-sm btn-outline-warning">
                                                         <i class="cil-pencil"></i>
                                                     </a>
                                                 @else
-                                                    <a href="{{ route('cabang.proposal.getShow') }}?id={{ $data->uuid }}" class="btn btn-sm btn-warning">
+                                                    <a href="{{ route('cabang.lpj.getShow') }}?id={{ $data->uuid }}" class="btn btn-sm btn-warning">
                                                         <i class="cil-search"></i>
                                                     </a>
                                                 @endif
-                                                <a  class="btn btn-sm btn-outline-danger" href="{{ route('cabang.proposal.index') }}?metode=hapus&id={{ $data->id }}" onclick="return confirm('Konfirmasi Hapus Proposal')">
+                                                <a  class="btn btn-sm btn-outline-danger" href="{{ route('cabang.lpj.index') }}?metode=hapus&id={{ $data->id }}" onclick="return confirm('Konfirmasi Hapus Proposal')">
                                                     <i class="cil-trash"></i>
                                                 </a>
                                             </div>
@@ -180,7 +187,7 @@
                             {!! $datas->appends(request()->query())->links() !!}
                         </div>
                     </div><!--col-->
-                </div><!--row--> --}}
+                </div><!--row-->
             </div>
         </div>
     </div><!--col-md-10-->
