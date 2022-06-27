@@ -430,7 +430,11 @@ rel="stylesheet"
                                                 @foreach ($dataapproval as $data_h)
                                                     <tr>
                                                         <td>{{ $n++ }}</td>
-                                                        <td>{{ $data_h->created_at }}</td>
+                                                        <td>
+                                                            @if (!null == $data_h->status_approval)
+                                                                {{ $data_h->updated_at }}
+                                                            @endif
+                                                        </td>
                                                         <td>{{ $data_h->userapp->name }}</td>
                                                         <td>{{ $data_h->userapp->jabatanpusat->nama_jabatan }}</td>
                                                         <td>
@@ -447,9 +451,15 @@ rel="stylesheet"
                                                                     $st = 'Rejected';
                                                                     $si = 'danger';
                                                                     $ic = 'times';
+                                                                } else {
+                                                                    $st = '';
+                                                                    $si = '';
+                                                                    $ic = '';
                                                                 }
                                                             @endphp
-                                                            <label class="badge bg-{{ $si }}"  style="color: #fff">{{ $st }} <i class="fas fa-{{ $ic }}"></i></label>
+                                                            @if (!null == $data_h->status_approval)
+                                                                <label class="badge bg-{{ $si }}"  style="color: #fff">{{ $st }} <i class="fas fa-{{ $ic }}"></i></label>
+                                                            @endif
                                                         </td>
                                                         <td>{{ $data_h->keterangan_approval }}</td>
                                                     </tr>
