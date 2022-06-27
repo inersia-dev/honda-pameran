@@ -33,7 +33,7 @@ rel="stylesheet"
                         <hr>
                         <div class="mb-2 row">
                             <label class="col-sm-2 col-form-label">
-                                <strong>Dealer</strong>
+                                <strong>Dealer<strong style="color:rgb(243, 0, 0)">*</strong></strong>
                             </label>
                             <label class="col-sm-5 col-form-label">
                                 <select class="form-control data-dealer" name="dealer">
@@ -63,19 +63,19 @@ rel="stylesheet"
                             </div>
                             <div class="col-sm-10">
                                 <div class="mb-2 row">
-                                    <label class="col-sm-2 col-form-label">Latar Belakang Honda</label>
+                                    <label class="col-sm-2 col-form-label">Latar Belakang Honda<strong style="color:rgb(243, 0, 0)">*</strong></label>
                                     <div class="col-sm-10">
                                         <textarea class="form-control" name="latarbelakang" id="" rows="2">{{ $data->latar_belakang_proposal }}</textarea>
                                     </div>
                                 </div>
                                 <div class="mb-2 row">
-                                    <label class="col-sm-2 col-form-label">Latar Belakang Kompetitor</label>
+                                    <label class="col-sm-2 col-form-label">Latar Belakang Kompetitor<strong style="color:rgb(243, 0, 0)">*</strong></label>
                                     <div class="col-sm-10">
                                         <textarea class="form-control" name="latarkompetitor" id="" rows="2">{{ $data->latar_kompetitor_proposal }}</textarea>
                                     </div>
                                 </div>
                                 <div class="mb-2 row">
-                                    <label class="col-sm-2 col-form-label">Kondisi Penjualan</label>
+                                    <label class="col-sm-2 col-form-label">Kondisi Penjualan<strong style="color:rgb(243, 0, 0)">*</strong></label>
                                     <div class="col-sm-6">
                                         <table class="table table-striped border datatable table-sm">
                                             <thead class="text-center">
@@ -103,7 +103,7 @@ rel="stylesheet"
                                 </div>
                                 <div class="mb-2 row">
                                     <label class="col-sm-2 col-form-label">
-                                        Tujuan / Benefit
+                                        Tujuan / Benefit<strong style="color:rgb(243, 0, 0)">*</strong>
                                     </label>
                                     <div class="col-sm-10">
                                         <textarea class="form-control" name="tujuan" id="" rows="2">{{ $data->tujuan_proposal }}</textarea>
@@ -121,13 +121,13 @@ rel="stylesheet"
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="mb-2 row">
-                                            <label class="col-sm-3 col-form-label">Tempat</label>
+                                            <label class="col-sm-3 col-form-label">Tempat<strong style="color:rgb(243, 0, 0)">*</strong></label>
                                             <div class="col-sm-9">
                                                 <input class="form-control" type="text"  name="tempat" value="{{ $data->tempat_proposal }}">
                                             </div>
                                         </div>
                                         <div class="mb-2 row">
-                                            <label class="col-sm-3 col-form-label">Lokasi</label>
+                                            <label class="col-sm-3 col-form-label">Lokasi<strong style="color:rgb(243, 0, 0)">*</strong></label>
                                             <div class="col-sm-9">
                                                 <select class="form-control data-lokasi" name="lokasi">
                                                     @if (!null == $data->lokasi_proposal)
@@ -142,7 +142,7 @@ rel="stylesheet"
                                             </div>
                                         </div>
                                         <div class="mb-2 row">
-                                            <label class="col-sm-3 col-form-label">Display</label>
+                                            <label class="col-sm-3 col-form-label">Display<strong style="color:rgb(243, 0, 0)">*</strong></label>
                                             <div class="col-sm-9">
                                                 <select class="form-control data-display" name="display[]" multiple="multiple">
                                                     @if (!null == $data->display_proposal)
@@ -162,7 +162,7 @@ rel="stylesheet"
                                             </div>
                                         </div>
                                         <div class="mb-2 row">
-                                            <label class="col-sm-4 col-form-label">History Penjualan</label>
+                                            <label class="col-sm-4 col-form-label">History Penjualan<strong style="color:rgb(243, 0, 0)">*</strong></label>
                                             <div class="col-sm-8">
                                                 <div class="input-group">
                                                     <input class="form-control" type="number" name="historypenjualan" value="{{ $data->history_penjualan_proposal }}">
@@ -171,7 +171,7 @@ rel="stylesheet"
                                             </div>
                                         </div>
                                         <div class="mb-2 row">
-                                            <label class="col-sm-3 col-form-label">Start</label>
+                                            <label class="col-sm-3 col-form-label">Start<strong style="color:rgb(243, 0, 0)">*</strong></label>
                                             <div class="col-sm-9">
                                                 <input class="form-control" name="tanggalstart" type="date" value="{{ $data->periode_start_proposal }}">
                                             </div>
@@ -185,26 +185,26 @@ rel="stylesheet"
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="mb-2 row">
-                                            <label class="col-sm-5 col-form-label">Target Database</label>
+                                            <label class="col-sm-5 col-form-label">Target Database<strong style="color:rgb(243, 0, 0)">*</strong></label>
                                             <div class="col-sm-7">
                                                 <input class="form-control" type="number" name="targetdata" value="{{ $data->target_database_proposal }}">
                                             </div>
                                         </div>
                                         <div class="mb-2 row">
-                                            <label class="col-sm-5 col-form-label">Target Penjualan</label>
+                                            <label class="col-sm-5 col-form-label">Target Penjualan<strong style="color:rgb(243, 0, 0)">*</strong></label>
                                             <div class="col-sm-7">
                                                 <input class="form-control" type="number" name="targetjual" value="{{ $data->target_penjualan_proposal }}">
                                             </div>
                                         </div>
                                         <div class="mb-2 row">
-                                            <label class="col-sm-5 col-form-label">Target Prospectus</label>
+                                            <label class="col-sm-5 col-form-label">Target Prospectus<strong style="color:rgb(243, 0, 0)">*</strong></label>
                                             <div class="col-sm-7">
                                                 <input class="form-control" type="number" name="targetpros" value="{{ $data->target_prospectus_proposal }}">
                                             </div>
                                         </div>
 
                                         <div class="mb-2 row">
-                                            <label class="col-sm-5 col-form-label">Program Penjualan</label>
+                                            <label class="col-sm-5 col-form-label">Program Penjualan<strong style="color:rgb(243, 0, 0)">*</strong></label>
                                             <div class="col-sm-7">
                                                 <textarea class="form-control" id="" rows="2" name="program">{{ $data->program_proposal }}</textarea>
                                             </div>
@@ -216,7 +216,7 @@ rel="stylesheet"
                         </div>
                         <div class="mb-2 row">
                             <label class="col-sm-2 col-form-label">
-                                <strong>Perkiraan Dana</strong>
+                                <strong>Perkiraan Dana<strong style="color:rgb(243, 0, 0)">*</strong></strong>
                             </label>
                             <div class="col-sm-10">
                                 <table class="table table-striped border datatable table-sm" id="dataDana">
@@ -297,7 +297,7 @@ rel="stylesheet"
                         </div>
                         <div class="mb-2 row">
                             <label class="col-sm-2 col-form-label">
-                                <strong>Penanggung Jawab</strong>
+                                <strong>Penanggung Jawab<strong style="color:rgb(243, 0, 0)">*</strong></strong>
                             </label>
                             <div class="col-sm-10">
                                 <div class="row pb-2">
@@ -346,7 +346,7 @@ rel="stylesheet"
                         </div>
                         <div class="mb-2 row">
                             <label class="col-sm-2 col-form-label">
-                                <strong>Sales People</strong>
+                                <strong>Sales People<strong style="color:rgb(243, 0, 0)">*</strong></strong>
                             </label>
                             <div class="col-sm-10">
                                 <div class="row pb-2">
@@ -414,7 +414,7 @@ rel="stylesheet"
                             </label>
                             <div class="col-sm-10">
                                 <div class="mb-2 row">
-                                    <label class="col-sm-2 col-form-label">Foto</label>
+                                    <label class="col-sm-2 col-form-label">Foto<strong style="color:rgb(243, 0, 0)">*</strong></label>
                                     <div class="col-sm-10">
                                         <div class="row p-2">
                                             @if (!null == $data->foto_lokasi_proposal)
@@ -448,13 +448,13 @@ rel="stylesheet"
                                     </div>
                                 </div>
                                 <div class="mb-2 row">
-                                    <label class="col-sm-2 col-form-label">Latitude</label>
+                                    <label class="col-sm-2 col-form-label">Latitude<strong style="color:rgb(243, 0, 0)">*</strong></label>
                                     <div class="col-sm-5">
                                         <input class="form-control" name="lat" id="lat" type="text" value="{{ $data->lat_proposal }}">
                                     </div>
                                 </div>
                                 <div class="mb-2 row">
-                                    <label class="col-sm-2 col-form-label">Longtitude</label>
+                                    <label class="col-sm-2 col-form-label">Longtitude<strong style="color:rgb(243, 0, 0)">*</strong></label>
                                     <div class="col-sm-5">
                                         <input class="form-control"  name="long" id="long" type="text" value="{{ $data->long_proposal }}">
                                     </div>

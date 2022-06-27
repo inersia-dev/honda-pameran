@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
 use Image;
 use App\Models\ApprovalProposal;
+use Illuminate\Http\Request;
 
 class ProposalController extends Controller
 {
@@ -193,7 +194,7 @@ class ProposalController extends Controller
         }
     }
 
-    public function postStore()
+    public function postStore(Request $request)
     {
         foreach (request()->ket_dana as $key => $item) {
             $dana[] = [
@@ -202,15 +203,6 @@ class ProposalController extends Controller
                 'beban_fincoy_dana' => request()->beban_fincoy_dana[$key],
                 'beban_md_dana'     => request()->beban_md_dana[$key],
             ];
-        }
-
-        function cekarray($data) {
-            if ($data == 'null' || $data == null) {
-                return null;
-            } else {
-                return json_encode($data);
-            }
-
         }
 
         $dt = Carbon::now();
@@ -226,10 +218,10 @@ class ProposalController extends Controller
 
         $data                                   = Proposal::firstWhere('uuid', request()->uuid);
         $data->no_proposal                      = $st == 'draft' ? null : $no.'/'.$dt->year.'/'.$dt->month.'/'.$dt->day.'/'.$data->kategori_proposal.'/'.$data->dealer->kode_dealer ;
-        $data->status_proposal                  = $st == 'done' ? 2 : 1;
+        $data->status_proposal                  = 1;
         $data->lokasi_proposal                  = request()->lokasi ?? null ;
         $data->dealer_proposal                  = request()->dealer ?? null;
-        $data->display_proposal                 = cekarray(request()->display) ?? null ;
+        $data->display_proposal                 = request()->display ? json_encode(request()->display) : null;
         $data->target_database_proposal         = request()->targetdata ?? null ;
         $data->target_penjualan_proposal        = request()->targetjual ?? null ;
         $data->target_prospectus_proposal       = request()->targetpros ?? null ;
@@ -239,9 +231,9 @@ class ProposalController extends Controller
         $data->tempat_proposal                  = request()->tempat ?? null ;
         $data->lat_proposal                     = request()->lat ?? null ;
         $data->long_proposal                    = request()->long ?? null ;
-        $data->dana_proposal                    = cekarray($dana) ?? null ;
+        $data->dana_proposal                    = $dana ? json_encode($dana) : null ;
         $data->penanggung_jawab_proposal        = request()->pjid ?? null ;
-        $data->sales_people_proposal            = cekarray(request()->idsales) ?? null ;
+        $data->sales_people_proposal            = request()->idsales ? json_encode(request()->idsales) : null ;
         $data->history_penjualan_proposal       = request()->historypenjualan ?? null ;
         $data->latar_belakang_proposal          = request()->latarbelakang ?? null ;
         $data->latar_kompetitor_proposal        = request()->latarkompetitor ?? null ;
@@ -251,6 +243,63 @@ class ProposalController extends Controller
         // $data->fotolokasi_proposal              = cekarray(request()->fotolokasi) ?? null ;
         $data->total_dana_proposal              = str_replace(",","",request()->total) ?? null ;
         $data->save();
+
+
+        //
+        if($st == 'done'){
+            $request->validate([
+                'lokasi'     => 'required',
+                'targetdata' => 'required',
+                'targetjual' => 'required',
+                'targetpros' => 'required',
+                'tanggalstart' => 'required',
+                'tanggalend' => 'required',
+                'program' => 'required',
+                'tempat' => 'required',
+                'lat' => 'required',
+                'long' => 'required',
+                'ket_dana' => 'required',
+                'pjid' => 'required',
+                'idsales' => 'required',
+                'historypenjualan' => 'required',
+                'latarbelakang' => 'required',
+                'latarkompetitor' => 'required',
+                'mmin1' => 'required',
+                'm1' => 'required',
+                'tujuan' => 'required',
+            ], [ // 2nd array is the rules custom message
+                'required' => 'Kolom :attribute Harus Diisi !.'
+            ], [ // 3rd array is the fields custom name
+                'lokasi'     => 'Lokasi',
+                'targetdata' => 'Target Database',
+                'targetjual' => 'Target Penjualan',
+                'targetpros' => 'Target Prospectus',
+                'tanggalstart' => 'Periode Start',
+                'tanggalend' => 'Periode End',
+                'program' => 'Program',
+                'tempat' => 'Tempat',
+                'lat' => 'Titik Lokasi Map Latitude',
+                'long' => 'Titik Lokasi Map Longtitude',
+                'ket_dana' => 'List Dana',
+                'pjid' => 'Penanggung Jawab',
+                'idsales' => 'Sales People',
+                'historypenjualan' => 'History Penjualan',
+                'latarbelakang' => 'Latar Belakang',
+                'latarkompetitor' => 'Latar Kompetitor',
+                'mmin1' => 'M-1',
+                'm1' => 'M1',
+                'tujuan' => 'Tujuan',
+            ]);
+
+            if ($data->foto_lokasi_proposal == null) {
+                return redirect()->back()->withFlashDanger('Foto Belum Ada ! Upload Terlebih Dahulu');
+            }
+
+            $data->status_proposal = 2;
+            $data->save();
+
+        }
+
 
         if (request()->b == 'upload') {
             return redirect()->to(route('pusat.proposal.getUpload').'?uuid='.request()->uuid);

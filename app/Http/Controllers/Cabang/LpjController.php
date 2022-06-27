@@ -154,29 +154,34 @@ class LpjController extends Controller
         return redirect()->route('cabang.lpj.index')->withFlashSuccess('Data Berhasil Tersimpan  ! ✅');
     }
 
-    public function getCreateKonsumen() {
-        return view('cabang.lpj.konsumen');
+    public function getKonsumen() {
+
+        $datalokasi   = Lokasi::get();
+        $salespeople  = SalesPeople::where('dealer_sales_people', Auth::guard('cabang')->user()->dealer)->get();
+        $datafinance  = FinanceCompany::get();
+        $data         = LpjKonsumen::find(request()->id);
+
+        return view('cabang.lpj.konsumen', compact('datalokasi', 'salespeople', 'datafinance', 'data'));
     }
 
-    public function postStoreKonsumen() {
-        // $lpj =
-        $tambah                     = new LpjKonsumen;
-        $tambah->id_lpj             = 1;
-        $tambah->nama               = request()->namakonsumen;
-        $tambah->alamat             = request()->alamatkonsumen;
-        $tambah->id_lokasi          = request()->kelurahankonsumen;
-        $tambah->notelp             = request()->notelpkonsumen;
-        $tambah->type               = request()->typekonsumen;
-        $tambah->id_sales_people    = request()->spkonsumen;
-        $tambah->cash_credit        = request()->jeniskonsumen;
-        $tambah->finance_company    = request()->financekonsumen;
-        $tambah->database           = request()->dbkonsumen ? true : false;
-        $tambah->prospecting        = request()->proskonsumen ? true : false;
-        $tambah->polling            = request()->polkonsumen ? true : false;
-        $tambah->reject             = request()->rejkonsumen ? true : false;
-        $tambah->ssu                = request()->ssukonsumen ? true : false;
-        $tambah->save();
+    public function postUpdateKonsumen() {
 
-        return Response::json($tambah);
+        $update                     = LpjKonsumen::find(request()->id);
+        $update->nama               = request()->namakonsumen;
+        $update->alamat             = request()->alamatkonsumen;
+        $update->id_lokasi          = request()->kelurahankonsumen;
+        $update->notelp             = request()->notelpkonsumen;
+        $update->type               = request()->typekonsumen;
+        $update->id_sales_people    = request()->spkonsumen;
+        $update->cash_credit        = request()->jeniskonsumen;
+        $update->finance_company    = request()->financekonsumen;
+        $update->database           = request()->dbkonsumen ? true : false;
+        $update->prospecting        = request()->proskonsumen ? true : false;
+        $update->polling            = request()->polkonsumen ? true : false;
+        $update->reject             = request()->rejkonsumen ? true : false;
+        $update->ssu                = request()->ssukonsumen ? true : false;
+        $update->save();
+
+        return redirect()->to(route('cabang.lpj.getCreate').'/?id='.request()->uuid)->withFlashSuccess('Data Konsumen Berhasil Ditambahkan  ! ✅');
     }
 }
