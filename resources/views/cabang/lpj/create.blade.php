@@ -365,19 +365,19 @@ rel="stylesheet"
                                                     <div class="row form-group">
                                                         <label class="col-sm-3 control-label">No Telepon</label>
                                                         <div class="col-sm-9">
-                                                            <input class="form-control" id="notelponsumen" name="notelpkonsumen" value="" >
+                                                            <input class="form-control" id="notelponsumen" name="notelpkonsumen" >
                                                         </div>
                                                     </div>
                                                     <div class="row form-group">
                                                         <label class="col-sm-3 control-label">Type</label>
                                                         <div class="col-sm-9">
-                                                            <input class="form-control" id="typekonsumen" name="typekonsumen" value="" >
+                                                            <input class="form-control" id="typekonsumen" name="typekonsumen" >
                                                         </div>
                                                     </div>
                                                     <div class="row form-group">
                                                         <label class="col-sm-3 control-label">Sales People</label>
                                                         <div class="col-sm-9">
-                                                            <select class="form-control data-lokasi" name="lokasikonsumen">
+                                                            <select class="form-control data-sales" name="saleskonsumen">
                                                                 @foreach ($salespeople as $data_sp)
                                                                     <option value="{{ $data_sp->id }}">{{ $data_sp->nama_sales_people }}</option>
                                                                 @endforeach
@@ -474,39 +474,51 @@ rel="stylesheet"
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td>Nama</td>
-                                                        <td>Alamat</td>
-                                                        <td>Kelurahan</td>
-                                                        <td>No Telepon</td>
-                                                        <td>Type</td>
-                                                        <td>Sales Prople</td>
-                                                        <td>CASH/CREDIT</td>
-                                                        <td>Finance Company</td>
-                                                        <td class="text-center">
-                                                           <i class="fas fa-check"></i>
-                                                        </td>
-                                                        <td class="text-center">
-                                                           <i class="fas fa-check"></i>
-                                                        </td>
-                                                        <td class="text-center">
-                                                           <i class="fas fa-check"></i>
-                                                        </td>
-                                                        <td class="text-center">
-                                                           <i class="fas fa-check"></i>
-                                                        </td>
-                                                        <td class="text-center">
-                                                           <i class="fas fa-check"></i>
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <a href="javascript:void(0)" id="edit-post" data-id="1" class="btn btn-warning btn-sm m-0" style="padding: 0.15rem 0.3rem; font-size: 0.7rem;">
-                                                                <i class="fas fa-edit"></i>
-                                                            </a>
-                                                            <a href="javascript:void(0)" id="delete-post" data-id="1" class="btn btn-danger delete-post btn-sm m-0" style="padding: 0.15rem 0.3rem; font-size: 0.7rem;">
-                                                                <i class="fas fa-trash"></i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
+                                                    @foreach ($datakonsumen as $data_ko)
+                                                        <tr>
+                                                            <td>{{ $data_ko->nama }}</td>
+                                                            <td>{{ $data_ko->alamat }}</td>
+                                                            <td>{{ $data_ko->id_lokasi }}</td>
+                                                            <td>{{ $data_ko->notelp }}</td>
+                                                            <td>{{ $data_ko->type }}</td>
+                                                            <td>{{ $data_ko->id_sales_people }}</td>
+                                                            <td>{{ $data_ko->cash_credit }}</td>
+                                                            <td>{{ $data_ko->finance_company }}</td>
+                                                            <td class="text-center">
+                                                                @if ($data_ko->database == true)
+                                                                    <i class="fas fa-check"></i>
+                                                                @endif
+                                                            </td>
+                                                            <td class="text-center">
+                                                                @if ($data_ko->prospecting == true)
+                                                                    <i class="fas fa-check"></i>
+                                                                @endif
+                                                            </td>
+                                                            <td class="text-center">
+                                                                @if ($data_ko->polling == true)
+                                                                    <i class="fas fa-check"></i>
+                                                                @endif
+                                                            </td>
+                                                            <td class="text-center">
+                                                                @if ($data_ko->reject == true)
+                                                                    <i class="fas fa-check"></i>
+                                                                @endif
+                                                            </td>
+                                                            <td class="text-center">
+                                                                @if ($data_ko->ssu == true)
+                                                                    <i class="fas fa-check"></i>
+                                                                @endif
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <a href="javascript:void(0)" id="edit-post" data-id="1" class="btn btn-warning btn-sm m-0" style="padding: 0.15rem 0.3rem; font-size: 0.7rem;">
+                                                                    <i class="fas fa-edit"></i>
+                                                                </a>
+                                                                <a href="javascript:void(0)" id="delete-post" data-id="1" class="btn btn-danger delete-post btn-sm m-0" style="padding: 0.15rem 0.3rem; font-size: 0.7rem;">
+                                                                    <i class="fas fa-trash"></i>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
                                                 </tbody>
                                             </table>
                                         </div>

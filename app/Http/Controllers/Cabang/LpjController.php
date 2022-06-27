@@ -66,7 +66,9 @@ class LpjController extends Controller
         $datafinance  = FinanceCompany::get();
         $data         = Lpj::where('uuid', request()->id)->first();
         $datadana     = json_decode($data->dana_lpj ?? null, true);
-        return view('cabang.lpj.create', compact('datalokasi', 'salespeople', 'datafinance', 'data', 'datadana'));
+        $datakonsumen  = LpjKonsumen::where('id_lpj', $data->id)->get();
+
+        return view('cabang.lpj.create', compact('datalokasi', 'salespeople', 'datafinance', 'data', 'datadana', 'datakonsumen'));
     }
 
     public function postStore() {
@@ -129,7 +131,21 @@ class LpjController extends Controller
 
         if (request()->b == 'konsumen') {
             $konsumen = new LpjKonsumen;
-            $konsumen->id_lpj = $data->id;
+            $konsumen->id_lpj             = $data->id;
+            $konsumen->nama               = request()->namakonsumen;
+            $konsumen->alamat             = request()->alamatkonsumen;
+            $konsumen->id_lokasi          = request()->lokasikonsumen;
+            $konsumen->notelp             = request()->notelpkonsumen;
+            $konsumen->type               = request()->typekonsumen;
+            // $konsumen->status             = request()->konsumen;
+            $konsumen->id_sales_people    = request()->saleskonsumen;
+            $konsumen->cash_credit        = request()->jeniskonsumen;
+            $konsumen->finance_company    = request()->financekonsumen;
+            $konsumen->database           = request()->dbkonsumen ? true : false;
+            $konsumen->prospecting        = request()->proskonsumen ? true : false;
+            $konsumen->polling            = request()->polkonsumen ? true : false;
+            $konsumen->reject             = request()->rejkonsumen ? true : false;
+            $konsumen->ssu                = request()->ssukonsumen ? true : false;
             $konsumen->save();
 
             return redirect()->back()->withFlashSuccess('Data Konsumen Berhasil Ditambahkan  ! ✅');
