@@ -14,6 +14,8 @@ use Illuminate\Support\Carbon;
 use Image;
 use App\Models\ApprovalProposal;
 use Illuminate\Http\Request;
+use App\Models\Pusat;
+use Illuminate\Database\Eloquent\Builder;
 
 class ProposalController extends Controller
 {
@@ -70,6 +72,12 @@ class ProposalController extends Controller
             return redirect()->route('cabang.pameran.index');
         }
 
+    }
+
+    public function getTess()
+    {
+        $oke =  Pusat::orderBy('jabatan', 'ASC')->get();
+        return $oke;
     }
 
     public function getPilihJenisProposal()
@@ -241,6 +249,15 @@ class ProposalController extends Controller
 
             $data->status_proposal = 2;
             $data->save();
+
+            $approval = Pusat::orderBy('jabatan', 'ASC')->get();
+
+            foreach ($approval as $app) {
+                $isiapproval = new ApprovalProposal;
+                $isiapproval->id_proposal   = $data->id;
+                $isiapproval->user_approval = $app->id;
+                $isiapproval->save();
+            }
 
         }
 

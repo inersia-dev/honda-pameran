@@ -123,7 +123,6 @@
                 @endphp
 
                 @foreach($datas as $key => $data)
-
                     <div style="text-decoration: none;">
                         <div class="card mb-2" style="border-radius: 5px; font-size: 12px">
                             <div class="row p-2 align-items-center">
@@ -212,8 +211,8 @@
                     @php
                         $first  = $datas->firstItem();
                         $end    = $data->id;
-                        @endphp
-                    @endforeach
+                    @endphp
+                @endforeach
                 <div class="row">
                     <div class="col-7">
                         <div class="float-left">

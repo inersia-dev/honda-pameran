@@ -407,7 +407,7 @@ rel="stylesheet"
                                             <thead class="table-dark">
                                                 <tr>
                                                     <th>No.</th>
-                                                    <th>Tanggal</th>
+                                                    <th>Waktu</th>
                                                     <th>Created By</th>
                                                     <th></th>
                                                     <th>Status</th>
@@ -417,7 +417,7 @@ rel="stylesheet"
                                             <tbody>
                                                 <tr>
                                                     <td>1.</td>
-                                                    <td>{{ $data->created_at }}</td>
+                                                    <td>{{ $data->updated_at }}</td>
                                                     <td>{{ $data->usercabang->name }}</td>
                                                     <td></td>
                                                     <td>
@@ -431,7 +431,11 @@ rel="stylesheet"
                                                 @foreach ($dataapproval as $data_h)
                                                     <tr>
                                                         <td>{{ $n++ }}</td>
-                                                        <td>{{ $data_h->created_at }}</td>
+                                                        <td>
+                                                            @if (!null == $data_h->status_approval)
+                                                                {{ $data_h->updated_at }}
+                                                            @endif
+                                                        </td>
                                                         <td>{{ $data_h->userapp->name }}</td>
                                                         <td>{{ $data_h->userapp->jabatanpusat->nama_jabatan }}</td>
                                                         <td>
@@ -448,9 +452,15 @@ rel="stylesheet"
                                                                     $st = 'Rejected';
                                                                     $si = 'danger';
                                                                     $ic = 'times';
+                                                                } else {
+                                                                    $st = '';
+                                                                    $si = '';
+                                                                    $ic = '';
                                                                 }
                                                             @endphp
-                                                            <label class="badge bg-{{ $si }}"  style="color: #fff">{{ $st }} <i class="fas fa-{{ $ic }}"></i></label>
+                                                            @if (!null == $data_h->status_approval)
+                                                                <label class="badge bg-{{ $si }}"  style="color: #fff">{{ $st }} <i class="fas fa-{{ $ic }}"></i></label>
+                                                            @endif
                                                         </td>
                                                         <td>{{ $data_h->keterangan_approval }}</td>
                                                     </tr>
@@ -459,34 +469,44 @@ rel="stylesheet"
                                         </table>
                                     </div>
                                 </div>
-                                @if ($data->status_proposal != 4)
-                                    <div class="mb-2 row">
-                                        <label class="col-sm-2 col-form-label">Status</label>
-                                        <div class="col-sm-5">
-                                            <select class="form-control" name="status">
-                                                <option value="1">Approve</option>
-                                                <option value="2">Revise</option>
-                                                <option value="3">Rejected</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="mb-2 row">
-                                        <label class="col-sm-2 col-form-label">Keterangan</label>
-                                        <div class="col-sm-10">
-                                            <textarea type="text" class="form-control" rows="4" name="keterangan"></textarea>
-                                        </div>
-                                    </div>
-                                @endif
+
                             </div>
                             @if ($data->status_proposal != 4)
-                                <div class="col-12">
-                                    @csrf
-                                    <input type="hidden" name="id" value="{{ $data->id }}">
-                                    <a href="{{ route('pusat.proposal.index') }}" class="btn btn-outline-dark"><i class="fas fa-chevron-left"></i> Kembali</a>
-                                    <div class="float-right">
-                                        <button class="btn btn-primary" type="text" name="b" value="done"  onclick="return confirm('Konfirmasi Submit Status Proposal')">Submit <i class="fas fa-check"></i> </button>
-                                    </div>
-                                </div>
+                                @foreach ($dataapproval as $key => $data_sub)
+                                    @if ($data_sub->status_approval == null)
+                                        @if ($data_sub->user_approval == Auth::guard('pusat')->user()->id)
+                                            <div class="col-12">
+                                                <div class="mb-2 row">
+                                                    <label class="col-sm-2 col-form-label">Status</label>
+                                                    <div class="col-sm-5">
+                                                        <select class="form-control" name="status">
+                                                            <option value="1">Approve</option>
+                                                            <option value="2">Revise</option>
+                                                            <option value="3">Rejected</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-2 row">
+                                                    <label class="col-sm-2 col-form-label">Keterangan</label>
+                                                    <div class="col-sm-10">
+                                                        <textarea type="text" class="form-control" rows="4" name="keterangan"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-2 row">
+                                                    <div class="col-12">
+                                                        @csrf
+                                                        <input type="hidden" name="id" value="{{ $data->id }}">
+                                                        <a href="{{ route('pusat.proposal.index') }}" class="btn btn-outline-dark"><i class="fas fa-chevron-left"></i> Kembali</a>
+                                                        <div class="float-right">
+                                                            <button class="btn btn-primary" type="text" name="b" value="done"  onclick="return confirm('Konfirmasi Submit Status Proposal')">Submit <i class="fas fa-check"></i> </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
+                                        @break
+                                    @endif
+                                @endforeach
                             @endif
                         </form>
                         {{-- <div class="mb-2 row fixed-bottom position-sticky p-4 border-top" style="background-color: #fff; ">

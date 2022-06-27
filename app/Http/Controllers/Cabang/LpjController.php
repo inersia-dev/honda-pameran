@@ -66,7 +66,7 @@ class LpjController extends Controller
         $datafinance  = FinanceCompany::get();
         $data         = Lpj::where('uuid', request()->id)->first();
         $datadana     = json_decode($data->dana_lpj ?? null, true);
-        $datakonsumen  = LpjKonsumen::where('id_lpj', $data->id)->get();
+        $datakonsumen = LpjKonsumen::where('id_lpj', $data->id)->get();
 
         return view('cabang.lpj.create', compact('datalokasi', 'salespeople', 'datafinance', 'data', 'datadana', 'datakonsumen'));
     }
