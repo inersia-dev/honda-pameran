@@ -126,7 +126,7 @@ class Proposal extends Model
     public function scopeTanggal($query, $tanggal)
     {
         if ($tanggal) {
-            return $query->whereDate('created_at', '=', date($tanggal));
+            return $query->whereDate('created_at', 'LIKE', '%'.$tanggal.'%');
         }
     }
 

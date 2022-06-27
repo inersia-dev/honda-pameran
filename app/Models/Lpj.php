@@ -32,4 +32,33 @@ class Lpj extends Model
         return $this->hasOne(Proposal::class, 'id', 'id_proposal');
     }
 
+    public function scopeKategori($query, $kategori)
+    {
+        $this->kategori = $kategori;
+        if ($this->kategori) {
+            return $query->whereHas('proposal', function ($query) {
+                return $query->where('kategori_proposal', $this->kategori);
+            });
+        }
+    }
+
+    public function scopePj($query, $pj)
+    {
+        $this->pj = $pj;
+        if ($this->pj) {
+            return $query->whereHas('proposal', function ($query) {
+                return $query->whereHas('pj', function ($query) {
+                    return $query->whereRaw('LOWER(nama_sales_people) LIKE ? ', '%'.strtolower($this->pj).'%');
+                });
+            });
+        }
+    }
+
+    public function scopeSubmitDate($query, $submitdate)
+    {
+        if ($submitdate) {
+            return $query->where('created_at', 'LIKE', '%'.$submitdate.'%');
+        }
+    }
+
 }

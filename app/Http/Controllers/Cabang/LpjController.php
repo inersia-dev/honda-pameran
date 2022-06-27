@@ -31,7 +31,11 @@ class LpjController extends Controller
         $datakategori = KategoriProposal::get();
         $datas = Lpj::whereHas('proposal', function (Builder $query) {
                     $query->where('dealer_proposal', Auth::guard('cabang')->user()->dealer);
-                 })->paginate(10);
+                 })
+                 ->pj(request()->namapj)
+                 ->kategori(request()->kategori)
+                 ->submitDate(request()->tanggal)
+                 ->paginate(10);
 
         return view('cabang.lpj.index', compact('datas', 'datakategori'));
     }
