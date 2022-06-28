@@ -12,7 +12,10 @@
     </button>
 
     <ul class="c-header-nav d-md-down-none">
-        <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="#">Main Dealer</a></li>
+        @php
+            $jbtn = DB::table('user_jabatan_pusats')->where('id', {{ Auth::guard('pusat')->user()->jabatan }})->first();
+        @endphp
+        <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="#">Main Dealer - {{ $jbtn->nama_jabatan ?? '' }}</a></li>
 
         {{-- @if(config('boilerplate.locale.status') && count(config('boilerplate.locale.languages')) > 1)
             <li class="c-header-nav-item dropdown">
