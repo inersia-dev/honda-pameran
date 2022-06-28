@@ -163,15 +163,63 @@
                                     </div>
                                     <div class="text-right">
                                         <div class="btn-group" role="group" aria-label="Action">
-                                            {{-- <button type="button" class="btn btn-sm btn-warning">
+                                            <a data-toggle="collapse" href="#detail{{ $data->id }}" aria-expanded="false" class="btn btn-sm btn-warning">
                                                 <i class="cil-pencil"></i>
-                                            </button> --}}
+                                            </a>
                                             <form action="" onsubmit="return confirm('Apakah Anda yakin data {{ $data->nama_sales_people }} dihapus ?');" >
                                                 <input type="hidden" name="metode" value="hapus">
                                                 <input type="hidden" name="id" value="{{ $data->id }}">
                                                 <button class="btn btn-sm btn-danger">
                                                     <i class="cil-trash"></i>
                                                 </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="color: #4e4e4e">
+                                <div class="col-12">
+                                    <div class="col-12">
+                                        <div class="collapse" id="detail{{ $data->id }}">
+                                            <hr>
+                                            <form class="row" action="">
+                                                <input type="hidden" name="id" value="{{ $data->id }}">
+                                                <input type="hidden" name="metode" value="edit">
+                                                <div class="col-3">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Nama Sales People</label>
+                                                        <input type="text" class="form-control" name="nama" value="{{ $data->nama_sales_people }}">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label class="form-label">No. HP Sales People</label>
+                                                        <input type="text" class="form-control" name="nohp" value="{{ $data->nohp_sales_people }}">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <button type="submit" class="btn btn-sm btn-primary">Update</button>
+                                                    </div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">HONDA ID</label>
+                                                        <input type="text" class="form-control" name="hondaid" value="{{ $data->honda_id_sales_people }}">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label class="form-label">HSO ID</label>
+                                                        <input type="text" class="form-control" name="hsoid" value="{{ $data->hso_id_sales_people }}">
+                                                    </div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Dealer</label>
+                                                        <select name="dealer" class="form-control" >
+                                                            <option value="{{ $data->dealer_sales_people }}">{{ $data->dealer->nama_dealer }} - {{ $data->dealer->kota_dealer }}</option>
+                                                            <option value=""></option>
+                                                            @foreach ($datadealer as $data)
+                                                                <option value="{{ $data->id }}">{{ $data->nama_dealer }} - {{ $data->kota_dealer }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
                                             </form>
                                         </div>
                                     </div>
