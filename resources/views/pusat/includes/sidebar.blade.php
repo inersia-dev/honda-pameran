@@ -24,6 +24,14 @@
                 class="c-sidebar-nav-link"
                 :href="route('pusat.proposal.index')"
                 :active="activeClass(Route::is('pusat.proposal.index'), 'c-active')"
+                icon="c-sidebar-nav-icon cil-inbox"
+                text="Inbox"/>
+        </li>
+        <li class="c-sidebar-nav-item">
+            <x-utils.link
+                class="c-sidebar-nav-link"
+                :href="route('pusat.proposal.getData')"
+                :active="activeClass(Route::is('pusat.proposal.getData'), 'c-active')"
                 icon="c-sidebar-nav-icon cil-layers"
                 text="Proposal"/>
         </li>

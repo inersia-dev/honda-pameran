@@ -64,6 +64,29 @@ class ProposalController extends Controller
         return view('pusat.proposal.index', compact('datas', 'datalokasi', 'datakategori', 'datadealer'));
     }
 
+    public function getData()
+    {
+        if(request()->metode == 'hapus') {
+            $hapus = Proposal::find(request()->id);
+            $hapus->delete();
+            return redirect()->back()->withFlashSuccess('Proposal Berhasil Terhapus  ! ✅');
+        }
+
+        $datalokasi   = Lokasi::get();
+        $datakategori = KategoriProposal::get();
+        $datadealer   = Dealer::get();
+        $datas        = Proposal::orderBy('updated_at', 'DESC')
+                            ->pj(request()->namapj)
+                            ->kategori(request()->kategori)
+                            ->lokasi(request()->lokasi)
+                            ->statusProposal(request()->status)
+                            ->tanggal(request()->tanggal)
+                            ->cariDealer(request()->dealer)
+                            ->where('status_proposal', '!=', 1)
+                            ->paginate(10);
+        return view('pusat.proposal.data', compact('datas', 'datalokasi', 'datakategori', 'datadealer'));
+    }
+
     public function postStatusHistory()
     {
         $proposal  = Proposal::find(request()->id);
