@@ -197,7 +197,7 @@ rel="stylesheet"
                                             </div>
                                         </div>
                                         <div class="mb-2 row">
-                                            <label class="col-sm-5 col-form-label">Target Prospectus<strong style="color:rgb(243, 0, 0)">*</strong></label>
+                                            <label class="col-sm-5 col-form-label">Target Prospecting<strong style="color:rgb(243, 0, 0)">*</strong></label>
                                             <div class="col-sm-7">
                                                 <input class="form-control" type="number" name="targetpros" value="{{ $data->target_prospectus_proposal }}">
                                             </div>
