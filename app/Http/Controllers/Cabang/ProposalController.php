@@ -151,7 +151,9 @@ class ProposalController extends Controller
             //     return redirect()->route('cabang.proposal.index');
             // }
 
-            $dataapproval       = ApprovalProposal::where('id_proposal', $data->id)->get();
+            $dataapproval       = ApprovalProposal::where('id_proposal', $data->id)
+                                                    ->orderBy('updated_at', 'asc')
+                                                    ->get();
 
             return view('cabang.proposal.show', compact('data', 'datalokasi', 'datadisplay', 'salespeople', 'datadana', 'datasalespeople', 'dataapproval', 'datafinance', 'datadisplayunit'));
         // } else {
@@ -275,14 +277,19 @@ class ProposalController extends Controller
             $data->status_proposal = 2;
             $data->save();
 
+            ApprovalProposal::where('status_approval', null)
+                                ->where('id_proposal', $data->id)
+                                ->delete();
             $approval = Pusat::orderBy('jabatan', 'ASC')->get();
-
-            foreach ($approval as $app) {
+            foreach ($approval->sortBy('jabatan') as $app) {
                 $isiapproval = new ApprovalProposal;
                 $isiapproval->id_proposal   = $data->id;
                 $isiapproval->user_approval = $app->id;
                 $isiapproval->save();
+                // $ok[] = $app->jabatan;
             }
+
+
 
         }
 

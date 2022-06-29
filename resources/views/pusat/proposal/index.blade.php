@@ -124,11 +124,27 @@
 
                 @foreach($datas as $key => $data)
                     @php
-                        $d = DB::table('approval_proposals')->where('id_proposal', $data->id)->get();
+                        $d = DB::table('approval_proposals')
+                                    ->where('id_proposal', $data->id)
+                                    ->select(['approval_proposals.*', 'pusats.jabatan as jabatan_p'])
+                                    ->join('pusats', 'approval_proposals.user_approval', '=', 'pusats.id')
+                                    ->orderBy('approval_proposals.created_at')
+                                    ->orderBy('pusats.jabatan')
+                                    ->get();
                     @endphp
                     @foreach ($d as $data_sub)
                         @if ($data_sub->status_approval == null)
-                            @if ($data_sub->user_approval == Auth::guard('pusat')->user()->id)
+                            @php
+                                $pus = DB::table('pusats')
+                                        ->where('id', $data_sub->user_approval)
+                                        ->first();
+                                $cek_ = DB::table('approval_proposals')
+                                                ->where('user_approval', Auth::guard('pusat')->user()->id)
+                                                ->where('id_proposal', $data_sub->id_proposal)
+                                                ->orderBy('updated_at', 'desc')
+                                                ->first();
+                            @endphp
+                            @if ($pus->jabatan == Auth::guard('pusat')->user()->jabatan && is_null($cek_->status_approval))
                                 <div style="text-decoration: none;">
                                     <div class="card mb-2" style="border-radius: 5px; font-size: 12px">
                                         <div class="row p-2 align-items-center">
@@ -199,7 +215,7 @@
                                                                     <i class="cil-pencil"></i>
                                                                 </a>
                                                             @else
-                                                                <a href="{{ route('pusat.proposal.getShow') }}?id={{ $data->uuid }}" class="btn btn-sm btn-warning">
+                                                                <a href="{{ route('pusat.proposal.getShow') }}?id={{ $data->uuid }}" class="btn btn-sm btn--outline-dark">
                                                                     <i class="cil-search"></i>
                                                                 </a>
                                                             @endif

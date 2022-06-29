@@ -491,7 +491,7 @@ rel="stylesheet"
                                         <table class="table table-sm text-center">
                                             <thead class="table-dark">
                                                 <tr>
-                                                    <<th>No.</th>
+                                                    <th>No.</th>
                                                     <th>Waktu</th>
                                                     <th>Created By</th>
                                                     <th></th>
@@ -517,7 +517,7 @@ rel="stylesheet"
                                                     <tr>
                                                         <td>{{ $n++ }}</td>
                                                         <td>
-                                                            @if (!null == $data_h->status_approval)
+                                                            @if (!null == $data_h->status_approval && $data_h->keterangan_approval != '-')
                                                                 {{ $data_h->updated_at }}
                                                             @endif
                                                         </td>

@@ -91,24 +91,33 @@ class ProposalController extends Controller
     public function postStatusHistory()
     {
         $proposal  = Proposal::find(request()->id);
-        if (request()->status == 1) { // approve
-            if (Auth::guard('pusat')->user()->jabatan == 5){
-                $proposal->status_proposal = 4;
-            } else {
-                $proposal->status_proposal = 3;
-            }
-        } elseif (request()->status == 2) { // revise
-            $proposal->status_proposal = 5;
-        } elseif (request()->status == 3) { // rejected
-            $proposal->status_proposal = 6;
-        }
-        $proposal->save();
 
         $approval                         = ApprovalProposal::find(request()->idapproval);
         $approval->status_approval        = request()->status;
         $approval->keterangan_approval    = request()->keterangan;
-
         $approval->save();
+
+        $dataappr = ApprovalProposal::where('status_approval', null)->where('id_proposal', $approval->id_proposal)->get();
+
+        if (request()->status == 1) { // approve
+            if (Auth::guard('pusat')->user()->jabatan == 5){
+                $proposal->status_proposal = 4; // Final Approve
+            } else {
+                $proposal->status_proposal = 3; // Partial Approve
+            }
+
+        } elseif (request()->status == 2) { // revise
+            $proposal->status_proposal = 5;
+        } elseif (request()->status == 3) { // rejected
+            $proposal->status_proposal = 6;
+            foreach ($dataappr as $reject) {
+                $rejectapproval                         = ApprovalProposal::find($reject->id);
+                $rejectapproval->status_approval        = '-';
+                $rejectapproval->keterangan_approval    = '-';
+                $rejectapproval->save();
+            }
+        }
+        $proposal->save();
 
         return redirect()->route('pusat.proposal.index')->withFlashSuccess('Update Approval Proposal Berhasil ! ✅');
     }
@@ -209,7 +218,12 @@ class ProposalController extends Controller
             //     return redirect()->route('pusat.proposal.index');
             // }
 
-            $dataapproval = ApprovalProposal::where('id_proposal', $data->id)->get();
+            $dataapproval = ApprovalProposal::where('id_proposal', $data->id)
+                                    ->select(['approval_proposals.*', 'pusats.jabatan as jabatan_p'])
+                                    ->join('pusats', 'approval_proposals.user_approval', '=', 'pusats.id')
+                                    ->orderBy('approval_proposals.created_at')
+                                    ->orderBy('pusats.jabatan')
+                                    ->get();
 
 
             return view('pusat.proposal.show', compact('data', 'datalokasi', 'datadisplay', 'datadealer', 'salespeople', 'datadana', 'datasalespeople', 'dataapproval', 'datafinance', 'datadisplayunit'));

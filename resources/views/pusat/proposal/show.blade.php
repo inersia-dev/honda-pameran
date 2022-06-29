@@ -518,7 +518,7 @@ rel="stylesheet"
                                                     <tr>
                                                         <td>{{ $n++ }}</td>
                                                         <td>
-                                                            @if (!null == $data_h->status_approval)
+                                                            @if (!null == $data_h->status_approval && $data_h->keterangan_approval != '-')
                                                                 {{ $data_h->updated_at }}
                                                             @endif
                                                         </td>
@@ -560,7 +560,18 @@ rel="stylesheet"
                             @if ($data->status_proposal != 4)
                                 @foreach ($dataapproval as $key => $data_sub)
                                     @if ($data_sub->status_approval == null)
-                                        @if ($data_sub->user_approval == Auth::guard('pusat')->user()->id)
+                                            @php
+                                                $pus = DB::table('pusats')
+                                                        ->where('id', $data_sub->user_approval)
+                                                        ->first();
+
+                                                $cek_ = DB::table('approval_proposals')
+                                                            ->where('user_approval', Auth::guard('pusat')->user()->id)
+                                                            ->where('id_proposal', $data_sub->id_proposal)
+                                                            ->orderBy('updated_at', 'desc')
+                                                            ->first();
+                                            @endphp
+                                        @if ($pus->jabatan == Auth::guard('pusat')->user()->jabatan && is_null($cek_->status_approval))
                                             <div class="col-12">
                                                 <div class="mb-2 row">
                                                     <label class="col-sm-2 col-form-label">Status<strong style="color:rgb(243, 0, 0)">*</strong></label>

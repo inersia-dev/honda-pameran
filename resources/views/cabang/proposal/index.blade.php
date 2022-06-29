@@ -171,6 +171,13 @@
                                                     <a href="{{ route('cabang.proposal.getCreate') }}?id={{ $data->uuid }}" class="btn btn-sm btn-outline-warning">
                                                         <i class="cil-pencil"></i>
                                                     </a>
+                                                @elseif ($data->status_proposal == 5)
+                                                    <a href="{{ route('cabang.proposal.getCreate') }}?id={{ $data->uuid }}" class="btn btn-sm btn-outline-warning">
+                                                        <i class="cil-pencil"></i>
+                                                    </a>
+                                                    <a href="{{ route('cabang.proposal.getShow') }}?id={{ $data->uuid }}" class="btn btn-sm btn-outline-dark">
+                                                        <i class="cil-search"></i>
+                                                    </a>
                                                 @else
                                                     @if ($data->status_proposal == 4)
                                                         <div class="btn-group dropleft">
@@ -184,7 +191,7 @@
                                                             </div>
                                                         </div>
                                                     @endif
-                                                    <a href="{{ route('cabang.proposal.getShow') }}?id={{ $data->uuid }}" class="btn btn-sm btn-warning">
+                                                    <a href="{{ route('cabang.proposal.getShow') }}?id={{ $data->uuid }}" class="btn btn-sm btn-outline-dark">
                                                         <i class="cil-search"></i>
                                                     </a>
                                                 @endif

@@ -9,7 +9,7 @@
 href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
 rel="stylesheet"
 />
-    @if ($data->status_proposal == 1)
+    @if ($data->status_proposal == 1 || $data->status_proposal == 5)
     <style>
         .form-control:disabled, .form-control[readonly] {
             background-color: #ffffff;
@@ -30,7 +30,7 @@ rel="stylesheet"
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    @if ($data->status_proposal == 1)
+                    @if ($data->status_proposal == 1 || $data->status_proposal == 5)
                     <form class="card-body" action="{{ route('cabang.proposal.postStore') }}" method="POST">
                         @csrf
                         <input type="hidden" name="uuid" value="{{ $data->uuid }}">
@@ -608,7 +608,7 @@ rel="stylesheet"
                                 </div>
                             </div>
                         </div>
-                        @if ($data->status_proposal == 1)
+                        @if ($data->status_proposal == 1 || $data->status_proposal == 5)
                             <div class="mb-2 row fixed-bottom position-sticky p-4 border-top" style="background-color: #fff; ">
                                 <div class="col-12">
                                     <a href="#" class="btn btn-outline-secondary">Cancel</a>
