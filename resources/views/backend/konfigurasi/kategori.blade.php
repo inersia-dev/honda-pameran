@@ -56,7 +56,8 @@
                 <div class="card mb-2 bg-gray-500 text-white" style="border-radius: 5px; font-size: 12px;">
                     <div class="row p-2 font-weight-bold">
                         <div class="col-3">ID</div>
-                        <div class="col-6">Nama Kategori </div>
+                        <div class="col-4">Nama Kategori </div>
+                        <div class="col-2">Urutan </div>
                         <div class="col-3"></div>
                     </div>
                 </div>
@@ -75,10 +76,22 @@
                                         {{ $data->id }}
                                     </div>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-4">
                                     <div class="font-weight-bold" style="color: #ec1b25 ">
                                         {{ $data->nama_kategori }}
                                     </div>
+                                </div>
+                                <div class="col-2">
+                                    <form action="" class="row font-weight-bold">
+                                        <div class="col p-0 pr-1">
+                                            <input type="hidden" name="metode" value="urutan">
+                                            <input type="hidden" name="id" value="{{ $data->id }}">
+                                            <input type="number" class="form-control" name="urutan" value="{{ $data->keterangan_kategori }}">
+                                        </div>
+                                        <div class="col p-0">
+                                            <button class="btn btn-info"><i class="fas fa-check"></i></button>
+                                        </div>
+                                    </form>
                                 </div>
 
                                 <div class="col-3">

@@ -372,6 +372,14 @@ class KonfigurasiController  extends Controller
             return redirect()->back()->withFlashSuccess('Data Berhasil Diperbaruhi  ! ✅');
         }
 
+        if (request()->metode == 'urutan') {
+            $urutan = KategoriProposal::find(request()->id);
+            $urutan->keterangan_kategori = request()->urutan;
+            $urutan->save();
+
+            return redirect()->back()->withFlashSuccess('Data Berhasil Diperbaruhi  ! ✅');
+        }
+
         if (request()->metode == 'hapus') {
             $hapus = KategoriProposal::find(request()->id);
             $hapus->delete();
@@ -379,7 +387,7 @@ class KonfigurasiController  extends Controller
             return redirect()->back()->withFlashSuccess('Data Berhasil Dihapus ! ✅');
         }
 
-        $datas = KategoriProposal::orderBy('created_at', 'asc')->paginate(10);
+        $datas = KategoriProposal::orderBy('keterangan_kategori', 'asc')->paginate(10);
 
         return view('backend.konfigurasi.kategori', compact('datas'));
     }
