@@ -17,7 +17,7 @@
                 @php
                     $dealer = DB::table('dealers')->where('id', Auth::guard('cabang')->user()->dealer)->first();
                 @endphp
-                Dealer {{ $dealer->nama_dealer }}
+                {{ $dealer->nama_dealer }}
             </a>
         </li>
     </ul>

@@ -32,6 +32,7 @@ class Lpj extends Model
         return $this->hasOne(Proposal::class, 'id', 'id_proposal');
     }
 
+
     public function scopeKategori($query, $kategori)
     {
         $this->kategori = $kategori;

@@ -162,7 +162,7 @@ rel="stylesheet"
                                 <div class="col-12">
                                     <a href="#" class="btn btn-outline-secondary">Cancel</a>
                                     <div class="float-right">
-                                        <button class="btn btn-primary" type="text" name="b" value="done"  onclick="return confirm('Konfirmasi Pengajuan Proposal')">Selesai</button>
+                                        <button class="btn btn-primary" type="text" name="b" value="done"  onclick="return confirm('Konfirmasi Pengajuan Proposal')">Submit</button>
                                     </div>
                                 </div>
                             </div>

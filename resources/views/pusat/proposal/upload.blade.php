@@ -29,7 +29,7 @@ rel="stylesheet"
                     <div class="row fixed-bottom position-sticky p-2 border-top" style="background-color: #fff; ">
                         <div class="col-12">
                             <div class="float-right">
-                                <a href="{{ route('pusat.proposal.getCreate') }}?id={{ request()->uuid }}" class="btn btn-primary" type="text" name="b" value="done">Selesai</a>
+                                <a href="{{ route('pusat.proposal.getCreate') }}?id={{ request()->uuid }}" class="btn btn-primary" type="text" name="b" value="done">Submit</a>
                             </div>
                         </div>
                     </div>

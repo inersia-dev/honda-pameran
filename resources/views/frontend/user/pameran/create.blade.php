@@ -303,7 +303,7 @@
                                 <a href="#" class="btn btn-outline-secondary">Cancel</a>
                                 <div class="float-right">
                                     <button class="btn btn-outline-info" type="button">Simpan Sebagai Draft</button>
-                                    <button class="btn btn-primary" type="button">Selesai</button>
+                                    <button class="btn btn-primary" type="button">Submit</button>
                                 </div>
                             </div>
 

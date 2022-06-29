@@ -143,7 +143,7 @@
                                                                 @php
                                                                     $a = \Carbon\Carbon::create($data->periode_start_proposal);
                                                                     $b = \Carbon\Carbon::create($data->periode_end_proposal);
-                                                                    $c = \Carbon\Carbon::now();
+                                                                    $c = \Carbon\Carbon::now()->addDays(1);
                                                                 @endphp
                                                                 @if ($a->greaterThan($c) == true)
                                                                     <span class="btn btn-sm btn-outline-dark ms-auto">

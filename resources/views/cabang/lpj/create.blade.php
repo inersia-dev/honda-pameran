@@ -742,7 +742,7 @@ rel="stylesheet"
                                     <a href="#" class="btn btn-outline-secondary">Cancel</a>
                                     <div class="float-right">
                                         <button class="btn btn-outline-info" type="text" name="b" value="draft">Simpan Sebagai Draft</button>
-                                        <button class="btn btn-primary" type="text" name="b" value="done"  onclick="return confirm('Konfirmasi Pengajuan Proposal')">Selesai</button>
+                                        <button class="btn btn-primary" type="text" name="b" value="done"  onclick="return confirm('Konfirmasi Pengajuan Proposal')">Submit</button>
                                     </div>
                                 </div>
                             </div>

@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
 use Image;
 use App\Models\ApprovalProposal;
+use App\Models\Dealer;
 use Illuminate\Http\Request;
 use App\Models\Pusat;
 use Illuminate\Database\Eloquent\Builder;
@@ -76,8 +77,11 @@ class ProposalController extends Controller
 
     public function getTess()
     {
-        $oke =  Pusat::orderBy('jabatan', 'ASC')->get();
-        return $oke;
+        $oke =  Pusat::orderBy('jabatan', 'asc')->get();
+        foreach ($oke as $app) {
+            $d[]   = $app->id;
+        }
+        return $d;
     }
 
     public function getPilihJenisProposal()
@@ -111,16 +115,18 @@ class ProposalController extends Controller
         //     return redirect()->route('cabang.proposal.index');
         // }
 
-        $datalokasi         = Lokasi::get();
+        $kota = Dealer::find(Auth::guard('cabang')->user()->dealer);
+
+        $datalokasi         = Lokasi::where('kota_lokasi', 'LIKE', '%'.$kota->kota_dealer.'%')->get();
         $datadisplay        = Display::get();
         $salespeople        = SalesPeople::where('dealer_sales_people', Auth::guard('cabang')->user()->dealer)->get();
         $data               = Proposal::where('uuid', request()->id)->first();
         $datadana           = json_decode($data->dana_proposal  ?? null, true);
         $datasalespeople    = json_decode($data->sales_people_proposal  ?? null, true);
 
-        // if (null == $data) {
-        //     return redirect()->route('cabang.proposal.index');
-        // }
+        if (null == $data) {
+            return redirect()->route('cabang.proposal.index');
+        }
 
         return view('cabang.proposal.create', compact('data', 'datalokasi', 'datadisplay', 'salespeople', 'datadana', 'datasalespeople'));
     }

@@ -477,9 +477,9 @@ rel="stylesheet"
                                         @if ($data_sub->user_approval == Auth::guard('pusat')->user()->id)
                                             <div class="col-12">
                                                 <div class="mb-2 row">
-                                                    <label class="col-sm-2 col-form-label">Status</label>
+                                                    <label class="col-sm-2 col-form-label">Status<strong style="color:rgb(243, 0, 0)">*</strong></label>
                                                     <div class="col-sm-5">
-                                                        <select class="form-control" name="status">
+                                                        <select class="form-control" name="status" required>
                                                             <option value="1">Approve</option>
                                                             <option value="2">Revise</option>
                                                             <option value="3">Rejected</option>
@@ -487,9 +487,9 @@ rel="stylesheet"
                                                     </div>
                                                 </div>
                                                 <div class="mb-2 row">
-                                                    <label class="col-sm-2 col-form-label">Keterangan</label>
+                                                    <label class="col-sm-2 col-form-label">Keterangan<strong style="color:rgb(243, 0, 0)">*</strong></label>
                                                     <div class="col-sm-10">
-                                                        <textarea type="text" class="form-control" rows="4" name="keterangan"></textarea>
+                                                        <textarea type="text" class="form-control" rows="4" name="keterangan" required></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="mb-2 row">

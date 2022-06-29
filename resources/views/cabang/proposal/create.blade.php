@@ -77,7 +77,7 @@ rel="stylesheet"
                                     </div>
                                 </div>
                                 <div class="mb-2 row">
-                                    <label class="col-sm-2 col-form-label">Latar Belakang Kompetito<strong style="color:rgb(243, 0, 0)">*</strong>r</label>
+                                    <label class="col-sm-2 col-form-label">Latar Belakang Kompetitor<strong style="color:rgb(243, 0, 0)">*</strong></label>
                                     <div class="col-sm-10">
                                         <textarea class="form-control" name="latarkompetitor" id="" rows="2">{{ $data->latar_kompetitor_proposal }}</textarea>
                                     </div>
@@ -507,7 +507,7 @@ rel="stylesheet"
                                     <a href="#" class="btn btn-outline-secondary">Cancel</a>
                                     <div class="float-right">
                                         <button class="btn btn-outline-info" type="text" name="b" value="draft">Simpan Sebagai Draft</button>
-                                        <button class="btn btn-primary" type="text" name="b" value="done"  onclick="return confirm('Konfirmasi Pengajuan Proposal')">Selesai</button>
+                                        <button class="btn btn-primary" type="text" name="b" value="done"  onclick="return confirm('Konfirmasi Pengajuan Proposal')">Submit</button>
                                     </div>
                                 </div>
                             </div>
