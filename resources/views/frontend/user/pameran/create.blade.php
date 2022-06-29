@@ -23,7 +23,7 @@
                         <hr>
                         <div class="mb-2 row">
                             <label class="col-sm-2 col-form-label">
-                                <strong>Delaer</strong>
+                                <strong>Dealer</strong>
                             </label>
                             <label class="col-sm-10 col-form-label">
                                 <u>Cabang A</u>
@@ -181,7 +181,7 @@
                                         <tr>
                                             <th width="300">Keterangan</th>
                                             <th>Total Biaya</th>
-                                            <th>Beban Delaer</th>
+                                            <th>Beban Dealer</th>
                                             <th>Beban Fincoy</th>
                                             <th>Beban MD(Jika Ada)</th>
                                             <th>Fincoy</th>

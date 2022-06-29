@@ -231,7 +231,7 @@ rel="stylesheet"
                                     <thead class="text-center">
                                         <tr>
                                             <th width="300">Keterangan</th>
-                                            <th>Beban Delaer</th>
+                                            <th>Beban Dealer</th>
                                             <th>Beban Fincoy</th>
                                             <th>Beban MD(Jika Ada)</th>
                                             <th></th>
@@ -905,7 +905,7 @@ rel="stylesheet"
     // .then(function (response) {
     //     var marker = L.geoJSON(response.data, {
     //         pointToLayer: function(geoJsonPoint, latlng, layer) {
-    //             markerr  = L.marker(latlng).bindPopup('Delaer Tes');
+    //             markerr  = L.marker(latlng).bindPopup('Dealer Tes');
     //             circle   = L.circle(latlng, {radius: 500, color: 'red', opacity:.5});
     //             return L.featureGroup([markerr, circle])
     //                     // .bindPopup(nama)
@@ -947,7 +947,7 @@ rel="stylesheet"
     //         var lat = markers[i][1];
     //         var popupText = markers[i][2];
 
-    //         // markerr  = L.marker(lat, lon).bindPopup('Delaer Tes');
+    //         // markerr  = L.marker(lat, lon).bindPopup('Dealer Tes');
     //         // circle   = L.circle(lat, lon, {radius: 500, color: 'red', opacity:.5});
     //         // L.featureGroup([markerr, circle])
     //         //             .bindPopup(popupText)

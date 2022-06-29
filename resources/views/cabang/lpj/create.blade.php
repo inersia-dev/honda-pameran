@@ -186,7 +186,7 @@ rel="stylesheet"
                                                 <thead class="text-center">
                                                     <tr>
                                                         <th width="300">Keterangan</th>
-                                                        <th>Beban Delaer</th>
+                                                        <th>Beban Dealer</th>
                                                         <th>Beban Fincoy</th>
                                                         <th>Beban MD(Jika Ada)</th>
                                                     </tr>
@@ -232,7 +232,7 @@ rel="stylesheet"
                                                 <thead class="text-center">
                                                     <tr>
                                                         <th width="300">Keterangan</th>
-                                                        <th>Beban Delaer</th>
+                                                        <th>Beban Dealer</th>
                                                         <th>Beban Fincoy</th>
                                                         <th>Beban MD(Jika Ada)</th>
                                                         <th></th>
