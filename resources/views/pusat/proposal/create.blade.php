@@ -273,7 +273,36 @@ rel="stylesheet"
                                                 </td>
                                             </tr>
                                         @endif
-
+                                    </tbody>
+                                    <tbody>
+                                        <tr>
+                                            <td></td>
+                                            <td>
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                      <span class="input-group-text" id="basic-addon1">Rp. </span>
+                                                    </div>
+                                                    <input class="form-control" id="subtotala" readonly>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                      <span class="input-group-text" id="basic-addon1">Rp. </span>
+                                                    </div>
+                                                    <input class="form-control" id="subtotalb" readonly>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                      <span class="input-group-text" id="basic-addon1">Rp. </span>
+                                                    </div>
+                                                    <input class="form-control" id="subtotalc" readonly>
+                                                </div>
+                                            </td>
+                                            <td></td>
+                                        </tr>
                                     </tbody>
                                 </table>
                                 <a class="btn btn-outline-success" onclick="addRowDana(); return false;" href="#">
@@ -701,7 +730,13 @@ rel="stylesheet"
             });
 
             $sumtotal = sum_a + sum_b + sum_c;
+            $sumsubtotal_a = sum_a;
+            $sumsubtotal_b = sum_b;
+            $sumsubtotal_c = sum_c;
             document.getElementById("total").value = $sumtotal.toLocaleString();
+            document.getElementById("subtotala").value = $sumsubtotal_a.toLocaleString();
+            document.getElementById("subtotalb").value = $sumsubtotal_b.toLocaleString();
+            document.getElementById("subtotalc").value = $sumsubtotal_c.toLocaleString();
 
             console.log(sum_a + sum_b + sum_c);
         }
