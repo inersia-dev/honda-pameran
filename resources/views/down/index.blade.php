@@ -33,7 +33,7 @@
             </div>
             <div class="flex items-center pt-8 sm:justify-start sm:pt-0">
                 <div class="px-4 text-lg text-gray-500 border-gray-400 tracking-wider">
-                    Admin -> <a href="https://admin.hondakaltimra.com" target="_blank">admin.hondakaltimra.com</a>
+                    Admin -> <a href="https://admin.hondakaltimra.com/admin" target="_blank">admin.hondakaltimra.com</a>
                 </div>
             </div>
             <div class="flex items-center pt-8 sm:justify-start sm:pt-0">
