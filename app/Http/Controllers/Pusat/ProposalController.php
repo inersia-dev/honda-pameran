@@ -194,8 +194,9 @@ class ProposalController extends Controller
         // if (null == $data) {
         //     return redirect()->route('pusat.proposal.index');
         // }
+        $cektitikaktif      = Proposal::where('status_proposal', 4)->get();
 
-        return view('pusat.proposal.create', compact('data', 'datalokasi', 'datadisplay', 'datadealer', 'salespeople', 'datadana', 'datasalespeople', 'datafinance', 'datadisplayunit'));
+        return view('pusat.proposal.create', compact('data', 'datalokasi', 'datadisplay', 'datadealer', 'salespeople', 'datadana', 'datasalespeople', 'datafinance', 'datadisplayunit', 'cektitikaktif'));
     }
 
     public function getShow()
@@ -218,6 +219,8 @@ class ProposalController extends Controller
             //     return redirect()->route('pusat.proposal.index');
             // }
 
+            $cektitikaktif      = Proposal::where('status_proposal', 4)->get();
+
             $dataapproval = ApprovalProposal::where('id_proposal', $data->id)
                                     ->select(['approval_proposals.*', 'pusats.jabatan as jabatan_p'])
                                     ->join('pusats', 'approval_proposals.user_approval', '=', 'pusats.id')
@@ -226,7 +229,7 @@ class ProposalController extends Controller
                                     ->get();
 
 
-            return view('pusat.proposal.show', compact('data', 'datalokasi', 'datadisplay', 'datadealer', 'salespeople', 'datadana', 'datasalespeople', 'dataapproval', 'datafinance', 'datadisplayunit'));
+            return view('pusat.proposal.show', compact('data', 'datalokasi', 'datadisplay', 'datadealer', 'salespeople', 'datadana', 'datasalespeople', 'dataapproval', 'datafinance', 'datadisplayunit', 'cektitikaktif'));
         } else {
             return redirect()->route('pusat.proposal.index');
         }

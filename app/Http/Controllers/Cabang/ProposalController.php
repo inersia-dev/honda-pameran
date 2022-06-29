@@ -126,12 +126,13 @@ class ProposalController extends Controller
         $datadana           = json_decode($data->dana_proposal  ?? null, true);
         $datasalespeople    = json_decode($data->sales_people_proposal  ?? null, true);
         $datadisplayunit    = json_decode($data->display_proposal  ?? null, true);
+        $cektitikaktif      = Proposal::where('status_proposal', 4)->get();
 
         if (null == $data) {
             return redirect()->route('cabang.proposal.index');
         }
 
-        return view('cabang.proposal.create', compact('data', 'datalokasi', 'datadisplay', 'salespeople', 'datadana', 'datasalespeople', 'datafinance', 'datadisplayunit'));
+        return view('cabang.proposal.create', compact('data', 'datalokasi', 'datadisplay', 'salespeople', 'datadana', 'datasalespeople', 'datafinance', 'datadisplayunit', 'cektitikaktif'));
     }
     public function getShow()
     {
@@ -151,11 +152,14 @@ class ProposalController extends Controller
             //     return redirect()->route('cabang.proposal.index');
             // }
 
+            $cektitikaktif      = Proposal::where('status_proposal', 4)->get();
+
+
             $dataapproval       = ApprovalProposal::where('id_proposal', $data->id)
                                                     ->orderBy('updated_at', 'asc')
                                                     ->get();
 
-            return view('cabang.proposal.show', compact('data', 'datalokasi', 'datadisplay', 'salespeople', 'datadana', 'datasalespeople', 'dataapproval', 'datafinance', 'datadisplayunit'));
+            return view('cabang.proposal.show', compact('data', 'datalokasi', 'datadisplay', 'salespeople', 'datadana', 'datasalespeople', 'dataapproval', 'datafinance', 'datadisplayunit', 'cektitikaktif'));
         // } else {
         //     return redirect()->route('cabang.proposal.index');
         // }

@@ -121,14 +121,15 @@
                                                     @php
                                                         $a = \Carbon\Carbon::create($data->periode_start_proposal);
                                                         $b = \Carbon\Carbon::create($data->periode_end_proposal);
-                                                        $c = \Carbon\Carbon::now()->addDays(1);
+                                                        $c = \Carbon\Carbon::now();
+                                                        $d = \Carbon\Carbon::now()->addDays(1);
                                                     @endphp
                                                     @if ($a->greaterThan($c) == true)
                                                         <span class="btn btn-sm btn-outline-dark ms-auto">
                                                             Akan Berjalan
                                                         </span>
                                                     @else
-                                                        @if ($b->greaterThan($c) == true)
+                                                        @if ($b->greaterThan($d) == true)
                                                             <span class="btn btn-sm btn-outline-primary ms-auto">
                                                                 Sedang Berjalan
                                                             </span>

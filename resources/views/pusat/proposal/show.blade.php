@@ -458,13 +458,24 @@ rel="stylesheet"
                                             <tbody>
                                                 <tr>
                                                     <td>
+                                                        <img src="https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png" width="15" alt="">
+                                                    </td>
+                                                    <td>
+                                                        :
+                                                    </td>
+                                                    <td>
+                                                        Marker Lokasi Event/Pameran yang Akan Berjalan
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
                                                         <img src="https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png" width="15" alt="">
                                                     </td>
                                                     <td>
                                                         :
                                                     </td>
                                                     <td>
-                                                        Marker Lokasi Event/Pameran yang sedang Aktif
+                                                        Marker Lokasi Event/Pameran yang Sedang Berjalan
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -475,7 +486,7 @@ rel="stylesheet"
                                                         :
                                                     </td>
                                                     <td>
-                                                        Marker Lokasi Event/Pameran yang akan dipilih
+                                                        Marker Lokasi Event/Pameran yang Akan Dipilih
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -692,6 +703,15 @@ rel="stylesheet"
     shadowSize: [41, 41]
     });
 
+    var greenIcon = new L.Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+    });
+
     // inisiasi mapbox
     L.mapbox.accessToken = 'pk.eyJ1IjoicmltYmFib3JuZSIsImEiOiJja3Z5bjZrZGwwMWtyMnVvN2xqaWRwdWh4In0.xUbfIJAJn2vMBTd_IKDzTQ';
     var map = L.mapbox.map('mapid')
@@ -725,12 +745,37 @@ rel="stylesheet"
 
     // L.marker([-1.239848, 116.916119], {icon: redIcon}).bindPopup('Dealer D').addTo(map);
     // L.circle([-1.239848, 116.916119], {radius: 500, color: 'red', opacity:.5}).addTo(map);
+    @foreach ($cektitikaktif as $titik)
+        @php
+            $a = \Carbon\Carbon::create($titik->periode_start_proposal);
+            $b = \Carbon\Carbon::create($titik->periode_end_proposal);
+            $c = \Carbon\Carbon::now();
+            $d = \Carbon\Carbon::now()->addDays(1);
 
+            $a_ = \Carbon\Carbon::create($titik->periode_start_proposal)->format('Y-m-d');
+            $b_ = \Carbon\Carbon::create($titik->periode_end_proposal)->format('Y-m-d');
+        @endphp
+        @if ($titik->id == $data->id)
+            L.marker([{!! $titik->lat_proposal !!}, {!! $titik->long_proposal !!}]).bindPopup('{!! $titik->dealer->nama_dealer !!} ( {{ $a_ }} - {{ $b_ }} )').addTo(map);
+            L.circle([{!! $titik->lat_proposal !!}, {!! $titik->long_proposal !!}], {radius: 500, color: 'blue', opacity:.5}).addTo(map);
+        @else
+
+            @if($a->greaterThan($c) == true)
+                L.marker([{!! $titik->lat_proposal !!}, {!! $titik->long_proposal !!}], {icon: greenIcon}).bindPopup('{!! $titik->dealer->nama_dealer !!} ( {{ $a_ }} - {{ $b_ }} )').addTo(map);
+                L.circle([{!! $titik->lat_proposal !!}, {!! $titik->long_proposal !!}], {radius: 500, color: 'green', opacity:.5}).addTo(map);
+            @else
+                @if ($b->greaterThan($c) == true)
+                    L.marker([{!! $titik->lat_proposal !!}, {!! $titik->long_proposal !!}], {icon: redIcon}).bindPopup('{!! $titik->dealer->nama_dealer !!} ( {{ $a_ }} - {{ $b_ }} )').addTo(map);
+                    L.circle([{!! $titik->lat_proposal !!}, {!! $titik->long_proposal !!}], {radius: 500, color: 'red', opacity:.5}).addTo(map);
+                @endif
+            @endif
+        @endif
+    @endforeach
 
     var mapCenter = [ {!!  $data->lat_proposal ?? $lat_ !!}, {!!  $data->long_proposal ?? $long_ !!}];
 
     // Tambah Data Marker
-    L.marker(mapCenter).addTo(map);
+    // L.marker(mapCenter).addTo(map);
 
     </script>
 
