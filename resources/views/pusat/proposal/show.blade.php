@@ -190,6 +190,12 @@ rel="stylesheet"
                                                 <input class="form-control" type="number" value="{{ $data->target_prospectus_proposal }}" disabled>
                                             </div>
                                         </div>
+                                        <div class="mb-2 row">
+                                            <label class="col-sm-5 col-form-label">Target Downloader Motorku-X</label>
+                                            <div class="col-sm-7">
+                                                <input class="form-control" type="number" value="{{ $data->target_downloader_proposal }}" disabled>
+                                            </div>
+                                        </div>
 
                                         <div class="mb-2 row">
                                             <label class="col-sm-5 col-form-label">Program Penjualan</label>

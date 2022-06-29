@@ -184,6 +184,7 @@ class ProposalController extends Controller
         $data->target_database_proposal         = request()->targetdata ?? null ;
         $data->target_penjualan_proposal        = request()->targetjual ?? null ;
         $data->target_prospectus_proposal       = request()->targetpros ?? null ;
+        $data->target_downloader_proposal       = request()->targetdown ?? null ;
         $data->periode_start_proposal           = request()->tanggalstart ?? null ;
         $data->periode_end_proposal             = request()->tanggalend ?? null ;
         $data->program_proposal                 = request()->program ?? null ;
@@ -209,7 +210,7 @@ class ProposalController extends Controller
                 'lokasi'     => 'required',
                 'targetdata' => 'required',
                 'targetjual' => 'required',
-                'targetpros' => 'required',
+                'targetdown' => 'required',
                 'tanggalstart' => 'required',
                 'tanggalend' => 'required',
                 'program' => 'required',
@@ -232,6 +233,7 @@ class ProposalController extends Controller
                 'targetdata' => 'Target Database',
                 'targetjual' => 'Target Penjualan',
                 'targetpros' => 'Target Prospectus',
+                'targetdown' => 'Target Downloader',
                 'tanggalstart' => 'Periode Start',
                 'tanggalend' => 'Periode End',
                 'program' => 'Program',

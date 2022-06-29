@@ -210,6 +210,12 @@ rel="stylesheet"
                                                 <input class="form-control" type="number" name="targetpros" value="{{ $data->target_prospectus_proposal }}">
                                             </div>
                                         </div>
+                                        <div class="mb-2 row">
+                                            <label class="col-sm-5 col-form-label">Target Downloader Motorku-X<strong style="color:rgb(243, 0, 0)">*</strong></label>
+                                            <div class="col-sm-7">
+                                                <input class="form-control" type="number" name="targetdown" value="{{ $data->target_downloader_proposal }}">
+                                            </div>
+                                        </div>
 
                                         <div class="mb-2 row">
                                             <label class="col-sm-5 col-form-label">Program Penjualan<strong style="color:rgb(243, 0, 0)">*</strong></label>

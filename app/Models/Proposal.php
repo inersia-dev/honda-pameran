@@ -30,6 +30,7 @@ class Proposal extends Model
         'target_database_proposal',
         'target_penjualan_proposal',
         'target_prospectus_proposal',
+        'target_downloader_proposal',
         'periode_start_proposal',
         'periode_end_proposal',
         'program_proposal',

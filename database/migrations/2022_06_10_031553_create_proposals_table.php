@@ -27,6 +27,7 @@ class CreateProposalsTable extends Migration
             $table->string('target_database_proposal')->nullable();
             $table->string('target_penjualan_proposal')->nullable();
             $table->string('target_prospectus_proposal')->nullable();
+            $table->string('target_downloader_proposal')->nullable();
             $table->string('periode_start_proposal')->nullable(); // tanggal rencana awal
             $table->string('periode_end_proposal')->nullable(); // tanggal rencana akhir
             $table->string('program_proposal')->nullable();
