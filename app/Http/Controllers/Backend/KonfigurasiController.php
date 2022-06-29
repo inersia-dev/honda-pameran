@@ -445,6 +445,7 @@ class KonfigurasiController  extends Controller
             $tambah->honda_id_sales_people    = request()->hondaid;
             $tambah->hso_id_sales_people      = request()->hsoid;
             $tambah->dealer_sales_people      = request()->dealer;
+            $tambah->jabatan_sales_people     = request()->jabatan;
             $tambah->save();
 
             return redirect()->back()->withFlashSuccess('Data Berhasil Ditambah ! ✅');
@@ -456,6 +457,7 @@ class KonfigurasiController  extends Controller
             $edit->nohp_sales_people        = request()->nohp;
             $edit->honda_id_sales_people    = request()->hondaid;
             $edit->hso_id_sales_people      = request()->hsoid;
+            $edit->jabatan_sales_people     = request()->jabatan;
             $edit->dealer_sales_people      = request()->dealer;
             $edit->save();
 

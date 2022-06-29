@@ -43,6 +43,12 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Jabatan</label>
+                                <div class="col-sm-9">
+                                    <input name="jabatan" class="form-control" type="text" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Dealer</label>
                                 <div class="col-sm-9">
                                     <select name="dealer" class="form-control">
@@ -122,7 +128,7 @@
                         <div class="col-3">Nama Sales People</div>
                         <div class="col-3">ID</div>
                         <div class="col-3">Dealer</div>
-                        <div class="col-3"></div>
+                        <div class="col-3">Jabatan</div>
                     </div>
                 </div>
 
@@ -158,8 +164,8 @@
                                     </div>
                                 </div>
                                 <div class="col-3">
-                                    <div class="font-weight-bold" style="color: #222222">
-
+                                    <div class="font-weight-bold float-left" style="color: #222222">
+                                        {{ $data->jabatan_sales_people }}
                                     </div>
                                     <div class="text-right">
                                         <div class="btn-group" role="group" aria-label="Action">
@@ -214,10 +220,14 @@
                                                         <select name="dealer" class="form-control" >
                                                             <option value="{{ $data->dealer_sales_people }}">{{ $data->dealer->nama_dealer }} - {{ $data->dealer->kota_dealer }}</option>
                                                             <option value=""></option>
-                                                            @foreach ($datadealer as $data)
-                                                                <option value="{{ $data->id }}">{{ $data->nama_dealer }} - {{ $data->kota_dealer }}</option>
+                                                            @foreach ($datadealer as $data_)
+                                                                <option value="{{ $data_->id }}">{{ $data_->nama_dealer }} - {{ $data_->kota_dealer }}</option>
                                                             @endforeach
                                                         </select>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Jabatan</label>
+                                                        <input type="text" class="form-control" name="jabatan" value="{{ $data->jabatan_sales_people }}">
                                                     </div>
                                                 </div>
                                             </form>
