@@ -13,13 +13,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('lang/{lang}', [LocaleController::class, 'change'])->name('locale.change');
 
 require_once 'cabang.php';
-Route::group(['as' => 'cabang.', 'domain' => 'dealer-honda.test'], $dealerRoutes);
-// Route::group(['as' => 'cabang.', 'domain' => 'dealer.hondakaltimra.com'], $dealerRoutes);
+// Route::group(['as' => 'cabang.', 'domain' => 'dealer-honda.test'], $dealerRoutes);
+Route::group(['as' => 'cabang.', 'domain' => 'dealer.hondakaltimra.com'], $dealerRoutes);
 
 
 require_once 'pusat.php';
-Route::group(['as' => 'pusat.', 'domain' => 'main-dealer-honda.test'], $maindealerRoutes);
-// Route::group(['as' => 'pusat.', 'domain' => 'main-dealer.hondakaltimra.com'], $maindealerRoutes);
+// Route::group(['as' => 'pusat.', 'domain' => 'main-dealer-honda.test'], $maindealerRoutes);
+Route::group(['as' => 'pusat.', 'domain' => 'main-dealer.hondakaltimra.com'], $maindealerRoutes);
 
 /*
  * Frontend Routes
