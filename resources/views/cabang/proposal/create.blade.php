@@ -150,6 +150,26 @@ rel="stylesheet"
                                             </div>
                                         </div>
                                         <div class="mb-2 row">
+                                            <label class="col-sm-3 col-form-label">Finance Company<strong style="color:rgb(243, 0, 0)">*</strong></label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control data-finance" name="finance[]" multiple="multiple">
+                                                    @if ($data->finance_proposal)
+                                                        @foreach (json_decode($data->finance_proposal) as $key => $data_dis)
+                                                            @php
+                                                                $finance_ = DB::table('finance_companies')->where('id', $data_dis)->first();
+                                                            @endphp
+                                                            <option value="{{ $data_dis }}" selected>{{ $finance_->kode }}</option>
+                                                        @endforeach
+                                                    @else
+                                                        <option></option>
+                                                    @endif
+                                                    @foreach ($datafinance as $data_fin)
+                                                        <option value="{{ $data_fin->id }}">{{ $data_fin->kode }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="mb-2 row">
                                             <label class="col-sm-3 col-form-label">Display<strong style="color:rgb(243, 0, 0)">*</strong></label>
                                             <div class="col-sm-9">
                                                 <select class="form-control data-display" name="display[]" multiple="multiple">
@@ -584,6 +604,29 @@ rel="stylesheet"
         //     placeholder: 'Cari Display',
         //     ajax: {
         //         url: '/display',
+        //         dataType: 'json',
+        //         delay: 250,
+        //         processResults: function (data) {
+        //             return {
+        //                 results: $.map(data, function (item) {
+        //                     return {
+        //                         text: item.name+' - '+item.email,
+        //                         id: item.id
+        //                     }
+        //                 })
+        //             };
+        //         },
+        //         cache: true
+        //     }
+        // }
+        );
+    </script>
+    <script type="text/javascript">
+        $('.data-finance').select2(
+        //     {
+        //     placeholder: 'Cari Finance',
+        //     ajax: {
+        //         url: '/finance',
         //         dataType: 'json',
         //         delay: 250,
         //         processResults: function (data) {

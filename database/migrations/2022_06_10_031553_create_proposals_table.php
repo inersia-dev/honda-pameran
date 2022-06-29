@@ -24,6 +24,7 @@ class CreateProposalsTable extends Migration
             $table->string('lokasi_proposal')->nullable(); // id data lokasi
             $table->string('alamat_proposal')->nullable(); // alamat tambahan
             $table->string('display_proposal')->nullable(); // multi data id display 1, 2, 3
+            $table->string('finance_proposal')->nullable(); // multi data id display 1, 2, 3
             $table->string('target_database_proposal')->nullable();
             $table->string('target_penjualan_proposal')->nullable();
             $table->string('target_prospectus_proposal')->nullable();

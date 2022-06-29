@@ -27,6 +27,7 @@ class Proposal extends Model
         'lokasi_proposal',
         'alamat_proposal',
         'display_proposal',
+        'finance_proposal',
         'target_database_proposal',
         'target_penjualan_proposal',
         'target_prospectus_proposal',

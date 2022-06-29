@@ -15,6 +15,7 @@ use Illuminate\Support\Carbon;
 use Image;
 use App\Models\ApprovalProposal;
 use Illuminate\Http\Request;
+use App\Models\FinanceCompany;
 
 class ProposalController extends Controller
 {
@@ -175,6 +176,7 @@ class ProposalController extends Controller
         $datadisplay        = Display::get();
         $datadealer         = Dealer::get();
         $salespeople        = SalesPeople::get();
+        $datafinance        = FinanceCompany::get();
         $data               = Proposal::where('uuid', request()->id)->first();
         $datadana           = json_decode($data->dana_proposal  ?? null, true);
         $datasalespeople    = json_decode($data->sales_people_proposal  ?? null, true);
@@ -183,7 +185,7 @@ class ProposalController extends Controller
         //     return redirect()->route('pusat.proposal.index');
         // }
 
-        return view('pusat.proposal.create', compact('data', 'datalokasi', 'datadisplay', 'datadealer', 'salespeople', 'datadana', 'datasalespeople'));
+        return view('pusat.proposal.create', compact('data', 'datalokasi', 'datadisplay', 'datadealer', 'salespeople', 'datadana', 'datasalespeople', 'datafinance'));
     }
 
     public function getShow()
@@ -195,6 +197,7 @@ class ProposalController extends Controller
             $datadisplay        = Display::get();
             $datadealer         = Dealer::get();
             $salespeople        = SalesPeople::get();
+            $datafinance        = FinanceCompany::get();
             $data               = Proposal::where('uuid', request()->id)->first();
             $datadana           = json_decode($data->dana_proposal  ?? null, true);
             $datasalespeople    = json_decode($data->sales_people_proposal  ?? null, true);
@@ -206,7 +209,7 @@ class ProposalController extends Controller
             $dataapproval = ApprovalProposal::where('id_proposal', $data->id)->get();
 
 
-            return view('pusat.proposal.show', compact('data', 'datalokasi', 'datadisplay', 'datadealer', 'salespeople', 'datadana', 'datasalespeople', 'dataapproval'));
+            return view('pusat.proposal.show', compact('data', 'datalokasi', 'datadisplay', 'datadealer', 'salespeople', 'datadana', 'datasalespeople', 'dataapproval', 'datafinance'));
         } else {
             return redirect()->route('pusat.proposal.index');
         }
@@ -240,6 +243,7 @@ class ProposalController extends Controller
         $data->lokasi_proposal                  = request()->lokasi ?? null ;
         $data->dealer_proposal                  = request()->dealer ?? null;
         $data->display_proposal                 = request()->display ? json_encode(request()->display) : null;
+        $data->finance_proposal                 = request()->finance ? json_encode(request()->finance) : null ;
         $data->target_database_proposal         = request()->targetdata ?? null ;
         $data->target_penjualan_proposal        = request()->targetjual ?? null ;
         $data->target_prospectus_proposal       = request()->targetpros ?? null ;
@@ -268,6 +272,8 @@ class ProposalController extends Controller
         if($st == 'done'){
             $request->validate([
                 'lokasi'     => 'required',
+                'display'    => 'required',
+                'finance'    => 'required',
                 'targetdata' => 'required',
                 'targetjual' => 'required',
                 'targetpros' => 'required',
@@ -291,6 +297,8 @@ class ProposalController extends Controller
                 'required' => 'Kolom :attribute Harus Diisi !.'
             ], [ // 3rd array is the fields custom name
                 'lokasi'     => 'Lokasi',
+                'display'    => 'Display',
+                'finance'    => 'Finance Company',
                 'targetdata' => 'Target Database',
                 'targetjual' => 'Target Penjualan',
                 'targetpros' => 'Target Prospectus',
