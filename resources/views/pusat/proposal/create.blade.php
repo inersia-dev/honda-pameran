@@ -38,12 +38,12 @@ rel="stylesheet"
                             <label class="col-sm-5 col-form-label">
                                 <select class="form-control data-dealer" name="dealer">
                                     @if (!null == $data->dealer_proposal)
-                                        <option value="{{ $data->dealer_proposal }}" selected>{{ $data->dealer->nama_dealer }}, {{ $data->dealer->kota_dealer }}</option>
+                                        <option value="{{ $data->dealer_proposal }}" selected>{{ $data->dealer->nama_dealer }}, {{ Str::title($data->dealer->kota_dealer) }}</option>
                                     @else
                                         <option></option>
                                     @endif
                                     @foreach ($datadealer as $data_de)
-                                        <option value="{{ $data_de->id }}">{{ $data_de->nama_dealer }}, {{ $data_de->kota_dealer }}</option>
+                                        <option value="{{ $data_de->id }}">{{ $data_de->nama_dealer }}, {{ Str::title($data_de->kota_dealer) }}</option>
                                     @endforeach
                                 </select>
                             </label>
@@ -131,12 +131,12 @@ rel="stylesheet"
                                             <div class="col-sm-9">
                                                 <select class="form-control data-lokasi" name="lokasi">
                                                     @if (!null == $data->lokasi_proposal)
-                                                        <option value="{{ $data->lokasi_proposal }}" selected>{{ $data->lokasi->kelurahan_lokasi }}, {{ $data->lokasi->kecamatan_lokasi }}, {{ $data->lokasi->kota_lokasi }}</option>
+                                                        <option value="{{ $data->lokasi_proposal }}" selected>{{ $data->lokasi->kelurahan_lokasi }}, {{ $data->lokasi->kecamatan_lokasi }}, {{ Str::title($data->lokasi->kota_lokasi) }}</option>
                                                     @else
                                                         <option></option>
                                                     @endif
                                                     @foreach ($datalokasi as $data_l)
-                                                        <option value="{{ $data_l->id }}">{{ $data_l->kelurahan_lokasi }}, {{ $data_l->kecamatan_lokasi }}, {{ $data_l->kota_lokasi }}</option>
+                                                        <option value="{{ $data_l->id }}">{{ $data_l->kelurahan_lokasi }}, {{ $data_l->kecamatan_lokasi }}, {{ Str::title($data_l->kota_lokasi) }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>

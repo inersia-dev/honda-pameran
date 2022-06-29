@@ -82,7 +82,7 @@
                                             <option value="SEMUA">SEMUA</option>
                                         @endif
                                         @foreach ($datakota as $data)
-                                            <option value="{{ $data->kota_dealer }}">{{ $data->kota_dealer }}</option>
+                                            <option value="{{ $data->kota_dealer }}">{{ Str::title($data->kota_dealer) }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -132,7 +132,7 @@
                                 </div>
                                 <div class="col-3">
                                     <div class="font-weight-bold" style="color: #222222">
-                                        {{ $data->kota_dealer }}
+                                        {{ Str::title($data->kota_dealer) }}
                                     </div>
                                 </div>
                                 <div class="col-3">
@@ -179,7 +179,7 @@
                                                 <div class="col-3">
                                                     <div class="mb-3">
                                                         <label class="form-label">Kota Dealer</label>
-                                                        <input type="text" class="form-control" name="kota" value="{{ $data->kota_dealer }}">
+                                                        <input type="text" class="form-control" name="kota" value="{{ Str::title($data->kota_dealer) }}">
                                                     </div>
                                                 </div>
                                             </form>

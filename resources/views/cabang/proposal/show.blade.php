@@ -123,7 +123,7 @@ rel="stylesheet"
                                             <div class="col-sm-9">
                                                 <select class="form-control data-lokasi" name="lokasi">
                                                     @if (!null == $data->lokasi_proposal)
-                                                        <option value="{{ $data->lokasi_proposal }}" selected>{{ $data->lokasi->kelurahan_lokasi }}, {{ $data->lokasi->kecamatan_lokasi }}, {{ $data->lokasi->kota_lokasi }}</option>
+                                                        <option value="{{ $data->lokasi_proposal }}" selected>{{ $data->lokasi->kelurahan_lokasi }}, {{ $data->lokasi->kecamatan_lokasi }}, {{ Str::title($data->lokasi->kota_lokasi) }}</option>
                                                     @endif
                                                 </select>
                                             </div>

@@ -53,7 +53,7 @@
                                 <div class="col-sm-9">
                                     <select name="dealer" class="form-control">
                                         @foreach ($datadealer as $data)
-                                            <option value="{{ $data->id }}">{{ $data->nama_dealer }} - {{ $data->kota_dealer }}</option>
+                                            <option value="{{ $data->id }}">{{ $data->nama_dealer }} - {{ Str::title($data->kota_dealer) }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -103,7 +103,7 @@
                                             <option value="SEMUA">SEMUA</option>
                                         @endif
                                         @foreach ($datadealer as $data)
-                                            <option value="{{ $data->id }}">{{ $data->nama_dealer }} - {{ $data->kota_dealer }}</option>
+                                            <option value="{{ $data->id }}">{{ $data->nama_dealer }} - {{ Str::title($data->kota_dealer) }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -159,7 +159,7 @@
                                     <div class="font-weight-bold" style="color: #222222">
                                         {{ $data->dealer->nama_dealer }}
                                         <div class="text-muted">
-                                            {{ $data->dealer->kota_dealer }}
+                                            {{ Str::title($data->dealer->kota_dealer) }}
                                         </div>
                                     </div>
                                 </div>
@@ -218,10 +218,10 @@
                                                     <div class="mb-3">
                                                         <label class="form-label">Dealer</label>
                                                         <select name="dealer" class="form-control" >
-                                                            <option value="{{ $data->dealer_sales_people }}">{{ $data->dealer->nama_dealer }} - {{ $data->dealer->kota_dealer }}</option>
+                                                            <option value="{{ $data->dealer_sales_people }}">{{ $data->dealer->nama_dealer }} - {{ Str::title($data->dealer->kota_dealer) }}</option>
                                                             <option value=""></option>
                                                             @foreach ($datadealer as $data_)
-                                                                <option value="{{ $data_->id }}">{{ $data_->nama_dealer }} - {{ $data_->kota_dealer }}</option>
+                                                                <option value="{{ $data_->id }}">{{ $data_->nama_dealer }} - {{ Str::title($data_->kota_dealer) }}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>

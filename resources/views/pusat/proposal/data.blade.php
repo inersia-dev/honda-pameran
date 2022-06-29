@@ -80,7 +80,7 @@
                                                 @if (request()->dealer == $data_d->id)
                                                     selected
                                                 @endif
-                                            >{{ $data_d->nama_dealer }}, {{ $data_d->kota_dealer }}</option>
+                                            >{{ $data_d->nama_dealer }}, {{ Str::title($data_d->kota_dealer) }}</option>
                                         @endforeach
                                     </select>
                                 </div>
