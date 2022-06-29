@@ -115,7 +115,7 @@ rel="stylesheet"
                                         <div class="mb-2 row">
                                             <label class="col-sm-3 col-form-label">Tempat</label>
                                             <div class="col-sm-9">
-                                                <input class="form-control" type="text" value="{{ $data->tempat_proposal }}" disabled>
+                                                <input class="form-control" type="text"  name="tempat" value="{{ $data->tempat_proposal }}" disabled>
                                             </div>
                                         </div>
                                         <div class="mb-2 row">
@@ -124,6 +124,8 @@ rel="stylesheet"
                                                 <select class="form-control data-lokasi" name="lokasi">
                                                     @if (!null == $data->lokasi_proposal)
                                                         <option value="{{ $data->lokasi_proposal }}" selected>{{ $data->lokasi->kelurahan_lokasi }}, {{ $data->lokasi->kecamatan_lokasi }}, {{ Str::title($data->lokasi->kota_lokasi) }}</option>
+                                                    @else
+                                                        <option></option>
                                                     @endif
                                                 </select>
                                             </div>
@@ -142,29 +144,6 @@ rel="stylesheet"
                                                     @else
                                                         <option></option>
                                                     @endif
-                                                    @foreach ($datafinance as $data_fin)
-                                                        <option value="{{ $data_fin->id }}">{{ $data_fin->kode }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="mb-2 row">
-                                            <label class="col-sm-3 col-form-label">Display</label>
-                                            <div class="col-sm-9">
-                                                <select class="form-control data-display" name="display[]" multiple="multiple">
-                                                    @if (!null == $data->display_proposal)
-                                                        @foreach (json_decode($data->display_proposal) as $key => $data_dis)
-                                                            @php
-                                                                $display_ = DB::table('displays')->where('id', $data_dis)->first();
-                                                            @endphp
-                                                            <option value="{{ $data_dis }}" selected>{{ $display_->nama_display }}</option>
-                                                        @endforeach
-                                                    @else
-                                                        <option></option>
-                                                    @endif
-                                                    @foreach ($datadisplay as $data_d)
-                                                        <option value="{{ $data_d->id }}">{{ $data_d->nama_display }}</option>
-                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
@@ -172,21 +151,9 @@ rel="stylesheet"
                                             <label class="col-sm-4 col-form-label">History Penjualan</label>
                                             <div class="col-sm-8">
                                                 <div class="input-group">
-                                                    <input class="form-control" type="number" value="{{ $data->history_penjualan_proposal }}" disabled>
+                                                    <input class="form-control" type="number" name="historypenjualan" value="{{ $data->history_penjualan_proposal }}" disabled>
                                                     {{-- <span class="input-group-text">Unit</span> --}}
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="mb-2 row">
-                                            <label class="col-sm-3 col-form-label">Start</label>
-                                            <div class="col-sm-9">
-                                                <input class="form-control" name="tanggalstart" type="date" value="{{ $data->periode_start_proposal }}" disabled>
-                                            </div>
-                                        </div>
-                                        <div class="mb-2 row">
-                                            <label class="col-sm-3 col-form-label">End</label>
-                                            <div class="col-sm-9">
-                                                <input class="form-control" name="tanggalend" type="date" value="{{ $data->periode_end_proposal }}" disabled>
                                             </div>
                                         </div>
                                     </div>
@@ -194,32 +161,88 @@ rel="stylesheet"
                                         <div class="mb-2 row">
                                             <label class="col-sm-5 col-form-label">Target Database</label>
                                             <div class="col-sm-7">
-                                                <input class="form-control" type="number" value="{{ $data->target_database_proposal }}" disabled>
+                                                <input class="form-control" type="number" name="targetdata" value="{{ $data->target_database_proposal }}" disabled>
                                             </div>
                                         </div>
                                         <div class="mb-2 row">
                                             <label class="col-sm-5 col-form-label">Target Penjualan</label>
                                             <div class="col-sm-7">
-                                                <input class="form-control" type="number" value="{{ $data->target_penjualan_proposal }}" disabled>
+                                                <input class="form-control" type="number" name="targetjual" value="{{ $data->target_penjualan_proposal }}" disabled>
                                             </div>
                                         </div>
                                         <div class="mb-2 row">
-                                            <label class="col-sm-5 col-form-label">Target Prospectus</label>
+                                            <label class="col-sm-5 col-form-label">Target Prospecting</label>
                                             <div class="col-sm-7">
-                                                <input class="form-control" type="number" value="{{ $data->target_prospectus_proposal }}" disabled>
+                                                <input class="form-control" type="number" name="targetpros" value="{{ $data->target_prospectus_proposal }}" disabled>
                                             </div>
                                         </div>
                                         <div class="mb-2 row">
                                             <label class="col-sm-5 col-form-label">Target Downloader Motorku-X</label>
                                             <div class="col-sm-7">
-                                                <input class="form-control" type="number" value="{{ $data->target_downloader_proposal }}" disabled>
+                                                <input class="form-control" type="number" name="targetdown" value="{{ $data->target_downloader_proposal }}" disabled>
                                             </div>
                                         </div>
 
                                         <div class="mb-2 row">
                                             <label class="col-sm-5 col-form-label">Program Penjualan</label>
                                             <div class="col-sm-7">
-                                                <textarea class="form-control" id="" rows="2" disabled>{{ $data->program_proposal }}</textarea>
+                                                <textarea class="form-control" id="" rows="2" name="program" disabled>{{ $data->program_proposal }}</textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="row pb-3">
+                                            <div class="col-sm-6">
+                                                <div class="mb-2 row">
+                                                    <label class="col-sm-3 col-form-label">Start</label>
+                                                    <div class="col-sm-9">
+                                                        <input class="form-control" name="tanggalstart" type="date" value="{{ $data->periode_start_proposal }}" disabled>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="mb-2 row">
+                                                    <label class="col-sm-3 col-form-label">End</label>
+                                                    <div class="col-sm-9">
+                                                        <input class="form-control" name="tanggalend" type="date" value="{{ $data->periode_end_proposal }}" disabled>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <label class="col-sm-2 col-form-label">Display</label>
+
+                                            <div class="col-sm-10">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <table class="table table-striped border datatable table-sm" id="displayunitdata">
+                                                            <thead class="text-center">
+                                                                <tr>
+                                                                    <th>Nama</th>
+                                                                    <th>Jumlah Unit</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @if ($data->display_proposal)
+                                                                    @foreach ($datadisplayunit as $data_diu)
+                                                                        @php
+                                                                            $diu = DB::table('displays')->where('id', data_get($data_diu, 'iddisplayunit'))->first();
+                                                                        @endphp
+                                                                        <tr>
+                                                                            <td>
+                                                                                <input class="form-control displayunit_nama" type="text" name="displayunit_nama[]" value="{{ $diu->nama_display }}" readonly>
+                                                                            </td>
+                                                                            <td>
+                                                                                <input class="form-control displayunit text-center" type="text" name="displayunit[]" value="{{ data_get($data_diu, 'displayunit') }}" readonly>
+                                                                            </td>
+                                                                        </tr>
+                                                                    @endforeach
+                                                                @endif
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -319,6 +342,7 @@ rel="stylesheet"
                                                     <th>Nama</th>
                                                     <th>HONDA ID</th>
                                                     <th>HSO ID</th>
+                                                    <th>Jabatan</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -332,6 +356,9 @@ rel="stylesheet"
                                                     </td>
                                                     <td>
                                                         <input class="form-control" id="pjhsoid" type="text" name="pjhsoid" value="{{ $data->pj->hso_id_sales_people ?? '' }}" disabled>
+                                                    </td>
+                                                    <td>
+                                                        <input class="form-control" id="pjjabatan" type="text" name="pjjabatan[]" value="{{ $data->pj->jabatan_sales_people ?? '' }}" disabled="">
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -353,6 +380,7 @@ rel="stylesheet"
                                                     <th>Nama</th>
                                                     <th>HONDA ID</th>
                                                     <th>HSO ID</th>
+                                                    <th>Jabatan</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -371,6 +399,9 @@ rel="stylesheet"
                                                             </td>
                                                             <td>
                                                                 <input class="form-control hso_id" type="text" name="hso_id[]" value="{{ $sp->hso_id_sales_people }}" disabled="">
+                                                            </td>
+                                                            <td>
+                                                                <input class="form-control jabatan" type="text" name="jabatan[]" value="{{ $sp->jabatan_sales_people }}" disabled="">
                                                             </td>
                                                         </tr>
                                                     @endforeach

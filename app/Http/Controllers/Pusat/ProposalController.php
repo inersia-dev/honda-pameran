@@ -144,7 +144,7 @@ class ProposalController extends Controller
 
     public function getPilihJenisProposal()
     {
-        $datas = KategoriProposal::get();
+        $datas = KategoriProposal::orderBy('keterangan_kategori', 'asc')->get();
         return view('pusat.proposal.jenis', compact('datas'));
     }
 
@@ -180,12 +180,13 @@ class ProposalController extends Controller
         $data               = Proposal::where('uuid', request()->id)->first();
         $datadana           = json_decode($data->dana_proposal  ?? null, true);
         $datasalespeople    = json_decode($data->sales_people_proposal  ?? null, true);
+        $datadisplayunit    = json_decode($data->display_proposal  ?? null, true);
 
         // if (null == $data) {
         //     return redirect()->route('pusat.proposal.index');
         // }
 
-        return view('pusat.proposal.create', compact('data', 'datalokasi', 'datadisplay', 'datadealer', 'salespeople', 'datadana', 'datasalespeople', 'datafinance'));
+        return view('pusat.proposal.create', compact('data', 'datalokasi', 'datadisplay', 'datadealer', 'salespeople', 'datadana', 'datasalespeople', 'datafinance', 'datadisplayunit'));
     }
 
     public function getShow()
@@ -201,6 +202,8 @@ class ProposalController extends Controller
             $data               = Proposal::where('uuid', request()->id)->first();
             $datadana           = json_decode($data->dana_proposal  ?? null, true);
             $datasalespeople    = json_decode($data->sales_people_proposal  ?? null, true);
+            $datadisplayunit    = json_decode($data->display_proposal  ?? null, true);
+
 
             // if (null == $data || $data->status_proposal == 1) {
             //     return redirect()->route('pusat.proposal.index');
@@ -209,7 +212,7 @@ class ProposalController extends Controller
             $dataapproval = ApprovalProposal::where('id_proposal', $data->id)->get();
 
 
-            return view('pusat.proposal.show', compact('data', 'datalokasi', 'datadisplay', 'datadealer', 'salespeople', 'datadana', 'datasalespeople', 'dataapproval', 'datafinance'));
+            return view('pusat.proposal.show', compact('data', 'datalokasi', 'datadisplay', 'datadealer', 'salespeople', 'datadana', 'datasalespeople', 'dataapproval', 'datafinance', 'datadisplayunit'));
         } else {
             return redirect()->route('pusat.proposal.index');
         }
@@ -223,6 +226,13 @@ class ProposalController extends Controller
                 'beban_dealer_dana' => request()->beban_dealer_dana[$key],
                 'beban_fincoy_dana' => request()->beban_fincoy_dana[$key],
                 'beban_md_dana'     => request()->beban_md_dana[$key],
+            ];
+        }
+
+        foreach (request()->iddisplayunit as $keydis => $item) {
+            $displaydata[] = [
+                'iddisplayunit'     => request()->iddisplayunit[$keydis],
+                'displayunit'       => request()->displayunit[$keydis],
             ];
         }
 
@@ -242,7 +252,7 @@ class ProposalController extends Controller
         $data->status_proposal                  = 1;
         $data->lokasi_proposal                  = request()->lokasi ?? null ;
         $data->dealer_proposal                  = request()->dealer ?? null;
-        $data->display_proposal                 = request()->display ? json_encode(request()->display) : null;
+        $data->display_proposal                 = $displaydata ? json_encode($displaydata) : null ;
         $data->finance_proposal                 = request()->finance ? json_encode(request()->finance) : null ;
         $data->target_database_proposal         = request()->targetdata ?? null ;
         $data->target_penjualan_proposal        = request()->targetjual ?? null ;

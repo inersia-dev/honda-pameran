@@ -162,44 +162,12 @@ rel="stylesheet"
                                             </div>
                                         </div>
                                         <div class="mb-2 row">
-                                            <label class="col-sm-3 col-form-label">Display<strong style="color:rgb(243, 0, 0)">*</strong></label>
-                                            <div class="col-sm-9">
-                                                <select class="form-control data-display" name="display[]" multiple="multiple">
-                                                    @if (!null == $data->display_proposal)
-                                                        @foreach (json_decode($data->display_proposal) as $key => $data_dis)
-                                                            @php
-                                                                $display_ = DB::table('displays')->where('id', $data_dis)->first();
-                                                            @endphp
-                                                            <option value="{{ $data_dis }}" selected>{{ $display_->nama_display }}</option>
-                                                        @endforeach
-                                                    @else
-                                                        <option></option>
-                                                    @endif
-                                                    @foreach ($datadisplay as $data_d)
-                                                        <option value="{{ $data_d->id }}">{{ $data_d->nama_display }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="mb-2 row">
                                             <label class="col-sm-4 col-form-label">History Penjualan<strong style="color:rgb(243, 0, 0)">*</strong></label>
                                             <div class="col-sm-8">
                                                 <div class="input-group">
                                                     <input class="form-control" type="number" name="historypenjualan" value="{{ $data->history_penjualan_proposal }}">
                                                     {{-- <span class="input-group-text">Unit</span> --}}
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="mb-2 row">
-                                            <label class="col-sm-3 col-form-label">Start<strong style="color:rgb(243, 0, 0)">*</strong></label>
-                                            <div class="col-sm-9">
-                                                <input class="form-control" name="tanggalstart" type="date" value="{{ $data->periode_start_proposal }}">
-                                            </div>
-                                        </div>
-                                        <div class="mb-2 row">
-                                            <label class="col-sm-3 col-form-label">End</label>
-                                            <div class="col-sm-9">
-                                                <input class="form-control" name="tanggalend" type="date" value="{{ $data->periode_end_proposal }}">
                                             </div>
                                         </div>
                                     </div>
@@ -233,6 +201,82 @@ rel="stylesheet"
                                             <label class="col-sm-5 col-form-label">Program Penjualan<strong style="color:rgb(243, 0, 0)">*</strong></label>
                                             <div class="col-sm-7">
                                                 <textarea class="form-control" id="" rows="2" name="program">{{ $data->program_proposal }}</textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="row pb-3">
+                                            <div class="col-sm-6">
+                                                <div class="mb-2 row">
+                                                    <label class="col-sm-3 col-form-label">Start<strong style="color:rgb(243, 0, 0)">*</strong></label>
+                                                    <div class="col-sm-9">
+                                                        <input class="form-control" name="tanggalstart" type="date" value="{{ $data->periode_start_proposal }}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="mb-2 row">
+                                                    <label class="col-sm-3 col-form-label">End<strong style="color:rgb(243, 0, 0)">*</strong></label>
+                                                    <div class="col-sm-9">
+                                                        <input class="form-control" name="tanggalend" type="date" value="{{ $data->periode_end_proposal }}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <label class="col-sm-2 col-form-label">Display<strong style="color:rgb(243, 0, 0)">*</strong></label>
+
+                                            <div class="col-sm-10">
+                                                <div class="row pb-2">
+                                                    <div class="col-4">
+                                                        <select class="form-control data-display-unit" name="display[]" id="datadisplayunit">
+                                                            @foreach ($datadisplay as $data_dis)
+                                                                <option value="{{ $data_dis->id }}-{{ $data_dis->nama_display }}">{{ $data_dis->nama_display }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <a class="btn btn-outline-success" onclick="tambahdisplayunit(); return false;" href="#">
+                                                            Pilih Display / Produk <i class="fas fa-plus"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <table class="table table-striped border datatable table-sm" id="displayunitdata">
+                                                            <thead class="text-center">
+                                                                <tr>
+                                                                    <th>Nama</th>
+                                                                    <th>Jumlah Unit</th>
+                                                                    <th></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @if ($data->display_proposal)
+                                                                    @foreach ($datadisplayunit as $data_diu)
+                                                                        @php
+                                                                            $diu = DB::table('displays')->where('id', data_get($data_diu, 'iddisplayunit'))->first();
+                                                                        @endphp
+                                                                        <tr>
+                                                                            <td>
+                                                                                <input type="hidden" name="iddisplayunit[]" value="{{ $diu->id }}">
+                                                                                <input class="form-control displayunit_nama" type="text" name="displayunit_nama[]" value="{{ $diu->nama_display }}" readonly>
+                                                                            </td>
+                                                                            <td>
+                                                                                <input class="form-control displayunit text-center" type="text" name="displayunit[]" value="{{ data_get($data_diu, 'displayunit') }}">
+                                                                            </td>
+                                                                            <td>
+                                                                                <a href="javascript:void(0);" class="removedisplayunit btn btn-danger"><i class="fas fa-minus-circle"></i>
+                                                                                </a>
+                                                                            </td>
+                                                                        </tr>
+                                                                    @endforeach
+                                                                @endif
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -360,7 +404,7 @@ rel="stylesheet"
                                         <select class="form-control data-pj" name="pj" id="datapj">
                                             <option value="">Pilih..</option>
                                             @foreach ($salespeople as $data_pj)
-                                                <option value="{{ $data_pj->id }}-{{ $data_pj->nama_sales_people }}-{{ $data_pj->honda_id_sales_people }}-{{ $data_pj->hso_id_sales_people }}">{{ $data_pj->nama_sales_people }} ({{ $data_pj->dealer->nama_dealer }})</option>
+                                                <option value="{{ $data_pj->id }}-{{ $data_pj->nama_sales_people }}-{{ $data_pj->honda_id_sales_people }}-{{ $data_pj->hso_id_sales_people }}-{{ $data_pj->jabatan_sales_people }}">{{ $data_pj->nama_sales_people }} ({{ $data_pj->dealer->nama_dealer }})</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -378,6 +422,7 @@ rel="stylesheet"
                                                     <th>Nama</th>
                                                     <th>HONDA ID</th>
                                                     <th>HSO ID</th>
+                                                    <th>Jabatan</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -391,6 +436,9 @@ rel="stylesheet"
                                                     </td>
                                                     <td>
                                                         <input class="form-control" id="pjhsoid" type="text" name="pjhsoid" value="{{ $data->pj->hso_id_sales_people ?? '' }}" disabled>
+                                                    </td>
+                                                    <td>
+                                                        <input class="form-control" id="pjjabatan" type="text" name="pjjabatan[]" value="{{ $data->pj->jabatan_sales_people ?? '' }}" disabled="">
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -409,7 +457,7 @@ rel="stylesheet"
                                         <select class="form-control data-sales sales" name="sales[]" id="datasalespeople">
                                             <option value="">Pilih..</option>
                                             @foreach ($salespeople as $data_s)
-                                                <option value="{{ $data_s->id }}-{{ $data_s->nama_sales_people }}-{{ $data_s->honda_id_sales_people }}-{{ $data_s->hso_id_sales_people }}">{{ $data_s->nama_sales_people }} ({{ $data_pj->dealer->nama_dealer }})</option>
+                                                <option value="{{ $data_s->id }}-{{ $data_s->nama_sales_people }}-{{ $data_s->honda_id_sales_people }}-{{ $data_s->hso_id_sales_people }}-{{ $data_s->jabatan_sales_people }}">{{ $data_s->nama_sales_people }} ({{ $data_pj->dealer->nama_dealer }})</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -427,6 +475,7 @@ rel="stylesheet"
                                                     <th>Nama</th>
                                                     <th>HONDA ID</th>
                                                     <th>HSO ID</th>
+                                                    <th>Jabatan</th>
                                                     <th></th>
                                                 </tr>
                                             </thead>
@@ -446,6 +495,9 @@ rel="stylesheet"
                                                             </td>
                                                             <td>
                                                                 <input class="form-control hso_id" type="text" name="hso_id[]" value="{{ $sp->hso_id_sales_people }}" disabled="">
+                                                            </td>
+                                                            <td>
+                                                                <input class="form-control jabatan" type="text" name="jabatan[]" value="{{ $sp->jabatan_sales_people }}" disabled="">
                                                             </td>
                                                             <td>
                                                                 <a href="javascript:void(0);" class="removeSales btn btn-danger"><i class="fas fa-minus-circle"></i>
@@ -733,6 +785,9 @@ rel="stylesheet"
             $("#salesdata").on('click','.removeSales',function(){
                 $(this).parent().parent().remove();
             });
+            $("#displayunitdata").on('click','.removedisplayunit',function(){
+                $(this).parent().parent().remove();
+            });
             totaldana();
 
         });
@@ -769,6 +824,26 @@ rel="stylesheet"
     </script>
 
     <script>
+        function tambahdisplayunit() {
+            var table         = document.getElementById("displayunitdata");
+            var rowCount      = table.rows.length;
+            var row           = table.insertRow(rowCount);
+            var nama          = row.insertCell(0);
+            var unit          = row.insertCell(1);
+            var remv          = row.insertCell(2);
+
+            //console.log($('#datadisplayunit').val());
+
+            var dataid      = $('#datadisplayunit').val().split('-')[0];
+            var datanama    = $('#datadisplayunit').val().split('-')[1];
+
+            nama.innerHTML    = '<input type="hidden" name="iddisplayunit[]" value="'+dataid+'"><input class="form-control displayunit_nama" type="text" name="displayunit_nama[]" value="'+datanama+'" readonly>';
+            unit.innerHTML    = '<input class="form-control displayunit" type="number" name="displayunit[]" value="1">'
+            remv.innerHTML    = '<a href="javascript:void(0);" class="removedisplayunit btn btn-danger"><i class="fas fa-minus-circle"></i></a>'
+        }
+    </script>
+
+    <script>
         function tambahsales() {
             var table         = document.getElementById("salesdata");
             var rowCount      = table.rows.length;
@@ -776,19 +851,22 @@ rel="stylesheet"
             var nama          = row.insertCell(0);
             var hondaid       = row.insertCell(1);
             var hsoid         = row.insertCell(2);
-            var remv          = row.insertCell(3);
+            var jabatan       = row.insertCell(3);
+            var remv          = row.insertCell(4);
 
-            //console.log($('#datasalespeople').val());
 
             var dataid      = $('#datasalespeople').val().split('-')[0];
             var datanama    = $('#datasalespeople').val().split('-')[1];
             var datahondaid = $('#datasalespeople').val().split('-')[2];
             var datahsoid   = $('#datasalespeople').val().split('-')[3];
+            var datajabatan = $('#datasalespeople').val().split('-')[4];
+
 
             nama.innerHTML    = '<input type="hidden" name="idsales[]" value="'+dataid+'"><input class="form-control sales_nama" type="text" name="sales_nama[]" value="'+datanama+'" disabled>';
-            hondaid.innerHTML = '<input class="form-control honda_id" type="text" name="honda_id[]" value="'+datahondaid+'" disabled>'
+            hondaid.innerHTML = '<input class="form-control honda_id" type="text" name="honda_id[]" value="'+datahondaid+'" disabled>';
             hsoid.innerHTML   = '<input class="form-control hso_id" type="text" name="hso_id[]" value="'+datahsoid+'" disabled>';
-            remv.innerHTML    = '<a href="javascript:void(0);" class="removeSales btn btn-danger"><i class="fas fa-minus-circle"></i></a>'
+            jabatan.innerHTML = '<input class="form-control jabatan" type="text" name="jabatan[]" value="'+datajabatan+'" disabled>';
+            remv.innerHTML    = '<a href="javascript:void(0);" class="removeSales btn btn-danger"><i class="fas fa-minus-circle"></i></a>';
         }
     </script>
 
@@ -798,12 +876,14 @@ rel="stylesheet"
             var datanama    = $('#datapj').val().split('-')[1];
             var datahondaid = $('#datapj').val().split('-')[2];
             var datahsoid   = $('#datapj').val().split('-')[3];
+            var jabatan     = $('#datapj').val().split('-')[4];
 
             console.log($('#datapj').val());
             document.getElementById("pjid").value = dataid;
             document.getElementById("pjnama").value = datanama;
             document.getElementById("pjhondaid").value = datahondaid;
             document.getElementById("pjhsoid").value = datahsoid ;
+            document.getElementById("pjjabatan").value = jabatan ;
         }
     </script>
 
