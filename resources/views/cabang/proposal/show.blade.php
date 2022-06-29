@@ -129,7 +129,7 @@ rel="stylesheet"
                                             </div>
                                         </div>
                                         <div class="mb-2 row">
-                                            <label class="col-sm-3 col-form-label">Finance Company<strong style="color:rgb(243, 0, 0)">*</strong></label>
+                                            <label class="col-sm-3 col-form-label">Finance Company</label>
                                             <div class="col-sm-9">
                                                 <select class="form-control data-finance" name="finance[]" multiple="multiple">
                                                     @if ($data->finance_proposal)
