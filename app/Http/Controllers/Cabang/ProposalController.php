@@ -185,6 +185,8 @@ class ProposalController extends Controller
                     'displayunit'       => request()->displayunit[$keydis],
                 ];
             }
+        } else {
+            $displaydata = null;
         }
 
         $dt = Carbon::now();
@@ -202,7 +204,7 @@ class ProposalController extends Controller
         $data->no_proposal                      = $st == 'draft' ? null : $no.'/'.$dt->year.'/'.$dt->month.'/'.$dt->day.'/'.$data->kategori_proposal.'/'.$data->dealer->kode_dealer ;
         $data->status_proposal                  = 1;
         $data->lokasi_proposal                  = request()->lokasi ?? null ;
-        $data->display_proposal                 = $displaydata ? json_encode($displaydata) : null ;
+        $data->display_proposal                 = !null == $displaydata ? json_encode($displaydata) : null ;
         $data->finance_proposal                 = request()->finance ? json_encode(request()->finance) : null ;
         $data->target_database_proposal         = request()->targetdata ?? null ;
         $data->target_penjualan_proposal        = request()->targetjual ?? null ;
