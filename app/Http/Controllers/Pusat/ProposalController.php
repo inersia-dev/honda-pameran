@@ -237,20 +237,28 @@ class ProposalController extends Controller
 
     public function postStore(Request $request)
     {
-        foreach (request()->ket_dana as $key => $item) {
-            $dana[] = [
-                'ket_dana'          => request()->ket_dana[$key],
-                'beban_dealer_dana' => request()->beban_dealer_dana[$key],
-                'beban_fincoy_dana' => request()->beban_fincoy_dana[$key],
-                'beban_md_dana'     => request()->beban_md_dana[$key],
-            ];
+        if(request()->ket_dana){
+            foreach (request()->ket_dana as $key => $item) {
+                $dana[] = [
+                    'ket_dana'          => request()->ket_dana[$key],
+                    'beban_dealer_dana' => request()->beban_dealer_dana[$key],
+                    'beban_fincoy_dana' => request()->beban_fincoy_dana[$key],
+                    'beban_md_dana'     => request()->beban_md_dana[$key],
+                ];
+            }
+        } else {
+            $dana = null;
         }
 
+        if(request()->iddisplayunit){
         foreach (request()->iddisplayunit as $keydis => $item) {
-            $displaydata[] = [
-                'iddisplayunit'     => request()->iddisplayunit[$keydis],
-                'displayunit'       => request()->displayunit[$keydis],
-            ];
+                $displaydata[] = [
+                    'iddisplayunit'     => request()->iddisplayunit[$keydis],
+                    'displayunit'       => request()->displayunit[$keydis],
+                ];
+            }
+        } else {
+            $displaydata = null;
         }
 
         $dt = Carbon::now();
@@ -269,7 +277,7 @@ class ProposalController extends Controller
         $data->status_proposal                  = 1;
         $data->lokasi_proposal                  = request()->lokasi ?? null ;
         $data->dealer_proposal                  = request()->dealer ?? null;
-        $data->display_proposal                 = $displaydata ? json_encode($displaydata) : null ;
+        $data->display_proposal                 = !null == $displaydata ? json_encode($displaydata) : null ;
         $data->finance_proposal                 = request()->finance ? json_encode(request()->finance) : null ;
         $data->target_database_proposal         = request()->targetdata ?? null ;
         $data->target_penjualan_proposal        = request()->targetjual ?? null ;
@@ -281,7 +289,7 @@ class ProposalController extends Controller
         $data->tempat_proposal                  = request()->tempat ?? null ;
         $data->lat_proposal                     = request()->lat ?? null ;
         $data->long_proposal                    = request()->long ?? null ;
-        $data->dana_proposal                    = $dana ? json_encode($dana) : null ;
+        $data->dana_proposal                    = !null == $dana ? json_encode($dana) : null ;
         $data->penanggung_jawab_proposal        = request()->pjid ?? null ;
         $data->sales_people_proposal            = request()->idsales ? json_encode(request()->idsales) : null ;
         $data->history_penjualan_proposal       = request()->historypenjualan ?? null ;

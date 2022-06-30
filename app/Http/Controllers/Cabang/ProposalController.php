@@ -176,6 +176,8 @@ class ProposalController extends Controller
                     'beban_md_dana'     => request()->beban_md_dana[$key],
                 ];
             }
+        } else {
+            $dana = null;
         }
 
         if(request()->iddisplayunit){
@@ -216,7 +218,7 @@ class ProposalController extends Controller
         $data->tempat_proposal                  = request()->tempat ?? null ;
         $data->lat_proposal                     = request()->lat ?? null ;
         $data->long_proposal                    = request()->long ?? null ;
-        $data->dana_proposal                    = $dana ? json_encode($dana) : null ;
+        $data->dana_proposal                    = !null == $dana ? json_encode($dana) : null ;
         $data->penanggung_jawab_proposal        = request()->pjid ?? null ;
         $data->sales_people_proposal            = request()->idsales ? json_encode(request()->idsales) : null ;
         $data->history_penjualan_proposal       = request()->historypenjualan ?? null ;
