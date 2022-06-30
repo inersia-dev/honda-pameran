@@ -93,7 +93,17 @@
     {{-- <script src="https://cdn.jsdelivr.net/npm/@coreui/coreui-pro@4.2.1/dist/js/coreui.bundle.min.js" integrity="sha384-TAGm5uuO3fkc44Hog6/8rCxVuk1QQSmBJQFwLDS0V0CCFCxK6AErZBGKPhaJcrVR" crossorigin="anonymous"></script> --}}
     {{-- <livewire:scripts /> --}}
     @stack('after-scripts')
-
+    <script>
+        window.addEventListener( "pageshow", function ( event ) {
+        var historyTraversal = event.persisted ||
+                                ( typeof window.performance != "undefined" &&
+                                    window.performance.navigation.type === 2 );
+        if ( historyTraversal ) {
+            // Handle page restore.
+            window.location.reload();
+        }
+        });
+    </script>
 
 </body>
 </html>
