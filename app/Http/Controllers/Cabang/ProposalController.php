@@ -167,20 +167,24 @@ class ProposalController extends Controller
 
     public function postStore(Request $request)
     {
-        foreach (request()->ket_dana as $key => $item) {
-            $dana[] = [
-                'ket_dana'          => request()->ket_dana[$key],
-                'beban_dealer_dana' => request()->beban_dealer_dana[$key],
-                'beban_fincoy_dana' => request()->beban_fincoy_dana[$key],
-                'beban_md_dana'     => request()->beban_md_dana[$key],
-            ];
+        if(request()->ket_dana){
+            foreach (request()->ket_dana as $key => $item) {
+                $dana[] = [
+                    'ket_dana'          => request()->ket_dana[$key],
+                    'beban_dealer_dana' => request()->beban_dealer_dana[$key],
+                    'beban_fincoy_dana' => request()->beban_fincoy_dana[$key],
+                    'beban_md_dana'     => request()->beban_md_dana[$key],
+                ];
+            }
         }
 
+        if(request()->iddisplayunit){
         foreach (request()->iddisplayunit as $keydis => $item) {
-            $displaydata[] = [
-                'iddisplayunit'     => request()->iddisplayunit[$keydis],
-                'displayunit'       => request()->displayunit[$keydis],
-            ];
+                $displaydata[] = [
+                    'iddisplayunit'     => request()->iddisplayunit[$keydis],
+                    'displayunit'       => request()->displayunit[$keydis],
+                ];
+            }
         }
 
         $dt = Carbon::now();
