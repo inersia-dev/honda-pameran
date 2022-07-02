@@ -48,7 +48,7 @@ class ProposalController extends Controller
                             ->statusProposal(request()->status)
                             ->tanggal(request()->tanggal)
                             ->orderBy('updated_at', 'DESC')
-                            ->get();
+                            ->paginate(10);
         return view('cabang.proposal.index', compact('datas', 'datalokasi', 'datakategori'));
     }
 
