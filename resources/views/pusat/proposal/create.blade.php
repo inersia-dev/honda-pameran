@@ -394,7 +394,7 @@ rel="stylesheet"
                                 <hr>
                             </div>
                         </div>
-                        <div class="mb-2 row">
+                        {{-- <div class="mb-2 row">
                             <label class="col-sm-2 col-form-label">
                                 <strong>Penanggung Jawab<strong style="color:rgb(243, 0, 0)">*</strong></strong>
                             </label>
@@ -446,8 +446,8 @@ rel="stylesheet"
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="mb-2 row">
+                        </div> --}}
+                        {{-- <div class="mb-2 row">
                             <label class="col-sm-2 col-form-label">
                                 <strong>Sales People<strong style="color:rgb(243, 0, 0)">*</strong></strong>
                             </label>
@@ -514,7 +514,7 @@ rel="stylesheet"
                                 </div>
                                 <hr>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="mb-2 row">
                             <label class="col-sm-2 col-form-label">
                                 <strong>Lokasi Pameran</strong>
