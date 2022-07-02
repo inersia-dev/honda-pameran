@@ -649,6 +649,29 @@ rel="stylesheet"
         );
     </script>
     <script type="text/javascript">
+        $('.data-finance').select2(
+        //     {
+        //     placeholder: 'Cari Finance',
+        //     ajax: {
+        //         url: '/finance',
+        //         dataType: 'json',
+        //         delay: 250,
+        //         processResults: function (data) {
+        //             return {
+        //                 results: $.map(data, function (item) {
+        //                     return {
+        //                         text: item.name+' - '+item.email,
+        //                         id: item.id
+        //                     }
+        //                 })
+        //             };
+        //         },
+        //         cache: true
+        //     }
+        // }
+        );
+    </script>
+    <script type="text/javascript">
         $('.data-display').select2(
         //     {
         //     placeholder: 'Cari Display',
