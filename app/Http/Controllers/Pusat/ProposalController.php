@@ -76,6 +76,7 @@ class ProposalController extends Controller
         $datalokasi   = Lokasi::get();
         $datakategori = KategoriProposal::get();
         $datadealer   = Dealer::get();
+        $dataarea     = Dealer::select('kota_dealer')->groupBy('kota_dealer')->get();
         $datas        = Proposal::orderBy('updated_at', 'DESC')
                             ->pj(request()->namapj)
                             ->kategori(request()->kategori)
@@ -83,9 +84,10 @@ class ProposalController extends Controller
                             ->statusProposal(request()->status)
                             ->tanggal(request()->tanggal)
                             ->cariDealer(request()->dealer)
+                            ->area(request()->area)
                             ->where('status_proposal', '!=', 1)
                             ->paginate(10);
-        return view('pusat.proposal.data', compact('datas', 'datalokasi', 'datakategori', 'datadealer'));
+        return view('pusat.proposal.data', compact('datas', 'datalokasi', 'datakategori', 'datadealer', 'dataarea'));
     }
 
     public function postStatusHistory()
@@ -290,8 +292,8 @@ class ProposalController extends Controller
         $data->lat_proposal                     = request()->lat ?? null ;
         $data->long_proposal                    = request()->long ?? null ;
         $data->dana_proposal                    = !null == $dana ? json_encode($dana) : null ;
-        $data->penanggung_jawab_proposal        = request()->pjid ?? null ;
-        $data->sales_people_proposal            = request()->idsales ? json_encode(request()->idsales) : null ;
+        // $data->penanggung_jawab_proposal        = request()->pjid ?? null ;
+        // $data->sales_people_proposal            = request()->idsales ? json_encode(request()->idsales) : null ;
         $data->history_penjualan_proposal       = request()->historypenjualan ?? null ;
         $data->latar_belakang_proposal          = request()->latarbelakang ?? null ;
         $data->latar_kompetitor_proposal        = request()->latarkompetitor ?? null ;
@@ -320,8 +322,8 @@ class ProposalController extends Controller
                 'lat' => 'required',
                 'long' => 'required',
                 'ket_dana' => 'required',
-                'pjid' => 'required',
-                'idsales' => 'required',
+                // 'pjid' => 'required',
+                // 'idsales' => 'required',
                 'historypenjualan' => 'required',
                 'latarbelakang' => 'required',
                 'latarkompetitor' => 'required',
@@ -345,8 +347,8 @@ class ProposalController extends Controller
                 'lat' => 'Titik Lokasi Map Latitude',
                 'long' => 'Titik Lokasi Map Longtitude',
                 'ket_dana' => 'List Dana',
-                'pjid' => 'Penanggung Jawab',
-                'idsales' => 'Sales People',
+                // 'pjid' => 'Penanggung Jawab',
+                // 'idsales' => 'Sales People',
                 'historypenjualan' => 'History Penjualan',
                 'latarbelakang' => 'Latar Belakang',
                 'latarkompetitor' => 'Latar Kompetitor',
@@ -359,7 +361,7 @@ class ProposalController extends Controller
                 return redirect()->back()->withFlashDanger('Foto Belum Ada ! Upload Terlebih Dahulu');
             }
 
-            $data->status_proposal = 2;
+            $data->status_proposal = 4;
             $data->save();
 
         }

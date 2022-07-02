@@ -182,14 +182,9 @@
                                                 @else
                                                     @if ($data->status_proposal == 4)
                                                         <div class="btn-group dropleft">
-                                                            <button class="btn btn-sm btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+                                                            <a href="{{ route('cabang.lpj.getStoreInit') }}?id={{ $data->uuid }}" class="btn btn-sm btn-info">
                                                                 <i class="cil-pencil"></i>
-                                                            </button>
-                                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                                <a href="{{ route('cabang.lpj.getStoreInit') }}?id={{ $data->uuid }}" class="dropdown-item">
-                                                                    Buat LPJ
-                                                                </a>
-                                                            </div>
+                                                            </a>
                                                         </div>
                                                     @endif
                                                     <a href="{{ route('cabang.proposal.getShow') }}?id={{ $data->uuid }}" class="btn btn-sm btn-outline-dark">

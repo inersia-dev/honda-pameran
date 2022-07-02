@@ -155,9 +155,12 @@ class ProposalController extends Controller
             $cektitikaktif      = Proposal::where('status_proposal', 4)->get();
 
 
-            $dataapproval       = ApprovalProposal::where('id_proposal', $data->id)
-                                                    ->orderBy('updated_at', 'asc')
-                                                    ->get();
+            $dataapproval = ApprovalProposal::where('id_proposal', $data->id)
+                                    ->select(['approval_proposals.*', 'pusats.jabatan as jabatan_p'])
+                                    ->join('pusats', 'approval_proposals.user_approval', '=', 'pusats.id')
+                                    ->orderBy('approval_proposals.created_at')
+                                    ->orderBy('pusats.jabatan')
+                                    ->get();
 
             return view('cabang.proposal.show', compact('data', 'datalokasi', 'datadisplay', 'salespeople', 'datadana', 'datasalespeople', 'dataapproval', 'datafinance', 'datadisplayunit', 'cektitikaktif'));
         // } else {
@@ -284,6 +287,10 @@ class ProposalController extends Controller
 
             if ($data->foto_lokasi_proposal == null) {
                 return redirect()->back()->withFlashDanger('Foto Belum Ada ! Upload Terlebih Dahulu');
+            }
+
+            if ($data->display_proposal == null) {
+                return redirect()->back()->withFlashDanger('Data Display Belum Ada ! Upload Terlebih Dahulu');
             }
 
             $data->status_proposal = 2;

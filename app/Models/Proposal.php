@@ -104,6 +104,16 @@ class Proposal extends Model
         }
     }
 
+    public function scopeArea($query, $area)
+    {
+        $this->area = $area;
+        if ($this->area) {
+            return $query->whereHas('dealer', function ($query) {
+                return $query->whereRaw('LOWER(kota_dealer) LIKE ? ', '%'.strtolower($this->area).'%');
+            });
+        }
+    }
+
     public function scopeKategori($query, $kategori)
     {
         if ($kategori) {

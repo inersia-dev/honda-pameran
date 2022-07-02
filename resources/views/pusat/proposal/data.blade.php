@@ -86,6 +86,21 @@
                                 </div>
                                 <div class="pb-2 col">
                                     <div  style="padding-top: 5px; padding-bottom: 5px">
+                                        <label class="form-check-label">Area</label>
+                                    </div>
+                                    <select name="area" class="data-area form-control">
+                                        <option value=""></option>
+                                        @foreach ($dataarea as $data_are)
+                                            <option value="{{ $data_are->kota_dealer }}"
+                                                @if (request()->dealer == $data_are->kota_dealer)
+                                                    selected
+                                                @endif
+                                            >{{ Str::title($data_are->kota_dealer) }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="pb-2 col">
+                                    <div  style="padding-top: 5px; padding-bottom: 5px">
                                         <label class="form-check-label">Submit Date</label>
                                     </div>
                                     <input class="form-control" type="date" value="{{ request()->tanggal ?? '' }}" name="tanggal" style="font-size: small" />
@@ -233,6 +248,7 @@
 <script type="text/javascript">
     $('.data-lokasi').select2();
     $('.data-dealer').select2();
+    $('.data-area').select2();
 </script>
 <script type="text/javascript">
     $(document).ready(function(){
