@@ -192,19 +192,19 @@ rel="stylesheet"
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach ($datadana as $key => $data_dana)
+                                                    @foreach ($datadanapro as $key => $data_dana_pro)
                                                         <tr>
                                                             <td>
-                                                                <input class="form-control" type="text" value="{{ data_get($data_dana, 'ket_dana') }}" disabled>
+                                                                <input class="form-control" type="text" value="{{ data_get($data_dana_pro, 'ket_dana') }}" disabled>
                                                             </td>
                                                             <td>
-                                                                <input class="form-control" type="number"  value="{{ data_get($data_dana, 'beban_dealer_dana') }}" disabled>
+                                                                <input class="form-control" type="number"  value="{{ data_get($data_dana_pro, 'beban_dealer_dana') }}" disabled>
                                                             </td>
                                                             <td>
-                                                                <input class="form-control" type="number"  value="{{ data_get($data_dana, 'beban_fincoy_dana') }}" disabled>
+                                                                <input class="form-control" type="number"  value="{{ data_get($data_dana_pro, 'beban_fincoy_dana') }}" disabled>
                                                             </td>
                                                             <td>
-                                                                <input class="form-control" type="number" value="{{ data_get($data_dana, 'beban_md_dana') }}" disabled>
+                                                                <input class="form-control" type="number" value="{{ data_get($data_dana_pro, 'beban_md_dana') }}" disabled>
                                                             </td>
                                                         </tr>
                                                     @endforeach
