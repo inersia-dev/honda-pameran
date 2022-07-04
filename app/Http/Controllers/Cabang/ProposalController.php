@@ -184,7 +184,7 @@ class ProposalController extends Controller
         }
 
         if(request()->iddisplayunit){
-        foreach (request()->iddisplayunit as $keydis => $item) {
+            foreach (request()->iddisplayunit as $keydis => $item_d) {
                 $displaydata[] = [
                     'iddisplayunit'     => request()->iddisplayunit[$keydis],
                     'displayunit'       => request()->displayunit[$keydis],
@@ -192,6 +192,14 @@ class ProposalController extends Controller
             }
         } else {
             $displaydata = null;
+        }
+
+        if(request()->finance){
+            foreach (request()->finance as $keyfin => $item_f) {
+                    $finance = json_encode(request()->finance);
+                }
+        } else {
+            $finance = null;
         }
 
         $dt = Carbon::now();
@@ -210,7 +218,7 @@ class ProposalController extends Controller
         $data->status_proposal                  = 1;
         $data->lokasi_proposal                  = request()->lokasi ?? null ;
         $data->display_proposal                 = !null == $displaydata ? json_encode($displaydata) : null ;
-        $data->finance_proposal                 = request()->finance ? json_encode(request()->finance) : null ;
+        $data->finance_proposal                 = !null == $finance ? $finance : null ;
         $data->target_database_proposal         = request()->targetdata ?? null ;
         $data->target_penjualan_proposal        = request()->targetjual ?? null ;
         $data->target_prospectus_proposal       = request()->targetpros ?? null ;
