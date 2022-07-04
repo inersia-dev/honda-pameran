@@ -510,12 +510,12 @@ rel="stylesheet"
                                                                 @endif
                                                             </td>
                                                             <td class="text-center">
-                                                                <a href="{{ route('cabang.lpj.getKonsumen') }}/?id={{ $data_ko->id }}&uuid={{ request()->id }}" class="btn btn-warning btn-sm m-0" style="padding: 0.15rem 0.3rem; font-size: 0.7rem;">
+                                                                {{-- <a href="{{ route('cabang.lpj.getKonsumen') }}/?id={{ $data_ko->id }}&uuid={{ request()->id }}" class="btn btn-warning btn-sm m-0" style="padding: 0.15rem 0.3rem; font-size: 0.7rem;">
                                                                     <i class="fas fa-edit"></i>
                                                                 </a>
                                                                 <a href="" class="btn btn-danger delete-post btn-sm m-0" style="padding: 0.15rem 0.3rem; font-size: 0.7rem;">
                                                                     <i class="fas fa-trash"></i>
-                                                                </a>
+                                                                </a> --}}
                                                             </td>
                                                         </tr>
                                                     @endforeach
