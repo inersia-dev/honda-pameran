@@ -214,14 +214,14 @@
                                                                 <a href="{{ route('pusat.proposal.getCreate') }}?id={{ $data->uuid }}" class="btn btn-sm btn-outline-warning">
                                                                     <i class="cil-pencil"></i>
                                                                 </a>
+                                                                <a  class="btn btn-sm btn-outline-danger" href="{{ route('pusat.proposal.index') }}?metode=hapus&id={{ $data->id }}" onclick="return confirm('Konfirmasi Hapus Proposal')">
+                                                                    <i class="cil-trash"></i>
+                                                                </a>
                                                             @else
                                                                 <a href="{{ route('pusat.proposal.getShow') }}?id={{ $data->uuid }}" class="btn btn-sm btn--outline-dark">
                                                                     <i class="cil-search"></i>
                                                                 </a>
                                                             @endif
-                                                            <a  class="btn btn-sm btn-outline-danger" href="{{ route('pusat.proposal.index') }}?metode=hapus&id={{ $data->id }}" onclick="return confirm('Konfirmasi Hapus Proposal')">
-                                                                <i class="cil-trash"></i>
-                                                            </a>
                                                         </div>
                                                     </div>
                                                 </div>

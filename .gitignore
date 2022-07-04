@@ -1,4 +1,7 @@
 /coverage
+/public/upload-foto
+/public/upload-foto/*
+/public/upload-foto-lpj
 /node_modules
 /storage/*.key
 /vendor

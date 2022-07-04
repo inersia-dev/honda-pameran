@@ -191,9 +191,11 @@
                                                         <i class="cil-search"></i>
                                                     </a>
                                                 @endif
-                                                <a  class="btn btn-sm btn-outline-danger" href="{{ route('cabang.proposal.index') }}?metode=hapus&id={{ $data->id }}" onclick="return confirm('Konfirmasi Hapus Proposal')">
-                                                    <i class="cil-trash"></i>
-                                                </a>
+                                                @if ($data->status_proposal == 1)
+                                                    <a  class="btn btn-sm btn-outline-danger" href="{{ route('cabang.proposal.index') }}?metode=hapus&id={{ $data->id }}" onclick="return confirm('Konfirmasi Hapus Proposal')">
+                                                        <i class="cil-trash"></i>
+                                                    </a>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
