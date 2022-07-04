@@ -14,6 +14,7 @@ use App\Models\Proposal;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Builder;
 use App\Models\KategoriProposal;
+use App\Models\Dealer;
 
 class LpjController extends Controller
 {
@@ -61,7 +62,9 @@ class LpjController extends Controller
     }
 
     public function getCreate() {
-        $datalokasi   = Lokasi::get();
+        $kota = Dealer::find(Auth::guard('cabang')->user()->dealer);
+
+        $datalokasi         = Lokasi::where('kota_lokasi', 'LIKE', '%'.$kota->kota_dealer.'%')->get();
         $salespeople  = SalesPeople::where('dealer_sales_people', Auth::guard('cabang')->user()->dealer)->get();
         $datafinance  = FinanceCompany::get();
         $data         = Lpj::where('uuid', request()->id)->first();
