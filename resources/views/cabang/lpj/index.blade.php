@@ -97,7 +97,7 @@
                                                         DRAFT
                                                     </span>
                                                 @elseif ($data->status_lpj == 2)
-                                                    <span class="btn btn-sm btn-primary ms-auto">
+                                                    <span class="btn btn-sm btn-success ms-auto">
                                                         SUBMIT
                                                     </span>
                                                 @endif
@@ -126,17 +126,18 @@
                                         <div class="col-4 text-right">
                                             <div class="btn-group dropleft">
                                                 @if ($data->status_lpj == 1)
-                                                    <a href="{{ route('cabang.lpj.getCreate') }}?id={{ $data->uuid }}" class="btn btn-sm btn-outline-warning">
+                                                    <a href="{{ route('cabang.lpj.getCreateOne') }}?id={{ $data->uuid }}" class="btn btn-sm btn-outline-warning">
                                                         <i class="cil-pencil"></i>
                                                     </a>
+                                                    <a  class="btn btn-sm btn-outline-danger" href="{{ route('cabang.lpj.index') }}?metode=hapus&id={{ $data->id }}" onclick="return confirm('Konfirmasi Hapus Proposal')">
+                                                        <i class="cil-trash"></i>
+                                                    </a>
                                                 @else
-                                                    <a href="{{ route('cabang.lpj.getShow') }}?id={{ $data->uuid }}" class="btn btn-sm btn-warning">
+                                                    <a href="{{ route('cabang.lpj.index') }}?id={{ $data->uuid }}" class="btn btn-sm btn-warning">
                                                         <i class="cil-search"></i>
                                                     </a>
                                                 @endif
-                                                <a  class="btn btn-sm btn-outline-danger" href="{{ route('cabang.lpj.index') }}?metode=hapus&id={{ $data->id }}" onclick="return confirm('Konfirmasi Hapus Proposal')">
-                                                    <i class="cil-trash"></i>
-                                                </a>
+
                                             </div>
                                         </div>
                                     </div>

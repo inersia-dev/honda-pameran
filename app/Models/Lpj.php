@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Proposal;
+use App\Models\Lokasi;
 
 class Lpj extends Model
 {
@@ -13,23 +14,31 @@ class Lpj extends Model
     protected $fillable = [
         'uuid',
         'id_proposal',
+        'tempat_lpj',
         'periode_start_lp',
         'periode_end_lp',
-        'lokasi_lpj',
         'target_database_lpj',
         'target_penjualan_lpj',
         'target_prospectus_lpj',
+        'target_downloader_lpj',
+        'finance_lpj',
+        'unit_lpj',
         'dana_lpj',
         'total_dana_lpj',
         'status_lpj',
         'dokumentasi_lpj',
         'problem_identification_lpj',
-        'c_lpj',
+        'corrective_action_lpj',
     ];
 
     public function proposal()
     {
         return $this->hasOne(Proposal::class, 'id', 'id_proposal');
+    }
+
+    public function lokasi()
+    {
+        return $this->hasOne(Lokasi::class, 'id', 'lokasi_lpj');
     }
 
 

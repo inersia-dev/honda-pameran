@@ -17,19 +17,24 @@ class CreateLpjKonsumensTable extends Migration
             $table->id();
             $table->integer('id_lpj');
             $table->string('nama')->nullable();
-            $table->string('alamat')->nullable();
-            $table->integer('id_lokasi')->nullable();
+            $table->text('alamat')->nullable();
+            $table->string('lokasi')->nullable();
+            $table->string('tgl_lahir')->nullable();
+            $table->string('gender')->nullable();
             $table->string('notelp')->nullable();
+            $table->string('pekerjaan')->nullable();
+            $table->string('pendapatan')->nullable();
+            $table->string('nomor_mesin')->nullable();
+            $table->string('unit')->nullable(); // type
+            $table->integer('id_lokasi')->nullable();
             $table->string('type')->nullable();
             $table->string('status')->nullable();
             $table->integer('id_sales_people')->nullable();
             $table->integer('cash_credit')->nullable(); // 1 CASH / 2 CREDIT
-            $table->integer('finance_company')->nullable();
-            $table->boolean('database')->default(false);
-            $table->boolean('prospecting')->default(false);
-            $table->boolean('polling')->default(false);
-            $table->boolean('reject')->default(false);
-            $table->boolean('ssu')->default(false);
+            $table->string('finance_company')->nullable();
+            $table->string('hasil')->nullable();
+            $table->string('keterangan')->nullable();
+
             $table->timestamps();
         });
     }

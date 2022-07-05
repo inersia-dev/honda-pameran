@@ -17,18 +17,22 @@ class CreateLpjsTable extends Migration
             $table->id();
             $table->uuid('uuid');
             $table->integer('id_proposal');
+            $table->string('tempat_lpj')->nullable();
             $table->string('periode_start_lpj')->nullable();
             $table->string('periode_end_lpj')->nullable();
             $table->string('lokasi_lpj')->nullable();
+            $table->string('unit_lpj')->nullable();
+            $table->text('finance_lpj')->nullable();
             $table->string('target_database_lpj')->nullable();
             $table->string('target_penjualan_lpj')->nullable();
             $table->string('target_prospectus_lpj')->nullable();
+            $table->string('target_downloader_lpj')->nullable();
             $table->text('dana_lpj')->nullable(); // [item, beban dealer, beban fincoy, beban md]
-            $table->string('total_dana_lpj')->nullable(); // 1 DRAFT / 2 SUBMIT
+            $table->string('total_dana_lpj')->nullable();
             $table->string('status_lpj')->nullable();
             $table->text('dokumentasi_lpj')->nullable(); // foto
-            $table->string('problem_identification_lpj')->nullable();
-            $table->string('corrective_action_lpj')->nullable();
+            $table->text('problem_identification_lpj')->nullable();
+            $table->text('corrective_action_lpj')->nullable();
             $table->timestamps();
         });
     }
