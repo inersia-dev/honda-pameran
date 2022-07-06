@@ -35,7 +35,7 @@
                                                 <div class="col-8">
                                                     <div class="row p-2">
                                                         @php
-                                                            $datakanvasing = DB::table('lpj_dokumentasis')->where('id_lpj', 1)->where('kode', 1)->get();
+                                                            $datakanvasing = DB::table('lpj_dokumentasis')->where('id_lpj', $data->id)->where('kode', 1)->get();
                                                         @endphp
                                                         @foreach ($datakanvasing as $item_1)
                                                         <div class="col-3 img-thumbnail">
@@ -71,7 +71,7 @@
                                                 <div class="col-8">
                                                     <div class="row p-2">
                                                         @php
-                                                            $capture = DB::table('lpj_dokumentasis')->where('id_lpj', 1)->where('kode', 2)->get();
+                                                            $capture = DB::table('lpj_dokumentasis')->where('id_lpj', $data->id)->where('kode', 2)->get();
                                                         @endphp
                                                         @foreach ($capture as $item_2)
                                                         <div class="col-3 img-thumbnail">
@@ -107,7 +107,7 @@
                                                 <div class="col-8">
                                                     <div class="row p-2">
                                                         @php
-                                                            $posting = DB::table('lpj_dokumentasis')->where('id_lpj', 1)->where('kode', 3)->get();
+                                                            $posting = DB::table('lpj_dokumentasis')->where('id_lpj', $data->id)->where('kode', 3)->get();
                                                         @endphp
                                                         @foreach ($posting as $item_3)
                                                         <div class="col-3 img-thumbnail">
@@ -148,7 +148,7 @@
                                                 <div class="col-8">
                                                     <div class="row p-2">
                                                         @php
-                                                            $interaksi = DB::table('lpj_dokumentasis')->where('id_lpj', 1)->where('kode', 4)->get();
+                                                            $interaksi = DB::table('lpj_dokumentasis')->where('id_lpj', $data->id)->where('kode', 4)->get();
                                                         @endphp
                                                         @foreach ($interaksi as $item_4)
                                                         <div class="col-3 img-thumbnail">
@@ -184,7 +184,7 @@
                                                 <div class="col-8">
                                                     <div class="row p-2">
                                                         @php
-                                                            $unitdisplay = DB::table('lpj_dokumentasis')->where('id_lpj', 1)->where('kode', 5)->get();
+                                                            $unitdisplay = DB::table('lpj_dokumentasis')->where('id_lpj', $data->id)->where('kode', 5)->get();
                                                         @endphp
                                                         @foreach ($unitdisplay as $item_5)
                                                         <div class="col-3 img-thumbnail">
@@ -220,7 +220,7 @@
                                                 <div class="col-8">
                                                     <div class="row p-2">
                                                         @php
-                                                            $liveseason = DB::table('lpj_dokumentasis')->where('id_lpj', 1)->where('kode', 6)->get();
+                                                            $liveseason = DB::table('lpj_dokumentasis')->where('id_lpj', $data->id)->where('kode', 6)->get();
                                                         @endphp
                                                         @foreach ($liveseason as $item_6)
                                                         <div class="col-3 img-thumbnail">
