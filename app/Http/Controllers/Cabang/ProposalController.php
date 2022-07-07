@@ -170,7 +170,7 @@ class ProposalController extends Controller
 
     public function postStore(Request $request)
     {
-        if(request()->ket_dana){
+        if(data_get(request()->ket_dana, 0) != null){
             foreach (request()->ket_dana as $key => $item) {
                 $dana[] = [
                     'ket_dana'          => request()->ket_dana[$key],
@@ -298,7 +298,10 @@ class ProposalController extends Controller
             }
 
             if ($data->display_proposal == null) {
-                return redirect()->back()->withFlashDanger('Data Display Belum Ada ! Upload Terlebih Dahulu');
+                return redirect()->back()->withFlashDanger('Data Display Belum Ada !');
+            }
+            if(data_get(request()->ket_dana, 0) == null){
+                return redirect()->back()->withFlashDanger('Data Dana Masih Kosong !');
             }
 
             $data->status_proposal = 2;
