@@ -53,6 +53,9 @@ class LpjController extends Controller
 
         if ($cek) {
             $init = Lpj::where('id_proposal', $proposal->id)->first();
+            if ($init->status_lpj == 2) {
+                return redirect()->to(route('cabang.lpj.getShow').'/?id='.$init->uuid);
+            }
         } else {
             $init              = new Lpj;
             $init->uuid        = Str::uuid();
