@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Proposal;
 use App\Models\Lokasi;
+use Illuminate\Support\Carbon;
 
 class Lpj extends Model
 {
@@ -69,6 +70,13 @@ class Lpj extends Model
         if ($submitdate) {
             return $query->where('created_at', 'LIKE', '%'.$submitdate.'%');
         }
+    }
+
+    public function scopeDurasi($query, $start, $end)
+    {
+        $s = Carbon::parse($start);
+        $e = Carbon::parse($end);
+        return $s->diffInDays($e);
     }
 
 }

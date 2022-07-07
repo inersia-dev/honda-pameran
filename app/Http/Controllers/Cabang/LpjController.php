@@ -334,6 +334,35 @@ class LpjController extends Controller
         return view('cabang.lpj.5', compact('datalokasi', 'salespeople', 'datafinance', 'data', 'datadana', 'datakonsumen', 'datadisplay', 'konsumen'));
     }
 
+    public function getShow(Request $request) {
+
+        $data           = Lpj::where('uuid', request()->id)->first();
+
+        $kota           = Dealer::find(Auth::guard('cabang')->user()->dealer);
+        $datalokasi     = Lokasi::where('kota_lokasi', 'LIKE', '%'.$kota->kota_dealer.'%')->get();
+        $salespeople    = SalesPeople::where('dealer_sales_people', Auth::guard('cabang')->user()->dealer)->get();
+        $datafinance    = FinanceCompany::get();
+        $datadana       = json_decode($data->dana_lpj ?? null, true);
+        $datakonsumen   = LpjKonsumen::where('id_lpj', $data->id)->get();
+        $datadisplay    = Display::get();
+        $konsumen       = LpjKonsumen::find(request()->idkonsumen);
+
+        if (request()->submit == 'draft') {
+            return redirect()->route('cabang.lpj.index')->withFlashSuccess('Lpj Berhasil Tersimpan  ! ✅');
+        } elseif (request()->submit == 'submit') {
+            $cekkonsumen = LpjKonsumen::where('id_lpj', $data->id )->count();
+            if($cekkonsumen < 1){return redirect()->back()->withFlashDanger('Tidak Ada data Konsumen !');}
+            else{
+                $data->status_lpj = 2;
+                $data->save();
+
+                return redirect()->to(route('cabang.lpj.index'));
+            }
+        }
+
+        return view('cabang.lpj.show', compact('datalokasi', 'salespeople', 'datafinance', 'data', 'datadana', 'datakonsumen', 'datadisplay', 'konsumen'));
+    }
+
     public function getCreate(Request $request) {
 
         $kota           = Dealer::find(Auth::guard('cabang')->user()->dealer);

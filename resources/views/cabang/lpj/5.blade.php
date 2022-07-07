@@ -408,6 +408,7 @@
     <script>
         $(document).ready( function () {
             $('#tablekonsumen').DataTable({
+                    scrollX: true,
                     dom: 'Blfrtip',
                     buttons: [{
                             extend: 'excelHtml5',

@@ -75,6 +75,10 @@
                         <div class="col p-0 pl-3">Status</div>
                         <div class="col p-0">Proposal</div>
                         <div class="col p-0">Penanggung Jawab</div>
+                        <div class="col p-0">Database</div>
+                        <div class="col p-0">Prospecting</div>
+                        <div class="col p-0">Penjualan</div>
+                        <div class="col p-0">Biaya</div>
                         <div class="col p-0">Submit Date</div>
                     </div>
                 </div>
@@ -106,7 +110,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col p-0 pl-2">
+                                <div class="col p-0 pl-3">
                                     <div class="font-weight-bold" style="color: #ec1b25">
                                         {{ $data->proposal->kategori->nama_kategori ?? '-' }}
                                     </div>
@@ -115,6 +119,18 @@
                                     <div class="font-weight-bold" style="color: #222222">
                                         {{ $data->proposal->pj->nama_sales_people ?? '' }}
                                     </div>
+                                </div>
+                                <div class="col p-0 pl-3">
+                                    {{ $data->target_database_lpj ?? '' }}
+                                </div>
+                                <div class="col p-0 pl-3">
+                                    {{ $data->target_prospectus_lpj ?? '' }}
+                                </div>
+                                <div class="col p-0 pl-3">
+                                    {{ $data->target_penjualan_lpj ?? '' }}
+                                </div>
+                                <div class="col p-0 pl-3">
+                                    Rp. {{ number_format($data->total_dana_lpj,0,',',','); }}
                                 </div>
                                 <div class="col p-0 pr-4">
                                     <div class="row align-items-center">
@@ -133,7 +149,7 @@
                                                         <i class="cil-trash"></i>
                                                     </a>
                                                 @else
-                                                    <a href="{{ route('cabang.lpj.index') }}?id={{ $data->uuid }}" class="btn btn-sm btn-warning">
+                                                    <a href="{{ route('cabang.lpj.getShow') }}?id={{ $data->uuid }}" class="btn btn-sm btn-warning">
                                                         <i class="cil-search"></i>
                                                     </a>
                                                 @endif

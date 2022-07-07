@@ -32,7 +32,7 @@
                                         <thead class="text-center">
                                             <tr>
                                                 <th colspan="2">Database</th>
-                                                <th colspan="2">Prospectus</th>
+                                                <th colspan="2">Prospecting</th>
                                                 <th colspan="2">Penjualan</th>
                                                 <th colspan="2">Downloader Motorku-X</th>
                                                 <th colspan="2">Dana</th>
@@ -85,7 +85,12 @@
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <input class="form-control" type="number" name="totaldana" value="{{ $data->total_dana_lpj }}" required>
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend">
+                                                        <span class="input-group-text" id="basic-addon1">Rp. </span>
+                                                        </div>
+                                                        <input class="form-control" name="totaldana" value="{{ $data->total_dana_lpj }}" required>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         </tbody>
