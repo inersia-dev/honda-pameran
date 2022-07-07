@@ -72,6 +72,7 @@
                                                 <th style="vertical-align: middle;" colspan="2">Prospecting</th>
                                                 <th style="vertical-align: middle;" colspan="2">Penjualan</th>
                                                 <th style="vertical-align: middle;" colspan="2">Downloader Motorku-X</th>
+                                                <th style="vertical-align: middle;" rowspan="2">Sales Forces</th>
                                                 <th style="vertical-align: middle;" colspan="2">Biaya</th>
                                             </tr>
                                             <tr>
@@ -132,6 +133,9 @@
                                                 </td>
                                                 <td style="vertical-align: middle;">
                                                      {{ $data->target_downloader_lpj }}
+                                                </td>
+                                                <td style="vertical-align: middle;">
+                                                    {{ count(json_decode($data->proposal->sales_people_proposal)) }}
                                                 </td>
                                                 <td style="vertical-align: middle;">
                                                     Rp. {{ number_format($data->proposal->total_dana_proposal,0,',',','); }}
