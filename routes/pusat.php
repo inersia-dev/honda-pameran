@@ -61,4 +61,5 @@ $maindealerRoutes = function() {
     // Route::post('email/resend', 'App\Http\Controllers\Pusat\Auth\VerificationController@resend')->name('verification.resend');
 
     Route::auto('/proposal', App\Http\Controllers\Pusat\ProposalController::class);
+    Route::auto('/lpj', App\Http\Controllers\Pusat\LpjController::class);
 };
