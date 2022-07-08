@@ -99,8 +99,8 @@ class LpjKonsumen extends Model
         elseif ($p == 5) { return 'Pegawai Swasta Pertambangan'; }
         elseif ($p == 6) { return 'Pegawai Swasta Jasa'; }
         elseif ($p == 7) { return 'Pegawai Swasta Perdagangan (Retail)'; }
-        elseif ($p == 8) { return 'jek'; }
-        elseif ($p == 9) { return 'ertanian/ Perkebunan/ Kehutanan/ Perikanan/ Peternakan'; }
+        elseif ($p == 8) { return 'Ojek'; }
+        elseif ($p == 9) { return 'Pertanian/ Perkebunan/ Kehutanan/ Perikanan/ Peternakan'; }
         elseif ($p == 10) { return 'Industri'; }
         elseif ($p == 11) { return 'Konstruksi'; }
         elseif ($p == 12) { return 'Pertambangan'; }
@@ -127,7 +127,7 @@ class LpjKonsumen extends Model
         elseif ($l == 4 ){ return 'Rp 1.750.001,- s/d Rp 2.500.000,- ';}
         elseif ($l == 5 ){ return 'Rp 2.500.001,- s/d Rp 4.000.000,- ';}
         elseif ($l == 6 ){ return 'Rp 4.000.001.- s/d Rp 6.000.000,- ';}
-        elseif ($l == 7 ){ return '>Rp 6.000.000,- ';}
+        elseif ($l == 7 ){ return '> Rp 6.000.000,- ';}
         else { return '-'; }
     }
 
