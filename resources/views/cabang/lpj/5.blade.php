@@ -2,6 +2,18 @@
 
 @section('title', 'Buat LPJ')
 @section('content')
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+<script>
+    $( function() {
+      $( "#datepicker" ).datepicker({
+            yearRange: "1930:2010",
+            changeMonth: true,
+            changeYear: true
+        });
+    });
+    </script>
 
     <div>
         <div class="row">
@@ -75,13 +87,42 @@
                                                     <div class="row form-group">
                                                         <label class="col-sm-3 control-label">Tanggal Lahir<strong style="color:rgb(243, 0, 0)">*</strong></label>
                                                         <div class="col-sm-9">
-                                                            <input type="date" class="form-control" name="tgllahir" value="{{ $konsumen->tgl_lahir }}" required>
+                                                            <input type="text" id="datepicker" class="form-control" name="tgllahir" value="{{ $konsumen->tgl_lahir }}" required>
                                                         </div>
                                                     </div>
                                                     <div class="row form-group">
                                                         <label class="col-sm-3 control-label">Pekerjaan<strong style="color:rgb(243, 0, 0)">*</strong></label>
                                                         <div class="col-sm-9">
-                                                            <input class="form-control" name="pekerjaan" value="{{ $konsumen->pekerjaan }}" required>
+                                                            <select name="pekerjaan" class="form-control">
+                                                                @if ($konsumen->pekerjaan)
+                                                                    <option value="{{ $konsumen->pekerjaan }}">{{ $konsumen->pekerjaan_($konsumen->pekerjaan)}}</option>
+                                                                    <option value=""></option>
+                                                                @endif
+                                                                <option value="1">Pegawai Negeri</option>
+                                                                <option value="2">Peg Swasta Pertanian/ Perkebunan/ Kehutanan/ Perikanan/ Peternakan</option>
+                                                                <option value="3">Peg Swasta Industri</option>
+                                                                <option value="4">Peg Swasta Konstruksi</option>
+                                                                <option value="5">Peg Swasta Pertambangan</option>
+                                                                <option value="6">Peg Swasta Jasa</option>
+                                                                <option value="7">Peg Swasta Perdagangan (Retail)</option>
+                                                                <option value="8">Ojek</option>
+                                                                <option value="9">Pertanian/ Perkebunan/ Kehutanan/ Perikanan/ Peternakan</option>
+                                                                <option value="10">Industri</option>
+                                                                <option value="11">Konstruksi</option>
+                                                                <option value="12">Pertambangan</option>
+                                                                <option value="13">Jasa</option>
+                                                                <option value="14">Perdagangan (Retail)</option>
+                                                                <option value="15">Mahasiswa/ Pelajar</option>
+                                                                <option value="16">Guru / Dosen</option>
+                                                                <option value="17">TNI/ Polri</option>
+                                                                <option value="18">Ibu Rumah Tangga</option>
+                                                                <option value="19">Dokter</option>
+                                                                <option value="20">Pengacara</option>
+                                                                <option value="21">Wartawan</option>
+                                                                <option value="22">Petani</option>
+                                                                <option value="23">Nelayan</option>
+                                                                <option value="24">Lainnya..</option>
+                                                            </select>
                                                         </div>
                                                     </div>
                                                     <div class="row form-group">
@@ -90,8 +131,80 @@
                                                             <input class="form-control" name="pendapatan" value="{{ $konsumen->pendapatan }}" required>
                                                         </div>
                                                     </div>
+                                                    <div class="row form-group">
+                                                        <label class="col-sm-3 control-label">Pengeluaran / Bulan<strong style="color:rgb(243, 0, 0)">*</strong></label>
+                                                        <div class="col-sm-9">
+                                                            <select name="pengeluaran" class="form-control">
+                                                                @if ($konsumen->pengeluaran)
+                                                                    <option value="{{ $konsumen->pengeluaran }}">{{ $konsumen->pengeluaran_($konsumen->pengeluaran)}}</option>
+                                                                    <option value=""></option>
+                                                                @endif
+                                                                <option value="1">< Rp 900.000,-</option>
+                                                                <option value="2">Rp 900.001,- s/d Rp 1.250.000,-</option>
+                                                                <option value="3">Rp 1.250.001,- s/d Rp 1.750.000,-</option>
+                                                                <option value="4">Rp 1.750.001,- s/d Rp 2.500.000,-</option>
+                                                                <option value="5">Rp 2.500.001,- s/d Rp 4.000.000,-</option>
+                                                                <option value="6">Rp 4.000.001.- s/d Rp 6.000.000,-</option>
+                                                                <option value="7">>Rp 6.000.000,-</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="col-6">
+                                                    <div class="row form-group">
+                                                        <label class="col-sm-3 control-label">Range DP Konsumen<strong style="color:rgb(243, 0, 0)">*</strong></label>
+                                                        <div class="col-sm-9">
+                                                            <select name="dp" class="form-control">
+                                                                @if ($konsumen->dp)
+                                                                    <option value="{{ $konsumen->dp }}">{{ $konsumen->dp_($konsumen->dp)}}</option>
+                                                                    <option value=""></option>
+                                                                @endif
+                                                                <option value="1">≤ 1 jt</option>
+                                                                <option value="2">1 - 2 jt</option>
+                                                                <option value="3">2 - 3 jt</option>
+                                                                <option value="4">3 - 4 jt</option>
+                                                                <option value="5">4 - 5 jt</option>
+                                                                <option value="6">5 - 6 jt</option>
+                                                                <option value="7">6 - 7 jt</option>
+                                                                <option value="8">7 - 8 jt</option>
+                                                                <option value="9">8 - 9 jt</option>
+                                                                <option value="10">9 - 10 jt</option>
+                                                                <option value="11">> 10 jt</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row form-group">
+                                                        <label class="col-sm-3 control-label">Merk Motor Sebelumnya<strong style="color:rgb(243, 0, 0)">*</strong></label>
+                                                        <div class="col-sm-9">
+                                                            <select name="merkmotor" class="form-control">
+                                                                @if ($konsumen->merkmotor)
+                                                                    <option value="{{ $konsumen->merkmotor }}">{{ $konsumen->merkMotor_($konsumen->merkmotor)}}</option>
+                                                                    <option value=""></option>
+                                                                @endif
+                                                                <option value="1">Honda</option>
+                                                                <option value="2">Yamaha</option>
+                                                                <option value="3">Suzuki</option>
+                                                                <option value="4">Kawasaki</option>
+                                                                <option value="5">Motor Lain</option>
+                                                                <option value="6">Belum pernah memiliki</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row form-group">
+                                                        <label class="col-sm-3 control-label">Jenis Motor Sebelumnya<strong style="color:rgb(243, 0, 0)">*</strong></label>
+                                                        <div class="col-sm-9">
+                                                            <select name="jenismotor" class="form-control">
+                                                                @if ($konsumen->jenismotor)
+                                                                    <option value="{{ $konsumen->jenismotor }}">{{ $konsumen->jenisMotor_($konsumen->jenismotor)}}</option>
+                                                                    <option value=""></option>
+                                                                @endif
+                                                                <option value="1">Sport</option>
+                                                                <option value="2">Cub (Bebek)</option>
+                                                                <option value="3">AT (Automatic)</option>
+                                                                <option value="4">Belum pernah memiliki</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
                                                     <div class="row form-group">
                                                         <label class="col-sm-3 control-label">Nomor Mesin</label>
                                                         <div class="col-sm-9">
@@ -227,13 +340,38 @@
                                                         <div class="row form-group">
                                                             <label class="col-sm-3 control-label">Tanggal Lahir<strong style="color:rgb(243, 0, 0)">*</strong></label>
                                                             <div class="col-sm-9">
-                                                                <input type="date" class="form-control" name="tgllahir" required>
+                                                                <input type="text" id="datepicker" class="form-control" name="tgllahir" required>
                                                             </div>
                                                         </div>
                                                         <div class="row form-group">
                                                             <label class="col-sm-3 control-label">Pekerjaan<strong style="color:rgb(243, 0, 0)">*</strong></label>
                                                             <div class="col-sm-9">
-                                                                <input class="form-control" name="pekerjaan" required>
+                                                                <select name="pekerjaan" class="form-control">
+                                                                    <option value="1">Pegawai Negeri</option>
+                                                                    <option value="2">Peg Swasta Pertanian/ Perkebunan/ Kehutanan/ Perikanan/ Peternakan</option>
+                                                                    <option value="3">Peg Swasta Industri</option>
+                                                                    <option value="4">Peg Swasta Konstruksi</option>
+                                                                    <option value="5">Peg Swasta Pertambangan</option>
+                                                                    <option value="6">Peg Swasta Jasa</option>
+                                                                    <option value="7">Peg Swasta Perdagangan (Retail)</option>
+                                                                    <option value="8">Ojek</option>
+                                                                    <option value="9">Pertanian/ Perkebunan/ Kehutanan/ Perikanan/ Peternakan</option>
+                                                                    <option value="10">Industri</option>
+                                                                    <option value="11">Konstruksi</option>
+                                                                    <option value="12">Pertambangan</option>
+                                                                    <option value="13">Jasa</option>
+                                                                    <option value="14">Perdagangan (Retail)</option>
+                                                                    <option value="15">Mahasiswa/ Pelajar</option>
+                                                                    <option value="16">Guru / Dosen</option>
+                                                                    <option value="17">TNI/ Polri</option>
+                                                                    <option value="18">Ibu Rumah Tangga</option>
+                                                                    <option value="19">Dokter</option>
+                                                                    <option value="20">Pengacara</option>
+                                                                    <option value="21">Wartawan</option>
+                                                                    <option value="22">Petani</option>
+                                                                    <option value="23">Nelayan</option>
+                                                                    <option value="24">Lainnya..</option>
+                                                                </select>
                                                             </div>
                                                         </div>
                                                         <div class="row form-group">
@@ -242,8 +380,64 @@
                                                                 <input class="form-control" name="pendapatan" required>
                                                             </div>
                                                         </div>
+                                                        <div class="row form-group">
+                                                            <label class="col-sm-3 control-label">Pengeluaran / Bulan<strong style="color:rgb(243, 0, 0)">*</strong></label>
+                                                            <div class="col-sm-9">
+                                                                <select name="pengeluaran" class="form-control">
+                                                                    <option value="1">< Rp 900.000,-</option>
+                                                                    <option value="2">Rp 900.001,- s/d Rp 1.250.000,-</option>
+                                                                    <option value="3">Rp 1.250.001,- s/d Rp 1.750.000,-</option>
+                                                                    <option value="4">Rp 1.750.001,- s/d Rp 2.500.000,-</option>
+                                                                    <option value="5">Rp 2.500.001,- s/d Rp 4.000.000,-</option>
+                                                                    <option value="6">Rp 4.000.001.- s/d Rp 6.000.000,-</option>
+                                                                    <option value="7">>Rp 6.000.000,-</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                     <div class="col-6">
+                                                        <div class="row form-group">
+                                                            <label class="col-sm-3 control-label">Range DP Konsumen<strong style="color:rgb(243, 0, 0)">*</strong></label>
+                                                            <div class="col-sm-9">
+                                                                <select name="dp" class="form-control">
+                                                                    <option value="1">≤ 1 jt</option>
+                                                                    <option value="2">1 - 2 jt</option>
+                                                                    <option value="3">2 - 3 jt</option>
+                                                                    <option value="4">3 - 4 jt</option>
+                                                                    <option value="5">4 - 5 jt</option>
+                                                                    <option value="6">5 - 6 jt</option>
+                                                                    <option value="7">6 - 7 jt</option>
+                                                                    <option value="8">7 - 8 jt</option>
+                                                                    <option value="9">8 - 9 jt</option>
+                                                                    <option value="10">9 - 10 jt</option>
+                                                                    <option value="11">> 10 jt</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row form-group">
+                                                            <label class="col-sm-3 control-label">Merk Motor Sebelumnya<strong style="color:rgb(243, 0, 0)">*</strong></label>
+                                                            <div class="col-sm-9">
+                                                                <select name="merkmotor" class="form-control">
+                                                                    <option value="1">Honda</option>
+                                                                    <option value="2">Yamaha</option>
+                                                                    <option value="3">Suzuki</option>
+                                                                    <option value="4">Kawasaki</option>
+                                                                    <option value="5">Motor Lain</option>
+                                                                    <option value="6">Belum pernah memiliki</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row form-group">
+                                                            <label class="col-sm-3 control-label">Jenis Motor Sebelumnya<strong style="color:rgb(243, 0, 0)">*</strong></label>
+                                                            <div class="col-sm-9">
+                                                                <select name="jenismotor" class="form-control">
+                                                                    <option value="1">Sport</option>
+                                                                    <option value="2">Cub (Bebek)</option>
+                                                                    <option value="3">AT (Automatic)</option>
+                                                                    <option value="4">Belum pernah memiliki</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
                                                         <div class="row form-group">
                                                             <label class="col-sm-3 control-label">Nomor Mesin</label>
                                                             <div class="col-sm-9">
@@ -329,6 +523,11 @@
                                                             <th>Alamat</th>
                                                             <th>No Telepon</th>
                                                             <th>Pekerjaan</th>
+                                                            <th>Pendapatan</th>
+                                                            <th>Pengeluaran</th>
+                                                            <th>Range DP</th>
+                                                            <th>Merk Motor Sblmnya</th>
+                                                            <th>Jenis Motor Sblmnya</th>
                                                             <th>Kelurahan</th>
                                                             <th>Kecamatan</th>
                                                             <th>Kota</th>
@@ -353,7 +552,12 @@
                                                                 <td>{{ \Carbon\Carbon::parse($data_ko->tgl_lahir)->age }} Tahun</td>
                                                                 <td>{{ $data_ko->alamat }}</td>
                                                                 <td>{{ $data_ko->notelp }}</td>
-                                                                <td>{{ $data_ko->pekerjaan }}</td>
+                                                                <td>{{ $data_ko->pekerjaan_($data_ko->pekerjaan) }}</td>
+                                                                <td>{{ $data_ko->pendapatan }}</td>
+                                                                <td>{{ $data_ko->pengeluaran_($data_ko->pengeluaran) }}</td>
+                                                                <td>{{ $data_ko->dp_($data_ko->dp) }}</td>
+                                                                <td>{{ $data_ko->merkMotor_($data_ko->merkmotor) }}</td>
+                                                                <td>{{ $data_ko->jenisMotor_($data_ko->jenismotor) }}</td>
                                                                 <td>{{ $data_ko->lokasi_->kelurahan_lokasi }}</td>
                                                                 <td>{{ $data_ko->lokasi_->kecamatan_lokasi }}</td>
                                                                 <td>{{ $data_ko->lokasi_->kota_lokasi }}</td>

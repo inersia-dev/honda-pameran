@@ -297,6 +297,11 @@
                                                         <th>Alamat</th>
                                                         <th>No Telepon</th>
                                                         <th>Pekerjaan</th>
+                                                        <th>Pendapatan</th>
+                                                        <th>Pengeluaran</th>
+                                                        <th>Range DP</th>
+                                                        <th>Merk Motor Sblmnya</th>
+                                                        <th>Jenis Motor Sblmnya</th>
                                                         <th>Kelurahan</th>
                                                         <th>Kecamatan</th>
                                                         <th>Kota</th>
@@ -320,7 +325,12 @@
                                                             <td>{{ \Carbon\Carbon::parse($data_ko->tgl_lahir)->age }} Tahun</td>
                                                             <td>{{ $data_ko->alamat }}</td>
                                                             <td>{{ $data_ko->notelp }}</td>
-                                                            <td>{{ $data_ko->pekerjaan }}</td>
+                                                            <td>{{ $data_ko->pekerjaan_($data_ko->pekerjaan) }}</td>
+                                                            <td>{{ $data_ko->pendapatan }}</td>
+                                                            <td>{{ $data_ko->pengeluaran_($data_ko->pengeluaran) }}</td>
+                                                            <td>{{ $data_ko->dp_($data_ko->dp) }}</td>
+                                                            <td>{{ $data_ko->merkMotor_($data_ko->merkmotor) }}</td>
+                                                            <td>{{ $data_ko->jenisMotor_($data_ko->jenismotor) }}</td>
                                                             <td>{{ $data_ko->lokasi_->kelurahan_lokasi }}</td>
                                                             <td>{{ $data_ko->lokasi_->kecamatan_lokasi }}</td>
                                                             <td>{{ $data_ko->lokasi_->kota_lokasi }}</td>

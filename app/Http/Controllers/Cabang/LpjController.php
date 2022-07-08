@@ -282,6 +282,10 @@ class LpjController extends Controller
             $tambahkonsumen->finance_company    = $request->finance;
             $tambahkonsumen->cash_credit        = $request->jenis;
             $tambahkonsumen->hasil              = $request->hasil;
+            $tambahkonsumen->pengeluaran        = $request->pengeluaran;
+            $tambahkonsumen->dp                 = $request->dp;
+            $tambahkonsumen->merkmotor          = $request->merkmotor;
+            $tambahkonsumen->jenismotor         = $request->jenismotor;
             $tambahkonsumen->save();
 
             return redirect()->back()->withFlashSuccess('Konsumen Berhasil Ditambahkan  ! ✅');
@@ -307,6 +311,10 @@ class LpjController extends Controller
             $updatekonsumen->finance_company    = $request->finance;
             $updatekonsumen->cash_credit        = $request->jenis;
             $updatekonsumen->hasil              = $request->hasil;
+            $updatekonsumen->pengeluaran        = $request->pengeluaran;
+            $updatekonsumen->dp                 = $request->dp;
+            $updatekonsumen->merkmotor          = $request->merkmotor;
+            $updatekonsumen->jenismotor         = $request->jenismotor;
             $updatekonsumen->save();
 
             return redirect()->to(route('cabang.lpj.getCreateFive').'/?id='.request()->id)->withFlashSuccess('Konsumen Berhasil Ditambahkan  ! ✅');
