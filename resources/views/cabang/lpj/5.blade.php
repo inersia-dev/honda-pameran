@@ -375,12 +375,6 @@
                                                             </div>
                                                         </div>
                                                         <div class="row form-group">
-                                                            <label class="col-sm-3 control-label">Pendapatan<strong style="color:rgb(243, 0, 0)">*</strong></label>
-                                                            <div class="col-sm-9">
-                                                                <input class="form-control" name="pendapatan" required>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row form-group">
                                                             <label class="col-sm-3 control-label">Pengeluaran / Bulan<strong style="color:rgb(243, 0, 0)">*</strong></label>
                                                             <div class="col-sm-9">
                                                                 <select name="pengeluaran" class="form-control">
@@ -523,7 +517,6 @@
                                                             <th>Alamat</th>
                                                             <th>No Telepon</th>
                                                             <th>Pekerjaan</th>
-                                                            <th>Pendapatan</th>
                                                             <th>Pengeluaran</th>
                                                             <th>Range DP</th>
                                                             <th>Merk Motor Sblmnya</th>
@@ -553,7 +546,6 @@
                                                                 <td>{{ $data_ko->alamat }}</td>
                                                                 <td>{{ $data_ko->notelp }}</td>
                                                                 <td>{{ $data_ko->pekerjaan_($data_ko->pekerjaan) }}</td>
-                                                                <td>{{ $data_ko->pendapatan }}</td>
                                                                 <td>{{ $data_ko->pengeluaran_($data_ko->pengeluaran) }}</td>
                                                                 <td>{{ $data_ko->dp_($data_ko->dp) }}</td>
                                                                 <td>{{ $data_ko->merkMotor_($data_ko->merkmotor) }}</td>

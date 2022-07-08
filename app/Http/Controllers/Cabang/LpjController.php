@@ -274,7 +274,6 @@ class LpjController extends Controller
             $tambahkonsumen->gender             = $request->gender;
             $tambahkonsumen->notelp             = $request->notelp;
             $tambahkonsumen->pekerjaan          = $request->pekerjaan;
-            $tambahkonsumen->pendapatan         = $request->pendapatan;
             $tambahkonsumen->nomor_mesin        = $request->nomormesin;
             $tambahkonsumen->unit               = $request->unit;
             $tambahkonsumen->id_lokasi          = $request->lokasi;
@@ -303,7 +302,6 @@ class LpjController extends Controller
             $updatekonsumen->gender             = $request->gender;
             $updatekonsumen->notelp             = $request->notelp;
             $updatekonsumen->pekerjaan          = $request->pekerjaan;
-            $updatekonsumen->pendapatan         = $request->pendapatan;
             $updatekonsumen->nomor_mesin        = $request->nomormesin;
             $updatekonsumen->unit               = $request->unit;
             $updatekonsumen->id_lokasi          = $request->lokasi;
