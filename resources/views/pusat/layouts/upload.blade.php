@@ -61,6 +61,9 @@
             transform: scale(5);
             z-index: 999;
         }
+        .dataTables_length {
+            margin-top: 6px;
+        }
     </style>
     <style>
         #mapid { height: 700px; }
