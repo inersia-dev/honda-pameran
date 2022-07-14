@@ -36,7 +36,7 @@
                                     <strong>Dealer</strong>
                                 </label>
                                 <label class="col-sm-10 col-form-label">
-                                    {{ $data->proposal->dealer->nama_dealer}}
+                                    {{ $data->proposal->dealer ? $data->proposal->dealer->nama_dealer : ''}}
                                 </label>
                             </div>
                             <div class="mb-2 row">
@@ -98,10 +98,10 @@
                                                     {{ $data->durasi($data->periode_start_lpj, $data->periode_end_lpj ) }} Hari
                                                 </td>
                                                 <td style="vertical-align: middle;">
-                                                    {{ $data->proposal->dealer->kode_dealer }}
+                                                    {{ $data->proposal->dealer ? $data->proposal->dealer->kode_dealer : '' }}
                                                 </td>
                                                 <td style="vertical-align: middle;">
-                                                    {{ $data->proposal->dealer->nama_dealer }}
+                                                    {{ $data->proposal->dealer ? $data->proposal->dealer->nama_dealer : '' }}
                                                 </td>
                                                 <td style="vertical-align: middle;">
                                                     {{ $data->tempat_lpj }}. {{ $data->lokasi->kelurahan_lokasi }}, {{ $data->lokasi->kecamatan_lokasi }}, {{ Str::title($data->lokasi->kota_lokasi) }}
