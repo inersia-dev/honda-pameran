@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Pusat;
 
 use App\Http\Controllers\Controller;
+use App\Models\Dealer;
 
 class HomeController extends Controller
 {
@@ -22,6 +23,7 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index() {
-        return view('pusat.dashboard');
+        $datadealer = Dealer::get();
+        return view('pusat.dashboard', compact('datadealer'));
     }
 }

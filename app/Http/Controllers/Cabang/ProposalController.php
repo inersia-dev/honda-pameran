@@ -154,7 +154,6 @@ class ProposalController extends Controller
 
             $cektitikaktif      = Proposal::where('status_proposal', 4)->get();
 
-
             $dataapproval = ApprovalProposal::where('id_proposal', $data->id)
                                     ->select(['approval_proposals.*', 'pusats.jabatan as jabatan_p'])
                                     ->join('pusats', 'approval_proposals.user_approval', '=', 'pusats.id')
@@ -300,6 +299,7 @@ class ProposalController extends Controller
             if ($data->display_proposal == null) {
                 return redirect()->back()->withFlashDanger('Data Display Belum Ada !');
             }
+
             if(data_get(request()->ket_dana, 0) == null){
                 return redirect()->back()->withFlashDanger('Data Dana Masih Kosong !');
             }
@@ -318,9 +318,6 @@ class ProposalController extends Controller
                 $isiapproval->save();
                 // $ok[] = $app->jabatan;
             }
-
-
-
         }
 
         if (request()->b == 'upload') {
