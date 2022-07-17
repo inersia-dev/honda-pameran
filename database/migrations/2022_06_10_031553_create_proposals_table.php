@@ -18,6 +18,9 @@ class CreateProposalsTable extends Migration
             $table->uuid('uuid');
             $table->string('no_proposal')->nullable(); // NOMOR PROPOSAL nomor proposal / tahun / bulan / tanggal / jenis activity / dealer
             $table->integer('user_proposal')->nullable(); // id pembuat
+            $table->integer('user_approval')->nullable(); // id pembuat
+            $table->boolean('inbox_d')->nullable(); // id pembuat
+            $table->boolean('inbox_md')->nullable(); // id pembuat
             $table->string('status_proposal')->nullable(); // 1 draft / 2 Waiting Approval / 3 Partial Approval / 4  Final / 5 Revise (kembali approval terakhir)  / 6 Rejected
             $table->string('status_event_proposal')->nullable(); // 1 Proses Pengajuan / 2 Akan Berjalan / 3 Sedang Berjalan / 4 Selesai
             $table->string('dealer_proposal')->nullable(); // id dealer
