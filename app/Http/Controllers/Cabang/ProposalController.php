@@ -148,7 +148,7 @@ class ProposalController extends Controller
         $datadana           = json_decode($data->dana_proposal  ?? null, true);
         $datasalespeople    = json_decode($data->sales_people_proposal  ?? null, true);
         $datadisplayunit    = json_decode($data->display_proposal  ?? null, true);
-        $cektitikaktif      = Proposal::where('status_proposal', 4)->get();
+        $cektitikaktif      = Proposal::where('status_proposal', 4)->where('kategori_proposal', $data->kategori_proposal)->get();
 
         if (null == $data) {
             return redirect()->route('cabang.proposal.index');
@@ -174,7 +174,7 @@ class ProposalController extends Controller
             //     return redirect()->route('cabang.proposal.index');
             // }
 
-            $cektitikaktif      = Proposal::where('status_proposal', 4)->get();
+            $cektitikaktif      = Proposal::where('status_proposal', 4)->where('kategori_proposal', $data->kategori_proposal)->get();
 
             $dataapproval = ApprovalProposal::where('id_proposal', $data->id)
                                     ->select(['approval_proposals.*', 'pusats.jabatan as jabatan_p'])

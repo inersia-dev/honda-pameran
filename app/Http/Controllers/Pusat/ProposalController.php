@@ -229,7 +229,7 @@ class ProposalController extends Controller
         // if (null == $data) {
         //     return redirect()->route('pusat.proposal.index');
         // }
-        $cektitikaktif      = Proposal::where('status_proposal', 4)->get();
+        $cektitikaktif      = Proposal::where('status_proposal', 4)->where('kategori_proposal', $data->kategori_proposal)->get();
 
         return view('pusat.proposal.create', compact('data', 'datalokasi', 'datadisplay', 'datadealer', 'salespeople', 'datadana', 'datasalespeople', 'datafinance', 'datadisplayunit', 'cektitikaktif'));
     }
@@ -254,7 +254,7 @@ class ProposalController extends Controller
             //     return redirect()->route('pusat.proposal.index');
             // }
 
-            $cektitikaktif      = Proposal::where('status_proposal', 4)->get();
+            $cektitikaktif      = Proposal::where('status_proposal', 4)->where('kategori_proposal', $data->kategori_proposal)->get();
 
             $dataapproval = ApprovalProposal::where('id_proposal', $data->id)
                                     ->select(['approval_proposals.*', 'pusats.jabatan as jabatan_p'])
