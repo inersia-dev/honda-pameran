@@ -12,5 +12,6 @@ class KategoriProposal extends Model
     protected $fillable = [
         'nama_kategori',
         'keteragan_kategori',
+        'waktu_minimum',
     ];
 }

@@ -218,7 +218,7 @@ rel="stylesheet"
                                                 <div class="mb-2 row">
                                                     <label class="col-sm-3 col-form-label">Start<strong style="color:rgb(243, 0, 0)">*</strong></label>
                                                     <div class="col-sm-9">
-                                                        <input class="form-control" name="tanggalstart" type="date" value="{{ $data->periode_start_proposal }}">
+                                                        <input class="form-control" id="tanggalstart" onchange="tanggalevent()" name="tanggalstart" type="date" value="{{ $data->periode_start_proposal }}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -226,7 +226,7 @@ rel="stylesheet"
                                                 <div class="mb-2 row">
                                                     <label class="col-sm-3 col-form-label">End<strong style="color:rgb(243, 0, 0)">*</strong></label>
                                                     <div class="col-sm-9">
-                                                        <input class="form-control" name="tanggalend" type="date" value="{{ $data->periode_end_proposal }}">
+                                                        <input class="form-control" id="tanggalend" name="tanggalend" type="date" value="{{ $data->periode_end_proposal }}" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -931,6 +931,21 @@ rel="stylesheet"
             document.getElementById("pjhondaid").value = datahondaid;
             document.getElementById("pjhsoid").value = datahsoid ;
             document.getElementById("pjjabatan").value = jabatan ;
+        }
+    </script>
+
+    <script>
+        function tanggalevent() {
+            var start     = document.getElementById("tanggalstart").value;
+            var datestart = new Date(start);
+            datestart.setDate(datestart.getDate()+{{ $data->kategori->waktu_minimum+1 ?? 2 }});
+            // var y = datestart.getFullYear();
+            // var m = datestart.getMonth()+1;
+            // var d = datestart.getDate();
+            // var getend = new Date(y+'-'+m+'-'+d);
+            var minend = datestart.toISOString().substring(0,10);
+            document.getElementById("tanggalend").min = minend;
+            // console.log(minend);
         }
     </script>
 

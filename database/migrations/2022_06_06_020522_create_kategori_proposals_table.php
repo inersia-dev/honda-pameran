@@ -17,6 +17,7 @@ class CreateKategoriProposalsTable extends Migration
             $table->id();
             $table->string('nama_kategori')->nullable();
             $table->string('keterangan_kategori')->nullable();
+            $table->string('waktu_minimum')->nullable();
             $table->timestamps();
         });
     }
