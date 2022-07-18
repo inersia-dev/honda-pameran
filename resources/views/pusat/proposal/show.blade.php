@@ -766,16 +766,16 @@ rel="stylesheet"
 
     //Data Contoh
     // L.marker([-1.242292, 116.879625], {icon: redIcon}).bindPopup('Dealer A').addTo(map);
-    // L.circle([-1.242292, 116.879625], {radius: 500, color: 'red', opacity:.5}).addTo(map);
+    // L.circle([-1.242292, 116.879625], {radius: 1000, color: 'red', opacity:.5}).addTo(map);
 
     // L.marker([-1.252223, 116.851946], {icon: redIcon}).bindPopup('Dealer B').addTo(map);
-    // L.circle([-1.252223, 116.851946], {radius: 500, color: 'red', opacity:.5}).addTo(map);
+    // L.circle([-1.252223, 116.851946], {radius: 1000, color: 'red', opacity:.5}).addTo(map);
 
     // L.marker([-1.242223, 116.852946], {icon: redIcon}).bindPopup('Dealer C').addTo(map);
-    // L.circle([-1.242223, 116.852946], {radius: 500, color: 'red', opacity:.5}).addTo(map);
+    // L.circle([-1.242223, 116.852946], {radius: 1000, color: 'red', opacity:.5}).addTo(map);
 
     // L.marker([-1.239848, 116.916119], {icon: redIcon}).bindPopup('Dealer D').addTo(map);
-    // L.circle([-1.239848, 116.916119], {radius: 500, color: 'red', opacity:.5}).addTo(map);
+    // L.circle([-1.239848, 116.916119], {radius: 1000, color: 'red', opacity:.5}).addTo(map);
     @foreach ($cektitikaktif as $titik)
         @php
             $a = \Carbon\Carbon::create($titik->periode_start_proposal);
@@ -788,16 +788,16 @@ rel="stylesheet"
         @endphp
         @if ($titik->id == $data->id)
             L.marker([{!! $titik->lat_proposal !!}, {!! $titik->long_proposal !!}]).bindPopup('{!! $titik->dealer->nama_dealer !!} ( {{ $a_ }} - {{ $b_ }} )').addTo(map);
-            L.circle([{!! $titik->lat_proposal !!}, {!! $titik->long_proposal !!}], {radius: 500, color: 'blue', opacity:.5}).addTo(map);
+            L.circle([{!! $titik->lat_proposal !!}, {!! $titik->long_proposal !!}], {radius: 1000, color: 'blue', opacity:.5}).addTo(map);
         @else
 
             @if($a->greaterThan($c) == true)
                 L.marker([{!! $titik->lat_proposal !!}, {!! $titik->long_proposal !!}], {icon: greenIcon}).bindPopup('{!! $titik->dealer->nama_dealer !!} ( {{ $a_ }} - {{ $b_ }} )').addTo(map);
-                L.circle([{!! $titik->lat_proposal !!}, {!! $titik->long_proposal !!}], {radius: 500, color: 'green', opacity:.5}).addTo(map);
+                L.circle([{!! $titik->lat_proposal !!}, {!! $titik->long_proposal !!}], {radius: 1000, color: 'green', opacity:.5}).addTo(map);
             @else
                 @if ($b->greaterThan($c) == true)
                     L.marker([{!! $titik->lat_proposal !!}, {!! $titik->long_proposal !!}], {icon: redIcon}).bindPopup('{!! $titik->dealer->nama_dealer !!} ( {{ $a_ }} - {{ $b_ }} )').addTo(map);
-                    L.circle([{!! $titik->lat_proposal !!}, {!! $titik->long_proposal !!}], {radius: 500, color: 'red', opacity:.5}).addTo(map);
+                    L.circle([{!! $titik->lat_proposal !!}, {!! $titik->long_proposal !!}], {radius: 1000, color: 'red', opacity:.5}).addTo(map);
                 @endif
             @endif
         @endif

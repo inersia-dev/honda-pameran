@@ -254,7 +254,7 @@ function addRowDana() {
     //     var marker = L.geoJSON(response.data, {
     //         pointToLayer: function(geoJsonPoint, latlng, layer) {
     //             markerr  = L.marker(latlng).bindPopup('Dealer Tes');
-    //             circle   = L.circle(latlng, {radius: 500, color: 'red', opacity:.5});
+    //             circle   = L.circle(latlng, {radius: 1000, color: 'red', opacity:.5});
     //             return L.featureGroup([markerr, circle])
     //                     // .bindPopup(nama)
     //                     .addTo(map);
@@ -267,16 +267,16 @@ function addRowDana() {
     // });
 
     L.marker([-1.242292, 116.879625]).bindPopup('Dealer A').addTo(map);
-    L.circle([-1.242292, 116.879625], {radius: 500, color: 'red', opacity:.5}).addTo(map);
+    L.circle([-1.242292, 116.879625], {radius: 1000, color: 'red', opacity:.5}).addTo(map);
 
     L.marker([-1.252223, 116.851946]).bindPopup('Dealer B').addTo(map);
-    L.circle([-1.252223, 116.851946], {radius: 500, color: 'red', opacity:.5}).addTo(map);
+    L.circle([-1.252223, 116.851946], {radius: 1000, color: 'red', opacity:.5}).addTo(map);
 
     L.marker([-1.242223, 116.852946]).bindPopup('Dealer C').addTo(map);
-    L.circle([-1.242223, 116.852946], {radius: 500, color: 'red', opacity:.5}).addTo(map);
+    L.circle([-1.242223, 116.852946], {radius: 1000, color: 'red', opacity:.5}).addTo(map);
 
     L.marker([-1.239848, 116.916119]).bindPopup('Dealer D').addTo(map);
-    L.circle([-1.239848, 116.916119], {radius: 500, color: 'red', opacity:.5}).addTo(map);
+    L.circle([-1.239848, 116.916119], {radius: 1000, color: 'red', opacity:.5}).addTo(map);
     // map.addLayer(marker);
 
     // tambah data manual
@@ -292,7 +292,7 @@ function addRowDana() {
     //         var popupText = markers[i][2];
 
     //         // markerr  = L.marker(lat, lon).bindPopup('Dealer Tes');
-    //         // circle   = L.circle(lat, lon, {radius: 500, color: 'red', opacity:.5});
+    //         // circle   = L.circle(lat, lon, {radius: 1000, color: 'red', opacity:.5});
     //         // L.featureGroup([markerr, circle])
     //         //             .bindPopup(popupText)
     //         //             .addTo(map);
