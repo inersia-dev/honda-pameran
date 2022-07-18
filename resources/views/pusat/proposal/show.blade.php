@@ -515,7 +515,7 @@ rel="stylesheet"
                                                 <tr>
                                                     <td>1.</td>
                                                     <td>{{ $data->updated_at }}</td>
-                                                    <td>{{ $data->usercabang->name }}</td>
+                                                    <td>{{ $data->create_proposal == 1 ? $data->userpusat->name : $data->usercabang->name }}</td>
                                                     <td></td>
                                                     <td>
                                                         <label class="badge bg-info" style="color: #fff">Submit Proposal <i class="fas fa-check"></i> </label>

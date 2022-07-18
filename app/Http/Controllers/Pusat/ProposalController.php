@@ -315,6 +315,7 @@ class ProposalController extends Controller
         $data                                   = Proposal::firstWhere('uuid', request()->uuid);
         $data->no_proposal                      = $st == 'draft' ? null : $no.'/'.$dt->year.'/'.$dt->month.'/'.$dt->day.'/'.$data->kategori_proposal.'/'.$data->dealer->kode_dealer ;
         $data->status_proposal                  = 1;
+        $data->create_proposal                  = 1;
         $data->lokasi_proposal                  = request()->lokasi ?? null ;
         $data->dealer_proposal                  = request()->dealer ?? null;
         $data->display_proposal                 = !null == $displaydata ? json_encode($displaydata) : null ;

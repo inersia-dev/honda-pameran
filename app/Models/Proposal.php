@@ -12,6 +12,7 @@ use App\Models\Display;
 use App\Models\Cabang;
 use App\Models\Dealer;
 use App\Models\SalesPeople;
+USE App\Models\Pusat;
 
 class Proposal extends Model
 {
@@ -22,6 +23,7 @@ class Proposal extends Model
         'no_proposal',
         'user_proposal',
         'user_approval',
+        'create_proposal',
         'inbox_d',
         'inbox_md',
         'status_proposal',
@@ -95,6 +97,11 @@ class Proposal extends Model
     public function usercabang()
     {
         return $this->hasOne(Cabang::class, 'id', 'user_proposal');
+    }
+
+    public function userpusat()
+    {
+        return $this->hasOne(Pusat::class, 'id', 'user_proposal');
     }
 
     public function scopePj($query, $pj)
