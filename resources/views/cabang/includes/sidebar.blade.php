@@ -20,6 +20,21 @@
                 :text="__('Dashboard')" />
         </li>
         <li class="c-sidebar-nav-item">
+            <a href="{{ route('cabang.proposal.getInbox') }}" class="{{ activeClass(Route::is('cabang.proposal.getInbox'), 'c-active') }} c-sidebar-nav-link">
+                <i class="c-sidebar-nav-icon cil-inbox"></i>
+                Inbox
+                @php
+                    $inbox_ = DB::table('proposals')->where('status_proposal', '!=', 1)
+                                                ->where('dealer_proposal', Auth::guard('cabang')->user()->dealer)
+                                                ->where('inbox_d', true)
+                                                ->count();
+                @endphp
+                @if ($inbox_ != 0)
+                    <span class="badge bg-danger ms-auto">{{ $inbox_ }}</span>
+                @endif
+            </a>
+        </li>
+        <li class="c-sidebar-nav-item">
             <x-utils.link
                 class="c-sidebar-nav-link"
                 :href="route('cabang.proposal.index')"

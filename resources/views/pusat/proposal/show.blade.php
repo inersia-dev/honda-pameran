@@ -568,7 +568,38 @@ rel="stylesheet"
                                 </div>
 
                             </div>
-                            @if ($data->status_proposal != 4)
+                            @if ($data->user_approval == Auth::guard('pusat')->user()->jabatan)
+                                @if ($data->status_proposal == 2 || $data->status_proposal == 3)
+                                    <div class="col-12">
+                                        <div class="mb-2 row">
+                                            <label class="col-sm-2 col-form-label">Status<strong style="color:rgb(243, 0, 0)">*</strong></label>
+                                            <div class="col-sm-5">
+                                                <select class="form-control" name="status" required>
+                                                    <option value="1">Approve</option>
+                                                    <option value="2">Revise</option>
+                                                    <option value="3">Rejected</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="mb-2 row">
+                                            <label class="col-sm-2 col-form-label">Keterangan<strong style="color:rgb(243, 0, 0)">*</strong></label>
+                                            <div class="col-sm-10">
+                                                <textarea type="text" class="form-control" rows="4" name="keterangan" required></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="mb-2 row">
+                                            <div class="col-12">
+                                                @csrf
+                                                <input type="hidden" name="id" value="{{ $data->id }}">
+                                                <a href="{{ route('pusat.proposal.index') }}" class="btn btn-outline-dark"><i class="fas fa-chevron-left"></i> Kembali</a>
+                                                <div class="float-right">
+                                                    <button class="btn btn-primary" type="text" name="b" value="done"  onclick="return confirm('Konfirmasi Submit Status Proposal')">Submit <i class="fas fa-check"></i> </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
+                            @elseif ($data->user_approval == null)
                                 @foreach ($dataapproval as $key => $data_sub)
                                     @if ($data_sub->status_approval == null)
                                             @php

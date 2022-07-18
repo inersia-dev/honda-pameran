@@ -61,8 +61,34 @@ class ProposalController extends Controller
                             ->tanggal(request()->tanggal)
                             ->cariDealer(request()->dealer)
                             ->where('status_proposal', '!=', 1)
+                            ->where('user_approval', null)
                             ->paginate(10);
         return view('pusat.proposal.index', compact('datas', 'datalokasi', 'datakategori', 'datadealer'));
+    }
+
+    public function getInbox()
+    {
+        if(request()->metode == 'hapus') {
+            $hapus = Proposal::find(request()->id);
+            $hapus->delete();
+            return redirect()->back()->withFlashSuccess('Proposal Berhasil Terhapus  ! ✅');
+        }
+
+        $datalokasi   = Lokasi::get();
+        $datakategori = KategoriProposal::get();
+        $datadealer   = Dealer::get();
+        $datas        = Proposal::orderBy('updated_at', 'DESC')
+                            ->pj(request()->namapj)
+                            ->kategori(request()->kategori)
+                            ->lokasi(request()->lokasi)
+                            ->statusProposal(request()->status)
+                            ->tanggal(request()->tanggal)
+                            ->cariDealer(request()->dealer)
+                            ->where('status_proposal', '!=', 1)
+                            ->where('inbox_md', true)
+                            ->where('user_approval', Auth::guard('pusat')->user()->jabatan)
+                            ->paginate(10);
+        return view('pusat.proposal.inbox', compact('datas', 'datalokasi', 'datakategori', 'datadealer'));
     }
 
     public function getData()
@@ -94,7 +120,11 @@ class ProposalController extends Controller
     {
         $proposal  = Proposal::find(request()->id);
 
-        $approval                         = ApprovalProposal::find(request()->idapproval);
+        if (request()->idapproval) {
+            $approval = ApprovalProposal::find(request()->idapproval);
+        } else {
+            $approval = ApprovalProposal::where('id_proposal', $proposal->id)->where('user_approval', Auth::guard('pusat')->user()->id)->latest()->first();
+        }
         $approval->status_approval        = request()->status;
         $approval->keterangan_approval    = request()->keterangan;
         $approval->save();
@@ -106,6 +136,8 @@ class ProposalController extends Controller
                 $proposal->status_proposal = 4; // Final Approve
             } else {
                 $proposal->status_proposal = 3; // Partial Approve
+                $proposal->user_approval   = Auth::guard('pusat')->user()->jabatan+1;
+                $proposal->inbox_md        = true;
             }
 
         } elseif (request()->status == 2) { // revise
@@ -119,9 +151,10 @@ class ProposalController extends Controller
                 $rejectapproval->save();
             }
         }
+        $proposal->inbox_d = true;
         $proposal->save();
 
-        return redirect()->route('pusat.proposal.index')->withFlashSuccess('Update Approval Proposal Berhasil ! ✅');
+        return redirect()->route('pusat.proposal.getInbox')->withFlashSuccess('Update Approval Proposal Berhasil ! ✅');
     }
 
     public function getTes()
@@ -230,6 +263,11 @@ class ProposalController extends Controller
                                     ->orderBy('pusats.jabatan')
                                     ->get();
 
+            //Update Inbox Open
+            if ($data->user_approval == Auth::guard('pusat')->user()->jabatan) {
+                $data->inbox_md = false;
+                $data->save();
+            }
 
             return view('pusat.proposal.show', compact('data', 'datalokasi', 'datadisplay', 'datadealer', 'salespeople', 'datadana', 'datasalespeople', 'dataapproval', 'datafinance', 'datadisplayunit', 'cektitikaktif'));
         } else {

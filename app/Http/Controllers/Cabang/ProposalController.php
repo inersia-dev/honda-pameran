@@ -52,6 +52,28 @@ class ProposalController extends Controller
         return view('cabang.proposal.index', compact('datas', 'datalokasi', 'datakategori'));
     }
 
+    public function getInbox()
+    {
+        if(request()->metode == 'hapus') {
+            $hapus = Proposal::find(request()->id);
+            $hapus->delete();
+            return redirect()->back()->withFlashSuccess('Proposal Berhasil Terhapus  ! ✅');
+        }
+
+        $datalokasi   = Lokasi::get();
+        $datakategori = KategoriProposal::get();
+        $datas        = Proposal::where('dealer_proposal', Auth::guard('cabang')->user()->dealer)
+                            ->pj(request()->namapj)
+                            ->kategori(request()->kategori)
+                            ->lokasi(request()->lokasi)
+                            ->statusProposal(request()->status)
+                            ->tanggal(request()->tanggal)
+                            ->where('inbox_d', true)
+                            ->orderBy('updated_at', 'DESC')
+                            ->paginate(10);
+        return view('cabang.proposal.index', compact('datas', 'datalokasi', 'datakategori'));
+    }
+
     public function getDataLokasi()
     {
         $datalokasi = [];
@@ -160,6 +182,10 @@ class ProposalController extends Controller
                                     ->orderBy('approval_proposals.created_at')
                                     ->orderBy('pusats.jabatan')
                                     ->get();
+
+            //Update Inbox Open
+            $data->inbox_d = false;
+            $data->save();
 
             return view('cabang.proposal.show', compact('data', 'datalokasi', 'datadisplay', 'salespeople', 'datadana', 'datasalespeople', 'dataapproval', 'datafinance', 'datadisplayunit', 'cektitikaktif'));
         // } else {
@@ -305,6 +331,8 @@ class ProposalController extends Controller
             }
 
             $data->status_proposal = 2;
+            $data->user_approval   = 1;
+            $data->inbox_md        = true;
             $data->save();
 
             ApprovalProposal::where('status_approval', null)

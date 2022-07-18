@@ -28,6 +28,21 @@
                 text="Inbox"/>
         </li>
         <li class="c-sidebar-nav-item">
+            <a href="{{ route('pusat.proposal.getInbox') }}" class="{{ activeClass(Route::is('pusat.proposal.getInbox'), 'c-active') }} c-sidebar-nav-link">
+                <i class="c-sidebar-nav-icon cil-inbox"></i>
+                Inbox<strong style="color:rgb(243, 0, 0)">*</strong>
+                @php
+                    $inbox_ = DB::table('proposals')->where('status_proposal', '!=', 1)
+                                                ->where('user_approval', Auth::guard('pusat')->user()->jabatan)
+                                                ->where('inbox_md', true)
+                                                ->count();
+                @endphp
+                @if ($inbox_ != 0)
+                    <span class="badge bg-danger ms-auto">{{ $inbox_ }}</span>
+                @endif
+            </a>
+        </li>
+        <li class="c-sidebar-nav-item">
             <x-utils.link
                 class="c-sidebar-nav-link"
                 :href="route('pusat.proposal.getData')"
