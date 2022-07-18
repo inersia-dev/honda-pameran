@@ -252,8 +252,8 @@ class ProposalController extends Controller
         $data->periode_end_proposal             = request()->tanggalend ?? null ;
         $data->program_proposal                 = request()->program ?? null ;
         $data->tempat_proposal                  = request()->tempat ?? null ;
-        $data->lat_proposal                     = request()->lat ?? null ;
-        $data->long_proposal                    = request()->long ?? null ;
+        $data->lat_proposal                     = request()->lat ? Str::replace(',', '', request()->lat) : null ;
+        $data->long_proposal                    = request()->long ? Str::replace(',', '', request()->long) : null ; ;
         $data->dana_proposal                    = !null == $dana ? json_encode($dana) : null ;
         $data->penanggung_jawab_proposal        = request()->pjid ?? null ;
         $data->sales_people_proposal            = request()->idsales ? json_encode(request()->idsales) : null ;
