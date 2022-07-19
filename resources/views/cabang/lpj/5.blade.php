@@ -8,7 +8,7 @@
 <script>
     $( function() {
       $( "#datepicker" ).datepicker({
-            yearRange: "1930:2010",
+            yearRange: "{!! \Carbon\Carbon::now()->subYears(80)->year; !!}:{!! \Carbon\Carbon::now()->subYears(15)->year; !!}",
             changeMonth: true,
             changeYear: true
         });
@@ -132,7 +132,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="row form-group">
-                                                        <label class="col-sm-3 control-label">Pengeluaran / Bulan<strong style="color:rgb(243, 0, 0)">*</strong></label>
+                                                        <label class="col-sm-3 control-label">Pengeluaran / Bulan</label>
                                                         <div class="col-sm-9">
                                                             <select name="pengeluaran" class="form-control">
                                                                 @if ($konsumen->pengeluaran)
@@ -152,13 +152,13 @@
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="row form-group">
-                                                        <label class="col-sm-3 control-label">Range DP Konsumen<strong style="color:rgb(243, 0, 0)">*</strong></label>
+                                                        <label class="col-sm-3 control-label">Range DP Konsumen</label>
                                                         <div class="col-sm-9">
                                                             <select name="dp" class="form-control">
                                                                 @if ($konsumen->dp)
                                                                     <option value="{{ $konsumen->dp }}">{{ $konsumen->dp_($konsumen->dp)}}</option>
-                                                                    <option value=""></option>
                                                                 @endif
+                                                                <option value=""></option>
                                                                 <option value="1">≤ 1 jt</option>
                                                                 <option value="2">1 - 2 jt</option>
                                                                 <option value="3">2 - 3 jt</option>
@@ -233,7 +233,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="row form-group">
-                                                        <label class="col-sm-3 control-label">Jenis</label>
+                                                        <label class="col-sm-3 control-label">Jenis Pembayaran</label>
                                                         <div class="col-sm-9">
                                                             <select name="jenis" class="form-control">
                                                                 @if ($konsumen->cash_credit)
@@ -391,9 +391,10 @@
                                                     </div>
                                                     <div class="col-6">
                                                         <div class="row form-group">
-                                                            <label class="col-sm-3 control-label">Range DP Konsumen<strong style="color:rgb(243, 0, 0)">*</strong></label>
+                                                            <label class="col-sm-3 control-label">Range DP Konsumen</label>
                                                             <div class="col-sm-9">
                                                                 <select name="dp" class="form-control">
+                                                                    <option value=""></option>
                                                                     <option value="1">≤ 1 jt</option>
                                                                     <option value="2">1 - 2 jt</option>
                                                                     <option value="3">2 - 3 jt</option>
@@ -409,7 +410,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="row form-group">
-                                                            <label class="col-sm-3 control-label">Merk Motor Sebelumnya<strong style="color:rgb(243, 0, 0)">*</strong></label>
+                                                            <label class="col-sm-3 control-label">Merk Motor Sebelumnya</label>
                                                             <div class="col-sm-9">
                                                                 <select name="merkmotor" class="form-control">
                                                                     <option value="1">Honda</option>
@@ -422,7 +423,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="row form-group">
-                                                            <label class="col-sm-3 control-label">Jenis Motor Sebelumnya<strong style="color:rgb(243, 0, 0)">*</strong></label>
+                                                            <label class="col-sm-3 control-label">Jenis Motor Sebelumnya</label>
                                                             <div class="col-sm-9">
                                                                 <select name="jenismotor" class="form-control">
                                                                     <option value="1">Sport</option>
@@ -460,7 +461,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="row form-group">
-                                                            <label class="col-sm-3 control-label">Jenis</label>
+                                                            <label class="col-sm-3 control-label">Jenis Pembayaran</label>
                                                             <div class="col-sm-9">
                                                                 <select name="jenis" class="form-control">
                                                                     <option value=""></option>

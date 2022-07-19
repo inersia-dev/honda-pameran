@@ -24,9 +24,6 @@
                             </div>
                             <hr>
                             <div class="row">
-                                <div class="col-sm-2 col-form-label">
-                                    <strong>Kondisi</strong>
-                                </div>
                                 <div class="col-12">
                                     <table class="table table-striped border datatable table-sm table-bordered">
                                         <thead class="text-center">
@@ -35,7 +32,7 @@
                                                 <th colspan="2">Prospecting</th>
                                                 <th colspan="2">Penjualan</th>
                                                 <th colspan="2">Downloader Motorku-X</th>
-                                                <th colspan="2">Dana</th>
+                                                <th colspan="2">Biaya</th>
                                             </tr>
                                             <tr>
                                                 <th>Target</th>
