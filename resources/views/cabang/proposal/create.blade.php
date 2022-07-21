@@ -938,7 +938,7 @@ rel="stylesheet"
         function tanggalevent() {
             var start     = document.getElementById("tanggalstart").value;
             var datestart = new Date(start);
-            datestart.setDate(datestart.getDate()+{{ $data->kategori->waktu_minimum+1 ?? 2 }});
+            datestart.setDate(datestart.getDate()+{{ $data->kategori->waktu_minimum-1 ?? 0 }});
             // var y = datestart.getFullYear();
             // var m = datestart.getMonth()+1;
             // var d = datestart.getDate();

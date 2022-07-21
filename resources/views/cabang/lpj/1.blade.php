@@ -237,13 +237,13 @@
                                                     <div class="mb-2 row">
                                                         <label class="col-sm-3 col-form-label">Start</label>
                                                         <div class="col-sm-9">
-                                                            <input class="form-control" onchange="tanggalevent()" id="start" name="start" type="date" value="{{ $data->periode_start_lpj }}" required>
+                                                            <input class="form-control" onchange="tanggalevent()" id="start" name="start" type="date" value="{{ $data->periode_start_lpj }}" min="{{ \Carbon\Carbon::createFromFormat('Y-m-d',$data->periode_start_lpj)->format('Y') }}-{{ \Carbon\Carbon::createFromFormat('Y-m-d',$data->periode_start_lpj)->format('m') }}-01" required>
                                                         </div>
                                                     </div>
                                                     <div class="mb-2 row">
                                                         <label class="col-sm-3 col-form-label">End</label>
                                                         <div class="col-sm-9">
-                                                            <input class="form-control" id="end" name="end" type="date" value="{{ $data->periode_start_lpj }}" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" required>
+                                                            <input class="form-control" id="end" name="end" type="date" min="{{ \Carbon\Carbon::createFromFormat('Y-m-d',$data->periode_start_lpj)->addDays($data->proposal->kategori->waktu_minimum-1)->format('Y-m-d') }}" required>
                                                         </div>
                                                     </div>
                                                     <div class="text-muted">
@@ -289,7 +289,7 @@
         function tanggalevent() {
             var start     = document.getElementById("start").value;
             var datestart = new Date(start);
-            datestart.setDate(datestart.getDate()+{{ $data->proposal->kategori->waktu_minimum+1 ?? 2 }});
+            datestart.setDate(datestart.getDate()+{{ $data->proposal->kategori->waktu_minimum-1 ?? 0 }});
             // var y = datestart.getFullYear();
             // var m = datestart.getMonth()+1;
             // var d = datestart.getDate();
