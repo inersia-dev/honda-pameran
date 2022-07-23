@@ -381,7 +381,7 @@
             position: 'top'
         },
         series: [
-            @foreach ( $datakategori as $kat_ac_1)
+            @foreach ($datakategori as $kat_ac_1)
                 {
                     name: "{{ $kat_ac_1->nama_kategori }}",
                     type: "column",
@@ -406,7 +406,15 @@
         xaxis: {
             categories: [
                 @foreach ($datalokasikota as $kota)
-                    '{{ Str::title($kota->kota_lokasi) }}',
+                    @php
+                        $total_ac_kota = 0;
+                    @endphp
+                    @foreach ($datakategori as $kat_ac_1)
+                        @php
+                            $total_ac_kota = $total_ac_kota + $kat_ac_1->finalactivitykota($kat_ac_1->id, $kota->kota_lokasi)->count();
+                        @endphp
+                    @endforeach
+                    '{{ Str::title($kota->kota_lokasi) }} - {{ $total_ac_kota }}',
                 @endforeach
             ],
             labels: {
