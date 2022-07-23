@@ -36,6 +36,8 @@ class HomeController extends Controller
         if (request()->kecamatan) { $datalokasikelurahan = Lokasi::where('kota_lokasi', request()->lokasi)->where('kecamatan_lokasi', request()->kecamatan)->get(); }
         else { $datalokasikelurahan = null; }
 
+        // $chart1 = Proposal::
+
         return view('pusat.dashboard', compact('datadealer', 'datalokasikota', 'datalokasikecamatan', 'datalokasikelurahan', 'datakategori'));
     }
 }

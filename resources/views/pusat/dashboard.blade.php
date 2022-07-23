@@ -103,7 +103,7 @@
                                 @if (request()->analisys == 1)
                                     <div class="pb-2 col-sm">
                                         <div  style="padding-top: 5px; padding-bottom: 5px">
-                                            <label class="form-check-label">Dialy</label>
+                                            <label class="form-check-label">Daily</label>
                                         </div>
                                         <input type="date" class="form-control" name="date-analisys" onchange='if(this.value != 0) { this.form.submit(); }' value="{{ request()->input('date-analisys') ?? date('Y-m-d') }}">
                                     </div>
@@ -266,18 +266,15 @@
             height: {{ $h_ }},
             type: "line"
         },
-        fill: {
-                opacity: 1
-        },
         legend: {
             position: 'top'
         },
         series: [
-            @foreach ( $datakategori as $kat_ac)
+            @foreach ( $datakategori as $kat_ac_1)
                 {
-                    name: "{{ $kat_ac->nama_kategori }}",
+                    name: "{{ $kat_ac_1->nama_kategori }}",
                     type: "column",
-                    data: [440]
+                    data: [{{ $kat_ac_1->finalactivity($kat_ac_1->id)->count() }}]
                 },
             @endforeach
         ],
@@ -309,37 +306,37 @@
         var options = {
         chart: {
             height: {{ $h_ }},
-            type: "line"
+            type: "bar",
+            stacked: true,
         },
-        plotOptions: {
-          bar: {
-            borderRadius: 4,
-          }
+        legend: {
+            position: 'top'
+        },
+        stroke: {
+            width: 4,
+            curve: 'smooth',
+            colors: ['transparent']
         },
         series: [
-            {
-            name: "Proposal",
-            type: "column",
-            data: [240, 305, 414]
-            },
+            @foreach ( $datakategori as $kat_ac_2)
+
+                    {
+                        name: "{{ $kat_ac_2->nama_kategori }}",
+                        type: "column",
+                        data: [
+                                {{ $kat_ac_2->akanberjalan($kat_ac_2->id)->count() }},
+                                {{ $kat_ac_2->sedangberjalan($kat_ac_2->id)->count() }},
+                                {{ $kat_ac_2->selesai($kat_ac_2->id)->count() }}
+                        ]
+                    },
+            @endforeach
         ],
-        stroke: {
-            width: 3,
-            curve: 'smooth'
-        },
         title: {
             text: "Status Activity"
         },
-        theme: {
-            palette: 'palette3' // upto palette10
-        },
         labels: ["Akan Berjalan", "Sedang Berjalan", "Selesai"],
         dataLabels: {
-          enabled: true,
-            style: {
-                fontSize: '10px',
-                colors: ["#304758"]
-            }
+          enabled: true
         },
         xaxis: {
             labels: {
@@ -347,24 +344,6 @@
                     fontSize: '9px'
                 }
             }
-        },
-        grid: {
-          row: {
-            colors: ['#fff', '#f2f2f2']
-          }
-        },
-        fill: {
-            type: 'gradient',
-            gradient: {
-                shade: 'light',
-                type: "horizontal",
-                shadeIntensity: 0.25,
-                gradientToColors: undefined,
-                inverseColors: true,
-                opacityFrom: 0.85,
-                opacityTo: 0.85,
-                stops: [50, 0, 100]
-            },
         }
         };
 
