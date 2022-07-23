@@ -27,16 +27,11 @@
                                     <div  style="padding-top: 5px; padding-bottom: 5px">
                                         <label class="form-check-label">Dealer</label>
                                     </div>
-                                    <select name="dealer" class="data-dealer form-control">
-                                        <option value="">Semua</option>
-                                        <option value=""></option>
-                                        {{-- @foreach ($datadealer as $data_d)
-                                            <option value="{{ $data_d->id }}"
-                                                @if (request()->dealer == $data_d->id)
-                                                    selected
-                                                @endif
-                                            >{{ $data_d->nama_dealer }}, {{ Str::title($data_d->kota_dealer) }}</option>
-                                        @endforeach --}}
+                                    <select name="dealer" class="data-dealer form-control" onchange='if(this.value != 0) { this.form.submit(); }'>
+                                        <option value="SEMUA">Semua</option>
+                                        @foreach ($datadealer as $data_d)
+                                            <option value="{{ $data_d->id }}" {{ request()->dealer == $data_d->id ? 'selected' : '' }}>{{ $data_d->nama_dealer }}, {{ Str::title($data_d->kota_dealer) }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
 
@@ -45,52 +40,92 @@
                                         <label class="form-check-label">Activity</label>
 
                                     </div>
-                                    <select class="form-control" name="kategori" id="kategori">
-                                        <option value="">Semua</option>
-                                        <option value=""></option>
-                                        {{-- @foreach ($datakategori as $data_k)
-                                            <option value="{{ $data_k->id }}">{{ $data_k->nama_kategori }}</option>
-                                        @endforeach --}}
+                                    <select class="form-control" name="activity" id="activity" onchange='if(this.value != 0) { this.form.submit(); }'>
+                                        <option value="SEMUA">Semua</option>
+                                        @foreach ($datakategori as $data_ac)
+                                            <option value="{{ $data_ac->id }}" {{ request()->activity == $data_ac->id ? 'selected' : '' }}>{{ $data_ac->nama_kategori }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="pb-2 col-sm">
                                     <div  style="padding-top: 5px; padding-bottom: 5px">
                                         <label class="form-check-label">Area</label>
                                     </div>
-                                    <select class="form-control data-lokasi" name="lokasi">
-                                        <option value="">Semua</option>
-                                        <option value=""></option>
-                                        {{-- @foreach ($datalokasi as $data_l)
-                                            <option value="{{ $data_l->id }}"
-                                                @if (request()->lokasi == $data_l->id)
-                                                    selected
-                                                @endif
-                                            >{{ $data_l->kelurahan_lokasi }}, {{ $data_l->kecamatan_lokasi }}</option>
-                                        @endforeach --}}
+                                    <select class="form-control data-lokasi" name="lokasi" onchange='if(this.value != 0) { this.form.submit(); }'>
+                                        <option value="SEMUA">Semua</option>
+                                        @foreach ($datalokasikota as $data_kt)
+                                            <option value="{{ $data_kt->kota_lokasi }}" {{ request()->lokasi == $data_kt->kota_lokasi ? 'selected' : '' }}>
+                                                {{ Str::title($data_kt->kota_lokasi) }}
+                                            </option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="pb-2 col-sm">
+                                    @if(request()->lokasi && request()->lokasi != 'SEMUA')
+                                        <div  style="padding-top: 5px; padding-bottom: 5px">
+                                            <label class="form-check-label">Kecamatan</label>
+                                        </div>
+                                        <select class="form-control data-lokasi" name="kecamatan" onchange='if(this.value != 0) { this.form.submit(); }'>
+                                            <option value="SEMUA">Semua</option>
+                                            @foreach ($datalokasikecamatan as $data_kec)
+                                                <option value="{{ $data_kec->kecamatan_lokasi }}" {{ request()->kecamatan == $data_kec->kecamatan_lokasi ? 'selected' : '' }}>
+                                                    {{ Str::title($data_kec->kecamatan_lokasi) }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    @endif
                                 </div>
                                 <div class="pb-2 col-sm">
+                                    @if(request()->kecamatan && request()->kecamatan != 'SEMUA')
+                                        <div  style="padding-top: 5px; padding-bottom: 5px">
+                                            <label class="form-check-label">Kelurahan</label>
+                                        </div>
+                                        <select class="form-control data-lokasi" name="kelurahan" onchange='if(this.value != 0) { this.form.submit(); }'>
+                                            <option value="SEMUA">Semua</option>
+                                            @foreach ($datalokasikelurahan as $data_kel)
+                                                <option value="{{ $data_kel->id }}" {{ request()->kelurahan == $data_kel->id ? 'selected' : '' }}>
+                                                    {{ Str::title($data_kel->kelurahan_lokasi) }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    @endif
                                 </div>
                                 <div class="pb-2 col-sm">
                                     <div  style="padding-top: 5px; padding-bottom: 5px">
                                         <label class="form-check-label">Analysis</label>
                                     </div>
-                                    <select class="form-control data-lokasi" name="lokasi">
-                                        <option value="">Daily</option>
-                                        <option value="" selected>Monthly</option>
-                                        <option value="">Yearly</option>
-                                        <option value=""></option>
-                                        {{-- @foreach ($datalokasi as $data_l)
-                                            <option value="{{ $data_l->id }}"
-                                                @if (request()->lokasi == $data_l->id)
-                                                    selected
-                                                @endif
-                                            >{{ $data_l->kelurahan_lokasi }}, {{ $data_l->kecamatan_lokasi }}</option>
-                                        @endforeach --}}
+                                    <select class="form-control data-lokasi" name="analisys" onchange='if(this.value != 0) { this.form.submit(); }'>
+                                        <option value="1" {{ request()->analisys == 1 ? 'selected' : '' }}>Daily</option>
+                                        <option value="2" {{ request()->analisys == 2 || empty(request()->analisys) ? 'selected' : '' }}>Monthly</option>
+                                        <option value="3" {{ request()->analisys == 3 ? 'selected' : '' }}>Yearly</option>
                                     </select>
                                 </div>
+                                @if (request()->analisys == 1)
+                                    <div class="pb-2 col-sm">
+                                        <div  style="padding-top: 5px; padding-bottom: 5px">
+                                            <label class="form-check-label">Dialy</label>
+                                        </div>
+                                        <input type="date" class="form-control" name="date-analisys" onchange='if(this.value != 0) { this.form.submit(); }' value="{{ request()->input('date-analisys') ?? date('Y-m-d') }}">
+                                    </div>
+                                @elseif (request()->analisys == 3)
+                                    <div class="pb-2 col-sm">
+                                        <div  style="padding-top: 5px; padding-bottom: 5px">
+                                            <label class="form-check-label">Yearly</label>
+                                        </div>
+                                        <select class="form-control data-lokasi" name="year-analisys"  onchange='if(this.value != 0) { this.form.submit(); }'>
+                                            @for ($i = 2021; $i <= date("Y"); $i++)
+                                                <option value="{{ $i }}" {{ request()->input('year-analisys') == $i || $i == date("Y") ? 'selected' : '' }}>{{ $i }}</option>
+                                            @endfor
+                                        </select>
+                                    </div>
+                                @else
+                                    <div class="pb-2 col-sm">
+                                        <div  style="padding-top: 5px; padding-bottom: 5px">
+                                            <label class="form-check-label">Monthly</label>
+                                        </div>
+                                        <input type="month" class="form-control" name="month-analisys" onchange='if(this.value != 0) { this.form.submit(); }' value="{{ request()->input('month-analisys') ?? date('Y-m') }}">
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </form>
@@ -238,31 +273,13 @@
             position: 'top'
         },
         series: [
-            {
-                name: "Pameran",
-                type: "column",
-                data: [440]
-            },
-            {
-                name: "Pameran Ruko",
-                type: "column",
-                data: [505]
-            },
-            {
-                name: "Roadshow",
-                type: "column",
-                data: [414]
-            },
-            {
-                name: "Showroom Event",
-                type: "column",
-                data: [671]
-            },
-            {
-                name: "Showroom Event Virtual",
-                type: "column",
-                data: [227]
-            },
+            @foreach ( $datakategori as $kat_ac)
+                {
+                    name: "{{ $kat_ac->nama_kategori }}",
+                    type: "column",
+                    data: [440]
+                },
+            @endforeach
         ],
         stroke: {
             width: 4,
@@ -270,9 +287,9 @@
             colors: ['transparent']
         },
         title: {
-            text: "Jenis Proposal"
+            text: "Activity"
         },
-        labels: ["Proposal"],
+        labels: ["Activity"],
         dataLabels: {
           enabled: true,
             style: {
@@ -280,13 +297,6 @@
                 colors: ["#304758"]
             }
         },
-        yaxis: [
-            {
-                title: {
-                    text: "Final Approve"
-                }
-            }
-        ]
         };
 
         var chart = new ApexCharts(document.querySelector("#chart"), options);
@@ -318,7 +328,7 @@
             curve: 'smooth'
         },
         title: {
-            text: "Status Proposal"
+            text: "Status Activity"
         },
         theme: {
             palette: 'palette3' // upto palette10
@@ -331,13 +341,6 @@
                 colors: ["#304758"]
             }
         },
-        yaxis: [
-            {
-                title: {
-                    text: "Proposal"
-                }
-            },
-        ],
         xaxis: {
             labels: {
                 style: {
@@ -395,7 +398,7 @@
             },
         ],
         title: {
-            text: "Final Proposal - AREA"
+            text: "Activity Area"
         },
         theme: {
             palette: 'palette4' // upto palette10
