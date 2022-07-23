@@ -270,7 +270,13 @@
             position: 'top'
         },
         series: [
+            @php
+                $total_ac = 0;
+            @endphp
             @foreach ( $datakategori as $kat_ac_1)
+                @php
+                    $total_ac = $total_ac + $kat_ac_1->finalactivity($kat_ac_1->id)->count();
+                @endphp
                 {
                     name: "{{ $kat_ac_1->nama_kategori }}",
                     type: "column",
@@ -286,7 +292,7 @@
         title: {
             text: "Activity"
         },
-        labels: ["Activity"],
+        labels: ["Activity - {{ $total_ac }}"],
         dataLabels: {
           enabled: true,
             style: {
