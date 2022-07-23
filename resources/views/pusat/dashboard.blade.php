@@ -318,7 +318,17 @@
             colors: ['transparent']
         },
         series: [
+            @php
+                $total_ab = 0;
+                $total_sb = 0;
+                $total_s  = 0;
+            @endphp
             @foreach ( $datakategori as $kat_ac_2)
+                @php
+                    $total_ab = $total_ab + $kat_ac_2->akanberjalan($kat_ac_2->id)->count();
+                    $total_sb = $total_sb + $kat_ac_2->sedangberjalan($kat_ac_2->id)->count();
+                    $total_s  = $total_s + $kat_ac_2->selesai($kat_ac_2->id)->count();
+                @endphp
 
                     {
                         name: "{{ $kat_ac_2->nama_kategori }}",
@@ -334,7 +344,7 @@
         title: {
             text: "Status Activity"
         },
-        labels: ["Akan Berjalan", "Sedang Berjalan", "Selesai"],
+        labels: ["Akan Berjalan - {{ $total_ab }}", "Sedang Berjalan - {{ $total_sb }}", "Selesai - {{ $total_s }}"],
         dataLabels: {
           enabled: true
         },
@@ -357,7 +367,8 @@
         var options = {
         chart: {
             height: {{ $h_ }},
-            type: "bar"
+            type: "bar",
+            stacked: true,
         },
         plotOptions: {
           bar: {
@@ -370,17 +381,20 @@
             position: 'top'
         },
         series: [
-            {
-                name: "Proposal",
-                type: "column",
-                data: [340, 205, 114, 141, 187, 107, 127]
-            },
+            @foreach ( $datakategori as $kat_ac_1)
+                {
+                    name: "{{ $kat_ac_1->nama_kategori }}",
+                    type: "column",
+                    data: [
+                        @foreach ($datalokasikota as $kota)
+                            {{ $kat_ac_1->finalactivitykota($kat_ac_1->id, $kota->kota_lokasi)->count() }},
+                        @endforeach
+                    ]
+                },
+            @endforeach
         ],
         title: {
             text: "Activity Area"
-        },
-        theme: {
-            palette: 'palette4' // upto palette10
         },
         dataLabels: {
           enabled: true,
@@ -390,7 +404,11 @@
             }
         },
         xaxis: {
-            categories: ["Balikpapan", "Berau", "Bulungan", "Nunukan", "Paser", "Penajam Paser Utara", "Tarakan"],
+            categories: [
+                @foreach ($datalokasikota as $kota)
+                    '{{ Str::title($kota->kota_lokasi) }}',
+                @endforeach
+            ],
             labels: {
                 style: {
                     fontSize: '9px'

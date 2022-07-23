@@ -28,6 +28,17 @@ class KategoriProposal extends Model
         return $this->hasMany(Proposal::class, 'kategori_proposal', 'id')->where('status_proposal', 4)->where('kategori_proposal', $idkategori);
     }
 
+    public function finalactivitykota($idkategori, $kota)
+    {
+        $this->kota_ = $kota;
+        return $this->hasMany(Proposal::class, 'kategori_proposal', 'id')
+                    ->where('status_proposal', 4)
+                    ->where('kategori_proposal', $idkategori)
+                    ->whereHas('dealer', function ($query) {
+                        return $query->whereRaw('LOWER(kota_dealer) LIKE ? ', '%'.strtolower($this->kota_).'%');
+                    });
+    }
+
     public function akanberjalan($idkategori)
     {
         return $this->hasMany(Proposal::class, 'kategori_proposal', 'id')
