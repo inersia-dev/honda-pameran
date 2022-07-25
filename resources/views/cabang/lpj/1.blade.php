@@ -237,13 +237,13 @@
                                                     <div class="mb-2 row">
                                                         <label class="col-sm-3 col-form-label">Start</label>
                                                         <div class="col-sm-9">
-                                                            <input class="form-control" onchange="tanggalevent()" id="start" name="start" type="date" value="{{ $data->periode_start_lpj }}" min="{{ \Carbon\Carbon::createFromFormat('Y-m-d',$data->periode_start_lpj)->format('Y') }}-{{ \Carbon\Carbon::createFromFormat('Y-m-d',$data->periode_start_lpj)->format('m') }}-01" required>
+                                                            <input class="form-control" onchange="tanggalevent()" id="start" name="start" type="date" value="{{ $data->periode_start_lpj }}" min="{{ $data->periode_start_lpj ? \Carbon\Carbon::createFromFormat('Y-m-d',$data->periode_start_lpj)->format('Y') : date('Y') }}-{{ $data->periode_start_lpj ? \Carbon\Carbon::createFromFormat('Y-m-d',$data->periode_start_lpj)->format('m') : date('m') }}-01" required>
                                                         </div>
                                                     </div>
                                                     <div class="mb-2 row">
                                                         <label class="col-sm-3 col-form-label">End</label>
                                                         <div class="col-sm-9">
-                                                            <input class="form-control" id="end" name="end" type="date" value="{{ $data->periode_end_lpj }}" min="{{ \Carbon\Carbon::createFromFormat('Y-m-d',$data->periode_start_lpj)->addDays($data->proposal->kategori->waktu_minimum-1)->format('Y-m-d') }}" required>
+                                                            <input class="form-control" id="end" name="end" type="date" value="{{ $data->periode_end_lpj }}" min="{{ $data->periode_start_lpj ? \Carbon\Carbon::createFromFormat('Y-m-d',$data->periode_start_lpj)->addDays($data->proposal->kategori->waktu_minimum-1)->format('Y-m-d') : '' }}" required>
                                                         </div>
                                                     </div>
                                                     <div class="text-muted">
