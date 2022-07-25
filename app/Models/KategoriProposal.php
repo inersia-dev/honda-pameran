@@ -28,6 +28,11 @@ class KategoriProposal extends Model
         return $this->hasMany(Proposal::class, 'kategori_proposal', 'id')->where('status_proposal', 4)->where('kategori_proposal', $idkategori);
     }
 
+    public function finalactivity_data($idkategori)
+    {
+        return $this->hasMany(Proposal::class, 'kategori_proposal', 'id')->where('status_proposal', 4)->where('kategori_proposal', $idkategori);
+    }
+
     public function finalactivitykota($idkategori, $kota)
     {
         $this->kota_ = $kota;

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Proposal;
 
 class Dealer extends Model
 {
@@ -17,4 +18,17 @@ class Dealer extends Model
         'area_dealer',
         'user_dealer',
     ];
+
+    public function proposal()
+    {
+        return $this->hasMany(Proposal::class, 'dealer_proposal', 'id');
+    }
+
+    public function jumlahpenjualanlpj()
+    {
+        return $this->hasMany(Proposal::class, 'dealer_proposal', 'id')
+                    ->with(['lpj' => function($query){
+                        $query->sum('target_penjualan_lpj');
+                     }]);
+    }
 }

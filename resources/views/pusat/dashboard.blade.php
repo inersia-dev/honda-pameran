@@ -176,20 +176,20 @@
                                 $no_pen = 1;
                                 $data_pen = 400;
                             @endphp
-                            @foreach ($datadealer as $dealer_pen)
+                            @foreach ($data_leaderboard_penjualan_dealer as $dealer_pen)
                                 <div class="row p-2" style="font-size: 9px">
                                     <div class="col-1 p-0 pl-2">{{ $no_pen++; }}</div>
                                     <div class="col font-weight-bold justify-content-start" style="color: #ec1b25;">
-                                        {{ $dealer_pen->nama_dealer }}
+                                        {{ data_get($dealer_pen, 'dealer_') }}
                                     </div>
-                                    <div class="col-2 font-weight-bold text-right">{{ $data_pen -= 10 }}</div>
+                                    <div class="col-2 font-weight-bold text-right">{{ data_get($dealer_pen, 'penjualan_') }}</div>
                                 </div>
                                 <hr class="m-0 p-0">
                             @endforeach
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-3">
+                {{-- <div class="col-sm-3">
                     <div class="row">
                         <div class="col-12">
                             <label class="font-weight-bold">Leaderboard LPJ Dealer</label>
@@ -222,7 +222,7 @@
                             @endforeach
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
@@ -448,7 +448,15 @@
                     name: 'Downloader Motorku-X',
                     data: [
                         @foreach ($datakategori as $kat_ac_3_a)
-                            {{ $kat_ac_3_a->jumlahdownloader($kat_ac_3_a->id)}},
+                            @php
+                                $target = 0;
+                            @endphp
+                            @foreach ($kat_ac_3_a->finalactivity($kat_ac_3_a->id)->get() as $target_lpj_a)
+                                @php
+                                    $target = $target + $target_lpj_a->lpj->sum('target_downloader_lpj');
+                                @endphp
+                            @endforeach
+                            {{ $target }},
                         @endforeach
                     ]
                 },
@@ -456,7 +464,15 @@
                     name: 'Database',
                     data: [
                         @foreach ($datakategori as $kat_ac_3_b)
-                            {{ $kat_ac_3_b->jumlahdatabase($kat_ac_3_b->id)}},
+                            @php
+                                $target = 0;
+                            @endphp
+                            @foreach ($kat_ac_3_b->finalactivity($kat_ac_3_b->id)->get() as $target_lpj_a)
+                                @php
+                                    $target = $target + $target_lpj_a->lpj->sum('target_database_lpj');
+                                @endphp
+                            @endforeach
+                            {{ $target }},
                         @endforeach
                     ]
                 },
@@ -464,7 +480,15 @@
                     name: 'Prospecting',
                     data: [
                         @foreach ($datakategori as $kat_ac_3_c)
-                            {{ $kat_ac_3_c->jumlahprospectus($kat_ac_3_c->id)}},
+                            @php
+                                $target = 0;
+                            @endphp
+                            @foreach ($kat_ac_3_c->finalactivity($kat_ac_3_c->id)->get() as $target_lpj_a)
+                                @php
+                                    $target = $target + $target_lpj_a->lpj->sum('target_prospectus_lpj');
+                                @endphp
+                            @endforeach
+                            {{ $target }},
                         @endforeach
                     ]
                 },
@@ -472,7 +496,15 @@
                     name: 'Penjualan',
                     data: [
                         @foreach ($datakategori as $kat_ac_3_d)
-                            {{ $kat_ac_3_d->jumlahpenjualan($kat_ac_3_d->id)}},
+                            @php
+                                $target = 0;
+                            @endphp
+                            @foreach ($kat_ac_3_d->finalactivity($kat_ac_3_d->id)->get() as $target_lpj_a)
+                                @php
+                                    $target = $target + $target_lpj_a->lpj->sum('target_penjualan_lpj');
+                                @endphp
+                            @endforeach
+                            {{ $target }},
                         @endforeach
                     ]
                 }

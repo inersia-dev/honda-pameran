@@ -13,6 +13,7 @@ use App\Models\Cabang;
 use App\Models\Dealer;
 use App\Models\SalesPeople;
 USE App\Models\Pusat;
+use App\Models\Lpj;
 
 class Proposal extends Model
 {
@@ -94,6 +95,16 @@ class Proposal extends Model
         return $this->hasOne(SalesPeople::class, 'id', 'sales_people_proposal');
     }
 
+    public function lpj()
+    {
+        return $this->hasMany(Lpj::class, 'id_proposal', 'id');
+    }
+
+    public function lpj_()
+    {
+        return $this->hasOne(Lpj::class, 'id_proposal', 'id');
+    }
+
     public function usercabang()
     {
         return $this->hasOne(Cabang::class, 'id', 'user_proposal');
@@ -157,6 +168,11 @@ class Proposal extends Model
         if ($dealer) {
             return $query->where('dealer_proposal', $dealer);
         }
+    }
+
+    public function scopeLeaderboardPenjualan($query)
+    {
+        return $query->sum('target_downloader_proposal');
     }
 
     public function scopeFinalProposal($query)

@@ -38,8 +38,20 @@ class HomeController extends Controller
         if (request()->kecamatan) { $datalokasikelurahan = Lokasi::where('kota_lokasi', request()->lokasi)->where('kecamatan_lokasi', request()->kecamatan)->get(); }
         else { $datalokasikelurahan = null; }
 
-        // $chart1 = Proposal::
+        // LEADERBOARD LPJ Penjualan
+        foreach ($datadealer as $dealer_pen) {
+            $penjualan_ = 0;
+            foreach ($dealer_pen->proposal as $a) {
+                $penjualan_ = $penjualan_ + $a->lpj->sum('target_penjualan_lpj');
+            }
 
-        return view('pusat.dashboard', compact('datadealer', 'datalokasikota', 'datalokasikecamatan', 'datalokasikelurahan', 'datakategori', 'dataproposal'));
+            $data[] = array(
+                'dealer_'    => $dealer_pen->nama_dealer,
+                'penjualan_' => $penjualan_
+            );
+        }
+        $data_leaderboard_penjualan_dealer = collect($data)->sortBy('penjualan_')->reverse()->toArray();
+
+        return view('pusat.dashboard', compact('datadealer', 'datalokasikota', 'datalokasikecamatan', 'datalokasikelurahan', 'datakategori', 'dataproposal', 'data_leaderboard_penjualan_dealer'));
     }
 }
