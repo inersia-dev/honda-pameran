@@ -159,4 +159,14 @@ class Proposal extends Model
         }
     }
 
+    public function scopeFinalProposal($query)
+    {
+        return $query->where('status_proposal', 4);
+    }
+
+    public function scopeJumlahDownloader($query)
+    {
+        return $query->sum('target_downloader_proposal');
+    }
+
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Dealer;
 use App\Models\Lokasi;
 use App\Models\KategoriProposal;
+use App\Models\Proposal;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -29,6 +30,7 @@ class HomeController extends Controller
         $datadealer       = Dealer::get();
         $datalokasikota   = Lokasi::select('kota_lokasi')->groupBy('kota_lokasi')->get();
         $datakategori     = KategoriProposal::orderBy('keterangan_kategori')->get();
+        $dataproposal     = Proposal::finalProposal();
 
         if (request()->lokasi) { $datalokasikecamatan = Lokasi::where('kota_lokasi', request()->lokasi)->select('kecamatan_lokasi')->groupBy('kecamatan_lokasi')->get(); }
         else { $datalokasikecamatan = null; }
@@ -38,6 +40,6 @@ class HomeController extends Controller
 
         // $chart1 = Proposal::
 
-        return view('pusat.dashboard', compact('datadealer', 'datalokasikota', 'datalokasikecamatan', 'datalokasikelurahan', 'datakategori'));
+        return view('pusat.dashboard', compact('datadealer', 'datalokasikota', 'datalokasikecamatan', 'datalokasikelurahan', 'datakategori', 'dataproposal'));
     }
 }

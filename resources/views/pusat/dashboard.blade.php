@@ -352,7 +352,11 @@
         },
         labels: ["Akan Berjalan - {{ $total_ab }}", "Sedang Berjalan - {{ $total_sb }}", "Selesai - {{ $total_s }}"],
         dataLabels: {
-          enabled: true
+            enabled: true,
+            style: {
+                    fontSize: '10px',
+                    colors: ["#222"]
+                }
         },
         xaxis: {
             labels: {
@@ -442,19 +446,35 @@
             series: [
                 {
                     name: 'Downloader Motorku-X',
-                    data: [410, 504, 510, 490, 460]
+                    data: [
+                        @foreach ($datakategori as $kat_ac_3_a)
+                            {{ $kat_ac_3_a->jumlahdownloader($kat_ac_3_a->id)}},
+                        @endforeach
+                    ]
                 },
                 {
                     name: 'Database',
-                    data: [440, 550, 410, 370, 320]
+                    data: [
+                        @foreach ($datakategori as $kat_ac_3_b)
+                            {{ $kat_ac_3_b->jumlahdatabase($kat_ac_3_b->id)}},
+                        @endforeach
+                    ]
                 },
                 {
                     name: 'Prospecting',
-                    data: [380, 478, 310, 290, 260]
+                    data: [
+                        @foreach ($datakategori as $kat_ac_3_c)
+                            {{ $kat_ac_3_c->jumlahprospectus($kat_ac_3_c->id)}},
+                        @endforeach
+                    ]
                 },
                 {
                     name: 'Penjualan',
-                    data: [110, 199, 198, 179, 156]
+                    data: [
+                        @foreach ($datakategori as $kat_ac_3_d)
+                            {{ $kat_ac_3_d->jumlahpenjualan($kat_ac_3_d->id)}},
+                        @endforeach
+                    ]
                 }
             ],
             plotOptions: {
@@ -476,7 +496,11 @@
                 palette: 'palette4' // upto palette10
             },
             xaxis: {
-                categories: ["Pameran", "Pameran Ruko", "Roadshow", "Showroom Event", "Showroom Event Virtual"],
+                categories: [
+                    @foreach ($datakategori as $kat_ac_4)
+                        "{{ $kat_ac_4->nama_kategori }}",
+                    @endforeach
+                ],
             },
             fill: {
                 opacity: 1

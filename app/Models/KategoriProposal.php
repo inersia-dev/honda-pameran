@@ -64,4 +64,36 @@ class KategoriProposal extends Model
                         ->where('periode_end_proposal', '<', Carbon::now()->addDays(1)->format('Y-m-d'));
     }
 
+    public function jumlahdownloader($idkategori)
+    {
+        return $this->hasMany(Proposal::class, 'kategori_proposal', 'id')
+                        ->where('status_proposal', 4)
+                        ->where('kategori_proposal', $idkategori)
+                        ->sum('target_downloader_proposal');
+    }
+
+    public function jumlahdatabase($idkategori)
+    {
+        return $this->hasMany(Proposal::class, 'kategori_proposal', 'id')
+                        ->where('status_proposal', 4)
+                        ->where('kategori_proposal', $idkategori)
+                        ->sum('target_database_proposal');
+    }
+
+    public function jumlahpenjualan($idkategori)
+    {
+        return $this->hasMany(Proposal::class, 'kategori_proposal', 'id')
+                        ->where('status_proposal', 4)
+                        ->where('kategori_proposal', $idkategori)
+                        ->sum('target_penjualan_proposal');
+    }
+
+    public function jumlahprospectus($idkategori)
+    {
+        return $this->hasMany(Proposal::class, 'kategori_proposal', 'id')
+                        ->where('status_proposal', 4)
+                        ->where('kategori_proposal', $idkategori)
+                        ->sum('target_prospectus_proposal');
+    }
+
 }
