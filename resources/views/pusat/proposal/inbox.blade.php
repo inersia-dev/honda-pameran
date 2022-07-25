@@ -28,13 +28,13 @@
                                         <label class="form-check-label">Status</label>
                                     </div>
                                     <select id="status" name="status" class="form-control">
-                                        <option value="">Semua</option>
-                                        <option value="1">Draft</option>
-                                        <option value="2">Waiting Approval</option>
-                                        <option value="3">Partial Approval</option>
-                                        <option value="4">Final</option>
-                                        <option value="5">Revise</option>
-                                        <option value="6">Rejected</option>
+                                        <option value="" >Semua</option>
+                                        <option value="1" {{ request()->status == 1 ? 'selected' : ''}}>Draft</option>
+                                        <option value="2" {{ request()->status == 2 ? 'selected' : ''}}>Waiting Approval</option>
+                                        <option value="3" {{ request()->status == 3 ? 'selected' : ''}}>Partial Approval</option>
+                                        <option value="4" {{ request()->status == 4 ? 'selected' : ''}}>Final</option>
+                                        <option value="5" {{ request()->status == 5 ? 'selected' : ''}}>Revise</option>
+                                        <option value="6" {{ request()->status == 6 ? 'selected' : ''}}>Rejected</option>
                                     </select>
                                 </div>
                                 <div class="pb-2 col">
@@ -42,7 +42,7 @@
                                         <label class="form-check-label">Kategori Proposal</label>
                                     </div>
                                     <select class="form-control" name="kategori" id="kategori">
-                                        <option value=""></option>
+                                        <option value="SEMUA">Semua</option>
                                         @foreach ($datakategori as $data_k)
                                             <option value="{{ $data_k->id }}">{{ $data_k->nama_kategori }}</option>
                                         @endforeach
@@ -53,7 +53,7 @@
                                         <label class="form-check-label">Lokasi</label>
                                     </div>
                                     <select class="form-control data-lokasi" name="lokasi">
-                                        <option value=""></option>
+                                        <option value="SEMUA">Semua</option>
                                         @foreach ($datalokasi as $data_l)
                                             <option value="{{ $data_l->id }}"
                                                 @if (request()->lokasi == $data_l->id)

@@ -28,18 +28,23 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index() {
-        $datadealer       = Dealer::cariKota(request()->lokasi)->get();
-        $datalokasikota   = Lokasi::select('kota_lokasi')->groupBy('kota_lokasi')->get();
-        $dataactivitykota = Lokasi::select('kota_lokasi')->groupBy('kota_lokasi')->where('kota_lokasi', request()->lokasi)->get();
-        $datakategori     = KategoriProposal::orderBy('keterangan_kategori')->get();
-        $dataproposal     = Proposal::finalProposal();
-        $datakonsumen     = LpjKonsumen::select('id_sales_people', DB::raw('count(id_sales_people) as total_ssu'))
+        $datadealer           = Dealer::cariKota(request()->lokasi)->get();
+        $datalokasikota       = Lokasi::select('kota_lokasi')->groupBy('kota_lokasi')->get();
+        $dataactivitykota     = Lokasi::select('kota_lokasi')->groupBy('kota_lokasi')->where('kota_lokasi', request()->lokasi)->get();
+        $datakategori         = KategoriProposal::orderBy('keterangan_kategori')->get();
+        $dataproposal         = Proposal::finalProposal();
+        $leaderboardsales    = LpjKonsumen::select('id_sales_people', DB::raw('count(id_sales_people) as total_ssu'))
                                         ->where('hasil', 4)
                                         ->groupBy('id_sales_people')
                                         ->orderBy('total_ssu', 'desc')
+                                        ->areaKota(request()->lokasi)
+                                        ->dataDealer(request()->dealer)
                                         ->skip(0)
                                         ->take(20)
                                         ->get();
+        $datakonsumen         = LpjKonsumen::areaKota(request()->lokasi)
+                                        ->dataDealer(request()->dealer);
+                                        // ->get();
 
         if (request()->lokasi) { $datalokasikecamatan = Lokasi::where('kota_lokasi', request()->lokasi)->select('kecamatan_lokasi')->groupBy('kecamatan_lokasi')->get(); }
         else { $datalokasikecamatan = null; }
@@ -61,6 +66,9 @@ class HomeController extends Controller
         }
         $data_leaderboard_penjualan_dealer = collect($data)->sortBy('penjualan_')->reverse()->toArray();
 
-        return view('pusat.dashboard', compact('datadealer', 'datalokasikota', 'dataactivitykota', 'datalokasikecamatan', 'datalokasikelurahan', 'datakategori', 'dataproposal', 'data_leaderboard_penjualan_dealer', 'datakonsumen'));
+
+
+        return view('pusat.dashboard',
+                compact('datadealer', 'datalokasikota', 'dataactivitykota', 'datalokasikecamatan', 'datalokasikelurahan', 'datakategori', 'dataproposal', 'data_leaderboard_penjualan_dealer', 'datakonsumen', 'leaderboardsales'));
     }
 }

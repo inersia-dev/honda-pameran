@@ -66,6 +66,61 @@ class LpjKonsumen extends Model
         return $this->hasOne(Display::class, 'id', 'unit');
     }
 
+    public function scopeAreaKota($query, $kota)
+    {
+        $this->kota = $kota;
+        return $query->when($this->kota, function ($query_a) {
+            if( $this->kota != 'SEMUA') {
+                return $query_a->whereHas('lpj', function ($query_b) {
+                    return $query_b->whereHas('lokasi', function ($query_c) {
+                        return $query_c->whereRaw('LOWER(kota_lokasi) LIKE ? ', '%'.strtolower($this->kota).'%');
+                    });
+                });
+            }
+        });
+    }
+
+    public function scopeDataDealer($query, $kota)
+    {
+        $this->kota = $kota;
+        return $query->when($this->kota, function ($query_a) {
+            if( $this->kota != 'SEMUA') {
+                return $query_a->whereHas('lpj', function ($query_p) {
+                    return $query_p->whereHas('proposal', function ($query_b) {
+                        return $query_b->whereHas('dealer', function ($query_c) {
+                            return $query_c->where('id', $this->kota);
+                        });
+                    });
+                });
+            }
+        });
+    }
+
+    public function scopeDataGender($query, $gender)
+    {
+        return $query->where('gender', $gender);
+    }
+
+    public function scopeDataHasil($query, $hasil)
+    {
+        return $query->where('hasil', $hasil);
+    }
+
+    public function scopeDataPekerjaan($query, $pekerjaan)
+    {
+        return $query->where('pekerjaan', $pekerjaan);
+    }
+
+    public function scopeDataDp($query, $dp)
+    {
+        return $query->where('dp', $dp);
+    }
+
+    public function scopeDataPengeluaran($query, $dp)
+    {
+        return $query->where('dp', $dp);
+    }
+
     public function scopeHasil_($query, $h)
     {
         if ($h == 1) { return 'Database'; }

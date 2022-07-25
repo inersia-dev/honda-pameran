@@ -99,9 +99,9 @@ class ProposalController extends Controller
             return redirect()->back()->withFlashSuccess('Proposal Berhasil Terhapus  ! ✅');
         }
 
-        $datalokasi   = Lokasi::get();
+        $datalokasi   = Lokasi::areaKota(request()->area)->get();
         $datakategori = KategoriProposal::get();
-        $datadealer   = Dealer::get();
+        $datadealer   = Dealer::cariKota(request()->area)->get();
         $dataarea     = Dealer::select('kota_dealer')->groupBy('kota_dealer')->get();
         $datas        = Proposal::orderBy('updated_at', 'DESC')
                             ->pj(request()->namapj)

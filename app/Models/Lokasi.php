@@ -17,4 +17,11 @@ class Lokasi extends Model
         'area_lokasi',
         'keterangan_lokasi',
     ];
+
+    public function scopeAreaKota($query, $kota)
+    {
+        if (!null == $kota && $kota != 'SEMUA') {
+            return $query->whereRaw('LOWER(kota_lokasi) LIKE ? ', '%'.strtolower($kota).'%');
+        }
+    }
 }

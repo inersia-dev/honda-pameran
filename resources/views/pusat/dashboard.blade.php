@@ -210,7 +210,7 @@
                                 $no_lpj = 1;
                                 $data_lpj = 36;
                             @endphp
-                            @foreach ($datakonsumen as $leaderboard_sales)
+                            @foreach ($leaderboardsales as $leaderboard_sales)
                                 <div class="row p-2" style="font-size: 9px">
                                     <div class="col-1 p-0 pl-2">{{ $no_lpj++ }}</div>
                                     <div class="col font-weight-bold justify-content-start" style="color: #ec1b25;">
@@ -629,7 +629,11 @@
     {{-- 7 CHART BARIS 3 Gender--}}
     <script>
         var options = {
-            series: [1240, 790],
+            series: [
+                    @for ($gender = 1; $gender <= 2; $gender++)
+                        {{ $datakonsumen->dataGender($gender)->count() }},
+                    @endfor
+                ],
             chart: {
                 height: {{ $i_ }},
                 type: 'pie',
@@ -770,9 +774,13 @@
         },
         series: [
             {
-                name: "DP",
+                name: "Hasil",
                 type: "column",
-                data: [350, 290, 210, 186, 86]
+                data: [
+                    @for ($hasil = 1; $hasil <= 5; $hasil++)
+                        {{ $datakonsumen->dataHasil($hasil)->count() }},
+                    @endfor
+                ]
             },
         ],
         title: {
@@ -831,7 +839,11 @@
             {
                 name: "DP",
                 type: "column",
-                data: [50, 90, 76, 86, 46, 58, 48, 29, 46, 58, 48, 29]
+                data: [
+                    @for ($dp = 1; $dp <= 11; $dp++)
+                        {{ $datakonsumen->dataDp($dp)->count() }},
+                    @endfor
+                ]
             },
         ],
         title: {
@@ -895,7 +907,11 @@
             {
                 name: "DP",
                 type: "column",
-                data: [46, 58, 48, 29, 46, 58, 48]
+                data: [
+                    @for ($pengeluaran = 1; $pengeluaran <= 7; $pengeluaran++)
+                        {{ $datakonsumen->dataPengeluaran($pengeluaran)->count() }},
+                    @endfor
+                ]
             },
         ],
         title: {
@@ -1008,7 +1024,11 @@
             {
                 name: "DP",
                 type: "column",
-                data: [45, 15, 22, 36, 26, 18, 14, 18, 21, 28, 18, 19, 11, 16, 26, 16, 16, 13, 19, 24, 21, 12, 28, 19]
+                data: [
+                    @for ($pekerjaan = 1; $pekerjaan <= 24; $pekerjaan++)
+                        {{ $datakonsumen->dataPekerjaan($pekerjaan)->count() }},
+                    @endfor
+                ]
             },
         ],
         title: {

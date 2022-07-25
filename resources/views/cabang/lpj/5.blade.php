@@ -450,7 +450,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="row form-group">
-                                                            <label class="col-sm-3 control-label">Type Unit</label>
+                                                            <label class="col-sm-3 control-label">Type Unit<strong style="color:rgb(243, 0, 0)">*</strong></label>
                                                             <div class="col-sm-9">
                                                                 <select class="form-control data-unit" name="unit">
                                                                     <option value=""></option>

@@ -42,7 +42,7 @@
                                         <label class="form-check-label">Kategori Proposal</label>
                                     </div>
                                     <select class="form-control" name="kategori" id="kategori">
-                                        <option value=""></option>
+                                        <option value="SEMUA">Semua</option>
                                         @foreach ($datakategori as $data_k)
                                             <option value="{{ $data_k->id }}">{{ $data_k->nama_kategori }}</option>
                                         @endforeach
@@ -53,7 +53,7 @@
                                         <label class="form-check-label">Lokasi</label>
                                     </div>
                                     <select class="form-control data-lokasi" name="lokasi">
-                                        <option value=""></option>
+                                        <option value="SEMUA">Semua</option>
                                         @foreach ($datalokasi as $data_l)
                                             <option value="{{ $data_l->id }}"
                                                 @if (request()->lokasi == $data_l->id)
@@ -89,10 +89,10 @@
                                         <label class="form-check-label">Area</label>
                                     </div>
                                     <select name="area" class="data-area form-control">
-                                        <option value=""></option>
+                                        <option value="SEMUA">Semua</option>
                                         @foreach ($dataarea as $data_are)
                                             <option value="{{ $data_are->kota_dealer }}"
-                                                @if (request()->dealer == $data_are->kota_dealer)
+                                                @if (request()->area == $data_are->kota_dealer)
                                                     selected
                                                 @endif
                                             >{{ Str::title($data_are->kota_dealer) }}</option>

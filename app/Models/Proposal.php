@@ -137,14 +137,14 @@ class Proposal extends Model
 
     public function scopeKategori($query, $kategori)
     {
-        if ($kategori) {
+        if (!null == $kategori && $kategori != 'SEMUA') {
             return $query->where('kategori_proposal', $kategori);
         }
     }
 
     public function scopeLokasi($query, $lokasi)
     {
-        if ($lokasi) {
+        if (!null == $lokasi && $lokasi != 'SEMUA') {
             return $query->where('lokasi_proposal', $lokasi);
         }
     }
