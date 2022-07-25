@@ -128,7 +128,7 @@ class Proposal extends Model
     public function scopeArea($query, $area)
     {
         $this->area = $area;
-        if ($this->area) {
+        if ($this->area != 'SEMUA') {
             return $query->whereHas('dealer', function ($query) {
                 return $query->whereRaw('LOWER(kota_dealer) LIKE ? ', '%'.strtolower($this->area).'%');
             });

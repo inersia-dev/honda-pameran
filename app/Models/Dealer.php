@@ -31,4 +31,14 @@ class Dealer extends Model
                         $query->sum('target_penjualan_lpj');
                      }]);
     }
+
+    public function scopeCariKota($query, $kota)
+    {
+        $this->kota = $kota;
+        return $query->when($this->kota, function ($query) {
+            if( $this->kota != 'SEMUA') {
+                return $query->where('kota_dealer', 'like', '%'.$this->kota.'%');
+            }
+        });
+    }
 }
