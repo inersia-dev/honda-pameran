@@ -28,7 +28,11 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index() {
-        $datadealer       = Dealer::get();
+        $datadealer       = Dealer::when(request()->lokasi, function ($query) {
+                                        if( request()->lokasi != 'semua') {
+                                            return $query->where('kota_dealer', 'like', '%'.request()->lokasi.'%');
+                                        }
+                                    })->get();
         $datalokasikota   = Lokasi::select('kota_lokasi')->groupBy('kota_lokasi')->get();
         $datakategori     = KategoriProposal::orderBy('keterangan_kategori')->get();
         $dataproposal     = Proposal::finalProposal();

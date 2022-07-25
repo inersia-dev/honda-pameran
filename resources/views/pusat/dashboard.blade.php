@@ -25,20 +25,7 @@
                             <div class="row">
                                 <div class="pb-2 col-sm">
                                     <div  style="padding-top: 5px; padding-bottom: 5px">
-                                        <label class="form-check-label">Dealer</label>
-                                    </div>
-                                    <select name="dealer" class="data-dealer form-control" onchange='if(this.value != 0) { this.form.submit(); }'>
-                                        <option value="SEMUA">Semua</option>
-                                        @foreach ($datadealer as $data_d)
-                                            <option value="{{ $data_d->id }}" {{ request()->dealer == $data_d->id ? 'selected' : '' }}>{{ $data_d->nama_dealer }}, {{ Str::title($data_d->kota_dealer) }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                                <div class="pb-2 col-sm">
-                                    <div  style="padding-top: 5px; padding-bottom: 5px">
                                         <label class="form-check-label">Activity</label>
-
                                     </div>
                                     <select class="form-control" name="activity" id="activity" onchange='if(this.value != 0) { this.form.submit(); }'>
                                         <option value="SEMUA">Semua</option>
@@ -59,6 +46,19 @@
                                             </option>
                                         @endforeach
                                     </select>
+                                </div>
+                                <div class="pb-2 col-sm">
+                                    @if(request()->lokasi && request()->lokasi != 'SEMUA')
+                                        <div style="padding-top: 5px; padding-bottom: 5px">
+                                            <label class="form-check-label">Dealer</label>
+                                        </div>
+                                        <select name="dealer" class="data-dealer form-control" onchange='if(this.value != 0) { this.form.submit(); }'>
+                                            <option value="SEMUA">Semua</option>
+                                            @foreach ($datadealer as $data_d)
+                                                <option value="{{ $data_d->id }}" {{ request()->dealer == $data_d->id ? 'selected' : '' }}>{{ $data_d->nama_dealer }}, {{ Str::title($data_d->kota_dealer) }}</option>
+                                            @endforeach
+                                        </select>
+                                    @endif
                                 </div>
                                 <div class="pb-2 col-sm">
                                     @if(request()->lokasi && request()->lokasi != 'SEMUA')
@@ -182,7 +182,7 @@
                                     <div class="col font-weight-bold justify-content-start" style="color: #ec1b25;">
                                         {{ data_get($dealer_pen, 'dealer_') }}
                                     </div>
-                                    <div class="col-2 font-weight-bold text-right">{{ data_get($dealer_pen, 'penjualan_') }}</div>
+                                    <div class="col-3 font-weight-bold text-right">{{ data_get($dealer_pen, 'penjualan_') }}</div>
                                 </div>
                                 <hr class="m-0 p-0">
                             @endforeach
@@ -216,7 +216,7 @@
                                     <div class="col font-weight-bold justify-content-start" style="color: #ec1b25;">
                                         {{ $leaderboard_sales->sales->nama_sales_people }}
                                     </div>
-                                    <div class="col-2 font-weight-bold text-right">{{ $leaderboard_sales->total_ssu }}</div>
+                                    <div class="col-3 font-weight-bold text-right">{{ $leaderboard_sales->total_ssu }}</div>
                                 </div>
                                 <hr class="m-0 p-0">
                             @endforeach
