@@ -189,19 +189,19 @@
                         </div>
                     </div>
                 </div>
-                {{-- <div class="col-sm-3">
+                <div class="col-sm-3">
                     <div class="row">
                         <div class="col-12">
-                            <label class="font-weight-bold">Leaderboard LPJ Dealer</label>
+                            <label class="font-weight-bold">Leaderboard Sales People</label>
                         </div>
                         <div class="col-12">
                             <div class="row p-2" style="font-size: 9px">
                                 <div class="col-1 p-0 pl-2">No.</div>
                                 <div class="col font-weight-bold justify-content-start">
-                                    Nama Dealer
+                                    Nama
                                 </div>
                                 <div class="col font-weight-bold text-right">
-                                    Jumlah LPJ
+                                    Jumlah SSU
                                 </div>
                             </div>
                         </div>
@@ -210,19 +210,19 @@
                                 $no_lpj = 1;
                                 $data_lpj = 36;
                             @endphp
-                            @foreach ($datadealer as $dealer_lpj)
+                            @foreach ($datakonsumen as $leaderboard_sales)
                                 <div class="row p-2" style="font-size: 9px">
                                     <div class="col-1 p-0 pl-2">{{ $no_lpj++ }}</div>
                                     <div class="col font-weight-bold justify-content-start" style="color: #ec1b25;">
-                                        {{ $dealer_lpj->nama_dealer }}
+                                        {{ $leaderboard_sales->sales->nama_sales_people }}
                                     </div>
-                                    <div class="col-2 font-weight-bold text-right">{{ $data_lpj-- }}</div>
+                                    <div class="col-2 font-weight-bold text-right">{{ $leaderboard_sales->total_ssu }}</div>
                                 </div>
                                 <hr class="m-0 p-0">
                             @endforeach
                         </div>
                     </div>
-                </div> --}}
+                </div>
             </div>
         </div>
     </div>

@@ -8,6 +8,7 @@ use App\Models\Lokasi;
 use App\Models\KategoriProposal;
 use App\Models\Proposal;
 use Illuminate\Support\Facades\DB;
+use App\Models\LpjKonsumen;
 
 class HomeController extends Controller
 {
@@ -31,6 +32,13 @@ class HomeController extends Controller
         $datalokasikota   = Lokasi::select('kota_lokasi')->groupBy('kota_lokasi')->get();
         $datakategori     = KategoriProposal::orderBy('keterangan_kategori')->get();
         $dataproposal     = Proposal::finalProposal();
+        $datakonsumen     = LpjKonsumen::select('id_sales_people', DB::raw('count(id_sales_people) as total_ssu'))
+                                        ->where('hasil', 4)
+                                        ->groupBy('id_sales_people')
+                                        ->orderBy('total_ssu', 'desc')
+                                        ->skip(0)
+                                        ->take(20)
+                                        ->get();
 
         if (request()->lokasi) { $datalokasikecamatan = Lokasi::where('kota_lokasi', request()->lokasi)->select('kecamatan_lokasi')->groupBy('kecamatan_lokasi')->get(); }
         else { $datalokasikecamatan = null; }
@@ -52,6 +60,6 @@ class HomeController extends Controller
         }
         $data_leaderboard_penjualan_dealer = collect($data)->sortBy('penjualan_')->reverse()->toArray();
 
-        return view('pusat.dashboard', compact('datadealer', 'datalokasikota', 'datalokasikecamatan', 'datalokasikelurahan', 'datakategori', 'dataproposal', 'data_leaderboard_penjualan_dealer'));
+        return view('pusat.dashboard', compact('datadealer', 'datalokasikota', 'datalokasikecamatan', 'datalokasikelurahan', 'datakategori', 'dataproposal', 'data_leaderboard_penjualan_dealer', 'datakonsumen'));
     }
 }
