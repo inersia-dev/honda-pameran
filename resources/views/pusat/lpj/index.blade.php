@@ -74,7 +74,7 @@
                     <div class="row p-2 font-weight-bold">
                         <div class="col p-0 pl-3">Status</div>
                         <div class="col p-0">Proposal</div>
-                        <div class="col p-0">Penanggung Jawab</div>
+                        <div class="col p-0">Dealer</div>
                         <div class="col p-0">Database</div>
                         <div class="col p-0">Prospecting</div>
                         <div class="col p-0">Penjualan</div>
@@ -117,7 +117,7 @@
                                 </div>
                                 <div class="col p-0 pl-3">
                                     <div class="font-weight-bold" style="color: #222222">
-                                        {{ $data->proposal->pj->nama_sales_people ?? '' }}
+                                        {{ $data->proposal->dealer->nama_dealer ?? '' }}
                                     </div>
                                 </div>
                                 <div class="col p-0 pl-3">

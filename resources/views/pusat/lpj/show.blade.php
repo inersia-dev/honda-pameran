@@ -49,10 +49,10 @@
                             </div>
                             <div class="mb-2 row">
                                 <label class="col-sm-2 col-form-label">
-                                    <strong>Penanggung Jawab</strong>
+                                    <strong>Dealer</strong>
                                 </label>
                                 <label class="col-sm-10 col-form-label">
-                                    {{ $data->proposal->pj->nama_sales_people ?? '' }}
+                                    {{ $data->proposal->dealer->nama_dealer ?? '' }}
                                 </label>
                             </div>
                             <div class="pt-3 row">
