@@ -123,7 +123,27 @@ class LpjKonsumen extends Model
 
     public function scopeDataFincoy($query, $fincoy)
     {
-        return $query->where('finance_company', $fincoy);
+       return $query->where('finance_company', $fincoy);
+    }
+
+    public function scopeDataCashCredit($query, $cc)
+    {
+       return $query->where('cash_credit', $cc);
+    }
+
+    public function scopeDataMerkMotor($query, $mm)
+    {
+       return $query->where('merkmotor', $mm);
+    }
+
+    public function scopeDataJenisMotor($query, $jm)
+    {
+       return $query->where('jenismotor', $jm);
+    }
+
+    public function scopeDataTypeUnit($query, $tu)
+    {
+       return $query->where('unit', $tu);
     }
 
 

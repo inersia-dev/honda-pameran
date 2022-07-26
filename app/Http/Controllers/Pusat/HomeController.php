@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\LpjKonsumen;
 use App\Models\FinanceCompany;
 use Illuminate\Support\Carbon;
+use App\Models\Display;
 
 class HomeController extends Controller
 {
@@ -31,6 +32,7 @@ class HomeController extends Controller
      */
     public function index() {
         $datadealer           = Dealer::cariKota(request()->lokasi)->get();
+        $datadisplay          = Display::get();
         $datalokasikota       = Lokasi::select('kota_lokasi')->groupBy('kota_lokasi')->get();
         $dataactivitykota     = Lokasi::select('kota_lokasi')->groupBy('kota_lokasi')->where('kota_lokasi', request()->lokasi)->get();
         $datakategori         = KategoriProposal::orderBy('keterangan_kategori')->get();
@@ -115,6 +117,18 @@ class HomeController extends Controller
                 }
             }
         }
+        for ($k = 1; $k <= 2; $k++) {
+            $cashcredit_[]         = LpjKonsumen::areaKota(request()->lokasi)->dataDealer(request()->dealer)->dataCashCredit($k)->count() ;
+        }
+        for ($k = 1; $k <= 6; $k++) {
+            $merkmotor_[]          = LpjKonsumen::areaKota(request()->lokasi)->dataDealer(request()->dealer)->dataMerkMotor($k)->count() ;
+        }
+        for ($k = 1; $k <= 4; $k++) {
+            $jenismotor_[]         = LpjKonsumen::areaKota(request()->lokasi)->dataDealer(request()->dealer)->dataJenisMotor($k)->count() ;
+        }
+        foreach ($datadisplay as $motor_){
+            $typeunit_[]           = LpjKonsumen::areaKota(request()->lokasi)->dataDealer(request()->dealer)->dataTypeUnit($motor_->id)->count() ;
+        }
         $statistik = [
             "konsumen_gender"       => $konsumengender_,
             "konsumen_hasil"        => $konsumenhasil_,
@@ -128,11 +142,18 @@ class HomeController extends Controller
             "konsumen_umur_4"       => $d,
             "konsumen_umur_5"       => $e,
             "konsumen_umur_6"       => $f,
+            "konsumen_cash_credit"  => $cashcredit_,
+            "konsumen_merk_motor"   => $merkmotor_,
+            "konsumen_jenis_motor"  => $jenismotor_,
+            "konsumen_type_unit"    => $typeunit_,
         ];
         // dd(data_get($statistik, 'konsumen_umur_5'));
 
 
         return view('pusat.dashboard',
-                compact('datadealer', 'datalokasikota', 'dataactivitykota', 'datalokasikecamatan', 'datalokasikelurahan', 'datakategori', 'dataproposal', 'data_leaderboard_penjualan_dealer', 'datakonsumen', 'leaderboardsales', 'statistik', 'datafincoy'));
+                compact('datadealer', 'datalokasikota', 'dataactivitykota', 'datalokasikecamatan',
+                        'datalokasikelurahan', 'datakategori', 'dataproposal', 'data_leaderboard_penjualan_dealer',
+                        'datakonsumen', 'leaderboardsales', 'statistik', 'datafincoy', 'datadisplay'
+                    ));
     }
 }

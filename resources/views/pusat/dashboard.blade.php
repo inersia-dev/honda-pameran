@@ -152,7 +152,7 @@
     <div class="card">
         <div class="card-body">
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div id="chart4"></div>
                 </div>
                 <div class="col-sm-3">
@@ -189,7 +189,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <div class="row">
                         <div class="col-12">
                             <label class="font-weight-bold">Leaderboard Sales People</label>
@@ -223,6 +223,9 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-sm-3">
+                    <div id="chart17"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -249,6 +252,15 @@
                         </div>
                         <div class="col-sm-4">
                             <div id="chart12"></div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div id="chart14"></div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div id="chart15"></div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div id="chart16"></div>
                         </div>
                     </div>
                 </div>
@@ -588,7 +600,7 @@
             },
             chart: {
                 type: 'bar',
-                height: 350,
+                height: 400,
                 stacked: true,
             },
             title: {
@@ -1064,6 +1076,233 @@
         };
 
         var chart = new ApexCharts(document.querySelector("#chart13"), options);
+
+        chart.render();
+    </script>
+
+    {{-- 14 CHART BARIS 4 Cash Credit--}}
+    <script>
+        var options = {
+        chart: {
+            height: {{ $i_ }},
+            type: "bar"
+        },
+        plotOptions: {
+          bar: {
+            horizontal: true,
+            endingShape: 'rounded',
+            borderRadius: 4,
+          }
+        },
+        legend: {
+            position: 'top'
+        },
+        series: [
+            {
+                name: "Jenis Pembayaran",
+                type: "column",
+                data: {{ json_encode(data_get($statistik, 'konsumen_cash_credit')) }}
+            },
+        ],
+        title: {
+            text: "Jenis Pembayaran"
+        },
+        theme: {
+            palette: 'palette5' // upto palette10
+        },
+        dataLabels: {
+          enabled: true,
+            style: {
+                fontSize: '10px',
+                colors: ["#fff"]
+            }
+        },
+        xaxis: {
+            categories: [
+                'CASH',
+                'CREDIT ',
+            ],
+            labels: {
+                style: {
+                    fontSize: '9px'
+                }
+            }
+        }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart14"), options);
+
+        chart.render();
+    </script>
+
+    {{-- 15 CHART BARIS 4 Merk Motor Sebelumnya--}}
+    <script>
+        var options = {
+        chart: {
+            height: {{ $i_ }},
+            type: "bar"
+        },
+        plotOptions: {
+          bar: {
+            horizontal: true,
+            endingShape: 'rounded',
+            borderRadius: 4,
+          }
+        },
+        legend: {
+            position: 'top'
+        },
+        series: [
+            {
+                name: "Merk Motor Sebelumnya",
+                type: "column",
+                data: {{ json_encode(data_get($statistik, 'konsumen_merk_motor')) }}
+            },
+        ],
+        title: {
+            text: "Merk Motor Sebelumnya"
+        },
+        theme: {
+            palette: 'palette4' // upto palette10
+        },
+        dataLabels: {
+          enabled: true,
+            style: {
+                fontSize: '10px',
+                colors: ["#fff"]
+            }
+        },
+        xaxis: {
+            categories: [
+                'Honda',
+                'Yamaha',
+                'Suzuki',
+                'Kawasaki',
+                'Motor Lain',
+                'Belum Pernah Memiliki',
+            ],
+            labels: {
+                style: {
+                    fontSize: '9px'
+                }
+            }
+        }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart15"), options);
+
+        chart.render();
+    </script>
+
+    {{-- 16 CHART BARIS 4 Jenis Motor Sebelumnya--}}
+    <script>
+        var options = {
+        chart: {
+            height: {{ $i_ }},
+            type: "bar"
+        },
+        plotOptions: {
+          bar: {
+            horizontal: true,
+            endingShape: 'rounded',
+            borderRadius: 4,
+          }
+        },
+        legend: {
+            position: 'top'
+        },
+        series: [
+            {
+                name: "Jenis Motor Sebelumnya",
+                type: "column",
+                data: {{ json_encode(data_get($statistik, 'konsumen_jenis_motor')) }}
+            },
+        ],
+        title: {
+            text: "Jenis Motor Sebelumnya"
+        },
+        theme: {
+            palette: 'palette1' // upto palette10
+        },
+        dataLabels: {
+          enabled: true,
+            style: {
+                fontSize: '10px',
+                colors: ["#fff"]
+            }
+        },
+        xaxis: {
+            categories: [
+                'Sport',
+                'Cub (Bebek)',
+                'AT (Automatic)',
+                'Belum Pernah Memiliki',
+            ],
+            labels: {
+                style: {
+                    fontSize: '9px'
+                }
+            }
+        }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart16"), options);
+
+        chart.render();
+    </script>
+
+    {{-- 17 CHART BARIS 2 Type Unit--}}
+    <script>
+        var options = {
+        chart: {
+            height: 400,
+            type: "bar"
+        },
+        plotOptions: {
+          bar: {
+            horizontal: true,
+            endingShape: 'rounded',
+            borderRadius: 4,
+          }
+        },
+        legend: {
+            position: 'top'
+        },
+        series: [
+            {
+                name: "Type Unit",
+                type: "column",
+                data: {{ json_encode(data_get($statistik, 'konsumen_type_unit')) }}
+            },
+        ],
+        title: {
+            text: "Type Unit"
+        },
+        theme: {
+            palette: 'palette1' // upto palette10
+        },
+        dataLabels: {
+          enabled: true,
+            style: {
+                fontSize: '10px',
+                colors: ["#fff"]
+            }
+        },
+        xaxis: {
+            categories: [
+                @foreach ($datadisplay as $motor_)
+                    "{{ $motor_->nama_display }}",
+                @endforeach
+            ],
+            labels: {
+                style: {
+                    fontSize: '9px'
+                }
+            }
+        }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart17"), options);
 
         chart.render();
     </script>
