@@ -111,12 +111,14 @@ class LpjController extends Controller
         $data           = Lpj::where('uuid', request()->id)->first();
 
         if (request()->submit == 'draft' || request()->submit == 'submit') {
+            $total_dana_ = request()->totaldana ? str_replace(",","",request()->totaldana) : null;
+            $total_dana_ = request()->totaldana ? str_replace(".","",$total_dana_) : null;
 
             $data->target_database_lpj    = request()->database;
             $data->target_penjualan_lpj   = request()->penjualan;
             $data->target_prospectus_lpj  = request()->prospectus;
             $data->target_downloader_lpj  = request()->downloader;
-            $data->total_dana_lpj         = request()->totaldana;
+            $data->total_dana_lpj         = $total_dana_;
             $data->save();
 
             if (request()->submit == 'draft') {
