@@ -85,14 +85,18 @@ class HomeController extends Controller
         for ($k = 1; $k <= 24; $k++) {
             $konsumenpekerjaan_[]       = LpjKonsumen::areaKota(request()->lokasi)->dataDealer(request()->dealer)->dataPekerjaan($k)->count() ;
         }
+        foreach ($datafincoy as $fincoy){
+            $konsumenfincoy_[]          = LpjKonsumen::areaKota(request()->lokasi)->dataDealer(request()->dealer)->dataFincoy($fincoy->id)->count();
+        }
         $statistik = [
             "konsumen_gender"       => $konsumengender_,
             "konsumen_hasil"        => $konsumenhasil_,
             "konsumen_dp"           => $konsumendp_,
             "konsumen_pengeluaran"  => $konsumenpengeluaran_,
             "konsumen_pekerjaan"    => $konsumenpekerjaan_,
+            "konsumen_fincoy"       => $konsumenfincoy_,
         ];
-        // dd(data_get($statistik, 'konsumenhasil'));
+        // dd(data_get($statistik, 'konsumen_fincoy'));
 
 
         return view('pusat.dashboard',

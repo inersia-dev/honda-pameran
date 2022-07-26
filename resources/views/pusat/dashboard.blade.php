@@ -955,11 +955,7 @@
             {
                 name: "Finance Company",
                 type: "column",
-                data: [
-                    @foreach ($datafincoy as $fincoy)
-                        {{ $datakonsumen->dataFincoy($fincoy->id)->count() }},
-                    @endforeach
-                ]
+                data: {{ json_encode(data_get($statistik, 'konsumen_fincoy')) }}
             },
         ],
         title: {
