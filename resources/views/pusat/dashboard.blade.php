@@ -694,32 +694,32 @@
             {
                 name: "> 17 Thn",
                 type: "column",
-                data: [440]
+                data: [{{ json_encode(data_get($statistik, 'konsumen_umur_1')) }}]
             },
             {
                 name: "17 - 25 Thn",
                 type: "column",
-                data: [505]
+                data: [{{ json_encode(data_get($statistik, 'konsumen_umur_2')) }}]
             },
             {
                 name: "26 - 35 Thn",
                 type: "column",
-                data: [414]
+                data: [{{ json_encode(data_get($statistik, 'konsumen_umur_3')) }}]
             },
             {
                 name: "36 - 45 Thn",
                 type: "column",
-                data: [671]
+                data: [{{ json_encode(data_get($statistik, 'konsumen_umur_4')) }}]
             },
             {
                 name: "46 - 55 Thn",
                 type: "column",
-                data: [227]
+                data: [{{ json_encode(data_get($statistik, 'konsumen_umur_5')) }}]
             },
             {
                 name: "> 55 Thn",
                 type: "column",
-                data: [120]
+                data: [{{ json_encode(data_get($statistik, 'konsumen_umur_6')) }}]
             },
         ],
         stroke: {

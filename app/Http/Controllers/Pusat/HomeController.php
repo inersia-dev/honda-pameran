@@ -10,6 +10,7 @@ use App\Models\Proposal;
 use Illuminate\Support\Facades\DB;
 use App\Models\LpjKonsumen;
 use App\Models\FinanceCompany;
+use Illuminate\Support\Carbon;
 
 class HomeController extends Controller
 {
@@ -44,8 +45,9 @@ class HomeController extends Controller
                                         ->take(20)
                                         ->get();
         $datakonsumen          = LpjKonsumen::areaKota(request()->lokasi)
-                                            ->dataDealer(request()->dealer);
-                                        // ->get();
+                                            ->dataDealer(request()->dealer)
+                                            ->get();
+
         $datafincoy            = FinanceCompany::get();
 
         if (request()->lokasi) { $datalokasikecamatan = Lokasi::where('kota_lokasi', request()->lokasi)->select('kecamatan_lokasi')->groupBy('kecamatan_lokasi')->get(); }
@@ -88,6 +90,31 @@ class HomeController extends Controller
         foreach ($datafincoy as $fincoy){
             $konsumenfincoy_[]          = LpjKonsumen::areaKota(request()->lokasi)->dataDealer(request()->dealer)->dataFincoy($fincoy->id)->count();
         }
+        $a = 0;
+        $b = 0;
+        $c = 0;
+        $d = 0;
+        $e = 0;
+        $f = 0;
+        foreach ($datakonsumen as $data_k){
+            if ($data_k->tgl_lahir) {
+                $kategori_umur = Carbon::parse($data_k->tgl_lahir)->age;
+                $tes[] =  $kategori_umur;
+                if ($kategori_umur < 17) {
+                    $a++;
+                } elseif ($kategori_umur >= 17 && $kategori_umur <= 25) {
+                    $b++;
+                } elseif ($kategori_umur >= 26 && $kategori_umur <= 35) {
+                    $c++;
+                } elseif ($kategori_umur >= 36 && $kategori_umur <= 45) {
+                    $d++;
+                } elseif ($kategori_umur >= 46 && $kategori_umur <= 55) {
+                    $e++;
+                } elseif ($kategori_umur > 55) {
+                    $f++;
+                }
+            }
+        }
         $statistik = [
             "konsumen_gender"       => $konsumengender_,
             "konsumen_hasil"        => $konsumenhasil_,
@@ -95,8 +122,14 @@ class HomeController extends Controller
             "konsumen_pengeluaran"  => $konsumenpengeluaran_,
             "konsumen_pekerjaan"    => $konsumenpekerjaan_,
             "konsumen_fincoy"       => $konsumenfincoy_,
+            "konsumen_umur_1"       => $a,
+            "konsumen_umur_2"       => $b,
+            "konsumen_umur_3"       => $c,
+            "konsumen_umur_4"       => $d,
+            "konsumen_umur_5"       => $e,
+            "konsumen_umur_6"       => $f,
         ];
-        // dd(data_get($statistik, 'konsumen_fincoy'));
+        // dd(data_get($statistik, 'konsumen_umur_5'));
 
 
         return view('pusat.dashboard',
