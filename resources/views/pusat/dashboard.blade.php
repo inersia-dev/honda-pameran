@@ -657,9 +657,6 @@
             },
             labels: ['Laki-laki', 'Perempuan'],
             dataLabels: {
-                formatter: function (val, opts) {
-                    return opts.w.config.series[opts.seriesIndex]
-                },
                 enabled: true,
                     style: {
                         fontSize: '10px'
