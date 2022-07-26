@@ -123,6 +123,8 @@ class Proposal extends Model
                             })
                             ->when($this->tanggal_a, function ($query_a_g) {
                                 return $query_a_g->whereDate('updated_at', $this->tanggal_a);
+                            })->whereHas('konsumen', function ($query) {
+                                return $query->where('hasil', 4);
                             });
     }
 

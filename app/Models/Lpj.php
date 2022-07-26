@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Proposal;
 use App\Models\Lokasi;
 use Illuminate\Support\Carbon;
+use App\Models\LpjKonsumen;
 
 class Lpj extends Model
 {
@@ -40,6 +41,11 @@ class Lpj extends Model
     public function lokasi()
     {
         return $this->hasOne(Lokasi::class, 'id', 'lokasi_lpj');
+    }
+
+    public function konsumen()
+    {
+        return $this->hasMany(LpjKonsumen::class, 'id_lpj', 'id');
     }
 
 

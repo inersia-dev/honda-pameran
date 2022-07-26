@@ -177,6 +177,13 @@ class LpjKonsumen extends Model
        return $query->where('unit', $tu);
     }
 
+    public function scopeSubmitLpj($query)
+    {
+       return $query->whereHas('lpj', function ($query_sl) {
+            return $query_sl->where('status_lpj', 2);
+        });
+    }
+
 
     public function scopeHasil_($query, $h)
     {
