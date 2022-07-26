@@ -238,6 +238,9 @@ class ProposalController extends Controller
             $st = 'draft';
         }
 
+        $total_dana_ = request()->total ? str_replace(",","",request()->total) : null;
+        $total_dana_ = request()->total ? str_replace(".","",$total_dana_) : null;
+
         $data                                   = Proposal::firstWhere('uuid', request()->uuid);
         $data->no_proposal                      = $st == 'draft' ? null : $no.'/'.$dt->year.'/'.$dt->month.'/'.$dt->day.'/'.$data->kategori_proposal.'/'.$data->dealer->kode_dealer ;
         $data->status_proposal                  = 1;
@@ -264,7 +267,7 @@ class ProposalController extends Controller
         $data->kondisi_penjualan_m1_proposal    = request()->m1 ?? null ;
         $data->tujuan_proposal                  = request()->tujuan ?? null ;
         // $data->fotolokasi_proposal              = cekarray(request()->fotolokasi) ?? null ;
-        $data->total_dana_proposal              = str_replace(",","",request()->total) ?? null ;
+        $data->total_dana_proposal              = $total_dana_ ;
         $data->save();
 
         //
