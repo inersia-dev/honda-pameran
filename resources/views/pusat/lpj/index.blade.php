@@ -46,7 +46,8 @@
                                     <div  style="padding-top: 5px; padding-bottom: 5px">
                                         <label class="form-check-label">Dealer</label>
                                     </div>
-                                    <option value="SEMUA">Semua</option>
+                                    <select class="form-control" name="dealer" id="dealer">
+                                        <option value="SEMUA">Semua</option>
                                         @foreach ($datadealer as $data_d)
                                             <option value="{{ $data_d->id }}" {{ request()->dealer == $data_d ? 'selected' : '' }}>{{ $data_d->nama_dealer }}</option>
                                         @endforeach
