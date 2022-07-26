@@ -629,11 +629,7 @@
     {{-- 7 CHART BARIS 3 Gender--}}
     <script>
         var options = {
-            series: [
-                    @for ($gender = 1; $gender <= 2; $gender++)
-                        {{ $datakonsumen->dataGender($gender)->count() }},
-                    @endfor
-                ],
+            series: {{ json_encode(data_get($statistik, 'konsumen_gender')) }},
             chart: {
                 height: {{ $i_ }},
                 type: 'pie',
@@ -776,11 +772,7 @@
             {
                 name: "Hasil",
                 type: "column",
-                data: [
-                    @for ($hasil = 1; $hasil <= 5; $hasil++)
-                        {{ $datakonsumen->dataHasil($hasil)->count() }},
-                    @endfor
-                ]
+                data: {{ json_encode(data_get($statistik, 'konsumen_hasil')) }}
             },
         ],
         title: {
@@ -839,11 +831,7 @@
             {
                 name: "DP",
                 type: "column",
-                data: [
-                    @for ($dp = 1; $dp <= 11; $dp++)
-                        {{ $datakonsumen->dataDp($dp)->count() }},
-                    @endfor
-                ]
+                data: {{ json_encode(data_get($statistik, 'konsumen_dp')) }}
             },
         ],
         title: {
@@ -905,13 +893,9 @@
         },
         series: [
             {
-                name: "DP",
+                name: "Pengeluaran",
                 type: "column",
-                data: [
-                    @for ($pengeluaran = 1; $pengeluaran <= 7; $pengeluaran++)
-                        {{ $datakonsumen->dataPengeluaran($pengeluaran)->count() }},
-                    @endfor
-                ]
+                data: {{ json_encode(data_get($statistik, 'konsumen_pengeluaran')) }}
             },
         ],
         title: {
@@ -969,9 +953,13 @@
         },
         series: [
             {
-                name: "Proposal",
+                name: "Finance Company",
                 type: "column",
-                data: [340, 205, 114, 141, 187, 107, 127]
+                data: [
+                    @foreach ($datafincoy as $fincoy)
+                        {{ $datakonsumen->dataFincoy($fincoy->id)->count() }},
+                    @endforeach
+                ]
             },
         ],
         title: {
@@ -988,7 +976,11 @@
             }
         },
         xaxis: {
-            categories: ["CASH", "Mega Finance", "MCF", "WOM", "OTO", "FIF", "ADIRA"],
+            categories: [
+                @foreach ($datafincoy as $fincoy)
+                    "{{ $fincoy->nama }}",
+                @endforeach
+            ],
             labels: {
                 style: {
                     fontSize: '9px'
@@ -1022,13 +1014,9 @@
         },
         series: [
             {
-                name: "DP",
+                name: "Pekerjaan",
                 type: "column",
-                data: [
-                    @for ($pekerjaan = 1; $pekerjaan <= 24; $pekerjaan++)
-                        {{ $datakonsumen->dataPekerjaan($pekerjaan)->count() }},
-                    @endfor
-                ]
+                data: {{ json_encode(data_get($statistik, 'konsumen_pekerjaan')) }}
             },
         ],
         title: {

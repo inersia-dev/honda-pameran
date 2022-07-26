@@ -116,10 +116,16 @@ class LpjKonsumen extends Model
         return $query->where('dp', $dp);
     }
 
-    public function scopeDataPengeluaran($query, $dp)
+    public function scopeDataPengeluaran($query, $pengeluaran)
     {
-        return $query->where('dp', $dp);
+        return $query->where('pengeluaran', $pengeluaran);
     }
+
+    public function scopeDataFincoy($query, $fincoy)
+    {
+        return $query->where('finance_company', $fincoy);
+    }
+
 
     public function scopeHasil_($query, $h)
     {
