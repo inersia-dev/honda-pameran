@@ -114,6 +114,7 @@ class Proposal extends Model
         $this->waktu = $waktu;
 
         return $this->hasOne(Lpj::class, 'id_proposal', 'id')
+                            ->where('status_lpj', 2)
                             ->when($this->tahun_a, function ($query_a_t) {
                                 return $query_a_t->whereYear('updated_at', $this->tahun_a);
                             })
