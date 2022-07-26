@@ -96,6 +96,37 @@ class LpjKonsumen extends Model
         });
     }
 
+    public function scopeTahun($query, $tahun)
+    {
+        $this->tahun_a = $tahun;
+        return $query->when($this->tahun_a, function ($query_a) {
+            return $query_a->whereHas('lpj', function ($query_c) {
+                return $query_c->whereYear('updated_at', $this->tahun_a);
+            });
+        });
+    }
+
+    public function scopeBulan($query, $waktu)
+    {
+        $this->tahun_b = substr($waktu, 0, 4);
+        $this->bulan_b = substr($waktu, 5, 7);
+        return $query->when($waktu, function ($query_a) {
+            return $query_a->whereHas('lpj', function ($query_c) {
+                return $query_c->whereMonth('updated_at', $this->bulan_b)->whereYear('updated_at', $this->tahun_b);
+            });
+        });
+    }
+
+    public function scopeTanggal($query, $tanggal)
+    {
+        $this->tanggal_a = $tanggal;
+        return $query->when($this->tanggal_a, function ($query_a) {
+            return $query_a->whereHas('lpj', function ($query_c) {
+                return $query_c->whereDate('updated_at', $this->tanggal_a);
+            });
+        });
+    }
+
     public function scopeDataGender($query, $gender)
     {
         return $query->where('gender', $gender);

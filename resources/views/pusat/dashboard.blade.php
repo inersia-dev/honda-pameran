@@ -105,7 +105,7 @@
                                         <div  style="padding-top: 5px; padding-bottom: 5px">
                                             <label class="form-check-label">Daily</label>
                                         </div>
-                                        <input type="date" class="form-control" name="date-analisys" onchange='if(this.value != 0) { this.form.submit(); }' value="{{ request()->input('date-analisys') ?? date('Y-m-d') }}">
+                                        <input type="date" class="form-control" name="date-analisys" onchange='if(this.value != 0) { this.form.submit(); }' value="{{ request()->input('date-analisys') ?? '' }}">
                                     </div>
                                 @elseif (request()->analisys == 3)
                                     <div class="pb-2 col-sm">
@@ -113,8 +113,9 @@
                                             <label class="form-check-label">Yearly</label>
                                         </div>
                                         <select class="form-control data-lokasi" name="year-analisys"  onchange='if(this.value != 0) { this.form.submit(); }'>
+                                            <option value="">Pilih...</option>
                                             @for ($i = 2021; $i <= date("Y"); $i++)
-                                                <option value="{{ $i }}" {{ request()->input('year-analisys') == $i || $i == date("Y") ? 'selected' : '' }}>{{ $i }}</option>
+                                                <option value="{{ $i }}" {{ request()->input('year-analisys') == $i ? 'selected' : '' }}>{{ $i }}</option>
                                             @endfor
                                         </select>
                                     </div>
@@ -123,7 +124,7 @@
                                         <div  style="padding-top: 5px; padding-bottom: 5px">
                                             <label class="form-check-label">Monthly</label>
                                         </div>
-                                        <input type="month" class="form-control" name="month-analisys" onchange='if(this.value != 0) { this.form.submit(); }' value="{{ request()->input('month-analisys') ?? date('Y-m') }}">
+                                        <input type="month" class="form-control" name="month-analisys" onchange='if(this.value != 0) { this.form.submit(); }' value="{{ request()->input('month-analisys') ?? '' }}">
                                     </div>
                                 @endif
                             </div>
@@ -287,12 +288,12 @@
             @endphp
             @foreach ( $datakategori as $kat_ac_1)
                 @php
-                    $total_ac = $total_ac + $kat_ac_1->finalactivity($kat_ac_1->id, request()->lokasi, request()->dealer)->count();
+                    $total_ac = $total_ac + $kat_ac_1->finalactivity($kat_ac_1->id, request()->lokasi, request()->dealer, request()->get('date-analisys'), request()->get('month-analisys'), request()->get('year-analisys'))->count();
                 @endphp
                 {
                     name: "{{ $kat_ac_1->nama_kategori }}",
                     type: "column",
-                    data: [{{ $kat_ac_1->finalactivity($kat_ac_1->id, request()->lokasi, request()->dealer)->count() }}]
+                    data: [{{ $kat_ac_1->finalactivity($kat_ac_1->id, request()->lokasi, request()->dealer, request()->get('date-analisys'), request()->get('month-analisys'), request()->get('year-analisys'))->count() }}]
                 },
             @endforeach
         ],
@@ -343,18 +344,18 @@
             @endphp
             @foreach ( $datakategori as $kat_ac_2)
                 @php
-                    $total_ab = $total_ab + $kat_ac_2->akanberjalan($kat_ac_2->id, request()->lokasi, request()->dealer)->count();
-                    $total_sb = $total_sb + $kat_ac_2->sedangberjalan($kat_ac_2->id, request()->lokasi, request()->dealer)->count();
-                    $total_s  = $total_s + $kat_ac_2->selesai($kat_ac_2->id, request()->lokasi, request()->dealer)->count();
+                    $total_ab = $total_ab + $kat_ac_2->akanberjalan($kat_ac_2->id, request()->lokasi, request()->dealer, request()->get('date-analisys'), request()->get('month-analisys'), request()->get('year-analisys'))->count();
+                    $total_sb = $total_sb + $kat_ac_2->sedangberjalan($kat_ac_2->id, request()->lokasi, request()->dealer, request()->get('date-analisys'), request()->get('month-analisys'), request()->get('year-analisys'))->count();
+                    $total_s  = $total_s + $kat_ac_2->selesai($kat_ac_2->id, request()->lokasi, request()->dealer, request()->get('date-analisys'), request()->get('month-analisys'), request()->get('year-analisys'))->count();
                 @endphp
 
                     {
                         name: "{{ $kat_ac_2->nama_kategori }}",
                         type: "column",
                         data: [
-                                {{ $kat_ac_2->akanberjalan($kat_ac_2->id, request()->lokasi, request()->dealer)->count() }},
-                                {{ $kat_ac_2->sedangberjalan($kat_ac_2->id, request()->lokasi, request()->dealer)->count() }},
-                                {{ $kat_ac_2->selesai($kat_ac_2->id, request()->lokasi, request()->dealer)->count() }}
+                                {{ $kat_ac_2->akanberjalan($kat_ac_2->id, request()->lokasi, request()->dealer, request()->get('date-analisys'), request()->get('month-analisys'), request()->get('year-analisys'))->count() }},
+                                {{ $kat_ac_2->sedangberjalan($kat_ac_2->id, request()->lokasi, request()->dealer, request()->get('date-analisys'), request()->get('month-analisys'), request()->get('year-analisys'))->count() }},
+                                {{ $kat_ac_2->selesai($kat_ac_2->id, request()->lokasi, request()->dealer, request()->get('date-analisys'), request()->get('month-analisys'), request()->get('year-analisys'))->count() }}
                         ]
                     },
             @endforeach
@@ -410,7 +411,7 @@
                     type: "column",
                     data: [
                         @foreach ($datadealer as $dealer_)
-                            {{ $kat_ac_1->finalactivitydealer($kat_ac_1->id, $dealer_->id)->count() }},
+                            {{ $kat_ac_1->finalactivitydealer($kat_ac_1->id, $dealer_->id, request()->get('date-analisys'), request()->get('month-analisys'), request()->get('year-analisys'))->count() }},
                         @endforeach
                     ]
                 },
@@ -434,7 +435,7 @@
                     @endphp
                     @foreach ($datakategori as $kat_ac_1)
                         @php
-                            $total_ac_dealer = $total_ac_dealer + $kat_ac_1->finalactivitydealer($kat_ac_1->id, $dealer_->id)->count();
+                            $total_ac_dealer = $total_ac_dealer + $kat_ac_1->finalactivitydealer($kat_ac_1->id, $dealer_->id, request()->get('date-analisys'), request()->get('month-analisys'), request()->get('year-analisys'))->count();
                         @endphp
                     @endforeach
                     '{{ Str::title($dealer_->nama_dealer) }} - {{ $total_ac_dealer }}',
@@ -477,7 +478,7 @@
                     type: "column",
                     data: [
                         @foreach ($datalokasikota as $kota)
-                            {{ $kat_ac_1->finalactivitykota($kat_ac_1->id, $kota->kota_lokasi)->count() }},
+                            {{ $kat_ac_1->finalactivitykota($kat_ac_1->id, $kota->kota_lokasi, request()->get('date-analisys'), request()->get('month-analisys'), request()->get('year-analisys'))->count() }},
                         @endforeach
                     ]
                 },
@@ -501,7 +502,7 @@
                     @endphp
                     @foreach ($datakategori as $kat_ac_1)
                         @php
-                            $total_ac_kota = $total_ac_kota + $kat_ac_1->finalactivitykota($kat_ac_1->id, $kota->kota_lokasi)->count();
+                            $total_ac_kota = $total_ac_kota + $kat_ac_1->finalactivitykota($kat_ac_1->id, $kota->kota_lokasi, request()->get('date-analisys'), request()->get('month-analisys'), request()->get('year-analisys'))->count();
                         @endphp
                     @endforeach
                     '{{ Str::title($kota->kota_lokasi) }} - {{ $total_ac_kota }}',
@@ -549,7 +550,7 @@
                             @php
                                 $target = 0;
                             @endphp
-                            @foreach ($kat_ac_3_b->finalactivity($kat_ac_3_b->id, request()->lokasi, request()->dealer)->get() as $target_lpj_a)
+                            @foreach ($kat_ac_3_b->finalactivity($kat_ac_3_b->id, request()->lokasi, request()->dealer, request()->get('date-analisys'), request()->get('month-analisys'), request()->get('year-analisys'))->get() as $target_lpj_a)
                                 @php
                                     $target = $target + $target_lpj_a->lpj->sum('target_database_lpj');
                                 @endphp
@@ -565,7 +566,7 @@
                             @php
                                 $target = 0;
                             @endphp
-                            @foreach ($kat_ac_3_c->finalactivity($kat_ac_3_c->id, request()->lokasi, request()->dealer)->get() as $target_lpj_a)
+                            @foreach ($kat_ac_3_c->finalactivity($kat_ac_3_c->id, request()->lokasi, request()->dealer, request()->get('date-analisys'), request()->get('month-analisys'), request()->get('year-analisys'))->get() as $target_lpj_a)
                                 @php
                                     $target = $target + $target_lpj_a->lpj->sum('target_prospectus_lpj');
                                 @endphp
@@ -581,7 +582,7 @@
                             @php
                                 $target = 0;
                             @endphp
-                            @foreach ($kat_ac_3_d->finalactivity($kat_ac_3_d->id, request()->lokasi, request()->dealer)->get() as $target_lpj_a)
+                            @foreach ($kat_ac_3_d->finalactivity($kat_ac_3_d->id, request()->lokasi, request()->dealer, request()->get('date-analisys'), request()->get('month-analisys'), request()->get('year-analisys'))->get() as $target_lpj_a)
                                 @php
                                     $target = $target + $target_lpj_a->lpj->sum('target_penjualan_lpj');
                                 @endphp
