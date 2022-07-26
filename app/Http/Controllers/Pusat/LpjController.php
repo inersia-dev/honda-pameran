@@ -9,6 +9,7 @@ use App\Models\FinanceCompany;
 use App\Models\KategoriProposal;
 use Illuminate\Http\Request;
 use App\Models\Display;
+use App\Models\Dealer;
 
 class LpjController extends Controller
 {
@@ -24,13 +25,14 @@ class LpjController extends Controller
 
     public function index() {
         $datakategori = KategoriProposal::get();
+        $datadealer   = Dealer::get();
         $datas = Lpj::where('status_lpj', 2)
-                 ->pj(request()->namapj)
+                 ->dealer(request()->dealer)
                  ->kategori(request()->kategori)
                  ->submitDate(request()->tanggal)
                  ->paginate(10);
 
-        return view('pusat.lpj.index', compact('datas', 'datakategori'));
+        return view('pusat.lpj.index', compact('datas', 'datakategori', 'datadealer'));
     }
 
     public function getShow(Request $request) {

@@ -36,17 +36,21 @@
                                         <label class="form-check-label">Kategori Proposal</label>
                                     </div>
                                     <select class="form-control" name="kategori" id="kategori">
-                                        <option value=""></option>
+                                        <option value="SEMUA">Semua</option>
                                         @foreach ($datakategori as $data_k)
-                                            <option value="{{ $data_k->id }}">{{ $data_k->nama_kategori }}</option>
+                                            <option value="{{ $data_k->id }}" {{ request()->dealer == $data_k ? 'selected' : '' }}>{{ $data_k->nama_kategori }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="pb-2 col">
                                     <div  style="padding-top: 5px; padding-bottom: 5px">
-                                        <label class="form-check-label">Penanggung Jawab</label>
+                                        <label class="form-check-label">Dealer</label>
                                     </div>
-                                    <input class="form-control" type="text" value="{{ request()->namapj ?? '' }}" name="namapj" style="font-size: small" />
+                                    <option value="SEMUA">Semua</option>
+                                        @foreach ($datadealer as $data_d)
+                                            <option value="{{ $data_d->id }}" {{ request()->dealer == $data_d ? 'selected' : '' }}>{{ $data_d->nama_dealer }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="pb-2 col">
                                     <div  style="padding-top: 5px; padding-bottom: 5px">

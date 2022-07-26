@@ -46,7 +46,7 @@ class Lpj extends Model
     public function scopeKategori($query, $kategori)
     {
         $this->kategori = $kategori;
-        if ($this->kategori) {
+        if ($this->kategori && $this->kategori != 'SEMUA') {
             return $query->whereHas('proposal', function ($query) {
                 return $query->where('kategori_proposal', $this->kategori);
             });
@@ -60,6 +60,18 @@ class Lpj extends Model
             return $query->whereHas('proposal', function ($query) {
                 return $query->whereHas('pj', function ($query) {
                     return $query->whereRaw('LOWER(nama_sales_people) LIKE ? ', '%'.strtolower($this->pj).'%');
+                });
+            });
+        }
+    }
+
+    public function scopeDealer($query, $dealer)
+    {
+        $this->dealer = $dealer;
+        if ($this->dealer && $this->dealer != 'SEMUA') {
+            return $query->whereHas('proposal', function ($query) {
+                return $query->whereHas('dealer', function ($query) {
+                    return $query->where('id', $this->dealer);
                 });
             });
         }
