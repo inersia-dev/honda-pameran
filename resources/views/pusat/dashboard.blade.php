@@ -1274,7 +1274,7 @@
             },
         ],
         title: {
-            text: "Type Unit"
+            text: "Type Unit SSU"
         },
         theme: {
             palette: 'palette1' // upto palette10
