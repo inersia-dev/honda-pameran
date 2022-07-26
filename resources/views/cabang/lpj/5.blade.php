@@ -391,9 +391,9 @@
                                                     </div>
                                                     <div class="col-6">
                                                         <div class="row form-group">
-                                                            <label class="col-sm-3 control-label">Range DP Konsumen</label>
+                                                            <label class="col-sm-3 control-label">Range DP Konsumen<strong id="dp_" style="float: right; color:rgb(243, 0, 0); display:none">*</strong></label>
                                                             <div class="col-sm-9">
-                                                                <select name="dp" class="form-control">
+                                                                <select name="dp" class="form-control" id="dp">
                                                                     <option value=""></option>
                                                                     <option value="1">≤ 1 jt</option>
                                                                     <option value="2">1 - 2 jt</option>
@@ -410,9 +410,10 @@
                                                             </div>
                                                         </div>
                                                         <div class="row form-group">
-                                                            <label class="col-sm-3 control-label">Merk Motor Sebelumnya</label>
+                                                            <label class="col-sm-3 control-label">Merk Motor Sebelumnya<strong id="merkmotor_" style="float: right; color:rgb(243, 0, 0); display:none">*</strong></label>
                                                             <div class="col-sm-9">
-                                                                <select name="merkmotor" class="form-control">
+                                                                <select name="merkmotor" class="form-control" id="merkmotor">
+                                                                    <option value=""></option>
                                                                     <option value="1">Honda</option>
                                                                     <option value="2">Yamaha</option>
                                                                     <option value="3">Suzuki</option>
@@ -423,9 +424,10 @@
                                                             </div>
                                                         </div>
                                                         <div class="row form-group">
-                                                            <label class="col-sm-3 control-label">Jenis Motor Sebelumnya</label>
+                                                            <label class="col-sm-3 control-label">Jenis Motor Sebelumnya<strong id="jenismotor_" style="float: right; color:rgb(243, 0, 0); display:none">*</strong></label>
                                                             <div class="col-sm-9">
-                                                                <select name="jenismotor" class="form-control">
+                                                                <select name="jenismotor" class="form-control" id="jenismotor">
+                                                                    <option value=""></option>
                                                                     <option value="1">Sport</option>
                                                                     <option value="2">Cub (Bebek)</option>
                                                                     <option value="3">AT (Automatic)</option>
@@ -434,9 +436,9 @@
                                                             </div>
                                                         </div>
                                                         <div class="row form-group">
-                                                            <label class="col-sm-3 control-label">Nomor Mesin</label>
+                                                            <label class="col-sm-3 control-label">Nomor Mesin<strong id="nomormesin_" style="float: right; color:rgb(243, 0, 0); display:none">*</strong></label>
                                                             <div class="col-sm-9">
-                                                                <input class="form-control" name="nomormesin">
+                                                                <input class="form-control" name="nomormesin" id="nomormesin">
                                                             </div>
                                                         </div>
                                                         <div class="row form-group">
@@ -453,7 +455,6 @@
                                                             <label class="col-sm-3 control-label">Type Unit<strong style="color:rgb(243, 0, 0)">*</strong></label>
                                                             <div class="col-sm-9">
                                                                 <select class="form-control data-unit" name="unit">
-                                                                    <option value=""></option>
                                                                     @foreach ($datadisplay as $data_dis)
                                                                         <option value="{{ $data_dis->id }}">{{ $data_dis->nama_display }}</option>
                                                                     @endforeach
@@ -461,9 +462,9 @@
                                                             </div>
                                                         </div>
                                                         <div class="row form-group">
-                                                            <label class="col-sm-3 control-label">Jenis Pembayaran</label>
+                                                            <label class="col-sm-3 control-label">Jenis Pembayaran<strong id="jenis_" style="float: right; color:rgb(243, 0, 0); display:none">*</strong></label>
                                                             <div class="col-sm-9">
-                                                                <select name="jenis" class="form-control">
+                                                                <select name="jenis" id="jenis" class="form-control">
                                                                     <option value=""></option>
                                                                     <option value="1">CASH</option>
                                                                     <option value="2">CREDIT</option>
@@ -471,9 +472,10 @@
                                                             </div>
                                                         </div>
                                                         <div class="row form-group">
-                                                            <label class="col-sm-3 control-label">Finance Company</label>
+                                                            <label class="col-sm-3 control-label">Finance Company<strong id="finance_" style="float: right; color:rgb(243, 0, 0); display:none">*</strong></label>
                                                             <div class="col-sm-9">
-                                                                <select name="finance" class="form-control">
+                                                                <select name="finance" id="finance" class="form-control">
+                                                                    <option value=""></option>
                                                                     @foreach ($datafinance as $data_fi)
                                                                         <option value="{{ $data_fi->id }}">{{ $data_fi->nama }}</option>
                                                                     @endforeach
@@ -483,7 +485,7 @@
                                                         <div class="row form-group">
                                                             <label class="col-sm-3 control-label">Hasil<strong style="color:rgb(243, 0, 0)">*</strong></label>
                                                             <div class="col-sm-9">
-                                                                <select name="hasil" class="form-control">
+                                                                <select name="hasil" id="hasil" class="form-control" onchange="kondisihasil()" required>
                                                                     <option value="1">Database</option>
                                                                     <option value="2">Prospecting</option>
                                                                     <option value="3">Polling</option>
@@ -616,6 +618,67 @@
                     }]
                 });
         });
+    </script>
+    <script>
+        function kondisihasil() {
+            if (document.getElementById("hasil").value == 4){
+                document.getElementById("merkmotor").setAttribute('required', '');
+                document.getElementById("merkmotor_").style.display  = 'block';
+
+                document.getElementById("jenismotor").setAttribute('required', '');
+                document.getElementById("jenismotor_").style.display  = 'block';
+
+                document.getElementById("nomormesin").setAttribute('required', '');
+                document.getElementById("nomormesin_").style.display  = 'block';
+
+                document.getElementById("finance").setAttribute('required', '');
+                document.getElementById("finance_").style.display  = 'block';
+
+                document.getElementById("dp").setAttribute('required', '');
+                document.getElementById("dp_").style.display  = 'block';
+
+                document.getElementById("jenis").setAttribute('required', '');
+                document.getElementById("jenis_").style.display  = 'block';
+
+            } else if (document.getElementById("hasil").value == 1){
+                document.getElementById("merkmotor").removeAttribute('required', '');
+                document.getElementById("merkmotor_").style.display  = 'none';
+
+                document.getElementById("jenismotor").removeAttribute('required', '');
+                document.getElementById("jenismotor_").style.display  = 'none';
+
+                document.getElementById("nomormesin").removeAttribute('required', '');
+                document.getElementById("nomormesin_").style.display  = 'none';
+
+                document.getElementById("finance").removeAttribute('required', '');
+                document.getElementById("finance_").style.display  = 'none';
+
+                document.getElementById("dp").removeAttribute('required', '');
+                document.getElementById("dp_").style.display  = 'none';
+
+                document.getElementById("jenis").removeAttribute('required', '');
+                document.getElementById("jenis_").style.display  = 'none';
+
+            } else {
+                document.getElementById("merkmotor").setAttribute('required', '');
+                document.getElementById("merkmotor_").style.display  = 'block';
+
+                document.getElementById("jenismotor").setAttribute('required', '');
+                document.getElementById("jenismotor_").style.display  = 'block';
+
+                document.getElementById("finance").setAttribute('required', '');
+                document.getElementById("finance_").style.display  = 'block';
+
+                document.getElementById("dp").setAttribute('required', '');
+                document.getElementById("dp_").style.display  = 'block';
+
+                document.getElementById("nomormesin").removeAttribute('required', '');
+                document.getElementById("nomormesin_").style.display  = 'none';
+
+                document.getElementById("jenis").setAttribute('required', '');
+                document.getElementById("jenis_").style.display  = 'block';
+            }
+        }
     </script>
 
 @endsection
