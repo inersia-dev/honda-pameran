@@ -182,12 +182,5 @@
 <script type="text/javascript">
     $('.data-lokasi').select2();
 </script>
-<script type="text/javascript">
-    $(document).ready(function(){
-          $("#kategori").val("{!! request()->kategori !!}");
-          $("#lokasi").val("{!! request()->lokasi !!}");
-          $("#status").val("{!! request()->status !!}");
-    });
-</script>
 
 @endsection
