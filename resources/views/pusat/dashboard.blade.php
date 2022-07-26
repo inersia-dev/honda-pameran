@@ -652,6 +652,9 @@
             theme: {
                 palette: 'palette2' // upto palette10
             },
+            legend: {
+                position: 'top'
+            },
             labels: ['Laki-laki', 'Perempuan'],
             dataLabels: {
                 formatter: function (val, opts) {
@@ -669,7 +672,7 @@
                         width: 200
                     },
                     legend: {
-                        position: 'bottom'
+                        position: 'top'
                     }
                 }
             }]
@@ -1085,7 +1088,7 @@
         var options = {
         chart: {
             height: {{ $i_ }},
-            type: "bar"
+            type: "pie"
         },
         plotOptions: {
           bar: {
@@ -1097,18 +1100,12 @@
         legend: {
             position: 'top'
         },
-        series: [
-            {
-                name: "Jenis Pembayaran",
-                type: "column",
-                data: {{ json_encode(data_get($statistik, 'konsumen_cash_credit')) }}
-            },
-        ],
+        series: {{ json_encode(data_get($statistik, 'konsumen_cash_credit')) }},
         title: {
             text: "Jenis Pembayaran"
         },
         theme: {
-            palette: 'palette5' // upto palette10
+            palette: 'palette7' // upto palette10
         },
         dataLabels: {
           enabled: true,
@@ -1117,10 +1114,11 @@
                 colors: ["#fff"]
             }
         },
+        labels: ['Cash', 'Credit ',],
         xaxis: {
             categories: [
-                'CASH',
-                'CREDIT ',
+                'Cash',
+                'Credit ',
             ],
             labels: {
                 style: {
@@ -1270,7 +1268,7 @@
         },
         series: [
             {
-                name: "Type Unit",
+                name: "Type Unit SSU",
                 type: "column",
                 data: {{ json_encode(data_get($statistik, 'konsumen_type_unit')) }}
             },
