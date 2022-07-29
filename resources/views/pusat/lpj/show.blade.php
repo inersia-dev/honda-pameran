@@ -320,7 +320,7 @@
                                                             <td>{{ null != $data_ko->unit ? $data_ko->display->nama_display : '' }}</td>
                                                             <td>{{ $data_ko->sales->nama_sales_people }}</td>
                                                             <td>{{ $data_ko->jenis($data_ko->cash_credit)}}</td>
-                                                            <td>{{ $data_ko->finance->nama }}</td>
+                                                            <td>{{ $data_ko->finance ? $data_ko->finance->nama : '-' }}</td>
                                                             <td>{{ $data_ko->hasil_($data_ko->hasil) }}</td>
                                                         </tr>
                                                     @endforeach
